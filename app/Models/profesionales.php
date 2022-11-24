@@ -9,7 +9,7 @@ class profesionales extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','id_cliente','id_pago','cedula','nombre','profesion','telefono','fecha_nacimiento','porcentaje'];
+    protected $fillable = ['user_id','id_cliente','id_pago','cedula','nombre','profesion','telefono','fecha_nacimiento','porcentaje_pago'];
 
 
    

@@ -68,7 +68,16 @@ Route::get('/historia_clinica/{id}', [App\Http\Controllers\historiasClinicasCont
 
 Route::post('/crear_historia', [App\Http\Controllers\historiasClinicasController::class, 'store']);
 
+Route::post('/editar_historia/{id_cliente}', [App\Http\Controllers\historiasClinicasController::class, 'update']);
+
 Route::delete('/eliminar_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'destroy']);
+
+Route::get('/listado_controles/{id_controles}', [App\Http\Controllers\controlesController::class, 'index']);
+
+Route::post('/crear_control', [App\Http\Controllers\controlesController::class, 'store']);
+
+Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index']);
+
 
 
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');

@@ -22,9 +22,18 @@ class CreateClientesTable extends Migration
             $table->string('nombre',60)->required();
             $table->string('direccion',150)->nullable();
             $table->string('barrio',60)->nullable();
+            $table->string('municipio',60)->nullable();
             $table->string('celular',30)->nullable();
             $table->string('email',60)->nullable();
+            $table->string('estado',14)->nullable();
+
+                                                
             $table->timestamps();
+            $table->softDeletes();
+
+                   
+
+
         });
     }
 
@@ -38,5 +47,6 @@ class CreateClientesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('clientes');
+        
     }
 }

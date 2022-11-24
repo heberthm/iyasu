@@ -450,13 +450,17 @@ CALENDAR - AGENDAR   MEDICA
 
                 <select name="servicio" id="servicio" class="form-control " required  onChange="update()">
 
-                  <option value="" style='color: #cccccc'>Seleccionar terapia </option>
+                  <option value="" style='color: #cccccc'>Seleccionar una opción </option>
+
+                  <option style="color:68538B" value="#68538B" >control</option>
 
                   <option style="color:#1560F6;" value="#1560F6" >terapia con imanes</option>
 
                   <option style="color:#0CA46A;" value="#0CA46A">colonterapia</option>
 
                   <option style="color:#8C7657;" value="#8C7657" >lodoterapia</option>
+
+                  <option style="color:#D51051;" value="#D51051">colonterapia - lodoterapia</option>
 
                   <option style="color: #D51051;" value="#D51051" >drenaje</option>
 
@@ -513,7 +517,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="hora_ini" class="control-label">Hora ini</label>
 
-                <input type="text" name="hora_ini" class="form-control" id="hora_ini" >
+                <input type="text" name="hora_ini" class="form-control" id="hora_ini" readonly >
               </div>
             </div>
 
@@ -527,7 +531,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="hora_fin" class="control-label">Hora fin</label>
 
-                <input type="text" name="end" class="form-control" id="hora_fin" >
+                <input type="text" name="end" class="form-control" id="hora_fin" readonly >
 
               </div>
             </div>
@@ -712,13 +716,17 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 <select name="servicios" id="servicios" class="form-control text-capitalize" required  onChange="editColor()">
 
                
-                  <option value="">Seleccione una terapia </option>
+                  <option value="">Seleccione una opción</option>
 
-                                     <option style="color:#1560F6;" value="#1560F6" >terapia con imanes</option>
+                      <option style="color:68538B" value="#68538B" >control</option>
+
+                      <option style="color:#1560F6;" value="#1560F6" >terapia con imanes</option>
 
                       <option style="color:#0CA46A;" value="#0CA46A">colonterapia</option>
 
                       <option style="color:#8C7657;" value="#8C7657" >lodoterapia</option>
+
+                      <option style="color:#D51051;" value="#D51051">colonterapia - lodoterapia</option>
 
                       <option style="color: #D51051;" value="#D51051" >drenaje</option>
 
@@ -1004,7 +1012,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
         
 
-            <div class="col-md-4">
+            <div class="col-md-6">
 
               <div class="form-group">
 
@@ -1015,8 +1023,64 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 <div class="alert-message" id="barrioError"></div>
 
               </div>
-            </div>
+           </div>
 
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+
+                  <label for="municipio" class="control-label">Municipio</label>
+
+                  <select class="form-control" name="municipio" id="municipio" onkeypress="return handleEnter(this, event)" required>
+                        
+                        <option value="" selected="selected"></option>
+    
+                        <option value=" Alcala">Alcala</option>
+                        <option value=" Andalucía">Andalucía</option>
+                        <option value=" Ansermanuevo">Ansermanuevo</option>
+                        <option value=" Argelia">Argelia</option>
+                        <option value="Bolivar">Bolivar</option>
+                        <option value="Buga">Buga</option>
+                        <option value="Bugalagrande">Bugalagrande</option>
+                        <option value="Caicedonia">Caicedonia</option>
+
+                        <option value="Cali">Cali</option>
+                        <option value="Calima">Calima</option>
+                        <option value="Candelaria">Candelaria</option>
+                        <option value="Cartago">Cartago</option>
+                        <option value="Dagua">Dagua</option>
+
+                        <option value="El águila">El águila</option>
+                        <option value="El cairo">El cairo</option>
+                        <option value="El cerrito">El cerrito</option>
+                        <option value="El dóvio">El dóvio</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Ginebra">Ginebra</option>
+                        <option value="Guacarí">Guacarí</option>
+                        <option value="Jamundi">Jamundi</option>
+                        <option value="La unión">La unión</option>
+                        <option value="La victoria">La victoria</option>
+                        <option value="Obando">Obando</option>
+                        <option value="Restrepo">Restrepo</option>
+                        <option value="Rio frio">Rio frio</option>
+                        <option value="Roldanillo">Roldanillo</option>
+                        <option value="San pedro">San pedro</option>
+                        <option value="Toro">Toro</option>
+                        <option value="Trujillo">Trujillo</option>
+                        <option value="Tulúa">Tulúa</option>
+                        <option value="Ulloa">Ulloa</option>
+                        <option value="Versalles">Versalles</option>
+                        <option value="Yotoco">Yotoco</option>
+                        <option value="Zarzal">Zarzal</option>
+
+
+                    </select> 
+
+                  </div>
+              </div>
+
+         </div>   
 
 
             <div class="col-md-8">
@@ -1031,6 +1095,8 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
               </div>
             </div>
+
+            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
 
           </div>
 
@@ -2256,7 +2322,7 @@ $('.selectBuscarCliente').html('');
       maxTime: "20:00",
       nowIndicator: true,
       timeFormat: "h:mm a",
-      slotDuration: '00:15:00',
+      slotDuration: '00:30:00',
 
       
       slotLabelFormat: [

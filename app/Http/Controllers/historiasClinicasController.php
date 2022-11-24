@@ -27,7 +27,7 @@ class historiasClinicasController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = cliente::leftjoin('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
+              $id = cliente::join('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
               ->select('clientes.id_cliente', 'clientes.nombre', 'clientes.cedula',  'clientes.celular', 'clientes.direccion',
               'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'historias_clinicas.id_cliente', 'historias_clinicas.id_historia_clinica',
               'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 'historias_clinicas.abd_inicial', 
@@ -48,6 +48,9 @@ class historiasClinicasController extends Controller
                    
                     <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_historia_clinica.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit edit"></a>
     
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_cliente.'" data-target="#modalVerControlesMedicos"  title="Ver controles realizados" class="fa fa-street-view control"></a>
+
+
                     <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id_historia_clinica.'title="Eliminar história clínica" class="fa fa-trash deletePost"></a>';
                     
                      
@@ -177,10 +180,47 @@ class historiasClinicasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+   
+        
+    public function update(Request $request, $id_cliente)
+    { 
+      
+      try{
+        $id = array('id_cliente' => $request->id_cliente);
+        $updateArray = [
+                        'profesional' => $request->profesional,
+                        'estatura' => $request->estatura,
+                        'peso_inicial' => $request->peso_inicial,
+                        'abd_inicial' => $request->abd_inicial,
+                        'grasa_inicial' => $request->grasa_inicial,
+                        'agua_inicial' => $request->agua_inicial,
+                        'imc' => $request->imc,
+                        'grasa_viseral' => $request->grasa_viseral,
+
+                        'edad_metabolica' => $request->edad_metabolica,
+                        'terapias' => $request->terapias,
+                        'paquete_desintoxicacion' => $request->paquete_desintoxicacion,
+                        'terapias_adicionales' => $request->terapias_adicionales,
+
+                        'tipo_lavado' => $request->tipo_lavado,
+                        'num_lavado' => $request->num_lavado,
+                        'dias_lavados' => $request->dias_lavados,
+                        'observaciones' => $request->observaciones,
+                       
+                       ];
+          
+          $id_cliente  = historias_clinicas::where($id)->update($updateArray);
+ 
+        } catch (\Exception  $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
+
+          return response()->json(['success'=>'Successfully']);
+     
+        
+    } 
+
+
 
     /**
      * Remove the specified resource from storage.

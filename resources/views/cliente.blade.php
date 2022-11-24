@@ -18,6 +18,7 @@ a.editable-empty {
   font-style: italic;
 }
 
+
 /*
 
 thead {
@@ -60,18 +61,28 @@ thead {
   
 
 
-    <div class="row">
-<div class="col-lg-8">
+<div class="row">
+   <div class="col-lg-8">
         <div class="card card-light" id="card_mascotas">
               <div class="card-header" >
                 <h3 class="card-title"><span  style="color:#28a745;"
                     class="fas fa-list-alt mr-3"></span>História clínica</h3>
 
-                  
-                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAgregarHistoriaClinica">
-                    <span class="fa fa-plus fa-fw" tabindex="3"></span>  
-                    Crear história clínica
-                    </button>
+                    <div class="btn-toolbar">
+
+                      <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modalControlMedico" 
+                      style="position: absolute; top: 0; left: 500px">
+                      <span class="fa fa-street-view fa-fw" ></span>  
+                      Crear control clínico
+                      </button>  &nbsp;
+                    
+                      <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modalAgregarHistoriaClinica"
+                      style="position: absolute; top: 0; left: 300px">
+                      <span class="fa fa-plus fa-fw" ></span>  
+                      Crear história clínica
+                      </button>
+
+                    </div>
                     
               </div>
               
@@ -145,8 +156,11 @@ DATATABLE MASCOTAS
                 <span                    
                     style="color:#28a745;"
                     class="fas fa-user mr-3"></span>Datos del paciente</h3>
+                  
+                   <!--
                     <h4  style="text-align: center;">
-                          <div class="dropdown ml-auto">
+                           
+                    <div class="dropdown ml-auto">
                                   <button class="btn btn-light btn-sm dropdown-toggle" type="button"
                                           id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
                                           aria-expanded="false">
@@ -161,6 +175,9 @@ DATATABLE MASCOTAS
                                  </div>
                          </div>
                   </h4>
+  
+                 -->
+
               </div>
               <div class="card-body">
                 <!-- Date -->
@@ -304,7 +321,7 @@ DATATABLE MASCOTAS
               
                               <label for="Estatura" class="control-label font-weight-normal">Estatura</label>
                            
-                              <input type="number" name="estatura" class="form-control" id="estatura" autofocus="true" required autocomplete="off">
+                              <input type="number" name="estatura" class="form-control" id="estatura" autofocus="true"  autocomplete="off">
                                           
                               <div class="alert-message" id="estaturaError"></div>
                                 
@@ -320,7 +337,7 @@ DATATABLE MASCOTAS
               
                                 <label for="peso inicial" class="control-label font-weight-normal">Peso inicial</label>
               
-                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial" required >
+                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial"  >
               
                                   <div class="alert-message" id="pesoInicialError"></div>
               
@@ -337,7 +354,7 @@ DATATABLE MASCOTAS
               
                               <label for="abd inicial" class="control-label font-weight-normal">ABD inicial</label>
               
-                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control" required autocomplete="off">
+                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control"  autocomplete="off">
               
                               <div class="alert-message" id="abdInicialError"></div>
               
@@ -351,7 +368,7 @@ DATATABLE MASCOTAS
               
                                 <label for="grasa inicial" class="control-label font-weight-normal">Grasa inicial</label>
               
-                                <input type="number"  id="grasa_inicial" name="grasa_inicial"  class="form-control text-capitalize" required autocomplete="off">
+                                <input type="number"  id="grasa_inicial" name="grasa_inicial"  class="form-control text-capitalize"  autocomplete="off">
               
                                 <div class="alert-message" id="grasaInicialError"></div>
               
@@ -467,7 +484,7 @@ DATATABLE MASCOTAS
 
                   </div>
 
-                  <div class="col-md-3">
+                  <div class="col-md-8">
               
                         <div class="form-group">
 
@@ -482,44 +499,17 @@ DATATABLE MASCOTAS
                   </div>
 
               
-                  <div class="col-md-2">
-              
-                      <div class="form-group">
-
-                        <label for="numero lavados" class="control-label font-weight-normal">Num. lavados</label>
-
-                        <input type="number" name="num_lavado" class="form-control" id="num_lavado"  autocomplete="off">
-
-                        <div class="alert-message" id="numLavadoError"></div>
-
-                      </div>
-
-                </div>
-
-
-                <div class="col-md-2">
-              
-                  <div class="form-group">
-
-                    <label for="dias lavados" class="control-label font-weight-normal">Dias lavados</label>
-
-                    <input type="number" name="dias_lavados" class="form-control" id="dias_lavados"  autocomplete="off">
-
-                    <div class="alert-message" id="diasLavadosError"></div>
-
-                  </div>
-
-            </div>
-
         
             <div class="col-md-4">
               <div class="form-group">
-                  <label for="medico_tratante" class="control-label font-weight-normal">Atendido por</label>
+                  <label for="profesional" class="control-label font-weight-normal">Atendido por</label>
                   
-                  <select id="profesional"  name="profesional" class="form-control">
-                      <option value="" selected="selected"></option>
-                      <option value="Omaira mazuera">Omaira mazuera</option>
-                  </select><!-- select medicos -->
+                  <select name="profesional" class="form-control" id="profesional">
+                    <option value=""></option>
+                      @foreach($profesionales as $prof) 
+                      <option value="{{$prof->id_profesional}}">{{$prof->nombre}}</option>
+                      @endforeach
+                  </select>
 
                   
               </div>
@@ -627,7 +617,7 @@ DATATABLE MASCOTAS
                     <div class="modal-body">
               
               
-                    <form method="POST" id="form_crear_editar_clinica" action="{{ url('/clientes') }}" >
+                    <form method="POST" id="form_editar_historia_clinica" action="{{ url('/editar_historia/id_clientes') }}" >
                     
                   <!-- @csrf -->
               
@@ -643,7 +633,7 @@ DATATABLE MASCOTAS
               
                               <label for="Estatura" class="control-label font-weight-normal">Estatura</label>
                            
-                              <input type="number" name="estatura" class="form-control" id="estatura" value="{{$id_cliente->estatura}}" autofocus="true" required autocomplete="off">
+                              <input type="number" name="estatura" class="form-control" id="estatura" value="{{$id_cliente->estatura}}" autofocus="true"  autocomplete="off">
                                           
                               <div class="alert-message" id="estaturaError"></div>
                                 
@@ -659,7 +649,7 @@ DATATABLE MASCOTAS
               
                                 <label for="peso inicial" class="control-label font-weight-normal">Peso inicial</label>
               
-                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial" value="{{$id_cliente->peso_inicial}}"  required >
+                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial" value="{{$id_cliente->peso_inicial}}"  >
               
                                   <div class="alert-message" id="pesoInicialError"></div>
               
@@ -676,7 +666,7 @@ DATATABLE MASCOTAS
               
                               <label for="abd inicial" class="control-label font-weight-normal">ABD inicial</label>
               
-                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control" value="{{$id_cliente->abd_inicial}}"  required autocomplete="off">
+                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control" value="{{$id_cliente->abd_inicial}}"   autocomplete="off">
               
                               <div class="alert-message" id="abdInicialError"></div>
               
@@ -690,7 +680,7 @@ DATATABLE MASCOTAS
               
                                 <label for="grasa inicial" class="control-label font-weight-normal">Grasa inicial</label>
               
-                                <input type="number"  id="grasa_inicial" name="grasa_inicial"  class="form-control text-capitalize" value="{{$id_cliente->grasa_inicial}}"  required autocomplete="off">
+                                <input type="number"  id="grasa_inicial" name="grasa_inicial"  class="form-control text-capitalize" value="{{$id_cliente->grasa_inicial}}"   autocomplete="off">
               
                                 <div class="alert-message" id="grasaInicialError"></div>
               
@@ -777,7 +767,8 @@ DATATABLE MASCOTAS
                     </div>
 
 
-                    <div class="col-md-3">
+                   
+                    <div class="col-md-8">
               
                         <div class="form-group">
 
@@ -792,48 +783,23 @@ DATATABLE MASCOTAS
                   </div>
 
 
-                    <div class="col-md-3">
+                  
+
+
+                <div class="col-md-3">
               
-                        <div class="form-group">
+              <div class="form-group">
 
-                          <label for="terapias adicionales" class="control-label font-weight-normal">Terapias adicionales</label>
+                <label for="terapias adicionales" class="control-label font-weight-normal">Terapias adicionales</label>
 
-                          <input type="text" name="terapias_adicionales" class="form-control" id="terapias_adicionales" value="{{$id_cliente->terapias_adicionales}}"  autocomplete="off">
+                <input type="text" name="terapias_adicionales" class="form-control" id="terapias_adicionales" value="{{$id_cliente->terapias_adicionales}}"  autocomplete="off">
 
-                          <div class="alert-message" id="terapiasAdicionalesError"></div>
+                <div class="alert-message" id="terapiasAdicionalesError"></div>
 
-                        </div>
+              </div>
 
-                  </div>
+        </div>
 
-                  <div class="col-md-3">
-              
-                        <div class="form-group">
-
-                          <label for="tipo lavado" class="control-label font-weight-normal">Tipo lavado</label>
-
-                          <input type="text" name="tipo_lavado" class="form-control" id="tipo_lavado" value="{{$id_cliente->tipo_lavado}}"  autocomplete="off">
-
-                          <div class="alert-message" id="tipoLavadoError"></div>
-
-                        </div>
-
-                  </div>
-
-              
-                  <div class="col-md-2">
-              
-                      <div class="form-group">
-
-                        <label for="numero lavados" class="control-label font-weight-normal">Num. lavados</label>
-
-                        <input type="number" name="num_lavado" class="form-control" id="num_lavado"  value="{{$id_cliente->num_lavado}}" autocomplete="off">
-
-                        <div class="alert-message" id="numLavadoError"></div>
-
-                      </div>
-
-                </div>
 
 
                 <div class="col-md-2">
@@ -1331,7 +1297,7 @@ DATATABLE MASCOTAS
                               
                           </div>
 
-                          <input type="text" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ date_format(date_create($id_cliente->fecha_nacimiento), 'Y-m-d') }}" required/>
+                          <input type="hidden" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ date_format(date_create($id_cliente->fecha_nacimiento), 'Y-m-d') }}" required/>
 
                         </div>
 
@@ -1461,73 +1427,420 @@ DATATABLE MASCOTAS
 
 
 
+ 
+ <!--=====================================
+
+ CREAR CONTROL MÉDICO
+
+======================================-->
+
+<div class="modal fade" id="modalControlMedico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    
+
+
+            <div class="modal-dialog modal-lg">
+              
+              <div class="modal-content">
+              
+              <div class="modal-header">
+                
+              <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-list-alt mr-3"></span>Crear control médico </h5>
+
+              <div class="col-6 align-items-center" style="font-size: small;">
+                      <div  id="datos_historia_clinica">
+                        <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5> 
+                             <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a> 
+                            <!--  <a class="mx-1 raza" style="color:black">{{$id_cliente->peso}}</a> -->
+                            <!--  <a class="mx-1 edad" style="color:black">{{$id_cliente->estatura}}</a> -->
+                      </div>
+                  </div>
+                  
+              
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">  <span aria-hidden="true">&times;</span></button>
+
+                  
+                    </button>
+                
+                  </div>
+            
+                  <div class="modal-body">
+            
+            
+                    <form method="POST" id="form_control_medico" action="{{ url('/crear_control') }}" >
+            
+                  <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
+                   
+            
+                      <div class="row">
+            
+                        <div class="col-md-3">
+            
+                          <div class="form-group"  >
+            
+                            <label for="num control" class="control-label">Núm. control</label>
+            
+            
+                            <input type="number" name="num_control" class="form-control" id="num_control"  autofocus required autocomplete="off">
+            
+                          
+                            <div class="alert-message" id="numControlError"></div>
+                              
+                          </div>
+            
+                        </div>
+            
+            
+            
+                        <div class="col-md-3">
+            
+                          <div class="form-group">
+            
+                            <label for="peso" class="control-label">Peso</label>
+            
+                            <input type="number" name="peso" class="form-control" id="peso" required autocomplete="off">
+            
+                              <div class="alert-message" id="pesoError"></div>
+                            
+                          </div>
+                        </div>
+            
+            
+                        <div class="col-md-3">
+            
+                          <div class="form-group">
+
+                            <label for="abd" class="control-label">ABD</label>
+
+
+                            <input type="number" class="form-control" id="abd" name="abd" required >
+                         
+                            <div class="alert-message" id="ABDError" ></div>
+                              
+                          </div>
+                        </div>
+
+                       
+
+
+                        <div class="col-md-3">
+            
+                            <div class="form-group">
+
+                              <label for="grasa" class="control-label">Grasa</label>
+
+
+                              <input type="number" name="grasa" class="form-control" id="grasa"  autocomplete="off">
+
+                            
+                              <div class="alert-message" id="grasaError"></div>
+                                
+                            </div>
+                       </div>
+                         
+            
+            
+                        <div class="col-md-3">
+                          <div class="form-group">
+            
+                            <label for="agua" class="control-label">Agua</label>
+            
+                            <input type="number" name="agua" class="form-control" id="agua"  required autocomplete="off">
+                            
+                              <div class="alert-message" id="aguaError"></div>
+                                        
+                            </div>
+                        </div>
+                         
+                      </div>
+            
+            
+            
+            
+                      <!-- 
+            <div class="form-group">
+            <label for="end" class="col-sm-2 control-label">Fecha final</label>
+            
+            -->
+                  
+            
+                <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+
+                 <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
+                  
+            
+                  <!--     
+            
+            <div id="enlace_listado">  
+                      
+            <p><a href="crearClientes.php"><i class="fa fa-user fa-2x"></i>&nbsp; Crear cliente nuevo</a>   </p> 
+                      
+            </div>
+            
+            -->
+            
+                  <div class="modal-footer">
+            
+                    <button type="submit" id="crear_control_clinico" name="crear_control_clinico" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            
+                  </div>
+            
+                </div>
+              </div>
+            </div>
+            
+        </form>
+   </div>
+        
+        
+</div>
+                
+
+
+
+
+
+ <!--=====================================
+
+   EDITAR CONTROL MÉDICO
+
+======================================-->
+
+<div class="modal fade" id="modalEditarMedico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    
+
+
+            <div class="modal-dialog modal-lg">
+              
+              <div class="modal-content">
+              
+              <div class="modal-header">
+                
+              <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-list-alt mr-3"></span>Editar control médico </h5>
+
+              <div class="col-6 align-items-center" style="font-size: small;">
+                      <div  id="datos_historia_clinica">
+                        <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5> 
+                             <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a> 
+                            <!--  <a class="mx-1 raza" style="color:black">{{$id_cliente->peso}}</a> -->
+                            <!--  <a class="mx-1 edad" style="color:black">{{$id_cliente->estatura}}</a> -->
+                      </div>
+                  </div>
+                  
+              
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">  <span aria-hidden="true">&times;</span></button>
+
+                  
+                    </button>
+                
+                  </div>
+            
+                  <div class="modal-body">
+            
+            
+                    <form method="POST" id="form_control_medico" action="{{ url('/crear_control') }}" >
+            
+                  <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
+                   
+            
+                      <div class="row">
+            
+                        <div class="col-md-3">
+            
+                          <div class="form-group"  >
+            
+                            <label for="num control" class="control-label">Núm. control</label>
+            
+            
+                            <input type="number" name="num_control" class="form-control" id="num_control" value="{{ $id_cliente->num_control }}" autofocus required autocomplete="off">
+            
+                          
+                            <div class="alert-message" id="numControlError"></div>
+                              
+                          </div>
+            
+                        </div>
+            
+            
+            
+                        <div class="col-md-3">
+            
+                          <div class="form-group">
+            
+                            <label for="peso" class="control-label">Peso</label>
+            
+                            <input type="number" name="peso" class="form-control" id="peso" value="{{ $id_cliente->peso }}" required autocomplete="off">
+            
+                              <div class="alert-message" id="pesoError"></div>
+                            
+                          </div>
+                        </div>
+            
+            
+                        <div class="col-md-3">
+            
+                          <div class="form-group">
+
+                            <label for="abd" class="control-label">ABD</label>
+
+
+                            <input type="number" class="form-control" id="abd" name="abd" value="{{ $id_cliente->abd }}" required >
+                         
+                            <div class="alert-message" id="ABDError" ></div>
+                              
+                          </div>
+                        </div>
+
+                       
+
+
+                        <div class="col-md-3">
+            
+                            <div class="form-group">
+
+                              <label for="grasa" class="control-label">Grasa</label>
+
+
+                              <input type="number" name="grasa" class="form-control" id="grasa" value="{{ $id_cliente->grasa }}" autocomplete="off">
+
+                            
+                              <div class="alert-message" id="grasaError"></div>
+                                
+                            </div>
+                       </div>
+                         
+            
+            
+                        <div class="col-md-3">
+                          <div class="form-group">
+            
+                            <label for="agua" class="control-label">Agua</label>
+            
+                            <input type="number" name="agua" class="form-control" id="agua" value="" required autocomplete="off">
+                            
+                              <div class="alert-message" id="aguaError"></div>
+                                        
+                            </div>
+                        </div>
+                         
+                      </div>
+            
+            
+            
+            
+                      <!-- 
+            <div class="form-group">
+            <label for="end" class="col-sm-2 control-label">Fecha final</label>
+            
+            -->
+                  
+            
+                <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+
+                 <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
+                  
+            
+                  <!--     
+            
+            <div id="enlace_listado">  
+                      
+            <p><a href="crearClientes.php"><i class="fa fa-user fa-2x"></i>&nbsp; Crear cliente nuevo</a>   </p> 
+                      
+            </div>
+            
+            -->
+            
+                  <div class="modal-footer">
+            
+                    <button type="submit" id="crear_control_clinico" name="crear_control_clinico" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            
+                  </div>
+            
+                </div>
+              </div>
+            </div>
+            
+        </form>
+   </div>
+        
+        
+</div>
+                
+
+
+
+
+
+
 <!--  =======================================
 
-MODAL TRASPASAR MASCOTA A OTRO CLIENTE
+MODAL DATATABLE CONTROLES MEDICOS
 
 ============================================-->
 
-<div class="modal" id="modalTraspasarMascota" class="modal fade" role="dialog" style="overflow:hidden;">
 
-
-  <div class="modal-dialog">
-
+<div class="modal" id="modalVerControlesMedicos" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-
       <div class="modal-header">
-
-      
-        <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-paw mr-3"></span>Traspasar mascota a otro propietario</h5>
-        
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-          <span aria-hidden="true">&times;</span>
-
-        </button>
-      </div>
-
-      <div class="modal-body">
-       
-                 @if (session('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
-                 @endif
-                        
-                    <form method="POST" id="form_lista_espera" action="{{ url('/ajax-autocomplete-search') }}" >
-                    
-              
-                <!-- <input type="hidden" name="_token" value="{{csrf_token()}}"> -->
-          
-              
-              
-                <div class="row">
-
-                     <div class="col-6">
-
-                              <div class="form-group">
-                                                         
-              
-                                <select class="selectBuscarCliente"  name="selectBuscarCliente" id="selectBuscarCliente" style="width:100%;" required>   </select>
-                                   
-                     
-              
-                              </div>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-list mr-3"></span>Listado de controles realizados</h5>
+                        <div class="col-6 align-items-center" style="font-size: small;">
+                            <div  id="datos_historia_clinica">
+                                <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5>
+                                    <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a>
+                                  <!--  <a class="mx-1 raza" style="color:black">{{$id_cliente->peso}}</a> -->
+                                  <!--  <a class="mx-1 edad" style="color:black">{{$id_cliente->estatura}}</a> -->
+                            </div>
                         </div>
 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+                   
+ <div class="row">
+   <div class="col-lg-12">
+           
+             
+               <table id="Table_control_medico" class="table  table-hover" width="100%">
+                   <thead>
+                      <tr>
+                                        
+                         <th>Número</th>                
+                         <th>Fecha</th>
+                         <th>Peso</th>
+                         <th>ABD</th>
+                         <th>grasa</th>
+                         <th>Agua</th>
+                         <th></th>
+                      </tr>
 
+                  </thead>
+
+                        <tbody>
+                       
+                        </tbody>    
+
+                   
+              </table>
+
+              </div>       
       </div>
       <div class="modal-footer">
-
-         <button type="button" class="btn btn-primary">Guardar</button>
-
-         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         
-
-        </form>
-       </div>  
-     </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
   </div>
 </div>
 
+
+
+
+  
 
 
 <!-- ========================================
@@ -1629,6 +1942,19 @@ DESHABILITAR TECLAS CRTL, U, F12
     }
 });
 </script>
+
+
+<script>
+
+$('#modalVerControlesMedicos').on('shown.bs.modal', function () {
+   var table = $('#Table_control_medico').DataTable();
+   table.columns.adjust();
+});
+
+
+</script>
+
+
 
 
 
@@ -1748,7 +2074,7 @@ let today = new Date();
 
             
         
-        "emptyTable": "El paciente no tiene histórias registradas.",
+        "emptyTable": "El paciente no tiene história clínica registrada.",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
         "infoEmpty": "Mostrando 0 to 0 de 0 Entradas",
         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
@@ -1815,7 +2141,9 @@ let btn = $('#agregar_historia')
             dataType: "json",
             success: function(data) {
 
-              table.ajax.reload();
+            //  table.ajax.reload();
+
+            location.reload(true);
                
                
                 $('#form_crear_historia_clinica')[0].reset();
@@ -1837,6 +2165,65 @@ let btn = $('#agregar_historia')
     });
 
 
+
+// =======================================
+
+// EDITAR HISTORIA CLINICA
+
+// ======================================
+
+$('#form_editar_historia_clinica').off('submit').on('submit', function (e) {
+           
+           e.preventDefault();
+ 
+             let id = $('#id_cliente').val();
+ 
+            // Update Data
+ 
+         $.ajaxSetup({
+             headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
+         });
+ 
+                       
+ /* Configurar botón submit con spinner */
+ 
+         let btn = $('#editar_cliente') 
+         let existingHTML =btn.html() //store exiting button HTML
+         //Add loading message and spinner
+         $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+ 
+         setTimeout(function() {
+           $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+         },5000) //5 seconds
+ 
+        
+ 
+             $.ajax({
+                
+                 url: '/editar_historia/' +id,
+                 type: "POST",
+                 data: $(this).serialize(),
+                 dataType: "json",
+ 
+                 success: function (data) {
+ 
+                   table.ajax.reload();
+ 
+                  // $('#form_editar_cliente')[0].reset();
+                   $('#modalEditarHistoriaClinica').modal('hide');
+                   $("#editar_cliente"). attr("disabled", true);
+                      //   $('#agregar_cliente').attr('disabled', true);
+                         toastr["success"]("los datos se han editado correctamente");
+                      
+                        
+                 },
+                 error:function(error){
+                     console.log(error);
+                 }
+             });
+         });
 
 
 
@@ -2110,6 +2497,170 @@ EDITAR DATOS DEL PACIENTE
     });
 
 </script>
+
+
+
+
+
+
+ <!-- =========================================
+
+DATATABLE CONTROL MÉDICO
+
+==============================================  -->
+
+
+
+<script type = "text/javascript" >
+  
+  $(document).ready(function() {
+
+     $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    let id =$('#id_cliente').val();
+ 
+
+    let table =  $('#Table_control_medico').DataTable({
+  
+           processing: true,
+           serverSide: true,
+           paging: false,
+           info: false,
+           filter: false,
+           responsive: true,
+           autoWidth: false,
+            
+           type: "GET",
+
+           ajax: '/listado_controles/'+id,
+                      
+           columns: [
+                       
+                    { data: 'num_control', name: 'num_control' },    
+                    { data: 'created_at', name: 'created_at' },         
+                    { data: 'peso', name: 'peso' },     
+                    { data: 'abd', name: 'abd' },
+                    { data: 'grasa', name: 'grasa' },
+                    { data: 'agua', name: 'agua' },
+
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                 ],
+        
+                   order: [[0, 'desc']],
+    
+             "language": {
+                
+              /*  "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading..n.</span> ',  */
+                        
+
+            
+        
+        "emptyTable": "El paciente no tiene controles registrados.",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+                    
+                },
+       
+     
+      
+    });
+ 
+    table.columns.adjust().draw();
+
+//==================================================
+
+// CREAR CONTROL MÉDICO
+
+// ==================================================
+
+
+
+
+$('#form_control_medico').off('submit').on('submit', function (event) {
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+
+/* Configurar botón submit con spinner */
+
+let btn = $('#crear_control_clinico') 
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+
+        $('#crear_control_clinico').attr('disabled', true);
+
+        event.preventDefault();
+
+        try {
+
+        $.ajax({
+            url: "/crear_control",
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(data) {
+
+            
+               
+               
+                $('#form_control_medico')[0].reset();
+                $('#modalControlMedico').modal('hide');
+
+              //  table.ajax.reload();
+                
+              location.reload(true);
+               
+
+                toastr["success"]("Control médico creada correctamente.");
+              
+
+
+            }
+
+         });
+
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.");
+          }
+
+    });
+
+  });
+
+
+
+</script>
+
+
+
 
 
 <!-- =========================================

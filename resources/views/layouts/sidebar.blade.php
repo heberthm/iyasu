@@ -27,11 +27,22 @@
 
 
         <li class="nav-item">
-          <a href="{{ url('/historia_clinica') }}" class="nav-link {{ request()->is('historia_clinica') ? 'active' : '' }}">
+          <a href="{{ url('abonos') }}" class="nav-link {{ request()->is('abonos') ? 'active' : '' }}">
            <!-- <i class="nav-icon fas fa-list green"></i> -->
-            <i class="nav-icon fas  fa-suitcase-medical"></i>
+            <i class="nav-icon fas  fa-list"></i>
             <p>
-              história clínica
+              Abonos
+            </p>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="{{ url('/') }}" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+           <!-- <i class="nav-icon fas fa-list green"></i> -->
+            <i class="nav-icon fas  fa-usd"></i>
+            <p>
+              pagos
             </p>
           </a>
         </li>
@@ -96,14 +107,13 @@
       </li>
      
 
-
       
       <li class="nav-item has-treeview">
         <a href="{{ route('register') }}" class="nav-link {{ request()->is('register') ? '' : '' }}">
 
-          <i class="nav-icon fas fa-user green"></i>
+          <i class="nav-icon fas fa-user-plus green"></i>
           <p>
-            Registrar usuario
+            Agregar usuario
            
           </p>
         </a>
@@ -111,7 +121,7 @@
       </li>
 
 
-         
+       
        
       
           <li class="nav-item">

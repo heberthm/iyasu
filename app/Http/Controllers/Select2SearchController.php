@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;  
 
 use App\Models\Cliente;
+use App\models\profesionales;
 
 
 
@@ -63,7 +64,10 @@ class Select2SearchController extends Controller
 
 } else {
 
-    return view('cliente', compact('id_clientes'));
+
+    $profesionales = profesionales::select('id_profesional','nombre')->get(); 
+    
+    return view('cliente', compact('id_clientes', 'profesionales'));
    
  }
 

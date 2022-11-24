@@ -17,6 +17,7 @@ class CreateControlesTable extends Migration
             $table->bigIncrements('id_control');
             $table->string('id_cliente')->required();
             $table->string('user_id')->required();
+            $table->string('num_control',3)->nullable();
             $table->string('peso',3)->nullable();
             $table->string('abd',3)->nullable();
             $table->string('grasa',3)->nullable();

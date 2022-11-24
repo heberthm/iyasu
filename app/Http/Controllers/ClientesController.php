@@ -14,6 +14,7 @@ use Redirect;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Cliente;
+use App\models\profesionales;
 
 
 class ClientesController extends Controller
@@ -64,6 +65,9 @@ class ClientesController extends Controller
             ->make(true);
         } 
 
+       //   $profesionales = profesionales::select('id_profesional','nombre'); 
+   
+   
        
         return view('cliente');
        // dd($id_cliente);
@@ -114,7 +118,9 @@ class ClientesController extends Controller
         $data->celular             = $request->celular;
         $data->direccion           = $request->direccion;
         $data->barrio              = $request->barrio;
+        $data->municipio           = $request->municipio;
         $data->email               = $request->email;
+        $data->estado              = $request->estado;
         
      
         /*    
