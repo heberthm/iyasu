@@ -193,12 +193,12 @@ DATATABLE LISTA DE ESPERA
        <div class="row">
          <div class="col-lg-12">
                                              
-               <table id="table_registros_contables" class="display" style="width:100%">
+               <table id="table_registros_contables" class="table dt-responsive table-hover" style="width:100%">
                    <thead>
                       <tr>
                                         
                         <th>Paciente</th>
-                        <th>Celular</th>
+                        <th>Tel/Cel</th>
                          <th>Fecha abono</th>
                          <th>Vr. abono</th>
                          <th>Saldo</th>
@@ -208,17 +208,7 @@ DATATABLE LISTA DE ESPERA
                      </tr>
                   </thead>
                 
-                  <tfoot>
-                      <tr>
-                          <th colspan="3" style="text-align:right;" ></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          
-                      </tr>
-                  </tfoot>
+                 
                             
                </table>
                     
@@ -247,7 +237,7 @@ DATATABLE LISTA DE ESPERA
 
 ======================================-->
 
-<div class="modal fade" id="modalACrearAbono" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalACrearAbono"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -279,31 +269,33 @@ DATATABLE LISTA DE ESPERA
 
           <div class="row">
 
-            <div class="col-md-3">
+            
 
-              <div class="form-group"  >
+              <div class="form-group" >
 
-                <label for="Cedula" class="control-label">Valor abono</label>
+                <label for="cliente" class="control-label">Cliente</label>
 
 
-                <input type="number" name="valor_abono" class="form-control" id="valor_abono" autofocus required autocomplete="off">
+                <div class="form-group">
+                        <select class="livesearch form-control"  id="livesearch" name="livesearch" style="width: 100%;"></select>
+                    </div>
 
              
-                <div class="alert-message" id="saldoError"></div>
+                <div class="alert-message" id="livesearchError"></div>
                  
-              </div>
+             
 
             </div>
 
 
 
-            <div class="col-md-4">
+            <div class="col-md-5">
 
               <div class="form-group">
 
-                <label for="Nombre" class="control-label">Responsable</label>
+                <label for="Celular" class="control-label">Tel/Cel</label>
 
-                <input type="text" name="responsable" class="typeahead form-control text-capitalize" id="responsable" required autocomplete="off">
+                <input type="text" name="celular" class="form-control " id="celular" required autocomplete="off">
 
                  <div class="alert-message" id="responsableError"></div>
                 
@@ -313,18 +305,21 @@ DATATABLE LISTA DE ESPERA
 
 
 
-            <div class="col-md-5">
+            <div class="col-md-3">
               <div class="form-group">
 
-                <label for="telefono" class="control-label">Descripción</label>
+                <label for="valor_abono" class="control-label">Vr. abono</label>
 
-                <input type="text" name="descripcion" class="form-control" id="descripcion" required autocomplete="off">
+                <input type="number" name="descripcion" class="form-control" id="descripcion" required autocomplete="off">
                 
                   <div class="alert-message" id="descripcionError"></div>
                            
                </div>
             </div>
  
+            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+
+
             </div>
 
 
@@ -719,6 +714,90 @@ $(document).ready(function () {
 
 
 
+<!-- =======================================
+
+SELECT2 - BUSQUEDAD DE CLIENTES
+
+============================================ -->
+
+<script type="text/javascript">
+  $('.livesearch').select2({
+    placeholder: 'Buscar cliente por nombre...',
+    language: "es",
+    allowClear: true,
+    minimumInputLength: 3,
+    ajax: {
+      // url: '/ajax-autocomplete-search',
+
+      url: '{{ url("/ajax-autocomplete-search") }}',
+
+      dataType: 'json',
+      delay: 250,
+      processResults: function(data) {
+
+
+        return {
+          results: $.map(data, function(item) {
+            return {
+              text: item.nombre,
+              id: item.id_cliente
+            }
+
+            // location.href = '/clientes/' + id
+            // window.location.href =('clientes/id');      
+
+            //  window.location.href =('/clientes'+ item['id']);  
+          })
+
+        };
+
+      },
+
+
+      cache: true,
+
+    }
+
+  });
+  
+  
+  //================================================
+   // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
+  //================================================
+
+  $('#livesearch').off('change').on('change', function() {
+   
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    let id = $(this).val();
+
+    $.ajax({
+     
+   
+      url: '/cliente/' +id, 
+
+        method: "GET",
+        data: $(this).serialize(),
+        dataType: "json",
+        success: function(data) {
+   
+
+         }
+
+    });
+
+   // window.location.href = 'cliente/' +id;
+
+  });
+</script>
+
+
+
+
 
 
 <!-- ===================================================
@@ -748,13 +827,12 @@ $(document).ready(function () {
            info: true,
            filter: true,
            responsive: true,
-          
+        
                             
            type: "GET",
-           ajax: "{{ url('abonos') }}",
-           
-         
-          
+           ajax: 'abonos',
+
+                    
            columns: [
                    
                     { data: 'nombre', name: 'nombre' },                  
@@ -773,9 +851,9 @@ $(document).ready(function () {
             "language": {
                 
                             
-                        "emptyTable": "El paciente no tiene controles registrados.",
+                        "emptyTable": "El paciente no tiene abonos registrados.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                        "infoEmpty": "Mostrando 0 to 0 de 0 Entradas",
+                        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
                         "infoPostFix": "",
                         "thousands": ",",
@@ -796,116 +874,8 @@ $(document).ready(function () {
      
       
     });
-   
-
-//============================================
-
-// AGREGAR CLIENTE A LISTA DE ESPERA
-
-//============================================
-
-
-  $('#form_lista_espera').off('submit').on('submit', function (event) {
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-
-/* Configurar botón submit con spinner */
-
-let btn = $('#agregar_lista_espera') 
-        let existingHTML =btn.html() //store exiting button HTML
-        //Add loading message and spinner
-        $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
-
-        setTimeout(function() {
-          $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
-        },5000) //5 seconds
-
-            $('#agregar').attr('disabled', true);
-
-            event.preventDefault();
-
-            try {
-
-            $.ajax({
-                url: "/listado_citas",
-                method: "POST",
-                data: $(this).serialize(),
-                dataType: "json",
-                success: function(data) {
-
-                  table.ajax.reload();
-
-                    $('#agregar').prop("required", true);
-                   // $('#selectBuscarCliente').html("");
-                    $('#buscarMascotas').empty();
-                    $('.BuscMascota').css("display", "block");
-                    $('.motivoConsulta').css("display", "block");
-                    $('#nombreMascota').html("");
-                    $('#form_lista_espera')[0].reset();
-                    $('#modalAgregarListaEspera').modal('hide');
-                    $("#nombreCliente").html('');
-  
-                    $('.selectBuscarCliente').val('').trigger('change');
-                                       
-
-                    toastr["success"]("Cita registrada correctamente.");
-
-
-                   
-
-
-                }
-
-             });
-
-            } catch(e) {
-              toastr["danger"]("Se ha presentado un error.", "Información");
-              }
-
-        });
-
-
-
-
-
-// ======================================= 
-
-//  ELIMINAR CITA DE LISTA DE ESPERAS  
-
-// ========================================= 
-
-//event
-
-$('body').on('click', '.deletePost', function (e) {
-
-
-let id = $(this).data("id");
-
-e.preventDefault();
-
-      $.ajax({
-          type: 'delete',
-          url: '/eliminar_cita/'+id,
-                  
-          success: function (data) {
-
-            table.ajax.reload();
-            toastr["success"]("Cita eliminada correctamente.");
-            
-          }
-      });
-
-    
 
   });
-
-
-});
 
 </script>
 

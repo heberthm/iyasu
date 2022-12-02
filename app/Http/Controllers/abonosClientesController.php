@@ -23,10 +23,8 @@ class abonosClientesController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = cliente::join('abonos_clientes', 'abonos_clientes.id_cliente', '=', 'clientes.id_cliente')
-              ->select('clientes.id_cliente', 'clientes.nombre', 'clientes.cedula',  'clientes.celular', 'abonos_cliente.id_cliente',
-              'abonos_cliente.id_abonos', 'abonos_cliente.valor_abono', 'abonos_cliente.saldo', 'abono_cliente.fecha_abono' )
-              ->get();
+              $id = abonos_clientes::select('id_cliente', 'id_abonos', 'nombre', 'celular', 'valor_abono', 'saldo', 
+                                            'responsable', 'created_at')->get();
                 
     
                return datatables()->of($id)

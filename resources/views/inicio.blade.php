@@ -121,7 +121,7 @@ BUSCADOR DE CLIENTES - SELECT2
                         <select class="livesearch form-control" id="livesearch" name="livesearch"></select>
                     </div>
 
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente" style="text-align:left"><span class="fa fa-user fa-fw" tabindex="3"></span> Agregar cliente nuevo</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente" style="text-align:left"><span class="fa fa-user fa-fw" tabindex="3"></span> Agregar A cliente nuevo</button>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -375,7 +375,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 
                   <span class="btn-group float-right" id="btn_historialIngresos">
-                    <a href="#" class="mr-3" data-toggle="modal" data-target="#modalAgregarCliente"><i class="fas fa-plus" style="color: #1566EB;" 
+                    <a href="#" class="mr-3" data-toggle="modal" data-target="#modalAgregarCliente2"><i class="fas fa-plus" style="color: #1566EB;" 
                     title="Agregar nuevo cliente" ></i></a>
                   </span>   
 
@@ -388,7 +388,7 @@ CALENDAR - AGENDAR   MEDICA
                     </div>
                
              
-                    <input type="text" name="cliente" class="form-control text-capitalize" id="cliente" >
+                    <input type="hidden" name="cliente" class="form-control text-capitalize" id="cliente" >
 
 
               <!--
@@ -908,7 +908,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_crear_cliente" action="{{'clientes'}}" >
+        <form method="POST" id="form_crear_cliente1" action="{{'clientes'}}" >
 
        <input type="hidden" name="_token" value="{{csrf_token()}}">  
  
@@ -941,7 +941,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <div id="fechaNacimiento" class="input-group date enddate">
 
-                  <input type="text" name="nombre" class="form-control text-capitalize" id="nombre" required autocomplete="off">
+                  <input type="text" name="nombre" class="form-control text-capitalize" id="nombre_cliente" required autocomplete="off">
 
                   <div class="alert-message" id="nombreError"></div>
                 
@@ -955,7 +955,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="telefono" class="control-label">Tel/Cel.</label>
 
-                <input type="text" name="celular" class="form-control" id="celular" required autocomplete="off">
+                <input type="text" name="celular" class="form-control" id="celular_cliente" required autocomplete="off">
                 
                 <div class="alert-message" id="celularError"></div>
                            
@@ -1143,280 +1143,270 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
 
 
+
  <!--=====================================
 
-    MODAL AGREGAR MASCOTAS
+    MODAL AGREGAR CLIENTE 2
 
 ======================================-->
 
-<div class="modal fade" id="modalAgregarMascotas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAgregarCliente2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
-              <div class="modal-dialog modal-lg">
-                
-                <div class="modal-content">
-                
-                    <div class="modal-header">
-                  
-                    <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-paw mr-3"></span>Agregar mascota</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">  <span aria-hidden="true">&times;</span>
-                    
-                      </button>
-                  
-                  </div>
-              
-                    <div class="modal-body">
+<div class="modal-dialog modal-lg">
+  
+  <div class="modal-content">
+  
+  <div class="modal-header">
+   
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-user mr-3"></span>Agregar cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     
+           <span aria-hidden="true">&times;</span>
+     
+        </button>
+    
+      </div>
 
-                    @if (session('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
-                    @endif
+      <div class="modal-body">
 
-                                         
-               <!--   <form method="POST" id="form_crear_mascotas" action="{{ url('/mascotas') }}" >  -->
-                    
-              
-                <!-- <input type="hidden" name="_token" value="{{csrf_token()}}"> -->
-          
-              
-              
-                        <div class="row">
-              
-                          <div class="col-md-5">
-              
-                            <div class="form-group">
-              
-                              <label for="mascota" class="control-label">mascota</label>
-              
-              
-                              <input type="text" name="nombre" class="form-control text-capitalize" id="nombreMascota" autofocus required autocomplete="off">
-              
-                            
-                              <div class="alert-message" id="mascotaError"></div>
-                                
-                            </div>
-              
-                          </div>
-              
-              
-              
-                          <div class="col-md-3">
-              
-                            <div class="form-group">
-              
-                              <label for="Especie" class="control-label">Especie</label>
-              
-                              <select class="form-control text-capitalize" name="especie" id="especie" onkeypress="return handleEnter(this, event)" required>
-                        
-                                  <option value="Canino" selected="selected">Canino</option>
-              
-                                  <option value="Felino">Felino</option>
-                                  <option value="Hamster">Hamster</option>
-                                  <option value="Ave">Ave</option>
-                                  <option value="Otro">Otro</option>
-              
-                              </select> 
-              
-                                <div class="alert-message" id="especieError"></div>
+          @if (session('error'))
+          <div class="alert alert-danger">{{ session('error') }}</div>
+          @endif
+
+        <form method="POST" id="form_crear_cliente2" action="{{'clientes'}}" >
+
+       <input type="hidden" name="_token" value="{{csrf_token()}}">  
+ 
+   
+
+          <div class="row">
+
+            <div class="col-md-3">
+
+              <div class="form-group"  >
+
+                <label for="Cedula" class="control-label">Cédula</label>
+
+
+                <input type="number" name="cedula2" class="form-control"  id="cedula2" autofocus required autocomplete="off">
+
+                <span id="error_cedula2"></span>
+
                               
-                            </div>
-                          </div>
-              
-              
-              
-              
-                          <div class="col-md-4">
-                            <div class="form-group">
-              
-                              <label for="raza" class="control-label">Raza</label>
-              
-                              <input type="text" name="raza" class="form-control text-capitalize" id="raza" required autocomplete="off">
-                              
-                                <div class="alert-message" id="razaError"></div>
-                                          
-                              </div>
-                          </div>
-              
-                          
-                          <div class="col-md-3">
-              
-                              <div class="form-group">
-              
-                                <label for="genero" class="control-label">Genero</label>
-              
-              
-                                <select class="form-control text-capitalize" name="sexo" id="sexo"  required>
-                                  <option value="" selected="selected" style='color: #cccccc'>Seleccionar opción</option>
-              
-                                  <option value="Macho">Macho</option>
-                                  <option value="Hembra">Hembra</option>
-              
-              
-              
-                                </select>
-              
-              
-                                <div class="alert-message" id="sexoError"></div>
-              
-                              </div>
-                        </div>
-              
-              
-              
-                          <div class="col-md-2">
-              
-                              <div class="form-group">
-              
-                                <label for="edad" class="control-label">Edad</label>
-              
-                                <input type="text" name="edad" class="form-control text-capitalize" id="edad" value=" Años" required onkeypress="return isNumber(event)">
-              
-                                  <div class="alert-message" id="edadError"></div>
-              
-                              </div>
-              
-                          </div>
-              
-              
-                      
-              
-                          <div class="col-md-2">
-              
-                            <div class="form-group">
-              
-                              <label for="color" class="control-label">Color</label>
-              
-                              <input type="text"  id="color" name="color"  class="form-control text-capitalize" required autocomplete="off">
-              
-                              <div class="alert-message" id="colorError"></div>
-              
-                            </div>
-                          </div>
-              
-              
-                          <div class="col-md-2">
-              
-                              <div class="form-group">
-              
-                                <label for="peso" class="control-label">Peso</label>
-              
-                                <input type="text"  id="peso" name="peso" value=" Kgrs" class="form-control text-capitalize" required autocomplete="off">
-              
-                                <div class="alert-message" id="pesoError"></div>
-              
-                              </div>
-              
-                          </div>
-              
-              
-                        
-                          <div class="col-md-3">
-              
-                            <div class="form-group">
-              
-                              <label for="esterilizado" class="control-label">Esterilizado</label>
-              
-                            
-                              <select class="form-control text-capitalize" name="esterilizado" id="esterilizado" onkeypress="return handleEnter(this, event)" required>
-                                <option value="" selected="selected" style='color: #cccccc'>Seleccionar opción</option>
-              
-                                <option value="Si">SI</option>
-                                <option value="No">No</option>
-              
-              
-              
-                              </select>
-              
-              
-                              <div class="alert-message" id="esterilizadoError"></div>
-              
-                            </div>
-                          
-                          </div>
-              
-              
-              
-              
-              
-              
-                          <div class="col-md-12">
-              
-                            <div class="form-group">
-              
-                              <label for="caracteristicas" class="control-label">Características</label>
-              
-                              <input type="text" name="caracteristicas" class="form-control" id="caracteristicas" autocomplete="off">
-                
-                                <div class="alert-message" id="caracteristicasError"></div>
-              
-                            </div>
-              
-              
-                            <div class="col-md-12">
-              
-                                <div class="form-group">
-              
-                                  <label for="foto" class="control-label">Foto</label>
-              
-                                  <input type="text" name="foto" class="form-control" id="foto" value="images/img_1.jpg" autocomplete="off">
-              
-                                  <div class="alert-message" id="caracteristicasError"></div>
-              
-                                </div>
-              
-                          </div>
-              
-                                          
-                        </div>
-              
-                  
-              
               </div>
-              
-              
-              
-              
-                        <!-- 
+
+           </div>
+
+
+            <div class="col-md-5">
+
               <div class="form-group">
-              <label for="end" class="col-sm-2 control-label">Fecha final</label>
-              
-              -->
-            
-              
-                  <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
-              
-                  <input type="text" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
-             
-                  
-           
-              
-            <!--     
-              
-              <div id="enlace_listado">  
-                        
-              <p><a href="crearClientes.php"><i class="fa fa-user fa-2x"></i>&nbsp; Crear cliente nuevo</a>   </p> 
-                        
+
+                <label for="Nombre" class="control-label">Nombre</label>
+
+                <div id="fechaNacimiento" class="input-group date enddate">
+
+                  <input type="text" name="nombre" class="form-control text-capitalize" id="nombre_cliente" required autocomplete="off">
+
+                  <div class="alert-message" id="nombreError"></div>
+                
+               </div>
               </div>
-              
-              -->
-        
-                <div class="modal-footer">
-        
-                <button type="submit" id="agregar_mascota" name="agregar_mascota" class="btn btn-primary">Guardar</button>
-                <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        
+            </div>
+
+
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="telefono" class="control-label">Tel/Cel.</label>
+
+                <input type="text" name="celular" class="form-control" id="celular_cliente" required autocomplete="off">
+                
+                <div class="alert-message" id="celularError"></div>
+                           
+               </div>
+            </div>
+
+
+          <div class="col-md-3">
+
+           
+            
+                 <label for="fechaNacmiento" class="control-label">Fecha nacimiento</label>
+                
+                 <div class="form-group">
+                 
+                 <input type="date" class="form-control" name="fecha_nacimiento2" id="fecha_nacimiento2" required/>
+                          
+                  
+                 
+              </div>
+         
+         </div>
+
+         <input type="hidden" class="form-control" name="fecha_nacimientos" id="fecha_nacimientos" required/>
+
+         <div class="col-md-2">
+
+             <div class="form-group">
+            
+                 <label for="Edad" class="control-label">Edad</label>
+                 
+                    <input type="text" class="form-control" id="edad2" name="edad2" required autocomplete="off">
+                    
+                
+            </div>
+         </div>
+
+           
+
+
+            <div class="col-md-7">
+
+                <div class="form-group">
+
+                  <label for="direccion" class="control-label">Dirección</label>
+
+                  <input type="text" name="direccion" class="form-control text-capitalize" id="direccion" required onkeypress="return isNumber(event)">
+
+                    <div class="alert-message" id="direccionError"></div>
+
                 </div>
 
             </div>
-          </div>
-        </div>
-        
-    </form>
-   </div>
-       
- </div>
+
         
 
+            <div class="col-md-6">
+
+              <div class="form-group">
+
+                <label for="barrio" class="control-label">Barrio</label>
+
+                <input type="text"  id="barrio" name="barrio"  class="form-control text-capitalize" required autocomplete="off">
+
+                <div class="alert-message" id="barrioError"></div>
+
+              </div>
+           </div>
+
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+
+                  <label for="municipio" class="control-label">Municipio</label>
+
+                  <select class="form-control" name="municipio" id="municipio" onkeypress="return handleEnter(this, event)" required>
+                        
+                        <option value="" selected="selected"></option>
+    
+                        <option value=" Alcala">Alcala</option>
+                        <option value=" Andalucía">Andalucía</option>
+                        <option value=" Ansermanuevo">Ansermanuevo</option>
+                        <option value=" Argelia">Argelia</option>
+                        <option value="Bolivar">Bolivar</option>
+                        <option value="Buga">Buga</option>
+                        <option value="Bugalagrande">Bugalagrande</option>
+                        <option value="Caicedonia">Caicedonia</option>
+
+                        <option value="Cali">Cali</option>
+                        <option value="Calima">Calima</option>
+                        <option value="Candelaria">Candelaria</option>
+                        <option value="Cartago">Cartago</option>
+                        <option value="Dagua">Dagua</option>
+
+                        <option value="El águila">El águila</option>
+                        <option value="El cairo">El cairo</option>
+                        <option value="El cerrito">El cerrito</option>
+                        <option value="El dóvio">El dóvio</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Ginebra">Ginebra</option>
+                        <option value="Guacarí">Guacarí</option>
+                        <option value="Jamundi">Jamundi</option>
+                        <option value="La unión">La unión</option>
+                        <option value="La victoria">La victoria</option>
+                        <option value="Obando">Obando</option>
+                        <option value="Restrepo">Restrepo</option>
+                        <option value="Rio frio">Rio frio</option>
+                        <option value="Roldanillo">Roldanillo</option>
+                        <option value="San pedro">San pedro</option>
+                        <option value="Toro">Toro</option>
+                        <option value="Trujillo">Trujillo</option>
+                        <option value="Tulúa">Tulúa</option>
+                        <option value="Ulloa">Ulloa</option>
+                        <option value="Versalles">Versalles</option>
+                        <option value="Yotoco">Yotoco</option>
+                        <option value="Zarzal">Zarzal</option>
+
+
+                    </select> 
+
+                  </div>
+              </div>
+
+         </div>   
+
+
+            <div class="col-md-8">
+
+              <div class="form-group">
+
+                <label for="email" class="control-label">Email</label>
+
+                <input type="email" name="email" class="form-control" id="email" autocomplete="off">
+ 
+                 <div class="alert-message" id="emailError"></div>
+
+              </div>
+            </div>
+
+            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
+
+          </div>
+
+
+
+
+          <!-- 
+<div class="form-group">
+<label for="end" class="col-sm-2 control-label">Fecha final</label>
+
+-->
+     
+
+    <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+    
+      
+
+      <!--     
+
+<div id="enlace_listado">  
+         
+<p><a href="crearClientes.php"><i class="fa fa-user fa-2x"></i>&nbsp; Crear cliente nuevo</a>   </p> 
+         
+</div>
+
+-->
+
+      <div class="modal-footer">
+
+        <button type="submit" id="agregar_cliente2" name="agregar_cliente2" class="btn btn-primary loader">Guardar</button>
+        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</form>
+</div>
+
+
+</div>
 
 
 
@@ -1528,7 +1518,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               
                    
 
-                  <input type="hidden" name="nombreCliente" class="form-control" id="nombreCliente" autocomplete="off" >  
+                  <input type="text" name="nombreCliente" class="form-control" id="nombreCliente" autocomplete="off" >  
 
                   <input type="hidden" name="nombre_Mascota" class="form-control" id="nombre_Mascota" autocomplete="off" >  
 
@@ -1585,7 +1575,7 @@ $(window).on('load', function () {
 
 <!-- =======================================
 
-CALCULO DE LA EDAD DEL CLIENTE 
+CALCULO DE LA EDAD DEL CLIENTE 1
 
 =========================================== -->
 
@@ -1600,6 +1590,30 @@ $('#fecha_nacimiento1').blur(function()
             var edad = Math.floor((hoy-fecha)/(365.25*24*60*60*1000));
             document.getElementById('edad').value = edad +' ' +'Años';
            document.getElementById('fecha_nacimiento').value = document.getElementById('fecha_nacimiento1').value;
+        });
+
+</script>
+
+
+
+
+<!-- =======================================
+
+CALCULO DE LA EDAD DEL CLIENTE 2
+
+=========================================== -->
+
+
+<script>
+
+$('#fecha_nacimiento2').blur(function()
+        {
+          document.getElementById('edad2').value = "";
+            var fecha = new Date(document.getElementById('fecha_nacimiento2').value);
+            var hoy = new Date();
+            var edad = Math.floor((hoy-fecha)/(365.25*24*60*60*1000));
+            document.getElementById('edad2').value = edad +' ' +'Años';
+           document.getElementById('fecha_nacimientos').value = document.getElementById('fecha_nacimiento2').value;
         });
 
 </script>
@@ -1626,6 +1640,97 @@ $(document).ready(function () {
 
 
 
+<script>
+
+$("#agregar_cliente2").click(function () {
+         
+        var firstValue = $("#nombre").val();
+        var secondValue = $("#celular").val();
+        $("#nombre_cliente").text(firstValue);
+        $("#celular_cliente").text(secondValue);
+        });
+
+</script>
+
+
+
+<script>
+
+
+//============================================
+
+// AGREGAR CLIENTE NUEVO
+
+//============================================
+
+
+$('#form_crear_cliente2').off('submit').on('submit', function (event) {
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+
+/* Configurar botón submit con spinner */
+
+
+
+let btn = $('#agregar_cliente2') 
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+
+        $('#agregar_cliente2').attr('disabled', true);
+
+        
+
+        event.preventDefault();
+
+        try {
+
+        $.ajax({
+            url: 'crear_clientes',
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function() {
+
+             // table.ajax.reload();
+
+                $('#agregar_cliente2').prop("required", true);
+               // $('#selectBuscarCliente').html("");
+               
+                $('#form_crear_cliente2')[0].reset();
+                $('#modalAgregarCliente2').modal('hide');
+              
+                                   
+
+                toastr["success"]("Datos guardados correctamente.");
+             }
+
+         });
+
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.", "Información");
+          }
+
+    });
+
+
+
+</script>
+
+
+
+
+
+
 
 
 <!-- =======================================
@@ -1640,13 +1745,14 @@ SELECT2 - BUSQUEDAD DE CLIENTES
     language: "es",
     allowClear: true,
     minimumInputLength: 3,
+    delay: 250,
     ajax: {
       // url: '/ajax-autocomplete-search',
 
       url: '{{ url("/ajax-autocomplete-search") }}',
 
       dataType: 'json',
-      delay: 250,
+     
       processResults: function(data) {
 
 
@@ -1681,6 +1787,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
   $('#livesearch').off('change').on('change', function() {
    
+
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1726,11 +1833,11 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
   
     language: "es",
     placeholder: 'Buscar cliente...',
-    allowClear: true,
+   // allowClear: true,
     minimumInputLength: 3,
     dropdownParent: $('#ModalAdd'),
-
-    
+   
+   
     ajax: {
       
       url: '/ajax-autocomplete-search',
@@ -1771,7 +1878,7 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
 
   $('.livesearch2').off('change').on('change', function() {
   
-     
+      
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1781,8 +1888,8 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
   
 
     let id = $(this).val();
-   
-     $('#cliente').val('');
+      
+     $('#cliente').text('');
                      
       let cliente = '';
                                                 
@@ -1817,28 +1924,9 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
 </script>
 
 
-<script>
-
-$('#livesearch2').on('select2:unselect', function(e) {
-  $('#livesearch2').val(null).trigger('change'); //clear other
-});
-
-</script>
 
 
 
-
-<script>
-
-  
-$('#modaladd').on('shown.bs.modal', function() {
- 
-    $('#livesearch2').select2({
-        dropdownParent: 'modaladd'
-    });
-})
-
-</script>
 
 
 
@@ -2068,6 +2156,25 @@ $("#buscarMascota").change(function(){
 
 
 
+<!-- ================================= 
+
+RESET SELECT2: livesearch2
+
+================================= -->
+
+
+<script>
+
+$('.livesearch2').on('select2:opening', function (e) { 
+
+$('.livesearch2').html('');
+
+});
+
+
+</script>
+
+
 
 
 <!-- ================================= 
@@ -2087,6 +2194,8 @@ $('.selectBuscarCliente').html('');
 
 
 </script>
+
+
 
 
 <script>
@@ -2416,6 +2525,7 @@ $('.selectBuscarCliente').html('');
         $('#ModalAdd #fecha_actual').val(moment(start).format('DD-MM-YYYY'));
        
         $('#ModalAdd').modal('show');
+      
 
 
 
@@ -2591,6 +2701,8 @@ $('#ModalCalendar').on('shown.bs.modal', function() {
   $("#calendar2").fullCalendar('render');
 
   $("#calendar2").fullCalendar('refetchEvents');
+
+  
 
 });
 
@@ -2859,6 +2971,64 @@ $(document).ready(function(){
       $('#error_cedula').html('<label class="text-success">Disponible.</label>');
       $('#cedula').removeClass('has-error');
       $('#agregar_cliente').attr('disabled', false);
+
+     
+     }
+    }
+   })
+  }
+ });
+ 
+});
+
+</script>
+
+
+
+
+<!-- ==============================
+
+// VERIFICAR SI EXISTE CLIENTE 2
+
+===================================  -->
+
+<script>    
+
+$(document).ready(function(){
+
+ $('#cedula2').blur(function(){
+  var error_cedula = '';
+  var cedula2 = $('#cedula2').val();
+  var _token = $('input[name="_token"]').val();
+  var filter = /([0-9])/;
+  if(!filter.test(cedula2))
+  {    
+   $('#error_cedula2').html('<label class="text-danger">Debe escribir número de cédula.</label>');
+   $('#cedula2').addClass('has-error');
+   $('#agregar_cliente2').attr('disabled', 'disabled');
+  }
+  else
+  {
+   $.ajax({
+    url:'verificar_cliente',
+    method:"POST",
+    data:{cedula:cedula2},
+    success:function(result)
+    {
+     if(result == 'unique')
+     {
+     
+      $('#error_cedula2').html('<label class="text-danger">El cliente ya existe.</label>');
+      $('#cedula2').addClass('has-error');
+      $('#agregar_cliente2').attr('disabled', 'disabled');
+
+     }
+     else
+     {
+
+      $('#error_cedula2').html('<label class="text-success">Disponible.</label>');
+      $('#cedula2').removeClass('has-error');
+      $('#agregar_cliente2').attr('disabled', false);
 
      
      }

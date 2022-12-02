@@ -26,6 +26,11 @@ class Cliente extends Model
         return $this->hasMany(abonos_clientes::class);
     }
 
+    public function paquetes(){
+        return $this->hasMany(paquetes::class);
+    }
+
+
     
     use SoftDeletes;
    // use HasFactory;

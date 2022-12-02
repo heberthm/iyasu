@@ -15,12 +15,13 @@ class CreateAbonosClientesTable extends Migration
     {
         Schema::create('abonos_clientes', function (Blueprint $table) {
             $table->bigIncrements('id_abonos');
-            $table->string('id_cliente',18)->unique()->required();
+            $table->string('id_cliente')->required();
             $table->string('user_id')->required();
-            $table->string('id_profesional',25)->required();
+            $table->string('nombre',12)->nullable();
+            $table->string('celular',12)->nullable();
             $table->string('valor_abono',12)->nullable();
             $table->string('saldo',12)->nullable();
-            $table->string('fecha_abono',12)->nullable();
+            $table->string('responsable',30)->nullable();
             $table->timestamps();
         });
     }

@@ -20,27 +20,28 @@
 
    
 <!-- Font-awesome css -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-          crossorigin="anonymous"/>  
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>  
 
 
          
-
+<!-- Datatable Jquery -->
     <link href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" rel="stylesheet" />
    
+
+       
+<!-- Select2 css -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css" rel="stylesheet" />
+
 
 <!-- SweetAlert2 -->
     <link href="<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"  rel="stylesheet" />
     
  
-<!-- Select2 css -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   
   <!-- Fullcalendar 3.10.2 css --> 
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css' rel='stylesheet' />
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.print.css' rel='stylesheet' media='print' />
-
 
 
 <!-- Toastr css -->
@@ -61,7 +62,7 @@
  <link href="<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"  rel="stylesheet" /> 
  
 
-<link href="{{asset('css/select2.min.css')}}" rel="stylesheet"/>
+<!-- <link href="{{asset('css/select2.min.css')}}" rel="stylesheet"/> ->
 
   
 
@@ -80,16 +81,6 @@
 <!-- <link href="{{asset('css/toastr2.1.3.min.css')}}" rel="stylesheet"/> -->
 
 
- <!-- tippy.css -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/google.css"
-          integrity="sha256-mTkzfXLTKZmfwr8GdvnpDKWH6pohAu6TBMlyarkUjPE=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light.css"
-          integrity="sha256-Z8l5LwKwMxh3/74PQ3iea+z3IF7nTN9CP5A1S5Es2bE=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@4.3.5/themes/light-border.css"
-          integrity="sha256-cpXbUNk+V/EXxqmcyU0BJe8eEFURwIYi+CTmJseXFwU=" crossorigin="anonymous">
- 
-
-
 
 
           
@@ -101,8 +92,12 @@ ARCHIVOS JS
 
 
 <!-- Jquery 3.5 js -->
-<script src='https://code.jquery.com/jquery-3.6.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
 
+
+<!-- Select2 js -->  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/es.min.js"  ></script>  
 
 
 <!-- popper 2.11.2 js -->
@@ -118,6 +113,7 @@ ARCHIVOS JS
 
 <!--  tippy js -->
 <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.cjs.min.js"></script>
+
 
  
 <!-- DataTable js -->
@@ -144,9 +140,6 @@ ARCHIVOS JS
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale-all.min.js' defer></script>
 
  
-<!-- Select2 js -->  
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/es.min.js" ></script>  
 
 <!-- Tidio js --> 
 <!-- <script src="//code.tidio.co/zffhz4jdjbaro6re8swf82onrcpo6ojy.js" async></script> -->
@@ -183,14 +176,10 @@ ARCHIVOS JS
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
 
-       
-        <li style="width:auto">
              <!-- SELECT DE BUSQUEDAD EN BARRA DE MENU  -->
-       <!--      
-             <select class="livesearch form-control" id="livesearch_1" name="livesearch_1" style="width: 100%;"></select>
-         </li>
-
-       -->
+     
+       
+       
 
     </ul>
 
@@ -282,62 +271,7 @@ ARCHIVOS JS
  <script src="{{ mix('js/app.js') }}"></script>
 
 
- <!-- ================================================
-
-   SELECT2 - BUSCAR - CLIENTE
-   
-  ================================================  -->
-
-
-<script type="text/javascript">
-    
-  $('.livesearch_1').select2({
-    placeholder: 'Buscar cliente por nombre...',
-    language: "es",
-    allowClear: true,
-    minimumInputLength: 3,
-    ajax: {
-      // url: '/ajax-autocomplete-search',
-
-      url: '{{ url("../ajax-autocomplete-search") }}',
-
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-
-
-        return {
-          results: $.map(data, function(item) {
-            return {
-              text: item.nombre,
-              id: item.id_cliente
-            }
-
-            // location.href = '/clientes/' + id
-            // window.location.href =('clientes/id');      
-
-            //  window.location.href =('/clientes'+ item['id']);  
-          })
-
-        };
-
-      },
-
-
-      cache: true,
-
-    }
-
-  });
-  
-
-</script>
-
-
-
-
-
- <script type="text/javascript">
+  <script type="text/javascript">
 
 $('#clock').countdown('2022/05/16 12:34:56')
 .on('update.countdown', function(event) {

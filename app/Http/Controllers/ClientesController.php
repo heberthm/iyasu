@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Response;
+
 use App\Http\Requests\ValidarFormularioRequest;
 
 use Illuminate\Support\Facades\Auth;
@@ -80,10 +82,41 @@ class ClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+             
+      $validatedData = $request->validate([
+         
+          'nombre'              =>    'required|max:35',
+          'celular'             =>    'required|max:26',
+          'direccion'           =>    'required|max:50',
+          'barrio'              =>    'required|max:25',
+          'email'               =>    'required|max:50'
+      ]);
+   
+
+
+        $insertArr = [ 
+                       'user_id' => $request->userId,
+                       'cedula' => $request->cedula2,
+                       'fecha_nacimiento' => $request->fecha_nacimientos,
+                       'edad' => $request->edad2,
+                       'nombre' => $request->nombre,
+                       'celular' => $request->celular,
+                       'direccion' => $request->direccion,
+                       'barrio' => $request->barrio,
+                       'municipio' => $request->municipio,
+                       'email' => $request->email,
+                       'estado' => $request->estado,
+
+                    ];
+                    
+        $event = cliente::insert($insertArr);   
+       
+        return Response::json($event);
     }
+
+   
 
     /**
      * Store a newly created resource in storage.

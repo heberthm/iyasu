@@ -19,6 +19,12 @@ a.editable-empty {
 }
 
 
+.select2-multpie
+{
+   background-color: #f5f5f5 !important;
+}
+
+
 /*
 
 thead {
@@ -455,13 +461,20 @@ DATATABLE MASCOTAS
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-5">
               
                         <div class="form-group">
 
-                          <label for="terapia" class="control-label font-weight-normal">Terapia</label>
+                          <label for="terapia" class="control-label font-weight-normal">Terapias</label>
 
-                          <input type="text" name="terapias" class="form-control" id="terapias"  autocomplete="off">
+                                                   
+                          <select class="form-control select2-multiple" name="terapias[]" multiple="multiple" placeholder="Seleccione una opción" style="width:100%" >
+                              @foreach($terapias as $prof)
+                                    <option value="{{$prof->id_terapias}}">{{$prof->terapia}}</option>
+                            @endforeach   
+                          </select>
+
+
 
                           <div class="alert-message" id="terapiasError"></div>
 
@@ -1861,6 +1874,15 @@ $(window).on('load', function () {
 </script>
 
 
+<script>
+   
+    $('.select2-multiple').select2({
+      
+      allowClear: true,
+      placeholder: "Seleccione una opción",
+
+});
+ </script>
 
 
 

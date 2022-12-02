@@ -26,6 +26,16 @@
           </li>
 
 
+          <li class="nav-item">
+          <a href="{{ url('abonos') }}" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+           <!-- <i class="nav-icon fas fa-list green"></i> -->
+            <i class="nav-icon fas  fa-medkit"></i>
+            <p>
+              Registro tratamientos
+            </p>
+          </a>
+        </li>
+
         <li class="nav-item">
           <a href="{{ url('abonos') }}" class="nav-link {{ request()->is('abonos') ? 'active' : '' }}">
            <!-- <i class="nav-icon fas fa-list green"></i> -->
@@ -42,7 +52,7 @@
            <!-- <i class="nav-icon fas fa-list green"></i> -->
             <i class="nav-icon fas  fa-usd"></i>
             <p>
-              pagos
+              pagos a profesionales
             </p>
           </a>
         </li>
