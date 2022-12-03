@@ -113,9 +113,15 @@ class historiasClinicasController extends Controller
       //  try {
         $data = new historias_clinicas();
  
+        $getterapias = $request->terapias;
+        $terap = implode(',', $getterapias);
+
+        $getterapias_adicionales = $request->terapias_adicionales;
+        $teraps = implode(',', $getterapias_adicionales);
+
         $data ->user_id         = $request->userId;
-        $data->id_cliente         = $request->id_cliente;
-        $data->profesional         = $request->profesional;
+        $data->id_cliente       = $request->id_cliente;
+        $data->profesional      = $request->profesional;
         $data->estatura         = $request->estatura;
         $data->peso_inicial     = $request->peso_inicial;
         $data->abd_inicial      = $request->abd_inicial;
@@ -125,10 +131,10 @@ class historiasClinicasController extends Controller
         
         $data->grasa_viseral     = $request->grasa_viseral;
         $data->edad_metabolica   = $request->edad_metabolica;
-        $data->terapias          = $request->terapias;
+        $data->terapias = $terap;
+        $data->terapias_adicionales = $teraps;
         $data->paquete_desintoxicacion     = $request->paquete_desintoxicacion;
-        $data->terapias_adicionales        = $request->terapias_adicionales;
-
+      
         $data->tipo_lavado     = $request->tipo_lavado;
         $data->num_lavado      = $request->num_lavado;
         $data->dias_lavados    = $request->dias_lavados;

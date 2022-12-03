@@ -384,7 +384,7 @@ CALENDAR - AGENDAR   MEDICA
               
 
                     <div class="form-group">
-                        <select class="livesearch2 form-control"  id="livesearch2" name="livesearch2" style="width: 100%;"></select>
+                        <select class="livesearch2 form-control"  id="livesearch2" name="nombre_cliente" style="width: 100%;"></select>
                     </div>
                
              
@@ -410,7 +410,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="Telefono" class="control-label">Tel / Cel</label>
 
-                <input type="tel" name="telefono" class="form-control text-capitalize" id="telefono" required onkeypress="return isNumber(event)">
+                <input type="tel" name="telefono" class="form-control text-capitalize" id="celular_cliente" required onkeypress="return isNumber(event)">
 
               </div>
 
@@ -1393,7 +1393,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_cliente2" name="agregar_cliente2" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="agregar_cliente2" name="agregar_cliente2"  class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -1642,15 +1642,10 @@ $(document).ready(function () {
 
 <script>
 
-$("#agregar_cliente2").click(function () {
-         
-        var firstValue = $("#nombre").val();
-        var secondValue = $("#celular").val();
-        $("#nombre_cliente").text(firstValue);
-        $("#celular_cliente").text(secondValue);
-        });
 
 </script>
+
+
 
 
 
@@ -1674,8 +1669,6 @@ $.ajaxSetup({
 
 
 /* Configurar botón submit con spinner */
-
-
 
 let btn = $('#agregar_cliente2') 
     let existingHTML =btn.html() //store exiting button HTML
@@ -1714,23 +1707,20 @@ let btn = $('#agregar_cliente2')
                 toastr["success"]("Datos guardados correctamente.");
              }
 
+
          });
 
         } catch(e) {
           toastr["danger"]("Se ha presentado un error.", "Información");
           }
 
+         // window.location.href = 'cliente/' +id;
+       
     });
 
 
 
 </script>
-
-
-
-
-
-
 
 
 <!-- =======================================
@@ -3064,6 +3054,25 @@ $(document).ready(function() {
 
 
 
+<!-- =========================================
+
+ FUNCIÓN FOCUS PARA PRIMER INPUT ModalAdd
+
+ ============================================ -->
+
+
+ <script>
+
+$(document).ready(function() {
+    $('#ModalAgregarCliente').on('shown.bs.modal', function () {
+    $('#cliente').focus()
+  });
+});
+
+</script>
+
+
+
 <script>
 
    $(document).ready(function () {
@@ -3151,7 +3160,7 @@ $(document).ready(function() {
  <script>
 
 $(document).ready(function() {
-    $('#modalAgregarCliente').on('shown.bs.modal', function () {
+    $('#modalAgregarCliente2').on('shown.bs.modal', function () {
     $('#cedula').focus();
    // $('#agregar_cliente').attr('enabled','enabled');
 

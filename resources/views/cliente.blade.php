@@ -311,7 +311,7 @@ DATATABLE MASCOTAS
                     <div class="modal-body">
               
               
-                    <form method="POST" id="form_crear_historia_clinica" action="{{ url('/clientes') }}" >
+                    <form method="POST" id="form_crear_historia_clinica" enctype="multipart/form-data" action="{{ url('/clientes') }}" >
                     
                   <!-- @csrf -->
               
@@ -446,7 +446,7 @@ DATATABLE MASCOTAS
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-8">
               
                           <div class="form-group">
 
@@ -461,16 +461,16 @@ DATATABLE MASCOTAS
                     </div>
 
 
-                    <div class="col-md-5">
+                    <div class="col-md-6">
               
                         <div class="form-group">
 
                           <label for="terapia" class="control-label font-weight-normal">Terapias</label>
 
                                                    
-                          <select class="form-control select2-multiple" name="terapias[]" multiple="multiple" placeholder="Seleccione una opción" style="width:100%" >
+                          <select class="form-control select2-multiple" name="terapias[]" multiple="multiple" placeholder="Seleccione opciones" style="width:100%" >
                               @foreach($terapias as $prof)
-                                    <option value="{{$prof->id_terapias}}">{{$prof->terapia}}</option>
+                                    <option value="{{$prof->terapia}}">{{$prof->terapia}}</option>
                             @endforeach   
                           </select>
 
@@ -483,13 +483,18 @@ DATATABLE MASCOTAS
                   </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
               
                         <div class="form-group">
 
                           <label for="terapias adicionales" class="control-label font-weight-normal">Terapias adicionales</label>
 
-                          <input type="text" name="terapias_adicionales" class="form-control" id="terapias_adicionales"  autocomplete="off">
+                          <select class="form-control select2-multiple" name="terapias_adicionales[]" multiple="multiple" placeholder="Seleccione opciones" style="width:100%" >
+                              @foreach($terapias_adicionales as $tera)
+                                    <option value="{{$tera->terapias_adicionales}}">{{$tera->terapias_adicionales}}</option>
+                            @endforeach   
+                          </select>
+
 
                           <div class="alert-message" id="terapiasAdicionalesError"></div>
 
@@ -517,10 +522,10 @@ DATATABLE MASCOTAS
               <div class="form-group">
                   <label for="profesional" class="control-label font-weight-normal">Atendido por</label>
                   
-                  <select name="profesional" class="form-control" id="profesional">
+                  <select name="profesional" class="form-control" id="profesional"placeholder="Seleccione profesional">
                     <option value=""></option>
                       @foreach($profesionales as $prof) 
-                      <option value="{{$prof->id_profesional}}">{{$prof->nombre}}</option>
+                      <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
                       @endforeach
                   </select>
 
@@ -528,7 +533,7 @@ DATATABLE MASCOTAS
               </div>
           </div>
 
-          <div class="col-md-8">
+          <div class="col-md-12">
               
               <div class="form-group">
 
@@ -765,7 +770,7 @@ DATATABLE MASCOTAS
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-5">
               
                           <div class="form-group">
 
@@ -781,7 +786,7 @@ DATATABLE MASCOTAS
 
 
                    
-                    <div class="col-md-8">
+                    <div class="col-md-6">
               
                         <div class="form-group">
 
@@ -799,7 +804,7 @@ DATATABLE MASCOTAS
                   
 
 
-                <div class="col-md-3">
+                <div class="col-md-6">
               
               <div class="form-group">
 
@@ -815,21 +820,7 @@ DATATABLE MASCOTAS
 
 
 
-                <div class="col-md-2">
-              
-                  <div class="form-group">
-
-                    <label for="dias lavados" class="control-label font-weight-normal">Dias lavados</label>
-
-                    <input type="number" name="dias_lavados" class="form-control" id="dias_lavados" value="{{$id_cliente->dias_lavados}}" autocomplete="off">
-
-                    <div class="alert-message" id="diasLavadosError"></div>
-
-                  </div>
-
-            </div>
-
-        
+                      
             <div class="col-md-4">
               <div class="form-group">
                   <label for="medico_tratante" class="control-label font-weight-normal">Atendido por</label>
@@ -1116,30 +1107,7 @@ DATATABLE MASCOTAS
                         </div>
 
                   </div>
-
-              
-                  <div class="col-md-2">
-              
-                      <div class="form-group">
-
-                        <label for="numero lavados" class="control-label font-weight-normal"><b>Num. lavados</b></label>
-
-                        <p>{{ $id_cliente->num_lavado }}</p>       
-
-                      </div>
-
-                </div>
-
-
-                <div class="col-md-2">
-              
-                  <div class="form-group">
-
-                    <label for="dias lavados" class="control-label font-weight-normal"><b>Dias lavados</b></label>
-
-                    <p>{{ $id_cliente->dias_lavados }}</p>       
-
-                  </div>
+            
 
             </div>
 

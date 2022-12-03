@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Cliente;
 use App\models\profesionales;
 use App\models\terapias;
+use App\models\terapias_adicionales;
 
 
 
@@ -68,8 +69,10 @@ class Select2SearchController extends Controller
 
     $profesionales = profesionales::select('id_profesional','nombre')->get(); 
     $terapias = terapias::select('id_terapias','terapia')->get();
+    $terapias_adicionales = terapias_adicionales::select('id_terapias_adicionales','terapias_adicionales')->get();
+
     
-    return view('cliente', compact('id_clientes', 'profesionales', 'terapias'));
+    return view('cliente', compact('id_clientes', 'profesionales', 'terapias', 'terapias_adicionales'));
    
  }
 
