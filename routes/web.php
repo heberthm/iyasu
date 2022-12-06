@@ -9,6 +9,12 @@ use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
  use App\Http\Controllers\historiasClinicasController;
+ use App\Http\Controllers\abonosClientesController;
+ use App\Http\Controllers\terapiasController;
+ use App\Http\Controllers\terapias_adicionalesController;
+ use App\Http\Controllers\profesionalesController;
+
+
 
 
 use App\Http\Controllers\Controller;
@@ -80,11 +86,24 @@ Route::post('/crear_control', [App\Http\Controllers\controlesController::class, 
 
 Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index']);
 
+Route::post('/crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
+
+Route::post('/crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
+
+Route::get('tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
+
+
+
+Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index']);
+
+Route::get('terapias_adicionales', [App\Http\Controllers\terapias_adicionalesController::class, 'index']);
+
+Route::get('profesionales', [App\Http\Controllers\profesionalesController::class, 'index']);
 
 
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');
+Route::get('/listado_cliente', [App\Http\Controllers\ListadoCitaMedicaController::class, 'index']);
 
 
-Route::get('/listado_cliente/{id}', [App\Http\Controllers\ClientesController::class, 'index']);
 
 Route::delete('eliminar_cita/{id}', [App\Http\Controllers\ListadoCitaMedicaController::class, 'destroy'])->name('eliminar_cita');

@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration
             $table->bigIncrements('id_cliente');
             $table->string('cedula',18)->unique()->required();
             $table->string('user_id')->required();
-            $table->string('fecha_nacimiento',18)->required();
+            $table->date('fecha_nacimiento',18)->required();
             $table->string('edad',14)->required();
             $table->string('nombre',60)->required();
             $table->string('direccion',150)->nullable();
@@ -31,9 +31,7 @@ class CreateClientesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-                   
-
-
+    
         });
     }
 

@@ -17,7 +17,7 @@
                with font-awesome or any other icon font library -->
          
                <li class="nav-item">
-            <a href="{{ route('inicio') }}" class="nav-link {{ request()->is('inicio') ? 'active' : '' }}">
+            <a href="{{ url('inicio') }}" class="nav-link {{ request()->is('inicio') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-asterisk green"></i>
                 <p>
                  Inicio
@@ -27,7 +27,7 @@
 
 
           <li class="nav-item">
-          <a href="{{ url('abonos') }}" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+          <a href="{{ url('registrar_tratamientos') }}" class="nav-link {{ request()->is('registrar_tratamientos') ? 'active' : '' }}">
            <!-- <i class="nav-icon fas fa-list green"></i> -->
             <i class="nav-icon fas  fa-medkit"></i>
             <p>
@@ -59,7 +59,7 @@
 
 
       <li class="nav-item">
-        <a href="{{ route('inicio') }}" class="nav-link {{ request()->is('inicio') ? '' : '' }}">
+        <a href="{{ url('inicio') }}" class="nav-link {{ request()->is('inicio') ? '' : '' }}">
 
           <i class="nav-icon fas fa-comment green"></i>
           <p>
@@ -76,40 +76,51 @@
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-inicio green"></i>
           <p>
-           Administración
+          Configurar
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
 
+        <li class="nav-item">
+          <a href="{{ url('profesionales') }}" class="nav-link {{ request()->is('profesionales') ? 'Active' : '' }}">
+
+              <i class="nav-icon fas fa-user-md green"></i>
+              <p>
+                Profesionales
+              </p>
+           </a>   
+          </li>
+
+
          <li class="nav-item">
-          <a href="{{ route('inicio') }}" class="nav-link {{ request()->is('inicio') ? '' : '' }}">
+          <a href="{{ url('terapias') }}" class="nav-link {{ request()->is('terapias') ? 'Active' : '' }}">
 
               <i class="nav-icon fas fa-list-ol green"></i>
               <p>
-                Caja
+                Terapias
               </p>
            </a>   
           </li>
 
 
           <li class="nav-item">
-          <a href="{{ route('inicio') }}" class="nav-link {{ request()->is('inicio') ? '' : '' }}">
+          <a href="{{ url('terapias_adicionales') }}" class="nav-link {{ request()->is('terapias_adicionales') ? 'Active' : '' }}">
 
               <i class="nav-icon fas fa-tags green"></i>
               <p>
-                Inventario
+                Terapias adicionales
               </p>
           </a> 
 
           </li>
           
             <li class="nav-item">
-            <a href="{{ route('inicio') }}" class="nav-link {{ request()->is('inicio') ? '' : '' }}">
+            <a href="{{ url('inicio') }}" class="nav-link {{ request()->is('inicio') ? '' : '' }}">
 
                   <i class="nav-icon fas fa-cogs white"></i>
                   <p>
-                      Compras
+                     lavados
                   </p>
           </a>
             </li>
@@ -119,11 +130,11 @@
 
       
       <li class="nav-item has-treeview">
-        <a href="{{ route('register') }}" class="nav-link {{ request()->is('register') ? '' : '' }}">
+        <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? '' : '' }}">
 
           <i class="nav-icon fas fa-user-plus green"></i>
           <p>
-            Agregar usuario
+            Crear usuario
            
           </p>
         </a>
@@ -135,7 +146,7 @@
        
       
           <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}"
+                <a class="nav-link" href="{{ url('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                     <i class="nav-icon fa fa-power-off" style="color:#C81010"></i>

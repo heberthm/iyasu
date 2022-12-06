@@ -121,7 +121,7 @@ BUSCADOR DE CLIENTES - SELECT2
                         <select class="livesearch form-control" id="livesearch" name="livesearch"></select>
                     </div>
 
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente" style="text-align:left"><span class="fa fa-user fa-fw" tabindex="3"></span> Agregar A cliente nuevo</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente" style="text-align:left"><span class="fa fa-user fa-fw" tabindex="3"></span> Agregar cliente nuevo</button>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -142,7 +142,7 @@ FORMULARIO RECEPCION DE PACIENTES
                                   
               
                
-                <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span> Pacientes que cumplen años hoy</h3>
+                <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span> Pacientes que cumplen años el mes actual</h3>
                   <span class="btn-group float-right" id="btn_historialIngresos">
 
                   <span class="btn-group float-right" id="btn_historialIngresos">
@@ -184,10 +184,10 @@ DATATABLE LISTA DE ESPERA
                    <thead>
                       <tr>
                                         
-                         <th>hora</th>
-                         <th>Cliente</th>
-                         <th>mascota</th>
-                         <th>Motivo</th>
+                         <th>Paciente</th>
+                         <th>Celular</th>
+                         <th>Fecha nacimiento</th>
+                        
                          <th></th>
                       </tr>
                   </thead>
@@ -1643,7 +1643,84 @@ $(document).ready(function () {
 <script>
 
 
+
+//============================================
+
+// AGREGAR CLIENTE NUEVO
+
+//============================================
+
+/*
+
+$('#form_crear_cliente').off('submit').on('submit', function (event) {
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+*/
+
+/* Configurar botón submit con spinner */
+
+/*
+
+let btn = $('#agregar_cliente') 
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+
+        $('#agregar_cliente').attr('disabled', true);
+
+        
+
+        event.preventDefault();
+
+        try {
+
+        $.ajax({
+            url: 'crear_clientes',
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function() {
+
+             // table.ajax.reload();
+
+                $('#agregar_cliente').prop("required", true);
+               // $('#selectBuscarCliente').html("");
+               
+                $('#form_crear_cliente')[0].reset();
+                $('#modalAgregarCliente').modal('hide');
+              
+                                   
+
+                toastr["success"]("Datos guardados correctamente.");
+             }
+
+
+         });
+
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.", "Información");
+          }
+
+         // window.location.href = 'cliente/' +id;
+       
+    });
+
+
+*/
+
+
 </script>
+
+
 
 
 
@@ -1795,6 +1872,10 @@ SELECT2 - BUSQUEDAD DE CLIENTES
         data: $(this).serialize(),
         dataType: "json",
         success: function(data) {
+
+          $('#celular').val(data['celular_cliente']);
+        
+        
    
 
          }
@@ -1912,13 +1993,6 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
 
   });
 </script>
-
-
-
-
-
-
-
 
 
 <!-- =======================================
@@ -2148,7 +2222,7 @@ $("#buscarMascota").change(function(){
 
 <!-- ================================= 
 
-RESET SELECT2: livesearch2
+BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
 
 ================================= -->
 
@@ -3203,17 +3277,16 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
            responsive: true,
           
            type: "GET",
-           ajax: "{{ url('listado_cliente') }}",
+           ajax: "{{ url('/listado_cliente') }}",
 
           
            columns: [
                    
-                    { data: 'created_at', name: 'created_at' },         
-                    { data: 'cliente', name: 'cliente' },     
-                    { data: 'mascota', name: 'mascota' },
-                    { data: 'motivo_consulta', name: 'motivo_consulta' },
-                   
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                         
+                    { data: 'nombre', name: 'nombre' },     
+                    { data: 'celular', name: 'celular' },
+                    { data: 'fecha_nacimiento', name: 'fecha_nacimiento' },                      
+                  
                  ],
         
                    order: [[0, 'desc']],
@@ -3222,7 +3295,7 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
             "language": {
                 
              /*  processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading..n.</span> ',   */                       
-                    "emptyTable": "No hay pacientes en lista de espera."
+                    "emptyTable": "No hay eventos para mostrar."
                     
                 },
        

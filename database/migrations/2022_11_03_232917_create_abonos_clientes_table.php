@@ -17,11 +17,13 @@ class CreateAbonosClientesTable extends Migration
             $table->bigIncrements('id_abonos');
             $table->string('id_cliente')->required();
             $table->string('user_id')->required();
-            $table->string('nombre',12)->nullable();
-            $table->string('celular',12)->nullable();
+            $table->string('nombre',60)->nullable();
+            $table->string('celular',25)->nullable();
             $table->string('valor_abono',12)->nullable();
             $table->string('saldo',12)->nullable();
-            $table->string('responsable',30)->nullable();
+            $table->string('responsable',40)->nullable();
+            $table->string('descripcion',120)->nullable();
+
             $table->timestamps();
         });
     }

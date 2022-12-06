@@ -23,28 +23,31 @@ class abonosClientesController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = abonos_clientes::select('id_cliente', 'id_abonos', 'nombre', 'celular', 'valor_abono', 'saldo', 
-                                            'responsable', 'created_at')->get();
+              $id = abonos_clientes::select('id_cliente', 'id_abonos', 'nombre', 'celular', 'valor_abono', 'saldo', 'descripcion',
+                                            'responsable', 'created_at')->orderBy('created_at', 'desc')->get();
                 
     
                return datatables()->of($id)
+
+               ->addColumn('created_at', function($row)  {  
+                $date = date("d-m-Y h:i a", strtotime($row->created_at));
+                    return $date;
+              })
                                                                                                            
                 ->addColumn('action', 'atencion')
                 ->rawColumns(['action'])
                 ->addColumn('action', function($data) {
     
     
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalMostrarHistoriaClinica"  title="Ver datos história clínica" class="fa fa-eye mostrar_historia"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalVerAbono"  title="Ver datos del abono" class="fa fa-eye mostrar_historia"></a> 
                    
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit edit"></a>
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalEditarAbono"  title="Editar datos del abono" class="fa fa-edit edit"></a>
     
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalVerControlesMedicos"  title="Ver controles realizados" class="fa fa-street-view control"></a>
-
-
                     <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id_abonos.'title="Eliminar história clínica" class="fa fa-trash deletePost"></a>';
                     
                      
                     return $actionBtn;
+                    
                    
                 })
                
@@ -52,9 +55,14 @@ class abonosClientesController extends Controller
                 ->make(true);
             } 
     
+
+          
+            $id_abonos = abonos_clientes::select('id_cliente', 'id_abonos', 'nombre', 'celular', 'valor_abono', 'saldo', 
+            'responsable', 'created_at')->get(); 
+
            
-            return view('abonos');
-           // dd($id_cliente);
+            return view('abonos', compact('id_abonos'));
+           
           
         
     
@@ -79,7 +87,33 @@ class abonosClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            
+            'nombre'              =>    'max:60',
+            'celular'             =>    'required|max:25',
+            'valor_abono'         =>    'required|max:12',
+            'descripcion'         =>    'required|max:120',
+            'responsable'         =>    'required|max:40',
+          ]);
+   
+        //  try {
+          $data = new abonos_clientes;
+   
+          $data ->user_id       = $request->userId;
+          $data ->id_cliente    = $request->livesearch;
+          
+          $data->nombre         = $request->nombreCliente;
+          $data->celular        = $request->celular;
+          $data->valor_abono    = $request->valor_abono;
+          $data ->descripcion   = $request->descripcion;
+          $data ->responsable   = $request->responsable;
+         
+          $data->save();
+
+         // $id =$data->id;
+       
+          return view('abonos');
+        
     }
 
     /**

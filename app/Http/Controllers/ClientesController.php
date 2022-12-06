@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 use Redirect;
 
+use Carbon\Carbon;
+
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -28,51 +31,27 @@ class ClientesController extends Controller
      */
    
 
-    public function index($id)
+    public function index()
     {
       
-                
-        if(request()->ajax()) {
 
-          //  $id = $request->id_cliente;
-
-          $id = Cliente::select("id", "user_id", "id_cliente", "nombre", "celular", "direccion","barrio")
+          if(request()->ajax()) {
+            return datatables()->of(Cliente::select("user_id", "id_cliente", "nombre", "celular", 'fecha_nacimiento', "created_at")
             
-          ->where('id_cliente', '=', $id)
-
-          ->where('user_id', Auth::user()->id);
-
-           return datatables()->of($id)
-              
+            ->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')
+            ->whereMonth('fecha_nacimiento', Carbon::now()->month))
+          
+            ->addColumn('fecha_nacimiento', function($row)  {  
+                $date = date("d-M-Y", strtotime($row->fecha_nacimiento));
+                    return $date;
+              })
            
-                                                                      
-            ->addColumn('action', 'atencion')
-            ->rawColumns(['action'])
-            ->addColumn('action', function($data) {
-
-
-                $actionBtn = '<a href="/mascota/'.$data->id.'" data-toggle="tooltip"  data-id="'.$data->id.'" title="Ir a consulta médica" class=" fa fa-stethoscope cita"></a> 
-               
-                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar mascota" class="fa fa-trash deletePost"></a>
-
-                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Establecer como fallecido" class="fa fa-adjust defuncion"></a>
-                <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalTraspasarMascota"  title="Traspasar a otro propietario" class="fa fa-exchange traspasar"></a>';
-                
-                 
-                return $actionBtn;
-               
-            })
            
            
             ->make(true);
         } 
-
-       //   $profesionales = profesionales::select('id_profesional','nombre'); 
-   
-   
-       
-        return view('cliente');
-       // dd($id_cliente);
+        return view('inicio');
+ 
       
     }
 

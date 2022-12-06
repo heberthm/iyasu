@@ -82,6 +82,7 @@ thead {
                       Crear control clínico
                       </button>  &nbsp;
                     
+                      
                       <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modalAgregarHistoriaClinica"
                       style="position: absolute; top: 0; left: 300px">
                       <span class="fa fa-plus fa-fw" ></span>  

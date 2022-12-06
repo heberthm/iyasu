@@ -30,7 +30,8 @@ class Select2SearchController extends Controller
 
         if($request->has('q')){
             $search = $request->q;
-            $cliente =Cliente::select("user_id", "id_cliente", "cedula", "nombre")
+          
+            $cliente =Cliente::select("user_id", "id_cliente", "cedula", "nombre", "celular")
                     ->where('user_id', Auth::user()->id)
             		->where('nombre',  'LIKE', "%${search}%" )
                    // ->orWhere('cedula', 'LIKE', "%{$search}%") 

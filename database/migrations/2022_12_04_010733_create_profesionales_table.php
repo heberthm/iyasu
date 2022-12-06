@@ -23,6 +23,7 @@ class CreateProfesionalesTable extends Migration
             $table->string('profesion',60)->required();
             $table->string('fecha_nacimiento',60)->nullable();
             $table->string('celular',30)->nullable();
+            $table->string('email',50)->nullable();
             $table->string('porcentaje',30)->nullable();
 
             $table->timestamps();

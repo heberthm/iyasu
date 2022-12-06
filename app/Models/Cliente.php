@@ -10,7 +10,7 @@ class Cliente extends Model
 {
     
     protected $fillable = ['cedula','user_id', 'fecha_nacimiento','edad', 'nombre', 'direccion','barrio', 'municipio', 'celular',
-                           'email', 'estado'];
+                           'email', 'mes', 'estado'];
 
     protected $id = 'id_cliente';
   

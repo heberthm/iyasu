@@ -81,7 +81,7 @@ REGISTRO DE INGRESOS O EGRSOS
 
 <!-- ====================================
 
-FORMULARIO RECEPCION DE PACIENTES
+FORMULARIO CREAR TRATAMIENTO
 
 =========================================  -->
 
@@ -90,12 +90,12 @@ FORMULARIO RECEPCION DE PACIENTES
              
     <div class="card-header">
                    
-                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de abonos de pacientes</h3>
+                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de registro de tratamientos</h3>
                   
                    <div class="pull-right">
                       <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalACrearAbono">
                             <span class="fa fa-list fa-fw" ></span>  
-                            Crear abono
+                            Crear tratamiento
                         </button>  &nbsp;
                   </div> 
                     
@@ -149,9 +149,11 @@ DATATABLE LISTA DE ESPERA
                                         
                         <th>Paciente</th>
                         <th>Tel/Cel</th>
-                         <th>Fecha abono</th>
-                         <th>Vr. abono</th>
-                         <th>Saldo</th>
+                         <th>Tratamiento</th>
+                         <th>Vr. tratamiento</th>
+                         <th>Fecha</th>
+                         <th>Responsable</th>
+
                        
                          <th ></th>
                      
@@ -312,11 +314,6 @@ DATATABLE LISTA DE ESPERA
 
  
 
-@foreach($id_abonos as $id_abono)
-  
-  @endforeach
-
-
 
 
  <!--=====================================
@@ -363,7 +360,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="cliente" class="control-label">Cliente</label>
                
-                  <p>{{ $id_abono->nombre }}</p>                  
+                               
              
 
             </div>
@@ -376,7 +373,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="Celular" class="control-label">Tel/Cel</label>
 
-                <p>{{ $id_abono->celular }}</p>     
+               
                 
               </div>
             </div>
@@ -388,7 +385,7 @@ DATATABLE LISTA DE ESPERA
 
               <label for="Descripcion" class="control-label">Descripción</label>
 
-              <p>{{ $id_abono->descripcion }}</p>     
+              
               
             </div>
           </div>
@@ -400,7 +397,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
 
-                <p>{{ $id_abono->valor_abono }}</p>     
+                
                            
                </div>
             </div>
@@ -411,8 +408,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Responsable</label>
 
-                <p>{{ $id_abono->responsable }}</p>     
-                           
+                
                </div>
             </div>
  
@@ -422,7 +418,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Saldo</label>
 
-                <p>{{ $id_abono->saldo }}</p>     
+               
                            
                </div>
             </div>
@@ -505,7 +501,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="cliente" class="control-label">Cliente</label>
                           
-                    <input type="text" name="nombreCliente" class="form-control " id="nombreCliente" value="{{$id_abono->nombre}}" required autocomplete="off">
+                    <input type="text" name="nombreCliente" class="form-control " id="nombreCliente"  required autocomplete="off">
 
                 <div class="alert-message" id="livesearchError"></div>
                  
@@ -521,7 +517,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="Celular" class="control-label">Tel/Cel</label>
 
-                <input type="text" name="celular" class="form-control " id="celular"  value="{{$id_abono->celular}}" required autocomplete="off">
+                <input type="text" name="celular" class="form-control " id="celular"   required autocomplete="off">
 
                  <div class="alert-message" id="responsableError"></div>
                 
@@ -535,7 +531,7 @@ DATATABLE LISTA DE ESPERA
 
               <label for="Descripcion" class="control-label">Descripción</label>
 
-              <input type="text" name="descripcion" class="form-control " id="descripcion"  value="{{$id_abono->descripcion}}" required autocomplete="off">
+              <input type="text" name="descripcion" class="form-control " id="descripcion"   required autocomplete="off">
 
               <div class="alert-message" id="descripcionError"></div>
               
@@ -549,7 +545,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
 
-                <input type="number" name="valor_abono" class="form-control" id="valor_abono"  value="{{$id_abono->valor_abono}}" required autocomplete="off">
+                <input type="number" name="valor_abono" class="form-control" id="valor_abono"   required autocomplete="off">
                 
                   <div class="alert-message" id="valorAbonoError"></div>
                            
@@ -562,7 +558,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Responsable</label>
 
-                <input type="text" name="responsable" class="form-control" id="responsable"  value="{{$id_abono->responsable}}" required autocomplete="off">
+                <input type="text" name="responsable" class="form-control" id="responsable"   required autocomplete="off">
                 
                   <div class="alert-message" id="responsableError"></div>
                            
@@ -575,7 +571,7 @@ DATATABLE LISTA DE ESPERA
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
-            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_abono->id_cliente }}">
+            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" >
 
             </div>
 
@@ -796,36 +792,29 @@ $('.livesearch').html('');
         
                             
            type: "GET",
-           ajax: 'abonos',
+           ajax: 'tratamientos',
 
                     
            columns: [
                    
                     { data: 'nombre', name: 'nombre' },                  
                     { data: 'celular', name: 'celular' },
+                    { data: 'tratamiento', name: 'tratamiento' },  
+                    { data: 'valor_tratamiento', name: 'valor_tratamiento' },
                     { data: 'created_at', name: 'created_at' },  
-                    { data: 'valor_abono', name: 'valor_Abono' },
-                    { data: 'saldo', name: 'saldo' },
+                    { data: 'responsable', name: 'responsable' },
                    
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
-                   order: [[2, 'desc']],
-
-                   "columnDefs": [
-                        { "orderable": false,
-                          "render": $.fn.dataTable.render.number( '.' ),
-                          "targets":[3],
-                          className: 'dt-body-left',
-                        }
-                   ],
+                   order: [[0, 'desc']],
           
           
             "language": {
                 
                             
-                        "emptyTable": "El paciente no tiene abonos registrados.",
+                        "emptyTable": "No hay tratamientos registrados.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
