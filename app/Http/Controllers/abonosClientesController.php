@@ -8,6 +8,9 @@ use App\Models\Cliente;
 
 use \App\Models\abonos_clientes;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class abonosClientesController extends Controller
 {
     /**
@@ -23,9 +26,15 @@ class abonosClientesController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = abonos_clientes::select('id_cliente', 'id_abonos', 'nombre', 'celular', 'valor_abono', 'saldo', 'descripcion',
-                                            'responsable', 'created_at')->orderBy('created_at', 'desc')->get();
-                
+              $id = cliente::join('abonos_clientes', 'abonos_clientes.id_cliente', '=', 'clientes.id_cliente')
+              ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.id_cliente', 'clientes.cedula', 'clientes.nombre', 
+               'clientes.celular', 'abonos_clientes.id_abonos', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.descripcion', 
+               'abonos_clientes.responsable', 'abonos_clientes.valor_abono', 'abonos_clientes.created_at' )
+          
+              
+              ->where('clientes.user_id', Auth::user()->id)
+              ->get();
+                        
     
                return datatables()->of($id)
 
@@ -39,7 +48,7 @@ class abonosClientesController extends Controller
                 ->addColumn('action', function($data) {
     
     
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalVerAbono"  title="Ver datos del abono" class="fa fa-eye mostrar_historia"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalVerAbono"  title="Ver datos del abono" class="fa fa-eye mostrar_abono"></a> 
                    
                     <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalEditarAbono"  title="Editar datos del abono" class="fa fa-edit edit"></a>
     
@@ -56,10 +65,12 @@ class abonosClientesController extends Controller
             } 
     
 
-          
+            
+
             $id_abonos = abonos_clientes::select('id_cliente', 'id_abonos', 'nombre', 'celular', 'valor_abono', 'saldo', 
             'responsable', 'created_at')->get(); 
 
+           
            
             return view('abonos', compact('id_abonos'));
            
@@ -112,7 +123,7 @@ class abonosClientesController extends Controller
 
          // $id =$data->id;
        
-          return view('abonos');
+         return response()->json(['success'=>'Successfully']);
         
     }
 

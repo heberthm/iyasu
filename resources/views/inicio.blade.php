@@ -88,6 +88,24 @@ BUSCADOR DE CLIENTES - SELECT2
                     
                     <h3 class="card-title"><span style="color: #28a745;" class="fas fa-search mr-3"></span>Buscador</h3>
 
+                    <span class="btn-group float-right" id="btn_listadoClientes">
+
+                        <!--
+                        <span class="btn-group float-right" id="btn_historialIngresos">
+                          <a href="#" class="mr-3" data-toggle="modal" data-target="#modalAgregarListaEspera"><i class="fas fa-plus" style="color: #1566EB;" 
+                          title="Agregrar cliente a lista de espera" ></i></a>
+                        </span>   
+                        -->
+                            <a href="#" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown"
+                             aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-list"></span><span
+                          style="color:#212529;"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="javascript:historial_registros();">Ver listado de clientes</a>
+                        </div>
+                   </span> 
+
                     <!--
                      <button type="button" class="btn btn-sm btn-primary mt-3 mr-2" style="position: absolute; top: 0; left: 260px">
                      Ver hospitalizados
@@ -99,9 +117,14 @@ BUSCADOR DE CLIENTES - SELECT2
 
                      -->
 
+                    <!--
+
                     <span class="btn-group float-right" id="btn-group-buscar">
                         <a href="#" class="btn dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
+
+                       
+
                         <span class="fa fa-list"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -111,8 +134,9 @@ BUSCADOR DE CLIENTES - SELECT2
                           <a class="dropdown-item" href="javascript:listadoClientes();">Listado de clientes</a>
                           <a class="dropdown-item" href="javascript:historial_registros();">Historial de registros realizados</a>
                         </div>
-                    </span>
-
+                    </span> 
+                        
+                      -->
 
                 </div>
                 <div class="card-body">
@@ -143,23 +167,7 @@ FORMULARIO RECEPCION DE PACIENTES
               
                
                 <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span> Pacientes que cumplen años el mes actual</h3>
-                  <span class="btn-group float-right" id="btn_historialIngresos">
-
-                  <span class="btn-group float-right" id="btn_historialIngresos">
-                    <a href="#" class="mr-3" data-toggle="modal" data-target="#modalAgregarListaEspera"><i class="fas fa-plus" style="color: #1566EB;" 
-                    title="Agregrar cliente a lista de espera" ></i></a>
-                  </span>   
-
-                                <a href="#" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                <span class="fa fa-list"></span><span
-                                  style="color:#212529;"></span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item" href="javascript:historial_registros();">Historial de registros realizados</a>
-                                  <a class="dropdown-item" href="javascript:historial_ingresos();">Historial de pacientes en lista de espera</a>
-                                </div>
-                            </span> 
+                 
                 
                     
 

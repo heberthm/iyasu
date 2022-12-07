@@ -88,9 +88,9 @@ Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'ind
 
 Route::post('/crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
 
-Route::post('/crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
+Route::post('crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
 
-Route::get('tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
+Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
 
 
 
@@ -102,7 +102,7 @@ Route::get('profesionales', [App\Http\Controllers\profesionalesController::class
 
 
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');
-Route::get('/listado_cliente', [App\Http\Controllers\ListadoCitaMedicaController::class, 'index']);
+Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
 
 
 

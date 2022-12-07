@@ -151,7 +151,7 @@ DATATABLE LISTA DE ESPERA
                         <th>Tel/Cel</th>
                          <th>Fecha abono</th>
                          <th>Vr. abono</th>
-                         <th>Saldo</th>
+                        <!-- <th>Saldo</th>  -->
                        
                          <th ></th>
                      
@@ -309,19 +309,13 @@ DATATABLE LISTA DE ESPERA
 
 </div>
 
-
- 
-
-@foreach($id_abonos as $id_abono)
-  
-  @endforeach
-
-
+@forelse ($id_abonos as $id_abono)
+   
 
 
  <!--=====================================
 
-    MODAL VER DATOS DE SALDO
+    MODAL VER DATOS DE ABONO
 
 ======================================-->
 
@@ -335,7 +329,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Ver datos abono</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -429,6 +423,17 @@ DATATABLE LISTA DE ESPERA
 
 
 
+            <div class="col-md-3">
+              <div class="form-group">
+
+                <label for="fecha abono" class="control-label">Fecha del abono</label>
+
+                <p>{{ $id_abono->created_at->format("d-m-Y h:s a") }}</p>     
+                           
+               </div>
+            </div>
+
+
 
 
 
@@ -477,7 +482,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Editar datos de abono</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -578,6 +583,13 @@ DATATABLE LISTA DE ESPERA
             <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_abono->id_cliente }}">
 
             </div>
+
+
+  @empty
+    
+@endforelse
+
+
 
 
       <div class="modal-footer">
@@ -805,7 +817,7 @@ $('.livesearch').html('');
                     { data: 'celular', name: 'celular' },
                     { data: 'created_at', name: 'created_at' },  
                     { data: 'valor_abono', name: 'valor_Abono' },
-                    { data: 'saldo', name: 'saldo' },
+                   // { data: 'saldo', name: 'saldo' },
                    
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -886,7 +898,7 @@ let btn = $('#agregar_abono')
         try {
 
         $.ajax({
-            url: "/crear_abono",
+            url: "crear_abono",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",

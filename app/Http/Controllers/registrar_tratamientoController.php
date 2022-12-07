@@ -16,6 +16,8 @@ class registrar_tratamientoController extends Controller
     public function index()
     {
 
+
+        try { 
                   
         if(request()->ajax()) {
     
@@ -57,7 +59,17 @@ class registrar_tratamientoController extends Controller
 
 
         return view('registrar_tratamientos');
+
+
+    } catch(\Illuminate\Database\QueryException $ex){ 
+        dd($ex->getMessage()); 
+        // Note any method of class PDOException can be called on $ex.
+      }
+      
+
     }
+
+    
 
     /**
      * Show the form for creating a new resource.

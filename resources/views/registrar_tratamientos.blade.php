@@ -792,7 +792,7 @@ $('.livesearch').html('');
         
                             
            type: "GET",
-           ajax: 'tratamientos',
+           ajax: 'registrar_tratamientos',
 
                     
            columns: [
@@ -808,7 +808,7 @@ $('.livesearch').html('');
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
-                   order: [[0, 'desc']],
+                   order: [[4, 'desc']],
           
           
             "language": {
