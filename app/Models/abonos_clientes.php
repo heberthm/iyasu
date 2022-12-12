@@ -11,6 +11,7 @@ class abonos_clientes extends Model
 
     protected $fillable = ['user_id','id_cliente','nombre', 'celular', 'valor_abono','saldo','responsable','descripcion'];
 
+
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);

@@ -31,7 +31,7 @@
            <!-- <i class="nav-icon fas fa-list green"></i> -->
             <i class="nav-icon fas  fa-medkit"></i>
             <p>
-              Registro tratamientos
+              Registrar tratamientos
             </p>
           </a>
         </li>

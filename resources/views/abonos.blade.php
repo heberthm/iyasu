@@ -179,9 +179,8 @@ DATATABLE LISTA DE ESPERA
 
  
 
-        
-
-
+  
+  
 
  <!--=====================================
 
@@ -199,8 +198,10 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5> 
+   
+    
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
      
@@ -294,7 +295,7 @@ DATATABLE LISTA DE ESPERA
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_abono" name="agregar_abono" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="btn-save" name="agregar_abono"  class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -309,7 +310,6 @@ DATATABLE LISTA DE ESPERA
 
 </div>
 
-@forelse ($id_abonos as $id_abono)
    
 
 
@@ -357,7 +357,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="cliente" class="control-label">Cliente</label>
                
-                  <p>{{ $id_abono->nombre }}</p>                  
+                         
              
 
             </div>
@@ -370,7 +370,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="Celular" class="control-label">Tel/Cel</label>
 
-                <p>{{ $id_abono->celular }}</p>     
+                
                 
               </div>
             </div>
@@ -382,7 +382,7 @@ DATATABLE LISTA DE ESPERA
 
               <label for="Descripcion" class="control-label">Descripción</label>
 
-              <p>{{ $id_abono->descripcion }}</p>     
+               
               
             </div>
           </div>
@@ -394,7 +394,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
 
-                <p>{{ $id_abono->valor_abono }}</p>     
+                  
                            
                </div>
             </div>
@@ -405,7 +405,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Responsable</label>
 
-                <p>{{ $id_abono->responsable }}</p>     
+               
                            
                </div>
             </div>
@@ -416,7 +416,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Saldo</label>
 
-                <p>{{ $id_abono->saldo }}</p>     
+                    
                            
                </div>
             </div>
@@ -428,7 +428,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="fecha abono" class="control-label">Fecha del abono</label>
 
-                <p>{{ $id_abono->created_at->format("d-m-Y h:s a") }}</p>     
+                
                            
                </div>
             </div>
@@ -505,28 +505,29 @@ DATATABLE LISTA DE ESPERA
           <div class="row">
 
             
+            <div class="col-md-4">
 
               <div class="form-group" >
 
                 <label for="cliente" class="control-label">Cliente</label>
                           
-                    <input type="text" name="nombreCliente" class="form-control " id="nombreCliente" value="{{$id_abono->nombre}}" required autocomplete="off">
+                    <input type="text" name="nombreCliente" class="form-control " id="nombreCliente"  required autocomplete="off">
 
                 <div class="alert-message" id="livesearchError"></div>
                  
-             
-
             </div>
 
+          </div>
 
 
-            <div class="col-md-3">
+
+            <div class="col-md-4">
 
               <div class="form-group">
 
                 <label for="Celular" class="control-label">Tel/Cel</label>
 
-                <input type="text" name="celular" class="form-control " id="celular"  value="{{$id_abono->celular}}" required autocomplete="off">
+                <input type="text" name="celular" class="form-control " id="celular"   required autocomplete="off">
 
                  <div class="alert-message" id="responsableError"></div>
                 
@@ -534,27 +535,13 @@ DATATABLE LISTA DE ESPERA
             </div>
 
 
-            <div class="col-md-5">
-
-            <div class="form-group">
-
-              <label for="Descripcion" class="control-label">Descripción</label>
-
-              <input type="text" name="descripcion" class="form-control " id="descripcion"  value="{{$id_abono->descripcion}}" required autocomplete="off">
-
-              <div class="alert-message" id="descripcionError"></div>
-              
-            </div>
-          </div>
-
-
-
+         
             <div class="col-md-3">
               <div class="form-group">
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
 
-                <input type="number" name="valor_abono" class="form-control" id="valor_abono"  value="{{$id_abono->valor_abono}}" required autocomplete="off">
+                <input type="number" name="valor_abono" class="form-control" id="valor_abono"   required autocomplete="off">
                 
                   <div class="alert-message" id="valorAbonoError"></div>
                            
@@ -562,12 +549,27 @@ DATATABLE LISTA DE ESPERA
             </div>
 
 
-            <div class="col-md-4">
+            <div class="col-md-6">
+
+              <div class="form-group">
+
+                <label for="Descripcion" class="control-label">Descripción</label>
+
+                <input type="text" name="descripcion" class="form-control " id="descripcion"  required autocomplete="off">
+
+                <div class="alert-message" id="descripcionError"></div>
+                
+             </div>
+           </div>
+
+
+
+            <div class="col-md-6">
               <div class="form-group">
 
                 <label for="valor_abono" class="control-label">Responsable</label>
 
-                <input type="text" name="responsable" class="form-control" id="responsable"  value="{{$id_abono->responsable}}" required autocomplete="off">
+                <input type="text" name="responsable" class="form-control" id="responsable"   required autocomplete="off">
                 
                   <div class="alert-message" id="responsableError"></div>
                            
@@ -576,25 +578,21 @@ DATATABLE LISTA DE ESPERA
 
             
 
-
+            <input type="hidden" name="id_abono" id="id_abono">
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
-            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_abono->id_cliente }}">
 
             </div>
 
 
-  @empty
-    
-@endforelse
 
 
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_abono" name="agregar_abono" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="saveBtn" name="saveBtn" value="edit-abono" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -608,9 +606,6 @@ DATATABLE LISTA DE ESPERA
 
 
 </div>
-
-
-
 
 
 
@@ -862,51 +857,38 @@ $('.livesearch').html('');
     });
 
 
-      
 
-//============================================
+// =========================================
 
-// AGREGAR ABONOS DE CLIENTES
+/// GUARDAR REGISTROS DE ABONOS DE CLIENTES
 
-//============================================
+// =========================================
 
 
-  $('#form_agregar_abono').off('submit').on('submit', function (event) {
-
+$('#form_agregar_abono').off('submit').on('submit', function (event) {
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
-
-
 /* Configurar botón submit con spinner */
-
 let btn = $('#agregar_abono') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
-
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-
         $('#agregar_abono').attr('disabled', true);
-
         event.preventDefault();
-
         try {
-
         $.ajax({
             url: "crear_abono",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
-
                   table.ajax.reload();
-
-
                 $('#agregar_abono').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
@@ -915,22 +897,113 @@ let btn = $('#agregar_abono')
                   
              //   table.ajax.reload();
              //   location.reload(true);
-
                 toastr["success"]("Abono registrada correctamente.");
          
-
-
             }
-
          });
-
         } catch(e) {
           toastr["danger"]("Se ha presentado un error.", "Información");
           }
-
     });
 
-  });
+ 
+
+// =========================================
+
+/// EDITAR REGISTROS DE ABONOS DE CLIENTES
+
+// =========================================
+
+$('body').on('click', '.editarAbono', function(e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+        $('#form_agregar_abono')[0].reset();
+       
+        $.ajax({
+          url: 'editar_abono/'+id,
+          method: 'GET',
+          data: {  id: id },
+         
+          success: function(response) {
+            $('#modalEditarAbono').modal('show');
+         
+            $('#modalEditarAbono input[name="nombreCliente"]').val(response.nombre);
+            $('#modalEditarAbono input[name="celular"]').val(response.celular);
+            $('#modalEditarAbono input[name="valor_abono"]').val(response.valor_abono);
+            $('#modalEditarAbono input[name="descripcion"]').val(response.descripcion);
+            $('#modalEditarAbono input[name="responsable"]').val(response.responsable);
+        
+
+          }
+
+         });
+
+        
+         
+      });
+       
+   
+ 
+
+ // =========================================
+ 
+ // ACTUALIZAR DATOS DE ABONO
+
+ // =========================================
+
+
+ $("#form_editar_abono").submit(function(e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+        const fd = new FormData(this);
+        $("#edit_employee_btn").text('Updating...');
+        $.ajax({
+          url: 'actualizar_abono/'+id,
+          method: 'post',
+          data: fd,
+          cache: false,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+          success: function(response) {
+           
+
+             table.ajax.reload();
+
+
+                $('#agregar_abono').prop("required", true);
+               // $('#selectBuscarCliente').html("");
+               
+                $('#form_agregar_abono')[0].reset();
+                $('#modalAEditarAbono').modal('hide');
+                  
+             //   table.ajax.reload();
+             //   location.reload(true);
+
+                toastr["success"]("Abono registrada correctamente.");
+         
+          }
+
+      });
+        
+   });
+     
+
+      
+
+
+
+
+// =========================================
+
+/// ELIMINAR REGISTROS DE ABONOS DE CLIENTES
+
+// =========================================   
+
+   
+
+
+});
 
 </script>
 

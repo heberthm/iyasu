@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Cliente;
 
-use \App\Models\abonos_clientes;
+use App\Models\abonos_clientes;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +18,7 @@ class abonosClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
         {
           
                     
@@ -26,15 +26,12 @@ class abonosClientesController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = cliente::join('abonos_clientes', 'abonos_clientes.id_cliente', '=', 'clientes.id_cliente')
+              $id = abonos_clientes::leftjoin('clientes', 'clientes.id_cliente', '=', 'abonos_clientes.id_cliente')
               ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.id_cliente', 'clientes.cedula', 'clientes.nombre', 
-               'clientes.celular', 'abonos_clientes.id_abonos', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.descripcion', 
-               'abonos_clientes.responsable', 'abonos_clientes.valor_abono', 'abonos_clientes.created_at' )
-          
-              
-              ->where('clientes.user_id', Auth::user()->id)
-              ->get();
-                        
+               'clientes.celular', 'abonos_clientes.id', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.descripcion', 
+               'abonos_clientes.responsable', 'abonos_clientes.valor_abono', 'abonos_clientes.created_at' )->get();
+                  
+               
     
                return datatables()->of($id)
 
@@ -47,12 +44,13 @@ class abonosClientesController extends Controller
                 ->rawColumns(['action'])
                 ->addColumn('action', function($data) {
     
+
     
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalVerAbono"  title="Ver datos del abono" class="fa fa-eye mostrar_abono"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerAbono"  class="fa fa-eye mostrar_abono"></a> 
                    
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_abonos.'" data-target="#modalEditarAbono"  title="Editar datos del abono" class="fa fa-edit edit"></a>
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarAbono"    class="fa fa-edit editarAbono"></a>
     
-                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id_abonos.'title="Eliminar história clínica" class="fa fa-trash deletePost"></a>';
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'title="Eliminar história clínica" class="fa fa-trash deleteProduct"></a>';
                     
                      
                     return $actionBtn;
@@ -65,14 +63,13 @@ class abonosClientesController extends Controller
             } 
     
 
-            
 
-            $id_abonos = abonos_clientes::select('id_cliente', 'id_abonos', 'nombre', 'celular', 'valor_abono', 'saldo', 
-            'responsable', 'created_at')->get(); 
+            $id_clientes = cliente::select('id_cliente')->get(); 
 
+          
            
            
-            return view('abonos', compact('id_abonos'));
+            return view('abonos', compact('id_clientes'));
            
           
         
@@ -98,6 +95,7 @@ class abonosClientesController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validatedData = $request->validate([
             
             'nombre'              =>    'max:60',
@@ -146,7 +144,10 @@ class abonosClientesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $id_abono  = abonos_clientes::find($id);
+        return response()->json($id_abono);
+      
     }
 
     /**
@@ -158,7 +159,29 @@ class abonosClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
+        try{
+            $id = array('id' => $request->id);
+            $updateArray = [
+                            'nombre' => $request->nombreCLiente,
+                            'celular' => $request->celular,
+                            'valor_abono' => $request->valor_abono,
+                            'descripcion' => $request->descripcion,
+                            'responsable' => $request->responsable,
+                           
+                           ];
+              
+              $id  = abonos_clientes::where($id)->update($updateArray);
+     
+            } catch (\Exception  $exception) {
+                return back()->withError($exception->getMessage())->withInput();
+            }
+    
+              return response()->json(['success'=>'Successfully']);
+         
+
+
+
     }
 
     /**
@@ -169,6 +192,8 @@ class abonosClientesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        abonos_clientes::where('id_abonos', $id)->delete();
+     
+        return response()->json(['success'=>'Product deleted successfully.']);
     }
 }
