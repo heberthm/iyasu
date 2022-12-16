@@ -1082,7 +1082,7 @@ $('body').on('click', '.mostrarAbono', function(e) {
 
 
   
-$(document).on('click', '.eliminarAbono', function (event) {
+$(body).on('click', '.eliminarAbono', function (event) {
      
   event.preventDefault();
      let id = $(this).data('id');
