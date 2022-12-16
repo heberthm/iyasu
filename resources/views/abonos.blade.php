@@ -291,11 +291,11 @@ DATATABLE LISTA DE ESPERA
  
             <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
 
-            <input type="text" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
-            <input type="text" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
+            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
 
-            <input type="text" name="id_abono" id="id_abono">
+            <input type="hidden" name="id_abono" id="id_abono">
 
             </div>
 
