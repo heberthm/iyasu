@@ -93,7 +93,7 @@ FORMULARIO RECEPCION DE PACIENTES
                    <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de abonos de pacientes</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalACrearAbono">
+                      <button type="button" class="btn btn-primary float-right"  href="javascript:void(0)" id="btnCrearAbono">
                             <span class="fa fa-list fa-fw" ></span>  
                             Crear abono
                         </button>  &nbsp;
@@ -179,9 +179,6 @@ DATATABLE LISTA DE ESPERA
 
  
 
-  
-  
-
  <!--=====================================
 
     MODAL AGREGAR ABONO
@@ -198,7 +195,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-     <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5> 
+     <h5 class="modal-title" id="modelHeading"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5> 
    
     
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -215,14 +212,14 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_abono" action="{{ url('crear_abono') }}" >
+        <form  id="form_agregar_abono" method="POST" action="{{ url('actualizar_abono/{id}') }}"  >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
-            
+          <div class="col-md-4">
 
               <div class="form-group" >
 
@@ -231,20 +228,24 @@ DATATABLE LISTA DE ESPERA
 
                 <div class="form-group">
                         <select class="livesearch form-control"  id="livesearch" name="livesearch" style="width: 100%;"></select>
-                    </div>
+                   
 
              
                     <input type="hidden" name="nombreCliente" class="form-control " id="nombreCliente" required autocomplete="off">
 
+
+
+               </div>
+
                 <div class="alert-message" id="livesearchError"></div>
                  
              
-
             </div>
+         </div>
 
 
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
               <div class="form-group">
 
@@ -258,22 +259,8 @@ DATATABLE LISTA DE ESPERA
             </div>
 
 
-            <div class="col-md-5">
-
-            <div class="form-group">
-
-              <label for="Descripcion" class="control-label">Descripción</label>
-
-              <input type="text" name="descripcion" class="form-control " id="descripcion" required autocomplete="off">
-
-              <div class="alert-message" id="descripcionError"></div>
-              
-            </div>
-          </div>
-
-
-
-            <div class="col-md-3">
+          
+            <div class="col-md-4">
               <div class="form-group">
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
@@ -284,18 +271,38 @@ DATATABLE LISTA DE ESPERA
                            
                </div>
             </div>
+
+
+
+            <div class="col-md-12">
+
+              <div class="form-group">
+
+                <label for="Descripcion" class="control-label">Descripción</label>
+
+                <input type="text" name="descripcion" class="form-control " id="descripcion" required autocomplete="off">
+
+                <div class="alert-message" id="descripcionError"></div>
+                
+             </div>
+            </div>
+
+
  
             <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
 
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+            <input type="text" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
+            <input type="text" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
+
+            <input type="text" name="id_abono" id="id_abono">
 
             </div>
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="btn-save" name="agregar_abono"  class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="saveBtn" name="saveBtn"  class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -357,8 +364,8 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="cliente" class="control-label">Cliente</label>
                
-                         
-             
+                     
+                <p  id="nombreClientes"></p>      
 
             </div>
 
@@ -370,7 +377,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="Celular" class="control-label">Tel/Cel</label>
 
-                
+                <p name="celular"></p>      
                 
               </div>
             </div>
@@ -382,7 +389,7 @@ DATATABLE LISTA DE ESPERA
 
               <label for="Descripcion" class="control-label">Descripción</label>
 
-               
+              <p name="descripcion"></p>  
               
             </div>
           </div>
@@ -394,7 +401,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
 
-                  
+                <p name="valor_abono"></p>  
                            
                </div>
             </div>
@@ -405,7 +412,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Responsable</label>
 
-               
+                <p name="responsable"></p>  
                            
                </div>
             </div>
@@ -416,7 +423,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Saldo</label>
 
-                    
+                <p name="valor_abono"></p>  
                            
                </div>
             </div>
@@ -428,7 +435,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="fecha abono" class="control-label">Fecha del abono</label>
 
-                
+                <p name="fecha"></p>  
                            
                </div>
             </div>
@@ -497,7 +504,7 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_editar_abono" action="{{ url('editar_abono') }}" >
+        <form method="POST" id="form_editar_abono" action="{{ url('actualizar_abono/{id}') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
@@ -536,7 +543,7 @@ DATATABLE LISTA DE ESPERA
 
 
          
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="form-group">
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
@@ -569,7 +576,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Responsable</label>
 
-                <input type="text" name="responsable" class="form-control" id="responsable"   required autocomplete="off">
+                <input type="text" name="responsable" class="form-control" id="responsable"  readonly  autocomplete="off">
                 
                   <div class="alert-message" id="responsableError"></div>
                            
@@ -578,9 +585,13 @@ DATATABLE LISTA DE ESPERA
 
             
 
-            <input type="hidden" name="id_abono" id="id_abono">
+            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
 
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+            <input type="text" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+
+            <input type="text" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
+
+            <input type="text" name="id_abono" id="id_abono">
 
 
             </div>
@@ -592,7 +603,7 @@ DATATABLE LISTA DE ESPERA
 
       <div class="modal-footer">
 
-        <button type="submit" id="saveBtn" name="saveBtn" value="edit-abono" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="editar_abono" name="editar_abono" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -735,12 +746,18 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
    // window.location.href = 'cliente/' +id;
 
-   
+   $('#id_cliente').val('');
    $('#nombreCliente').val('');
+   
                      
     let cliente = '';
+    let id_cliente ='';
                                               
     cliente = $(".livesearch").text();
+
+    id_cliente = $(".livesearch").val();
+
+   $('#id_cliente').val(id_cliente);
 
     $('#nombreCliente').val(cliente);
         
@@ -818,7 +835,7 @@ $('.livesearch').html('');
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
-                   order: [[2, 'desc']],
+                   order: [2, 'desc'],
 
                    "columnDefs": [
                         { "orderable": false,
@@ -832,7 +849,7 @@ $('.livesearch').html('');
             "language": {
                 
                             
-                        "emptyTable": "El paciente no tiene abonos registrados.",
+                        "emptyTable": "No hay abonos registrados.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
@@ -858,14 +875,14 @@ $('.livesearch').html('');
 
 
 
+
 // =========================================
 
 /// GUARDAR REGISTROS DE ABONOS DE CLIENTES
 
 // =========================================
-
-
 $('#form_agregar_abono').off('submit').on('submit', function (event) {
+
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -906,7 +923,25 @@ let btn = $('#agregar_abono')
           }
     });
 
- 
+
+
+
+// =========================================
+
+// ABRIR MODAL CREAR ABONO
+
+// ==========================================
+
+$('#btnCrearAbono').click(function () {
+        $('#saveBtn').val("create-product");
+      //  $('#id_abono').val('');
+        $('#form_agregar_abono').trigger("reset");
+        $('#modelHeading').html("Crear Abono");
+        $('#modalACrearAbono').modal('show');
+    });
+
+
+
 
 // =========================================
 
@@ -914,36 +949,38 @@ let btn = $('#agregar_abono')
 
 // =========================================
 
-$('body').on('click', '.editarAbono', function(e) {
-        e.preventDefault();
+$('body').on('click', '.editarAbono', function (e) {
+ 
+
+        $('#form_editar_abono')[0].reset();
         let id = $(this).data('id');
-        $('#form_agregar_abono')[0].reset();
-       
-        $.ajax({
+      
+      $.ajax({
           url: 'editar_abono/'+id,
           method: 'GET',
           data: {  id: id },
          
-          success: function(response) {
+          success: function(data) {
+
+            $('#livesearch').hide();
+            $('#nombreCliente').show();
+            
+            
+
+            $('#modelHeading').html("Editar abono");
+            $('#saveBtn').val("Editar");
             $('#modalEditarAbono').modal('show');
-         
-            $('#modalEditarAbono input[name="nombreCliente"]').val(response.nombre);
-            $('#modalEditarAbono input[name="celular"]').val(response.celular);
-            $('#modalEditarAbono input[name="valor_abono"]').val(response.valor_abono);
-            $('#modalEditarAbono input[name="descripcion"]').val(response.descripcion);
-            $('#modalEditarAbono input[name="responsable"]').val(response.responsable);
-        
-
+            $('#modalEditarAbono input[name="id_abono"]').val(data.id)
+            $('#modalEditarAbono input[name="id_cliente"]').val(data.id_cliente);
+            $('#modalEditarAbono input[name="nombreCliente"]').val(data.nombre);
+            $('#modalEditarAbono input[name="celular"]').val(data.celular);
+            $('#modalEditarAbono input[name="valor_abono"]').val(data.valor_abono);
+            $('#modalEditarAbono input[name="descripcion"]').val(data.descripcion);
+            $('#modalEditarAbono input[name="responsable"]').val(data.responsable);
           }
-
-         });
-
-        
-         
-      });
-       
-   
+        });
  
+
 
  // =========================================
  
@@ -951,48 +988,96 @@ $('body').on('click', '.editarAbono', function(e) {
 
  // =========================================
 
-
  $("#form_editar_abono").submit(function(e) {
-        e.preventDefault();
-        let id = $(this).data('id');
-        const fd = new FormData(this);
-        $("#edit_employee_btn").text('Updating...');
+  
+  
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+  
+  e.preventDefault();
+
+
+  
+/* Configurar botón submit con spinner */
+let btn = $('#editar_abono') 
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+    $('#editar_abono').attr('disabled', true);
+  
+    let id = $(this).data('id');
+      
         $.ajax({
           url: 'actualizar_abono/'+id,
-          method: 'post',
-          data: fd,
-          cache: false,
-          contentType: false,
-          processData: false,
-          dataType: 'json',
-          success: function(response) {
+          method: "POST",
+          data: $(this).serialize(),
+          dataType: "json",
+        
+          success: function(data) {
+
+            $('#id').val(data.id);
            
-
-             table.ajax.reload();
-
-
-                $('#agregar_abono').prop("required", true);
+           //  table.ajax.reload();
+                $('#editar_abono').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_agregar_abono')[0].reset();
-                $('#modalAEditarAbono').modal('hide');
+               // $('#form_editar_abono')[0].reset();
+                $('#modalEditarAbono').modal('hide');
                   
              //   table.ajax.reload();
              //   location.reload(true);
-
-                toastr["success"]("Abono registrada correctamente.");
+                toastr["success"]("Datos de abono actualiados correctamente.");
          
           }
-
       });
         
    });
-     
+ 
 
-      
+// =========================================
+
+/// MOSTRAR REGISTROS DE ABONOS DE CLIENTES
+
+// =========================================
+
+$('body').on('click', '.mostrarAbono', function(e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+        $('#form_ver_abono')[0].reset();
+       
+        $.ajax({
+          url: 'ver_abono/'+id,
+          method: 'GET',
+          data: {  id: id },
+         
+          success: function(data) {
+           
+            $('#nombreClientes').append('<div>'+data.nombre+'</div');
+            $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
+            $('#modalVerAbono input[name="celular"]').val(data.celular);
+            $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
+            $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
+            $('#modalVerAbono input[name="responsable"]').val(data.responsable);
+            $('#modalVerAbono input[name="fecha"]').val(data.created_at);
+        
+
+          }
+
+         });
 
 
+      });
 
+        
+   });
+       
+  
 
 // =========================================
 
@@ -1000,7 +1085,56 @@ $('body').on('click', '.editarAbono', function(e) {
 
 // =========================================   
 
-   
+
+  
+$(document).on('click', '.eliminarAbono', function (event) {
+     
+  event.preventDefault();
+     let id = $(this).data('id');
+    swal({
+            title: "Esta seguro de eliminar?",
+            text: "La acción es permanente!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Si, Eliminar",
+            cancelButtonText: "No, cancelar",
+            reverseButtons: !0
+     
+          }).then(function (e) {
+
+            if (e.value === true) {
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajax({
+                    type: 'delete',
+                    url: 'eliminar_abono/' +id,
+                    data: {id:id},
+                    dataType: 'JSON',
+                    success: function (data) {
+
+                      if (data.success === true) {
+
+                            swal("Abono eliminado correctamente!", data.message, "success");
+                        
+                           table.ajax.reload();
+                         //  $('#table_mascotas').html(data);
+                        
+                
+                        } else {
+                            swal("Error!", data.message, "error");
+                        }
+                    }
+                });
+
+            } else {
+                e.dismiss;
+            }
+
+        }, function (dismiss) {
+            return false;
+        })
+      });
+
 
 
 });

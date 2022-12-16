@@ -15,8 +15,8 @@ class CreateAbonosClientesTable extends Migration
     {
         Schema::create('abonos_clientes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('id_cliente')->required();
-            $table->string('user_id')->required();
+            $table->string('id_cliente')->nullable();
+            $table->string('user_id')->nullable();
             $table->string('nombre',60)->nullable();
             $table->string('celular',25)->nullable();
             $table->string('valor_abono',12)->nullable();

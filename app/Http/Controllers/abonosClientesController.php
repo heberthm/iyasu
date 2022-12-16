@@ -46,11 +46,11 @@ class abonosClientesController extends Controller
     
 
     
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerAbono"  class="fa fa-eye mostrar_abono"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerAbono"  class="fa fa-eye mostrarAbono"></a> 
                    
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarAbono"    class="fa fa-edit editarAbono"></a>
-    
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'title="Eliminar história clínica" class="fa fa-trash deleteProduct"></a>';
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarAbono"    class="fa fa-edit editarAbono"></a>   
+                    
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'title="Eliminar abono" class="fa fa-trash eliminarAbono"></a>';
                     
                      
                     return $actionBtn;
@@ -66,13 +66,11 @@ class abonosClientesController extends Controller
 
             $id_clientes = cliente::select('id_cliente')->get(); 
 
-          
+          //  $id_abonos = abonos_clientes::select('id', 'id_clientes')->get(); 
            
            
             return view('abonos', compact('id_clientes'));
-           
-          
-        
+  
     
 
         
@@ -95,7 +93,7 @@ class abonosClientesController extends Controller
      */
     public function store(Request $request)
     {
-        
+      
         $validatedData = $request->validate([
             
             'nombre'              =>    'max:60',
@@ -123,6 +121,7 @@ class abonosClientesController extends Controller
        
          return response()->json(['success'=>'Successfully']);
         
+      
     }
 
     /**
@@ -133,7 +132,10 @@ class abonosClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        $id_abonos  = abonos_clientes::find($id);
+        return response()->json($id_abonos);
+
+       
     }
 
     /**
@@ -159,27 +161,19 @@ class abonosClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
-        try{
-            $id = array('id' => $request->id);
-            $updateArray = [
-                            'nombre' => $request->nombreCLiente,
-                            'celular' => $request->celular,
-                            'valor_abono' => $request->valor_abono,
-                            'descripcion' => $request->descripcion,
-                            'responsable' => $request->responsable,
-                           
-                           ];
-              
-              $id  = abonos_clientes::where($id)->update($updateArray);
      
-            } catch (\Exception  $exception) {
-                return back()->withError($exception->getMessage())->withInput();
-            }
-    
-              return response()->json(['success'=>'Successfully']);
-         
+        $id = $request->input('id_abono');
 
+        $abono = abonos_clientes::find($id);
+        $abono->nombre = $request->nombreCliente;
+        $abono->celular = $request->celular;
+        $abono->valor_abono = $request->valor_abono;
+        $abono->descripcion = $request->descripcion;
+        $abono->save();
+     
+        return response()->json(['success'=>'update successfully.']);
+      
+         
 
 
     }
@@ -192,8 +186,8 @@ class abonosClientesController extends Controller
      */
     public function destroy($id)
     {
-        abonos_clientes::where('id_abonos', $id)->delete();
+        abonos_clientes::find($id)->delete();
      
-        return response()->json(['success'=>'Product deleted successfully.']);
+        return response()->json(['success'=>'deleted successfully.']);
     }
 }

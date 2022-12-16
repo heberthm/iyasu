@@ -90,6 +90,11 @@ Route::post('crear_abono', [App\Http\Controllers\abonosClientesController::class
 
 Route::get('editar_abono/{id_abono}', [App\Http\Controllers\abonosClientesController::class, 'edit']);
 
+Route::get('ver_abono/{id_abono}', [App\Http\Controllers\abonosClientesController::class, 'show']);
+
+Route::post('actualizar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'update']);
+
+
 Route::delete('eliminar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'destroy']);
 
 
@@ -108,4 +113,4 @@ Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 
 
 
 
-Route::delete('eliminar_cita/{id}', [App\Http\Controllers\ListadoCitaMedicaController::class, 'destroy'])->name('eliminar_cita');
+//Route::delete('eliminar_cita/{id}', [App\Http\Controllers\ListadoCitaMedicaController::class, 'destroy'])->name('eliminar_cita');
