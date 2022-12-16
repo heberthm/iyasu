@@ -195,7 +195,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-     <h5 class="modal-title" id="modelHeading"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5> 
+     <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5> 
    
     
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -302,7 +302,7 @@ DATATABLE LISTA DE ESPERA
 
       <div class="modal-footer">
 
-        <button type="submit" id="saveBtn" name="saveBtn"  class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="agregar_abono" name="agregar_abono"  class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -964,11 +964,9 @@ $('body').on('click', '.editarAbono', function (e) {
 
             $('#livesearch').hide();
             $('#nombreCliente').show();
-            
-            
+                
 
-            $('#modelHeading').html("Editar abono");
-            $('#saveBtn').val("Editar");
+            
             $('#modalEditarAbono').modal('show');
             $('#modalEditarAbono input[name="id_abono"]').val(data.id)
             $('#modalEditarAbono input[name="id_cliente"]').val(data.id_cliente);
@@ -988,19 +986,14 @@ $('body').on('click', '.editarAbono', function (e) {
 
  // =========================================
 
- $("#form_editar_abono").submit(function(e) {
-  
-  
+ 
+$('#form_editar_abono').off('submit').on('submit', function (event) {
+
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
-  
-  e.preventDefault();
-
-
-  
 /* Configurar botón submit con spinner */
 let btn = $('#editar_abono') 
     let existingHTML =btn.html() //store exiting button HTML
@@ -1009,36 +1002,38 @@ let btn = $('#editar_abono')
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-    $('#editar_abono').attr('disabled', true);
-  
-    let id = $(this).data('id');
+        $('#editar_abono').attr('disabled', true);
+        event.preventDefault();
+        try {
+       
+      let id = $(this).data('id');
       
-        $.ajax({
-          url: 'actualizar_abono/'+id,
-          method: "POST",
-          data: $(this).serialize(),
-          dataType: "json",
-        
-          success: function(data) {
-
-            $('#id').val(data.id);
-           
-           //  table.ajax.reload();
+      $.ajax({
+        url: 'actualizar_abono/'+id,
+        method: "POST",
+        data: $(this).serialize(),
+        dataType: "json",
+            success: function(data) {
+                
                 $('#editar_abono').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-               // $('#form_editar_abono')[0].reset();
+                $('#form_editar_abono')[0].reset();
                 $('#modalEditarAbono').modal('hide');
                   
              //   table.ajax.reload();
              //   location.reload(true);
-                toastr["success"]("Datos de abono actualiados correctamente.");
+                toastr["success"]("datos actualizados correctamente.");
          
+            }
+         });
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.", "Información");
           }
-      });
-        
-   });
- 
+    });
+
+
+
 
 // =========================================
 
