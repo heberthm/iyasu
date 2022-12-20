@@ -24,9 +24,12 @@ class controlesController extends Controller
 
           //  $id = $request->id_cliente;
 
-          $id = controles::select('id_cliente', 'num_control', 'peso', 'abd',  'grasa', 'agua', 'created_at' )
+          $id = cliente::leftjoin('controles', 'controles.id_cliente', '=', 'clientes.id_cliente')
+          ->select('clientes.id_cliente',  'controles.id_control', 'controles.id_cliente', 'controles.user_id',  
+          'controles.num_control', 'controles.peso', 'controles.abd', 'controles.grasa', 'controles.grasa',
+           'controles.agua', 'controles.created_at')
 
-          ->where('id_cliente',  $id);
+          ->where('clientes.id_cliente',  $id);
 
            return datatables()->of($id)
 
@@ -39,15 +42,15 @@ class controlesController extends Controller
             ->rawColumns(['action'])
             ->addColumn('action', function($data) {
 
-           /*
+           
 
-                $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_historia_clinica.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit edit"></a>
+                $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarControl"  title="Editar datos de control clínico" class="fa fa-edit editarControl"></a>
 
-                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id_historia_clinica.'title="Eliminar história clínica" class="fa fa-trash deletePost"></a>';
+                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar control médico" class="fa fa-trash eliminarControl"></a>';
                 
                  
                 return $actionBtn;
-           */
+           
 
                
             })
@@ -159,6 +162,8 @@ class controlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        controles::find($id)->delete();
+     
+        return response()->json(['success'=>'deleted successfully.']);
     }
 }

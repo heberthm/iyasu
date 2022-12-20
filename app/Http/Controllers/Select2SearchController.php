@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;  
 
 use App\Models\Cliente;
+use App\Models\controles;
 use App\models\profesionales;
 use App\models\terapias;
 use App\models\terapias_adicionales;
@@ -48,7 +49,7 @@ class Select2SearchController extends Controller
     $id_clientes = Cliente::leftjoin('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
     ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.id_cliente', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 
     'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 
-    'historias_clinicas.id_historia_clinica', 'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 
+    'historias_clinicas.id', 'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 
     'historias_clinicas.abd_inicial', 'historias_clinicas.agua_inicial', 'historias_clinicas.grasa_inicial', 'historias_clinicas.imc', 
     'historias_clinicas.grasa_viseral', 'historias_clinicas.edad_metabolica', 'historias_clinicas.terapias', 'historias_clinicas.terapias_adicionales',
       'historias_clinicas.paquete_desintoxicacion', 'historias_clinicas.tipo_lavado', 'historias_clinicas.num_lavado', 'historias_clinicas.dias_lavados',
@@ -71,9 +72,10 @@ class Select2SearchController extends Controller
     $profesionales = profesionales::select('id_profesional','nombre')->get(); 
     $terapias = terapias::select('id_terapias','terapia')->get();
     $terapias_adicionales = terapias_adicionales::select('id_terapias_adicionales','terapias_adicionales')->get();
+    $controles = controles::select()->get(); 
 
     
-    return view('cliente', compact('id_clientes', 'profesionales', 'terapias', 'terapias_adicionales'));
+    return view('cliente', compact('id_clientes', 'profesionales', 'terapias', 'terapias_adicionales', 'controles'));
    
  }
 

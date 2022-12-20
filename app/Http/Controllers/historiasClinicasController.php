@@ -29,7 +29,7 @@ class historiasClinicasController extends Controller
     
               $id = cliente::join('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
               ->select('clientes.id_cliente', 'clientes.nombre', 'clientes.cedula',  'clientes.celular', 'clientes.direccion',
-              'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'historias_clinicas.id_cliente', 'historias_clinicas.id_historia_clinica',
+              'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'historias_clinicas.id', 'historias_clinicas.id_cliente', 
               'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 'historias_clinicas.abd_inicial', 
               'historias_clinicas.grasa_inicial', 'historias_clinicas.imc', 'historias_clinicas.grasa_viseral',
               'historias_clinicas.edad_metabolica', 'historias_clinicas.terapias',
@@ -44,14 +44,15 @@ class historiasClinicasController extends Controller
                 ->addColumn('action', function($data) {
     
     
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_historia_clinica.'" data-target="#modalMostrarHistoriaClinica"  title="Ver datos história clínica" class="fa fa-eye mostrar_historia"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalMostrarHistoriaClinica"  title="Ver datos história clínica" class="fa fa-eye mostrar_historia"></a> 
                    
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_historia_clinica.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit edit"></a>
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit edit"></a>
     
                     <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_cliente.'" data-target="#modalVerControlesMedicos"  title="Ver controles realizados" class="fa fa-street-view control"></a>
 
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar abono" class="fa fa-trash eliminarHistoria"></a>';
 
-                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id_historia_clinica.'title="Eliminar história clínica" class="fa fa-trash deletePost"></a>';
+
                     
                      
                     return $actionBtn;

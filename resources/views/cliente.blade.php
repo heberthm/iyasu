@@ -25,6 +25,7 @@ a.editable-empty {
 }
 
 
+
 /*
 
 thead {
@@ -82,12 +83,13 @@ thead {
                       Crear control clínico
                       </button>  &nbsp;
                     
-                      
+                     <div class="ocultar-boton">
                       <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modalAgregarHistoriaClinica"
                       style="position: absolute; top: 0; left: 300px">
                       <span class="fa fa-plus fa-fw" ></span>  
                       Crear história clínica
                       </button>
+                    </div>
 
                     </div>
                     
@@ -103,9 +105,9 @@ DATATABLE MASCOTAS
 
 ============================== -->
      
-@foreach($id_clientes as $id_cliente)
+@forelse($id_clientes as $id_cliente)
           
- @endforeach
+ 
 
 
   
@@ -786,6 +788,23 @@ DATATABLE MASCOTAS
                     </div>
 
 
+
+                    <div class="col-md-3">
+              
+                        <div class="form-group">
+
+                          <label for="lavado" class="control-label font-weight-normal">Lavado</label>
+
+                          <input type="text" name="tipo_lavado" class="form-control" id="tipo_lavado" value="{{$id_cliente->tipo_lavado}}"  autocomplete="off">
+
+                          <div class="alert-message" id="tipoLavadoError"></div>
+
+                        </div>
+
+                  </div>
+
+
+
                    
                     <div class="col-md-6">
               
@@ -1166,7 +1185,7 @@ DATATABLE MASCOTAS
               
                   <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
               
-                  <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_historia_clinica }}" readonly>  
+                  <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id }}" readonly>  
                     
               
                     <!--     
@@ -1579,8 +1598,16 @@ DATATABLE MASCOTAS
                 
 
 
+@empty
+    
+@endforelse
 
 
+
+
+@foreach($controles as $control)
+
+@endforeach
 
  <!--=====================================
 
@@ -1588,7 +1615,7 @@ DATATABLE MASCOTAS
 
 ======================================-->
 
-<div class="modal fade" id="modalEditarMedico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditarControl" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -1634,7 +1661,7 @@ DATATABLE MASCOTAS
                             <label for="num control" class="control-label">Núm. control</label>
             
             
-                            <input type="number" name="num_control" class="form-control" id="num_control" value="{{ $id_cliente->num_control }}" autofocus required autocomplete="off">
+                            <input type="number" name="num_control" class="form-control" id="num_control" value="{{ $control->num_control }}" autofocus required autocomplete="off">
             
                           
                             <div class="alert-message" id="numControlError"></div>
@@ -1651,7 +1678,7 @@ DATATABLE MASCOTAS
             
                             <label for="peso" class="control-label">Peso</label>
             
-                            <input type="number" name="peso" class="form-control" id="peso" value="{{ $id_cliente->peso }}" required autocomplete="off">
+                            <input type="number" name="peso" class="form-control" id="peso" value="{{ $control->peso }}" required autocomplete="off">
             
                               <div class="alert-message" id="pesoError"></div>
                             
@@ -1666,7 +1693,7 @@ DATATABLE MASCOTAS
                             <label for="abd" class="control-label">ABD</label>
 
 
-                            <input type="number" class="form-control" id="abd" name="abd" value="{{ $id_cliente->abd }}" required >
+                            <input type="number" class="form-control" id="abd" name="abd" value="{{ $control->abd }}" required >
                          
                             <div class="alert-message" id="ABDError" ></div>
                               
@@ -1683,7 +1710,7 @@ DATATABLE MASCOTAS
                               <label for="grasa" class="control-label">Grasa</label>
 
 
-                              <input type="number" name="grasa" class="form-control" id="grasa" value="{{ $id_cliente->grasa }}" autocomplete="off">
+                              <input type="number" name="grasa" class="form-control" id="grasa" value="{{ $control->grasa }}" autocomplete="off">
 
                             
                               <div class="alert-message" id="grasaError"></div>
@@ -1698,15 +1725,35 @@ DATATABLE MASCOTAS
             
                             <label for="agua" class="control-label">Agua</label>
             
-                            <input type="number" name="agua" class="form-control" id="agua" value="" required autocomplete="off">
+                            <input type="number" name="agua" class="form-control" id="agua" value="{{ $control->agua }}" required autocomplete="off">
                             
                               <div class="alert-message" id="aguaError"></div>
                                         
                             </div>
                         </div>
                          
-                      </div>
+                              
             
+
+                      <div class="col-md-5">
+                          <div class="form-group">
+            
+                       
+                            <label for="fecha de creacion" class="control-label font-weight-normal"><b>Fecha de registro</b></label>
+
+                            <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }}</p>       
+
+                          </div>
+
+                      </div>
+
+                  
+              
+                        
+            
+        </div>
+          
+      </div>
             
             
             
@@ -1753,8 +1800,6 @@ DATATABLE MASCOTAS
 
 
 
-
-
 <!--  =======================================
 
 MODAL DATATABLE CONTROLES MEDICOS
@@ -1762,10 +1807,15 @@ MODAL DATATABLE CONTROLES MEDICOS
 ============================================-->
 
 
-<div class="modal" id="modalVerControlesMedicos" class="modal fade" role="dialog">
+<div class="modal fade" id="modalVerControlesMedicos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       
+
   <div class="modal-dialog modal-lg" role="document">
+
     <div class="modal-content">
+
       <div class="modal-header">
+
       <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-list mr-3"></span>Listado de controles realizados</h5>
                         <div class="col-6 align-items-center" style="font-size: small;">
                             <div  id="datos_historia_clinica">
@@ -1787,7 +1837,7 @@ MODAL DATATABLE CONTROLES MEDICOS
    <div class="col-lg-12">
            
              
-               <table id="Table_control_medico" class="table  table-hover" width="100%">
+               <table id="Table_control_medico" tabindex="-1" class="table  table-hover" width="100%">
                    <thead>
                       <tr>
                                         
@@ -2090,6 +2140,21 @@ let today = new Date();
     });
 
 
+
+
+if (table.data.length === 0) {
+
+   $('.ocultar-boton').css({"display" : "none"});
+
+  } else if (!table.data.length === 0) {
+       
+    $('.ocultar-boton').css({"display" : "block"});
+  }
+  
+
+
+
+
 //==================================================
 
 // AGREGAR HISTORIA CLINCIA
@@ -2226,12 +2291,12 @@ $('#form_editar_historia_clinica').off('submit').on('submit', function (e) {
 // ========================================= 
 
 
-$('body').on('click', '.deletePost', function (e) {
+$('body').on('click', '.eliminarHistoria', function (event) {
 
 
-  let id = $(this).data("id_historia_clinica");
+  let id = $(this).data("id");
 
-    e.preventDefault();
+    event.preventDefault();
     
     swal({
             title: "Esta seguro de eliminar?",
@@ -2248,7 +2313,7 @@ $('body').on('click', '.deletePost', function (e) {
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
                 $.ajax({
-                  type: 'delete',
+                  type: 'post',
                   url: '/eliminar_historia/'+id,
                    
                    
@@ -2281,149 +2346,9 @@ $('body').on('click', '.deletePost', function (e) {
 
 
 
- /*
-
- let id = $(this).data("id");
-
-e.preventDefault();
-
-      $.ajax({
-          type: 'delete',
-          url: '/eliminar_mascota/'+id,
-                
-                  
-          success: function (data) {
-
-            table.ajax.reload();
-            toastr["success"]("Mascota eliminada correctamente.");
-            
-          }
-      });
-
-    
-  });
-
-
-});
-
-*/
-
 
 </script>
 
-
-
-<!--
-
-<script type="text/javascript">
-   
-   $(document).ready(function() {
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-     $('#form_crear_historia_clinica').on('submit', function(event) {
-
-     event.preventDefault();
-
- 
-/* Configurar botón submit con spinner */
-
-        let btn = $('#agregar_mascota') 
-        let existingHTML =btn.html() //store exiting button HTML
-        //Add loading message and spinner
-        $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
-
-        setTimeout(function() {
-          $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
-        },5000) //5 seconds
-
-
-             
-        $('#mascotaError').text('');
-        $('#especieError').text('');
-        $('#razaError').text('');
-        $('#sexoError').text('');
-        $('#colorError').text('');
-        $('#pesoError').text('');
-        $('#esterilizadoError').text('');
-        $('#caracteristicasError').text('');
-                 
-            $.ajax({
-              url: "/mascotas",
-              method: "POST",
-              data: $(this).serialize(),
-              dataType: "json",
-              success: function(data) {
-
-           
-                 /* 
-                    
-                var trHTML = '';
-                  $.each(data, function (key,value) {
-                    trHTML += 
-                        '<tr><td style="display:none">' + value.id_cliente + 
-                        '</td><td>' + value.especie + 
-                        '</td><td>' + value.raza + 
-                        '</td><td>' + value.edad + 
-                      
-                        '</td></tr>';     
-                  });
-
-                    $('#table_mascotas #lista_mascotas').append(trHTML);
-
-                */
-                   
-              
-                  location.reload(true);
-
-              //  $('#table_mascotas').html(data);
-                
-                                      
-                            
-                    
-                        $('#form_crear_historia_clinica')[0].reset();
-                        $('#modalAgregarHistoriaClinica').modal('hide');
-                     //   $('#agregar_cliente').attr('disabled', true);
-
-                    // $('#table-body').html(data);
-                       
-                        toastr["success"]("los datos se han guardado correctamente");
-
-            
-                        
-                          
-
-                  },
-
-                  error: function(response) {
-                    $('#mascotaError').text(response.responseJSON.errors.mascota);
-                    $('#especieError').text(response.responseJSON.errors.especie);
-                    $('#razaError').text(response.responseJSON.errors.raza);
-                    $('#sexoError').text(response.responseJSON.errors.sexo);
-                    $('#colorError').text(response.responseJSON.errors.color);
-                    $('#pesoError').text(response.responseJSON.errors.peso);
-                    $('#esterilizadoError').text(response.responseJSON.errors.esterilizado);
-                    $('#caracteristicasError').text(response.responseJSON.errors.caracteristicas);
-                }
-
-
-
-                
-              });
-
-          });
-
-      });    
-
-    
-
-  </script>
-
-    -->
 
 
 <!-- =========================================
@@ -2648,65 +2573,62 @@ let btn = $('#crear_control_clinico')
 
 
 
-</script>
+// =========================================
 
+// ELIMINAR DATOS DE CONTROL MEDICO
+ 
+// ==============================================  -->
 
-
-
-
-<!-- =========================================
-
-ELIMINAR DATOS DE MASCOTA
-
-==============================================  -->
-
-<script>
-
-$(document).on('click', '.eliminar_mascota', function (event) {
-    event.preventDefault();
-     let id = $(this).data('id');
-    swal({
-            title: "Esta seguro de eliminar?",
-            text: "La acción es permanente!",
-            type: "warning",
-            showCancelButton: !0,
-            confirmButtonText: "Si, Eliminar",
-            cancelButtonText: "No, cancelar",
-            reverseButtons: !0
+ 
+ $(document).on('click', '.eliminarControl', function (event) {
      
-          }).then(function (e) {
-
-            if (e.value === true) {
-                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-                $.ajax({
-                    type: 'post',
-                    url: '/eliminar_mascota/' +id,
-                    data: {id:id},
-                    dataType: 'JSON',
-                    success: function (data) {
-
-                      if (data.success === true) {
-                            swal("Registro eliminado correctamente!", data.message, "success");
-                           location.reload(true);
-                         //  $('#table_mascotas').html(data);
-                        
-                
-                        } else {
-                            swal("Error!", data.message, "error");
-                        }
-                    }
-                });
-
-            } else {
-                e.dismiss;
-            }
-
-        }, function (dismiss) {
-            return false;
-        })
-      });
-
+     event.preventDefault();
+        let id = $(this).data('id');
+       swal({
+               title: "Esta seguro de eliminar?",
+               text: "La acción es permanente!",
+               type: "warning",
+               showCancelButton: !0,
+               confirmButtonText: "Si, Eliminar",
+               cancelButtonText: "No, cancelar",
+               reverseButtons: !0
+        
+             }).then(function (e) {
+   
+               if (e.value === true) {
+                   let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+   
+                   $.ajax({
+                       type: 'POST',
+                       url: "/eliminar_control/"+id,
+                       data: {id:id},
+                       dataType: 'JSON',
+                       success: function (data) {
+   
+                      //   if (data.success === true) {
+   
+                               swal("História eliminada correctamente!", data.message, "success");
+                           
+                              table.ajax.reload();
+                            //  $('#table_mascotas').html(data);
+                           
+                   
+                         //  } else {
+                        //       swal("Error!", data.message, "error");
+                        //   }
+                       }
+                   });
+   
+               } else {
+                   e.dismiss;
+               }
+   
+           }, function (dismiss) {
+               return false;
+           })
+         });
+   
+   
     
 
 

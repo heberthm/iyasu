@@ -1082,7 +1082,7 @@ $('body').on('click', '.mostrarAbono', function(e) {
 
 
   
-$(body).on('click', '.eliminarAbono', function (event) {
+$(document).on('click', '.eliminarAbono', function (event) {
      
   event.preventDefault();
      let id = $(this).data('id');
@@ -1098,16 +1098,16 @@ $(body).on('click', '.eliminarAbono', function (event) {
           }).then(function (e) {
 
             if (e.value === true) {
-                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
                 $.ajax({
                     type: 'delete',
-                    url: 'eliminar_abono/' +id,
+                    url: '/eliminar_abono/'+id,
                     data: {id:id},
                     dataType: 'JSON',
                     success: function (data) {
 
-                      if (data.success === true) {
+                   //   if (data.success === true) {
 
                             swal("Abono eliminado correctamente!", data.message, "success");
                         
@@ -1115,9 +1115,9 @@ $(body).on('click', '.eliminarAbono', function (event) {
                          //  $('#table_mascotas').html(data);
                         
                 
-                        } else {
-                            swal("Error!", data.message, "error");
-                        }
+                      //  } else {
+                     //       swal("Error!", data.message, "error");
+                     //   }
                     }
                 });
 

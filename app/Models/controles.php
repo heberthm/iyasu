@@ -11,5 +11,12 @@ class controles extends Model
 
     protected $fillable = ['user_id','id_cliente', 'num_control','peso','abd','grasa','agua'];
 
+    protected $id = 'id_control';
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+
 
  }

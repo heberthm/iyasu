@@ -15,7 +15,7 @@ class CreateHistoriasClinicasTable extends Migration
     public function up()
     {
         Schema::create('historias_clinicas', function (Blueprint $table) {
-            $table->bigIncrements('id_historia_clinica');
+            $table->bigIncrements('id');
             $table->string('user_id')->required();
             $table->unsignedBigInteger('id_cliente')->required();
             $table->string('profesional',50);

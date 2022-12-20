@@ -78,7 +78,7 @@ Route::post('/crear_historia', [App\Http\Controllers\historiasClinicasController
 
 Route::post('/editar_historia/{id_cliente}', [App\Http\Controllers\historiasClinicasController::class, 'update']);
 
-Route::delete('/eliminar_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'destroy']);
+Route::post('/eliminar_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'destroy']);
 
 Route::get('/listado_controles/{id_controles}', [App\Http\Controllers\controlesController::class, 'index']);
 
@@ -95,7 +95,7 @@ Route::get('ver_abono/{id_abono}', [App\Http\Controllers\abonosClientesControlle
 Route::post('actualizar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'update']);
 
 
-Route::delete('eliminar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'destroy']);
+Route::delete('/eliminar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'destroy']);
 
 
 Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
