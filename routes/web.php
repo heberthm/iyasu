@@ -84,6 +84,9 @@ Route::get('/listado_controles/{id_controles}', [App\Http\Controllers\controlesC
 
 Route::post('/crear_control', [App\Http\Controllers\controlesController::class, 'store']);
 
+Route::post('/editar_control/{id_control}', [App\Http\Controllers\controlesController::class, 'update']);
+
+
 Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index']);
 
 Route::post('crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
@@ -99,6 +102,12 @@ Route::delete('/eliminar_abono/{id}', [App\Http\Controllers\abonosClientesContro
 
 
 Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
+
+Route::post('crear_tratamiento', [App\Http\Controllers\registrar_tratamientoController::class, 'store']);
+
+Route::get('editar_tratamientos/{id_tratamiento}', [App\Http\Controllers\registrar_tratamientoController::class, 'edit']);
+
+Route::post('actualizar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'update']);
 
 
 Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index']);

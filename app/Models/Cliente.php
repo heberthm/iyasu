@@ -30,6 +30,11 @@ class Cliente extends Model
         return $this->hasMany(paquetes::class);
     }
 
+    public function registrar_tratamiento(){
+        return $this->hasMany(registrar_tratamiento::class);
+    }
+
+
 
     
     use SoftDeletes;

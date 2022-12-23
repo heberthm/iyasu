@@ -93,7 +93,7 @@ FORMULARIO CREAR TRATAMIENTO
                    <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de registro de tratamientos</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalACrearAbono">
+                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalACrearTratamiento">
                             <span class="fa fa-list fa-fw" ></span>  
                             Crear tratamiento
                         </button>  &nbsp;
@@ -148,11 +148,10 @@ DATATABLE LISTA DE ESPERA
                       <tr>
                                         
                         <th>Paciente</th>
-                        <th>Tel/Cel</th>
                          <th>Tratamiento</th>
-                         <th>Vr. tratamiento</th>
+                         <th>Valor</th>
                          <th>Fecha</th>
-                         <th>Responsable</th>
+                    
 
                        
                          <th ></th>
@@ -187,11 +186,11 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL AGREGAR ABONO
+    MODAL AGREGAR TRATAMIENTO
 
 ======================================-->
 
-<div class="modal fade" id="modalACrearAbono"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalACrearTratamiento"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -201,7 +200,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar  tratamiento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -216,14 +215,14 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_abono" action="{{ url('crear_abono') }}" >
+        <form method="POST" id="form_agregar_tratamiento"  enctype="multipart/form-data" action="{{ url('crear_tratamiento') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
-            
+          <div class="col-md-6">
 
               <div class="form-group" >
 
@@ -242,10 +241,10 @@ DATATABLE LISTA DE ESPERA
              
 
             </div>
+         </div>
 
 
-
-            <div class="col-md-3">
+            <div class="col-md-5">
 
               <div class="form-group">
 
@@ -253,35 +252,48 @@ DATATABLE LISTA DE ESPERA
 
                 <input type="text" name="celular" class="form-control " id="celular" required autocomplete="off">
 
-                 <div class="alert-message" id="responsableError"></div>
+                 <div class="alert-message" id="celularError"></div>
                 
               </div>
             </div>
 
 
-            <div class="col-md-5">
-
-            <div class="form-group">
-
-              <label for="Descripcion" class="control-label">Descripción</label>
-
-              <input type="text" name="descripcion" class="form-control " id="descripcion" required autocomplete="off">
-
-              <div class="alert-message" id="descripcionError"></div>
+            <div class="col-md-6">
               
-            </div>
-          </div>
+              <div class="form-group">
+
+                <label for="tratamiento" class="control-label ">Tratamiento</label>
+
+
+                <input type="text" name="tratamiento" class="form-control" id="tratamiento" required autocomplete="off">
+
+               <!--                          
+                <select class="form-control select2-multiple" name="tratamientos[]" multiple="multiple" placeholder="Seleccione opciones" style="width:100%" >
+                    @foreach($terapias as $prof)
+                          <option value="{{$prof->terapia}}">{{$prof->terapia}}</option>
+                  @endforeach   
+                </select>
+
+              -->
+
+
+
+                <div class="alert-message" id="terapiasError"></div>
+
+              </div>
+
+        </div>
 
 
 
             <div class="col-md-3">
               <div class="form-group">
 
-                <label for="valor_abono" class="control-label">Vr. abono</label>
+                <label for="valor_abono" class="control-label">Valor</label>
 
-                <input type="number" name="valor_abono" class="form-control" id="valor_abono" required autocomplete="off">
+                <input type="number" name="valor_tratamiento" class="form-control" id="valor_tratamiento" required autocomplete="off">
                 
-                  <div class="alert-message" id="valorAbonoError"></div>
+                  <div class="alert-message" id="valorTratamientoError"></div>
                            
                </div>
             </div>
@@ -290,13 +302,13 @@ DATATABLE LISTA DE ESPERA
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
-
+            
             </div>
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_abono" name="agregar_abono" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="agregar_tratamiento" name="agregar_tratamiento" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -318,13 +330,14 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL VER DATOS DE SALDO
+    MODAL EDITAR DATOS DE TRATAMIENTO
 
 ======================================-->
 
-<div class="modal fade" id="modalVerAbono"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
- 
 
+
+<div class="modal fade" id="modalEditarTratamiento"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    
 
 <div class="modal-dialog modal-lg">
   
@@ -332,7 +345,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Editar tratamiento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -347,90 +360,90 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-      <!--  <form method="POST" id="form_agregar_abono" action="{{ url('crear_abono') }}"  -->
+        <form method="POST" id="form_editar_tratamiento"  enctype="multipart/form-data" action="{{ url('crear_tratamiento') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
-            
+          <div class="col-md-6">
 
               <div class="form-group" >
 
                 <label for="cliente" class="control-label">Cliente</label>
-               
-                               
+                         
+                    <input type="text" name="nombreCliente" class="form-control " id="nombreCliente" required autocomplete="off">
+
+                <div class="alert-message" id="livesearchError"></div>
+                 
              
 
             </div>
+         </div>
 
 
-
-            <div class="col-md-3">
+            <div class="col-md-5">
 
               <div class="form-group">
 
                 <label for="Celular" class="control-label">Tel/Cel</label>
 
-               
+                <input type="text" name="celular" class="form-control " id="celular" required autocomplete="off">
+
+                 <div class="alert-message" id="celularError"></div>
                 
               </div>
             </div>
 
 
             <div class="col-md-6">
-
-            <div class="form-group">
-
-              <label for="Descripcion" class="control-label">Descripción</label>
-
               
-              
-            </div>
-          </div>
+              <div class="form-group">
+
+                <label for="tratamiento" class="control-label">Tratamiento</label>
+
+
+                <input type="text" name="tratamiento" class="form-control" id="tratamiento" required autocomplete="off">
+
+               <!--                          
+                <select class="form-control select2-multiple" name="tratamientos[]" multiple="multiple" placeholder="Seleccione opciones" style="width:100%" >
+                    @foreach($terapias as $prof)
+                          <option value="{{$prof->terapia}}">{{$prof->terapia}}</option>
+                  @endforeach   
+                </select>
+
+              -->
+
+
+
+                <div class="alert-message" id="terapiasError"></div>
+
+              </div>
+
+        </div>
 
 
 
             <div class="col-md-3">
               <div class="form-group">
 
-                <label for="valor_abono" class="control-label">Vr. abono</label>
+                <label for="valor_abono" class="control-label">Valor</label>
 
+                <input type="number" name="valor_tratamiento" class="form-control" id="valor_tratamiento" required autocomplete="off">
                 
+                  <div class="alert-message" id="valorTratamientoError"></div>
                            
                </div>
             </div>
  
-     
-            <div class="col-md-3">
-              <div class="form-group">
-
-                <label for="valor_abono" class="control-label">Responsable</label>
-
-                
-               </div>
-            </div>
- 
-
-            <div class="col-md-3">
-              <div class="form-group">
-
-                <label for="valor_abono" class="control-label">Saldo</label>
-
-               
-                           
-               </div>
-            </div>
-
-
-
-
-
-
             <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+
+            <input type="hidden" name="id_tratamiento" class="form-control" id="id_tratamiento"  readonly>  
+
+            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
 
 
             </div>
@@ -438,7 +451,7 @@ DATATABLE LISTA DE ESPERA
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_abono" name="agregar_abono" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="editar_tratamiento" name="editar_tratamiento" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -640,6 +653,17 @@ $(document).ready(function () {
 
 
 
+<script>
+   
+    $('.select2-multiple').select2({
+      
+      allowClear: true,
+      placeholder: "Seleccione una opción",
+
+});
+ </script>
+
+
 
 <!-- =======================================
 
@@ -649,6 +673,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
 <script type="text/javascript">
   $('.livesearch').select2({
+
     placeholder: 'Buscar cliente por nombre...',
     language: "es",
     allowClear: true,
@@ -764,7 +789,7 @@ $('.livesearch').html('');
 
 <!-- ===================================================
 
- DATATABLE ABONOS
+ DATATABLE TRATAMIENTOS CLIENTES
 
 ======================================================= --->
 
@@ -798,17 +823,24 @@ $('.livesearch').html('');
            columns: [
                    
                     { data: 'nombre', name: 'nombre' },                  
-                    { data: 'celular', name: 'celular' },
                     { data: 'tratamiento', name: 'tratamiento' },  
                     { data: 'valor_tratamiento', name: 'valor_tratamiento' },
                     { data: 'created_at', name: 'created_at' },  
-                    { data: 'responsable', name: 'responsable' },
+                  
                    
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
                    order: [[4, 'desc']],
+
+                   "columnDefs": [
+                        { "orderable": false,
+                          "render": $.fn.dataTable.render.number( '.' ),
+                          "targets":[2],
+                          className: 'dt-body-left',
+                        }
+                   ],
           
           
             "language": {
@@ -843,12 +875,12 @@ $('.livesearch').html('');
 
 //============================================
 
-// AGREGAR ABONOS DE CLIENTES
+// AGREGAR TRATAMIENTO DE CLIENTE
 
 //============================================
 
 
-  $('#form_agregar_abono').off('submit').on('submit', function (event) {
+  $('#form_agregar_tratamiento').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -859,7 +891,7 @@ $.ajaxSetup({
 
 /* Configurar botón submit con spinner */
 
-let btn = $('#agregar_abono') 
+let btn = $('#agregar_tratamiento') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
@@ -868,14 +900,14 @@ let btn = $('#agregar_abono')
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
 
-        $('#agregar_abono').attr('disabled', true);
+        $('#agregar_tratamiento').attr('disabled', true);
 
         event.preventDefault();
 
         try {
 
         $.ajax({
-            url: "/crear_abono",
+            url: "crear_tratamiento",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
@@ -884,16 +916,16 @@ let btn = $('#agregar_abono')
                   table.ajax.reload();
 
 
-                $('#agregar_abono').prop("required", true);
+                $('#agregar_tratamiento').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_agregar_abono')[0].reset();
-                $('#modalACrearAbono').modal('hide');
+                $('#form_agregar_tratamiento')[0].reset();
+                $('#modalACrearTratamiento').modal('hide');
                   
              //   table.ajax.reload();
              //   location.reload(true);
 
-                toastr["success"]("Abono registrada correctamente.");
+                toastr["success"]("Tratamiento registrada correctamente.");
          
 
 
@@ -908,6 +940,101 @@ let btn = $('#agregar_abono')
     });
 
   });
+
+
+
+
+// =========================================
+
+/// EDITAR REGISTROS DE TRATAMIENTOS
+
+// =========================================
+
+$('body').on('click', '.editarTratamiento', function (e) {
+ 
+
+ $('#form_editar_tratamiento')[0].reset();
+ let id = $(this).data('id');
+
+$.ajax({
+   url: '/editar_tratamientos/'+id,
+   method: 'GET',
+   data: {  id: id },
+  
+   success: function(data) {
+
+    
+     
+    
+     $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id)
+     $('#modalEditarTratamiento input[name="id_cliente"]').val(data.id_cliente);
+     $('#modalEditarTratamiento input[name="nombreCliente"]').val(data.nombre);
+     $('#modalEditarTratamiento input[name="celular"]').val(data.celular);
+     $('#modalEditarTratamiento input[name="tratamiento"]').val(data.tratamiento);
+     $('#modalEditarTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+     $('#modalEditarTratamiento input[name="responsable"]').val(data.responsable);
+
+
+    
+   }
+ });
+
+
+
+// =========================================
+
+// ACTUALIZAR DATOS DE TRATAMIENTO
+
+// =========================================
+
+
+$('#form_editar_tratamiento').off('submit').on('submit', function (event) {
+
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+/* Configurar botón submit con spinner */
+let btn = $('#editar_tratamiento') 
+let existingHTML =btn.html() //store exiting button HTML
+//Add loading message and spinner
+$(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+setTimeout(function() {
+$(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+},5000) //5 seconds
+ $('#editar_tratamiento').attr('disabled', true);
+ event.preventDefault();
+ try {
+
+let id = $('#id_tratamiento').val();
+
+$.ajax({
+ url: 'actualizar_tratamiento/'+id,
+ method: "POST",
+ data: $(this).serialize(),
+ dataType: "json",
+     success: function(data) {
+         
+         $('#editar_abono').prop("required", true);
+        // $('#selectBuscarCliente').html("");
+        
+         $('#form_editar_tratamiento')[0].reset();
+         $('#modalEditarTratamiento').modal('hide');
+           
+      //   table.ajax.reload();
+      //   location.reload(true);
+         toastr["success"]("datos actualizados correctamente.");
+  
+     }
+  });
+ } catch(e) {
+   toastr["danger"]("Se ha presentado un error.", "Información");
+   }
+});
+
+});
+
 
 </script>
 

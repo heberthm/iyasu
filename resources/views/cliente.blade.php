@@ -24,6 +24,14 @@ a.editable-empty {
    background-color: #f5f5f5 !important;
 }
 
+.modalVerControlesMedicos {
+    z-index: 1500;
+}
+
+
+.modalEditarControl {
+    z-index: 1300;
+}
 
 
 /*
@@ -1605,9 +1613,8 @@ DATATABLE MASCOTAS
 
 
 
-@foreach($controles as $control)
+@forelse($controles as $control)
 
-@endforeach
 
  <!--=====================================
 
@@ -1615,7 +1622,7 @@ DATATABLE MASCOTAS
 
 ======================================-->
 
-<div class="modal fade" id="modalEditarControl" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditarControl"   role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -1647,7 +1654,7 @@ DATATABLE MASCOTAS
                   <div class="modal-body">
             
             
-                    <form method="POST" id="form_control_medico" action="{{ url('/crear_control') }}" >
+                    <form method="POST" id="form_editar_control" action="{{ url('/crear_control') }}" >
             
                   <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
                    
@@ -1768,7 +1775,10 @@ DATATABLE MASCOTAS
 
                  <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
                   
-            
+
+                 <input type="hidden" name="id_control" class="form-control" id="id_control" value="{{ $control->id}}" readonly>  
+
+                 
                   <!--     
             
             <div id="enlace_listado">  
@@ -1781,7 +1791,7 @@ DATATABLE MASCOTAS
             
                   <div class="modal-footer">
             
-                    <button type="submit" id="crear_control_clinico" name="crear_control_clinico" class="btn btn-primary">Guardar</button>
+                    <button type="submit" id="editar_control" name="editar_control" class="btn btn-primary">Guardar</button>
                     <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             
                   </div>
@@ -1797,6 +1807,10 @@ DATATABLE MASCOTAS
 </div>
                 
 
+@empty
+    
+@endforelse
+
 
 
 
@@ -1807,7 +1821,7 @@ MODAL DATATABLE CONTROLES MEDICOS
 ============================================-->
 
 
-<div class="modal fade" id="modalVerControlesMedicos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalVerControlesMedicos" tabindex="-9999" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
        
 
   <div class="modal-dialog modal-lg" role="document">
@@ -1836,8 +1850,8 @@ MODAL DATATABLE CONTROLES MEDICOS
  <div class="row">
    <div class="col-lg-12">
            
-             
-               <table id="Table_control_medico" tabindex="-1" class="table  table-hover" width="100%">
+            
+               <table id="Table_control_medico" class="table table-hover"  width="100%" >
                    <thead>
                       <tr>
                                         
@@ -1902,9 +1916,6 @@ $(window).on('load', function () {
 
 });
  </script>
-
-
-
 
 
 <!-- =======================================
@@ -2142,11 +2153,11 @@ let today = new Date();
 
 
 
-if (table.data.length === 0) {
+if (table.data.length == 0) {
 
    $('.ocultar-boton').css({"display" : "none"});
 
-  } else if (!table.data.length === 0) {
+  } else if (table.data.length !== 0) {
        
     $('.ocultar-boton').css({"display" : "block"});
   }
@@ -2500,8 +2511,15 @@ DATATABLE CONTROL MÉDICO
       
     });
  
-    table.columns.adjust().draw();
+/*
+    $(document).on('hidden.bs.modal', function (event) {
+    if ($('.modalVerControlMedico:visible').length) {
+       $('body').addClass('modal-open');
+    }
+});
+*/
 
+    
 //==================================================
 
 // CREAR CONTROL MÉDICO
@@ -2552,9 +2570,9 @@ let btn = $('#crear_control_clinico')
 
               //  table.ajax.reload();
                 
-              location.reload(true);
+              
                
-
+location.reload(true);
                 toastr["success"]("Control médico creada correctamente.");
               
 
@@ -2570,6 +2588,77 @@ let btn = $('#crear_control_clinico')
     });
 
   });
+
+
+
+
+
+// =========================================
+
+//  EDITAR DATOS DEL CONTROL
+
+// ==============================================  
+
+
+    $(document).ready(function() {
+      
+      $('#form_editar_control').off('submit').on('submit', function (e) {
+           
+          e.preventDefault();
+
+            let id = $('#id_control').val();
+
+           // Update Data
+
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+                      
+
+        let btn = $('#editar_control') 
+        let existingHTML =btn.html() //store exiting button HTML
+        //Add loading message and spinner
+        $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
+        setTimeout(function() {
+          $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+        },5000) //5 seconds
+
+       
+
+            $.ajax({
+               
+                url: '/editar_control/' +id,
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "json",
+
+                success: function (data) {
+                 // $('#form_editar_cliente')[0].reset();
+                  $('#modalEditarControl').modal('hide');
+                  $("#editar_control"). attr("disabled", true);
+                     //   $('#agregar_cliente').attr('disabled', true);
+                        toastr["success"]("los datos se han editado correctamente");
+                     
+                        location.reload(true);
+
+                     // table.ajax.reload();
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            });
+        });
+
+    });
+
+
+
+
+
 
 
 

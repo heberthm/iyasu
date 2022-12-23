@@ -14,7 +14,7 @@ class CreateControlesTable extends Migration
     public function up()
     {
         Schema::create('controles', function (Blueprint $table) {
-            $table->bigIncrements('id_control');
+            $table->bigIncrements('id');
             $table->string('id_cliente')->required();
             $table->string('user_id')->required();
             $table->string('num_control',3)->nullable();

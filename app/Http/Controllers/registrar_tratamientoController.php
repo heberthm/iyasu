@@ -4,30 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\models\registrar_tratamiento;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\Cliente;
+
+use App\Models\terapias;
+
+
+use App\Models\registrar_tratamientos;
 
 class registrar_tratamientoController extends Controller
 {
-    /**
+  /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-
-
-        try { 
-                  
-        if(request()->ajax()) {
     
-            //  $id = $request->id_cliente;
+     public function index()
+     {
+       
+                 
+         if(request()->ajax()) {
+            
   
-            $id = registrar_tratamiento::select('id_tratamiento','id_cliente', 'id_suer', 'nombre', 'celular',
-            'tratamiento', 'valor_tratamiento', 'responsable', 'created_at')->get();
-              
+            $id = Cliente::join('registrar_tratamientos', 'registrar_tratamientos.id_cliente', '=', 'clientes.id_cliente')
+            ->select('clientes.id_cliente', 'clientes.nombre',  'clientes.user_id', 'clientes.celular',  'registrar_tratamientos.id', 'registrar_tratamientos.id_cliente',
+             'registrar_tratamientos.user_id', 'registrar_tratamientos.tratamiento', 'registrar_tratamientos.valor_tratamiento', 'registrar_tratamientos.responsable', 
+             'registrar_tratamientos.created_at')->get();
+  
+            
   
              return datatables()->of($id)
+
 
              ->addColumn('created_at', function($row)  {  
               $date = date("d-m-Y h:i a", strtotime($row->created_at));
@@ -39,11 +48,11 @@ class registrar_tratamientoController extends Controller
               ->addColumn('action', function($data) {
   
   
-                  $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_tratamiento.'" data-target="#modalVerTratamiento"  title="Ver datos del tratamiento" class="fa fa-eye mostrar_historia"></a> 
+                  $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerRegistrTratamiento"  title="Ver datos del tratamiento" class="fa fa-eye mostrar_historia"></a> 
                  
-                  <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_tratamiento.'" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit edit"></a>
+                  <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
   
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id_tratamiento.'title="Eliminar tratamiento" class="fa fa-trash deletePost"></a>';
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash deletePost"></a>';
                   
                    
                   return $actionBtn;
@@ -56,15 +65,11 @@ class registrar_tratamientoController extends Controller
           } 
   
     
+          $terapias = terapias::select('id_terapias','terapia')->get();
 
 
-        return view('registrar_tratamientos');
+        return view('registrar_tratamientos', compact('terapias'));
 
-
-    } catch(\Illuminate\Database\QueryException $ex){ 
-        dd($ex->getMessage()); 
-        // Note any method of class PDOException can be called on $ex.
-      }
       
 
     }
@@ -89,7 +94,39 @@ class registrar_tratamientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+          try {
+          $data = new registrar_tratamientos();
+   
+          /*
+          $gettratamientos = $request->tratamientos;
+          $tratam = implode(',', $gettratamientos);
+           */
+
+          $data->user_id             = $request->userId;
+          $data ->id_cliente         = $request->livesearch;   
+          $data ->tratamiento        = $request->tratamiento;  
+          $data ->nombre             = $request->nombreCliente;  
+          $data ->celular            = $request->celular;           
+       /*   $data->tratamiento         = $tratam;  */
+          $data->valor_tratamiento   = $request->valor_tratamiento;
+          $data->responsable         = $request->responsable;
+         
+
+               
+       
+              
+          } catch (\Exception  $exception) {
+              return back()->withError($exception->getMessage())->withInput();
+          }
+                
+   
+          $data->save();
+  
+         // $id =$data->id;
+       
+         return response()->json(['success'=>'Successfully']);
+       
     }
 
     /**
@@ -111,8 +148,12 @@ class registrar_tratamientoController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $id_tratamiento  = registrar_tratamientos::find($id);
+        return response()->json($id_tratamiento);
+      
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -123,7 +164,24 @@ class registrar_tratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id_tratamiento = $request->input('id_tratamiento');
+
+        $data = registrar_tratamientos::find($id_tratamiento);
+          
+        $data->user_id             = $request->userId;
+        $data ->id_cliente         = $request->id_cliente;   
+        $data ->tratamiento        = $request->tratamiento;  
+        $data ->nombre             = $request->nombreCliente;  
+        $data ->celular            = $request->celular;           
+     /*   $data->tratamiento         = $tratam;  */
+        $data->valor_tratamiento   = $request->valor_tratamiento;
+        $data->responsable         = $request->responsable;
+       
+         
+
+        $data->save();
+     
+        return response()->json(['success'=>'update successfully.']);
     }
 
     /**

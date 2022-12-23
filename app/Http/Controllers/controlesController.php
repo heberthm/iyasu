@@ -25,7 +25,7 @@ class controlesController extends Controller
           //  $id = $request->id_cliente;
 
           $id = cliente::leftjoin('controles', 'controles.id_cliente', '=', 'clientes.id_cliente')
-          ->select('clientes.id_cliente',  'controles.id_control', 'controles.id_cliente', 'controles.user_id',  
+          ->select('clientes.id_cliente',  'controles.id', 'controles.id_cliente', 'controles.user_id',  
           'controles.num_control', 'controles.peso', 'controles.abd', 'controles.grasa', 'controles.grasa',
            'controles.agua', 'controles.created_at')
 
@@ -46,7 +46,7 @@ class controlesController extends Controller
 
                 $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarControl"  title="Editar datos de control clínico" class="fa fa-edit editarControl"></a>
 
-                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar control médico" class="fa fa-trash eliminarControl"></a>';
+                <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar control médico" class="fa fa-trash eliminarControl"></a>';
                 
                  
                 return $actionBtn;
@@ -139,7 +139,7 @@ class controlesController extends Controller
      */
     public function edit($id)
     {
-        //
+       //
     }
 
     /**
@@ -151,7 +151,25 @@ class controlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $id = array('id' => $request->id_control);
+            $updateArray = [
+                            'num_control' => $request->num_control,
+                            'peso'        => $request->peso,
+                            'abd'         => $request->abd,
+                            'grasa'       => $request->grasa,
+                            'agua'        => $request->agua,
+                                                       
+                           ];
+              
+              $id_cliente  = controles::where($id)->update($updateArray);
+     
+            } catch (\Exception  $exception) {
+                return back()->withError($exception->getMessage())->withInput();
+            }
+    
+              return response()->json(['success'=>'Successfully']);
+         
     }
 
     /**
