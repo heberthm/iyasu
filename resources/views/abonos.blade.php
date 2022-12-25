@@ -1021,7 +1021,7 @@ let btn = $('#editar_abono')
                 $('#form_editar_abono')[0].reset();
                 $('#modalEditarAbono').modal('hide');
                   
-             //   table.ajax.reload();
+                table.ajax.reload();
              //   location.reload(true);
                 toastr["success"]("datos actualizados correctamente.");
          

@@ -109,6 +109,9 @@ Route::get('editar_tratamientos/{id_tratamiento}', [App\Http\Controllers\registr
 
 Route::post('actualizar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'update']);
 
+Route::delete('/eliminar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'destroy']);
+
+
 
 Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index']);
 

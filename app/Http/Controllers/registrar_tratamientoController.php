@@ -52,7 +52,7 @@ class registrar_tratamientoController extends Controller
                  
                   <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
   
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash deletePost"></a>';
+                  <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash eliminarTratamiento"></a>';
                   
                    
                   return $actionBtn;
@@ -192,6 +192,8 @@ class registrar_tratamientoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        registrar_tratamientos::find($id)->delete();
+     
+        return response()->json(['success'=>'deleted successfully.']);
     }
 }

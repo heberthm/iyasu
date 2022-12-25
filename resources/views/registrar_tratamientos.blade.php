@@ -151,9 +151,6 @@ DATATABLE LISTA DE ESPERA
                          <th>Tratamiento</th>
                          <th>Valor</th>
                          <th>Fecha</th>
-                    
-
-                       
                          <th ></th>
                      
                      </tr>
@@ -785,11 +782,9 @@ $('.livesearch').html('');
 
 
 
-
-
 <!-- ===================================================
 
- DATATABLE TRATAMIENTOS CLIENTES
+ DATATABLE TRATAMIENTO CLIENTES
 
 ======================================================= --->
 
@@ -821,18 +816,20 @@ $('.livesearch').html('');
 
                     
            columns: [
-                   
-                    { data: 'nombre', name: 'nombre' },                  
+
+
+                     { data: 'nombre', name: 'nombre' },                  
                     { data: 'tratamiento', name: 'tratamiento' },  
                     { data: 'valor_tratamiento', name: 'valor_tratamiento' },
                     { data: 'created_at', name: 'created_at' },  
-                  
-                   
+                        
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
+                   
+                
                  ],
         
-                   order: [[4, 'desc']],
+                   order: [3, 'desc'],
 
                    "columnDefs": [
                         { "orderable": false,
@@ -846,7 +843,7 @@ $('.livesearch').html('');
             "language": {
                 
                             
-                        "emptyTable": "No hay tratamientos registrados.",
+                        "emptyTable": "No hay tratamiento registrados.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
@@ -871,51 +868,39 @@ $('.livesearch').html('');
     });
 
 
-      
-
-//============================================
-
-// AGREGAR TRATAMIENTO DE CLIENTE
-
-//============================================
 
 
-  $('#form_agregar_tratamiento').off('submit').on('submit', function (event) {
+// =========================================
+
+/// GUARDAR REGISTROS DE ABONOS DE CLIENTES
+
+// =========================================
+
+$('#form_agregar_tratamiento').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
-
-
 /* Configurar botón submit con spinner */
-
 let btn = $('#agregar_tratamiento') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
-
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-
         $('#agregar_tratamiento').attr('disabled', true);
-
         event.preventDefault();
-
         try {
-
         $.ajax({
             url: "crear_tratamiento",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
-
                   table.ajax.reload();
-
-
                 $('#agregar_tratamiento').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
@@ -924,119 +909,211 @@ let btn = $('#agregar_tratamiento')
                   
              //   table.ajax.reload();
              //   location.reload(true);
-
-                toastr["success"]("Tratamiento registrada correctamente.");
+                toastr["success"]("Tratamiento registrado correctamente.");
          
-
-
             }
-
          });
-
         } catch(e) {
           toastr["danger"]("Se ha presentado un error.", "Información");
           }
-
     });
-
-  });
-
 
 
 
 // =========================================
 
-/// EDITAR REGISTROS DE TRATAMIENTOS
+/// EDITAR REGISTROS DE TRATAMIENTO DE CLIENTES
 
 // =========================================
 
 $('body').on('click', '.editarTratamiento', function (e) {
  
 
- $('#form_editar_tratamiento')[0].reset();
- let id = $(this).data('id');
-
-$.ajax({
-   url: '/editar_tratamientos/'+id,
-   method: 'GET',
-   data: {  id: id },
+        $('#form_editar_tratamiento')[0].reset();
+        let id = $(this).data('id');
+      
+      $.ajax({
+        url: '/editar_tratamientos/'+id,
+        method: 'GET',
+        data: {  id: id },
   
-   success: function(data) {
+         
+          success: function(data) {
 
-    
-     
-    
-     $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id)
-     $('#modalEditarTratamiento input[name="id_cliente"]').val(data.id_cliente);
-     $('#modalEditarTratamiento input[name="nombreCliente"]').val(data.nombre);
-     $('#modalEditarTratamiento input[name="celular"]').val(data.celular);
-     $('#modalEditarTratamiento input[name="tratamiento"]').val(data.tratamiento);
-     $('#modalEditarTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
-     $('#modalEditarTratamiento input[name="responsable"]').val(data.responsable);
+           
+            $('#modalEditarTratamiento').modal('show');
+            $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id)
+            $('#modalEditarTratamiento input[name="id_cliente"]').val(data.id_cliente);
+            $('#modalEditarTratamiento input[name="nombreCliente"]').val(data.nombre);
+            $('#modalEditarTratamiento input[name="celular"]').val(data.celular);
+            $('#modalEditarTratamiento input[name="tratamiento"]').val(data.tratamiento);
+            $('#modalEditarTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+            $('#modalEditarTratamiento input[name="responsable"]').val(data.responsable);
 
-
-    
-   }
- });
-
+          }
+        });
+ 
 
 
-// =========================================
+ // =========================================
+ 
+ // ACTUALIZAR DATOS DE ABONO
 
-// ACTUALIZAR DATOS DE TRATAMIENTO
+ // =========================================
 
-// =========================================
-
-
+ 
 $('#form_editar_tratamiento').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
-headers: {
-'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-}
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
 });
 /* Configurar botón submit con spinner */
 let btn = $('#editar_tratamiento') 
-let existingHTML =btn.html() //store exiting button HTML
-//Add loading message and spinner
-$(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
-setTimeout(function() {
-$(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
-},5000) //5 seconds
- $('#editar_tratamiento').attr('disabled', true);
- event.preventDefault();
- try {
-
-let id = $('#id_tratamiento').val();
-
-$.ajax({
- url: 'actualizar_tratamiento/'+id,
- method: "POST",
- data: $(this).serialize(),
- dataType: "json",
-     success: function(data) {
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+        $('#editar_tratamiento').attr('disabled', true);
+        event.preventDefault();
+        try {
+       
+      let id = $(this).data('id');
+      
+      $.ajax({
+       
+            url: 'actualizar_tratamiento/'+id,
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(data) {
+                
+                $('#editar_tratamiento').prop("required", true);
+               // $('#selectBuscarCliente').html("");
+               
+                $('#form_editar_tratamiento')[0].reset();
+                $('#modalEditarTratamiento').modal('hide');
+                  
+                table.ajax.reload();
+             //   location.reload(true);
+                toastr["success"]("datos actualizados correctamente.");
          
-         $('#editar_abono').prop("required", true);
-        // $('#selectBuscarCliente').html("");
-        
-         $('#form_editar_tratamiento')[0].reset();
-         $('#modalEditarTratamiento').modal('hide');
+            }
+         });
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.", "Información");
+          }
+    });
+
+
+
+
+// =========================================
+
+/// MOSTRAR REGISTROS DE ABONOS DE CLIENTES
+
+// =========================================
+
+$('body').on('click', '.mostrarTratamiento', function(e) {
+        e.preventDefault();
+        let id = $(this).data('id');
+        $('#form_ver_tratamiento')[0].reset();
+       
+        $.ajax({
+          url: 'ver_tratamiento/'+id,
+          method: 'GET',
+          data: {  id: id },
+         
+          success: function(data) {
            
-      //   table.ajax.reload();
-      //   location.reload(true);
-         toastr["success"]("datos actualizados correctamente.");
+            $('#modalEditarTratamiento').append('<div>'+data.nombre+'</div');
+            $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id)
+            $('#modalEditarTratamiento input[name="id_cliente"]').val(data.id_cliente);
+            $('#modalEditarTratamiento input[name="nombreCliente"]').val(data.nombre);
+            $('#modalEditarTratamiento input[name="celular"]').val(data.celular);
+            $('#modalEditarTratamiento input[name="tratamiento"]').val(data.tratamiento);
+            $('#modalEditarTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+            $('#modalEditarTratamiento input[name="responsable"]').val(data.responsable);
+        
+
+          }
+
+         });
+
+
+      });
+
+        
+   });
+       
   
-     }
-  });
- } catch(e) {
-   toastr["danger"]("Se ha presentado un error.", "Información");
-   }
-});
+
+// =========================================
+
+/// ELIMINAR REGISTROS DE ABONOS DE CLIENTES
+
+// =========================================   
+
+
+  
+$(document).on('click', '.eliminarTratamiento', function (event) {
+     
+  event.preventDefault();
+     let id = $(this).data('id');
+    swal({
+            title: "Esta seguro de eliminar?",
+            text: "La acción es permanente!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Si, Eliminar",
+            cancelButtonText: "No, cancelar",
+            reverseButtons: !0
+     
+          }).then(function (e) {
+
+            if (e.value === true) {
+                let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajax({
+                    type: 'delete',
+                    url: '/eliminar_tratamiento/'+id,
+                    data: {id:id},
+                    dataType: 'JSON',
+                    success: function (data) {
+
+                   //   if (data.success === true) {
+
+                            swal("Tratamiento eliminado correctamente!", data.message, "success");
+                        
+                           table.ajax.reload();
+                         //  $('#table_mascotas').html(data);
+                        
+                
+                      //  } else {
+                     //       swal("Error!", data.message, "error");
+                     //   }
+                    }
+                });
+
+            } else {
+                e.dismiss;
+            }
+
+        }, function (dismiss) {
+            return false;
+        })
+      });
+
+
 
 });
-
 
 </script>
+
+
 
 
 
