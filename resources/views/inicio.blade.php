@@ -166,11 +166,11 @@ FORMULARIO RECEPCION DE PACIENTES
                                   
               
                
-                <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span> Pacientes que cumplen años el mes actual</h3>
+                <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3">
+              </span> Pacientes que cumplen años el mes de:  &nbsp; </h3> <p><b>{{  now()->translatedFormat('F');  }}</b></p>
                  
                 
                     
-
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -1932,7 +1932,8 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
           results: $.map(data, function(item) {
             return {
               text: item.nombre,
-              id: item.id_cliente
+              id: item.id_cliente,
+              celular: item.celular,
            
             }
 
@@ -1983,7 +1984,7 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
     $.ajax({
      
    
-      url: '/cliente/' +id, 
+      url: 'ajax-autocomplete-search/' +id, 
 
         method: "GET",
         data: $(this).serialize(),
@@ -2240,11 +2241,36 @@ BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
 $('.livesearch2').on('select2:opening', function (e) { 
 
 $('.livesearch2').html('');
+$('#celular_cliente').val('');
+
 
 });
 
 
 </script>
+
+
+
+<!-- =======================================================
+
+PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
+
+============================================================ -->
+
+
+<script>
+
+$('#livesearch2').on('select2:select', function(evt){
+    
+    let celular = evt.params.data.celular;
+  
+    var opt = "<option value='"+celular+"' selected ='selected'> </option>";
+    $("#celular_cliente").html(opt);
+    $("#celular_cliente").val(celular).trigger("change");
+});
+
+</script>
+
 
 
 

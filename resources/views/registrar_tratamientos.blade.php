@@ -606,6 +606,139 @@ DATATABLE LISTA DE ESPERA
 
 
 
+ <!--=====================================
+
+    MODAL VER DATOS DE TRATAMIENTO
+
+======================================-->
+
+<div class="modal fade" id="modalVerTratamiento"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 
+
+
+<div class="modal-dialog modal-lg">
+  
+  <div class="modal-content">
+  
+  <div class="modal-header">
+   
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Ver datos del tratamiento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+     
+           <span aria-hidden="true">&times;</span>
+     
+        </button>
+    
+      </div>
+
+      <div class="modal-body">
+
+          @if (session('error'))
+          <div class="alert alert-danger">{{ session('error') }}</div>
+          @endif
+
+        <form method="POST" id="form_ver_tratamiento" action="{{ url('registrar_tratamientos') }}"  >
+
+     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
+
+
+          <div class="row">
+
+          <div class="col-md-5"> 
+
+              <div class="form-group" >
+
+                <label for="cliente" class="control-label">Cliente</label>
+                                    
+                <input type="text" name="nombreCliente" class="form-control  border-0" id="nombreCliente" >
+
+            </div>
+          </div>
+
+
+            <div class="col-md-5">
+
+              <div class="form-group">
+
+                <label for="Celular" class="control-label">Tel/Cel</label>
+                      
+                <input type="text" name="celular" class="form-control border-0" id="celular" >
+                
+              </div>
+            </div>
+
+
+            <div class="col-md-8">
+
+            <div class="form-group">
+
+              <label for="Tratamiento" class="control-label">Tratamiento</label>
+
+              <input type="text" name="tratamiento" class="form-control border-0" id="tratamiento" >
+
+              
+            </div>
+          </div>
+
+
+
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="valor_abono" class="control-label">Vr. tratamiento</label>
+
+                <input type="text" name="valor_tratamiento" class="form-control border-0" id="valor_tratamiento" >
+
+                           
+               </div>
+            </div>
+ 
+     
+                     
+
+
+            <div class="col-md-5">
+              <div class="form-group">
+
+                <label for="responsable" class="control-label">responsable</label>
+
+                <input type="text" name="responsable" class="form-control border-0" id="responsable" >
+
+                           
+               </div>
+            </div>
+
+
+           
+
+            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+
+            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+
+            <input type="hidden" name="id_abono" id="id_abono">
+
+
+
+            </div>
+
+
+      <div class="modal-footer">
+
+      
+        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</form> 
+</div>
+</div>
+
+
+
 
 
 
@@ -658,8 +791,8 @@ $(document).ready(function () {
       placeholder: "Seleccione una opción",
 
 });
- </script>
 
+ </script>
 
 
 <!-- =======================================
@@ -689,7 +822,8 @@ SELECT2 - BUSQUEDAD DE CLIENTES
           results: $.map(data, function(item) {
             return {
               text: item.nombre,
-              id: item.id_cliente
+              id: item.id_cliente,
+              celular: item.celular,
             }
 
             // location.href = '/clientes/' + id
@@ -736,9 +870,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
         dataType: "json",
         success: function(data) {
 
-        //  $('#celular').val(data['celular']);
-          $('#celular').val(data.celular);
-   
+          
 
          }
 
@@ -757,15 +889,17 @@ SELECT2 - BUSQUEDAD DE CLIENTES
         
 
   });
+
+
 </script>
 
 
+<!-- ===============================================
 
-<!-- ================================= 
+ BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
+ 
+ =================================================== --> 
 
-BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
-
-================================= -->
 
 
 <script>
@@ -773,6 +907,7 @@ BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
 $('.livesearch').on('select2:opening', function (e) { 
 
 $('.livesearch').html('');
+$('.celular').val('');
 
 });
 
@@ -782,11 +917,37 @@ $('.livesearch').html('');
 
 
 
+<!-- =======================================================
+
+PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
+
+============================================================ -->
+
+
+<script>
+
+$('#livesearch').on('select2:select', function(evt){
+    
+    let celular = evt.params.data.celular;
+  
+    var opt = "<option value='"+celular+"' selected ='selected'> </option>";
+    $("#celular").html(opt);
+    $("#celular").val(celular).trigger("change");
+});
+
+</script>
+
+
+
+
+
+
 <!-- ===================================================
 
  DATATABLE TRATAMIENTO CLIENTES
 
-======================================================= --->
+ ======================================================== -->
+
 
 <script type = "text/javascript" >
   
@@ -920,6 +1081,56 @@ let btn = $('#agregar_tratamiento')
 
 
 
+
+// =========================================
+
+/// VER REGISTROS DE TRATAMIENTO DE CLIENTES
+
+// =========================================
+
+$('body').on('click', '.verTratamiento', function(e) {
+  
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  
+          
+          let id = $(this).data('id');
+         $('#form_ver_tratamiento')[0].reset();
+         
+          $.ajax({
+            url: 'ver_tratamiento/'+id,
+            method: 'get',
+            data: {  id: id },
+           
+            success: function(data) {
+             
+  
+             
+              $('#modalVerTratamiento').modal('show');
+             
+              $('#modalVerTratamiento input[name="id_abono"]').val(data.id)
+              $('#modalVerTratamiento input[name="id_cliente"]').val(data.id_cliente);
+              $('#modalVerTratamiento input[name="nombreCliente"]').val(data.nombre);
+              $('#modalVerTratamiento input[name="celular"]').val(data.celular);
+              $('#modalVerTratamiento input[name="tratamiento"]').val(data.tratamiento);
+              $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+              $('#modalVerTratamiento input[name="responsable"]').val(data.responsable);
+            //  $('#modalVerTratamiento input[name="fecha"]').val(date('d-m-Y  h:i A', strtotime(data.created_at)));
+          
+  
+            }
+  
+           });
+  
+  
+        });
+  
+  
+
+
 // =========================================
 
 /// EDITAR REGISTROS DE TRATAMIENTO DE CLIENTES
@@ -928,6 +1139,7 @@ let btn = $('#agregar_tratamiento')
 
 $('body').on('click', '.editarTratamiento', function (e) {
  
+  e.preventDefault();
 
         $('#form_editar_tratamiento')[0].reset();
         let id = $(this).data('id');
@@ -952,9 +1164,11 @@ $('body').on('click', '.editarTratamiento', function (e) {
 
           }
         });
- 
+      });
 
 
+             
+  
  // =========================================
  
  // ACTUALIZAR DATOS DE ABONO
@@ -1009,46 +1223,7 @@ let btn = $('#editar_tratamiento')
     });
 
 
-
-
-// =========================================
-
-/// MOSTRAR REGISTROS DE ABONOS DE CLIENTES
-
-// =========================================
-
-$('body').on('click', '.mostrarTratamiento', function(e) {
-        e.preventDefault();
-        let id = $(this).data('id');
-        $('#form_ver_tratamiento')[0].reset();
-       
-        $.ajax({
-          url: 'ver_tratamiento/'+id,
-          method: 'GET',
-          data: {  id: id },
-         
-          success: function(data) {
-           
-            $('#modalEditarTratamiento').append('<div>'+data.nombre+'</div');
-            $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id)
-            $('#modalEditarTratamiento input[name="id_cliente"]').val(data.id_cliente);
-            $('#modalEditarTratamiento input[name="nombreCliente"]').val(data.nombre);
-            $('#modalEditarTratamiento input[name="celular"]').val(data.celular);
-            $('#modalEditarTratamiento input[name="tratamiento"]').val(data.tratamiento);
-            $('#modalEditarTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
-            $('#modalEditarTratamiento input[name="responsable"]').val(data.responsable);
-        
-
-          }
-
-         });
-
-
-      });
-
-        
-   });
-       
+      
   
 
 // =========================================

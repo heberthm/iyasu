@@ -93,8 +93,7 @@ FORMULARIO RECEPCION DE PACIENTES
                    <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de abonos de pacientes</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right"  href="javascript:void(0)" id="btnCrearAbono">
-                            <span class="fa fa-list fa-fw" ></span>  
+                      <button type="button" class="btn btn-primary float-right"  data-toggle="modal" data-target="#modalACrearAbono">                            <span class="fa fa-list fa-fw" ></span>  
                             Crear abono
                         </button>  &nbsp;
                   </div> 
@@ -212,7 +211,7 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form  id="form_agregar_abono" method="POST" action="{{ url('actualizar_abono/{id}') }}"  >
+        <form  id="form_agregar_abono" method="POST" action="{{ url('abonos}') }}"  >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
@@ -351,45 +350,44 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-      <!--  <form method="POST" id="form_agregar_abono" action="{{ url('crear_abono') }}"  -->
+        <form method="POST" id="form_ver_abono" action="{{ url('abonos') }}"  >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
-            
+            <div class="col-md-6">
 
               <div class="form-group" >
 
-                <label for="cliente" class="control-label">Cliente</label>
-               
-                     
-                <p  id="nombreClientes"></p>      
+              <label for="nombreCliente" class="control-label">Nombre</label>
+
+              <input type="text" name="nombreCliente" class="form-control  border-0" id="nombreCliente" >
 
             </div>
+          </div>
 
 
-
-            <div class="col-md-3">
+            <div class="col-md-6">
 
               <div class="form-group">
 
-                <label for="Celular" class="control-label">Tel/Cel</label>
+              <label for="celular" class="control-label">Celular</label>
 
-                <p name="celular"></p>      
+              <input type="text" name="celular" class="form-control  border-0" id="celular" >
                 
               </div>
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-12">
 
             <div class="form-group">
 
               <label for="Descripcion" class="control-label">Descripción</label>
 
-              <p name="descripcion"></p>  
+              <input type="text" name="descripcion" class="form-control  border-0" id="descripcion" >
               
             </div>
           </div>
@@ -401,45 +399,50 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Vr. abono</label>
 
-                <p name="valor_abono"></p>  
+                <input type="text" name="valor_abono" class="form-control  border-0" id="valor_abono" >
                            
                </div>
             </div>
  
-     
-            <div class="col-md-3">
-              <div class="form-group">
 
-                <label for="valor_abono" class="control-label">Responsable</label>
-
-                <p name="responsable"></p>  
-                           
-               </div>
-            </div>
- 
 
             <div class="col-md-3">
               <div class="form-group">
 
                 <label for="valor_abono" class="control-label">Saldo</label>
 
-                <p name="valor_abono"></p>  
+                <input type="text" name="saldo" class="form-control  border-0" id="saldo" >
                            
                </div>
             </div>
 
 
+
+     
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="valor_abono" class="control-label">Responsable</label>
+
+                <input type="text" name="responsable" class="form-control  border-0" id="responsable" >
+                           
+               </div>
+            </div>
+ 
+
+          
 
             <div class="col-md-3">
               <div class="form-group">
 
-                <label for="fecha abono" class="control-label">Fecha del abono</label>
+                <label for="valor tratamiento" class="control-label">Valor tratamiento</label>
 
-                <p name="fecha"></p>  
+                <input type="text" name="valor_tratamiento" class="form-control  border-0" id="valor_tratamiento" >
                            
                </div>
             </div>
 
+          
 
 
 
@@ -448,13 +451,14 @@ DATATABLE LISTA DE ESPERA
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
+            <input type="hidden" name="id_abono" id="id_abono">
+
 
             </div>
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_abono" name="agregar_abono" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -678,7 +682,8 @@ SELECT2 - BUSQUEDAD DE CLIENTES
     ajax: {
       // url: '/ajax-autocomplete-search',
 
-      url: '{{ url("/ajax-autocomplete-search") }}',
+     
+      url: 'ajax-autocomplete-search', 
 
       dataType: 'json',
       delay: 250,
@@ -689,7 +694,9 @@ SELECT2 - BUSQUEDAD DE CLIENTES
           results: $.map(data, function(item) {
             return {
               text: item.nombre,
-              id: item.id_cliente
+              id: item.id_cliente,
+              celular: item.celular,
+             
             }
 
             // location.href = '/clientes/' + id
@@ -729,16 +736,16 @@ SELECT2 - BUSQUEDAD DE CLIENTES
     $.ajax({
      
    
-      url: '/cliente/' +id, 
+        url: '/cliente/' +id, 
 
         method: "GET",
         data: $(this).serialize(),
         dataType: "json",
+       
         success: function(data) {
 
-        //  $('#celular').val(data['celular']);
-          $('#celular').val(data.celular);
-   
+          
+       
 
          }
 
@@ -760,6 +767,8 @@ SELECT2 - BUSQUEDAD DE CLIENTES
    $('#id_cliente').val(id_cliente);
 
     $('#nombreCliente').val(cliente);
+
+   
         
 
   });
@@ -767,11 +776,11 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
 
 
-<!-- ================================= 
+<!-- ============================================
 
 BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
 
-================================= -->
+================================================= -->
 
 
 <script>
@@ -779,6 +788,7 @@ BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
 $('.livesearch').on('select2:opening', function (e) { 
 
 $('.livesearch').html('');
+$('#celular').val('');
 
 });
 
@@ -787,12 +797,33 @@ $('.livesearch').html('');
 
 
 
+<!-- =======================================================
+
+PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
+
+============================================================ -->
+
+
+<script>
+
+$('#livesearch').on('select2:select', function(evt){
+    
+    let celular = evt.params.data.celular;
+  
+    var opt = "<option value='"+celular+"' selected ='selected'> </option>";
+    $("#celular").html(opt);
+    $("#celular").val(celular).trigger("change");
+});
+
+</script>
+
+
 
 
 
 <!-- ===================================================
 
- DATATABLE ABONOS
+ DATATABLE TRATAMIENTO CLIENTES
 
 ======================================================= --->
 
@@ -824,15 +855,17 @@ $('.livesearch').html('');
 
                     
            columns: [
-                   
+
+
                     { data: 'nombre', name: 'nombre' },                  
                     { data: 'celular', name: 'celular' },
                     { data: 'created_at', name: 'created_at' },  
                     { data: 'valor_abono', name: 'valor_Abono' },
-                   // { data: 'saldo', name: 'saldo' },
-                   
+                        
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
+                   
+                
                  ],
         
                    order: [2, 'desc'],
@@ -881,6 +914,7 @@ $('.livesearch').html('');
 /// GUARDAR REGISTROS DE ABONOS DE CLIENTES
 
 // =========================================
+
 $('#form_agregar_abono').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
@@ -897,8 +931,11 @@ let btn = $('#agregar_abono')
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
         $('#agregar_abono').attr('disabled', true);
+
         event.preventDefault();
+
         try {
+
         $.ajax({
             url: "crear_abono",
             method: "POST",
@@ -906,7 +943,7 @@ let btn = $('#agregar_abono')
             dataType: "json",
             success: function(data) {
                   table.ajax.reload();
-                $('#agregar_abono').prop("required", true);
+                $('#agregar_tratamiento').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
                 $('#form_agregar_abono')[0].reset();
@@ -914,7 +951,7 @@ let btn = $('#agregar_abono')
                   
              //   table.ajax.reload();
              //   location.reload(true);
-                toastr["success"]("Abono registrada correctamente.");
+                toastr["success"]("Abono registrado correctamente.");
          
             }
          });
@@ -925,48 +962,74 @@ let btn = $('#agregar_abono')
 
 
 
+    
+// =========================================
+
+/// VER REGISTROS DE ABONO DE CLIENTES
 
 // =========================================
 
-// ABRIR MODAL CREAR ABONO
 
-// ==========================================
-
-$('#btnCrearAbono').click(function () {
-        $('#saveBtn').val("create-product");
-      //  $('#id_abono').val('');
-        $('#form_agregar_abono').trigger("reset");
-        $('#modelHeading').html("Crear Abono");
-        $('#modalACrearAbono').modal('show');
-    });
-
+$('body').on('click', '.verAbono', function(e) {
+  
+ 
+          
+          let id = $(this).data('id');
+         $('#form_ver_abono')[0].reset();
+         
+          $.ajax({
+            url: 'ver_abono/'+id,
+            method: 'GET',
+            data: {  id: id },
+           
+            success: function(data) {
+             
+  
+             
+            $('#modalVerAbono').modal('show');
+            $('#modalVerAbono input[name="id_abono"]').val(data.id)
+            $('#modalVerAbono input[name="id_cliente"]').val(data.id_cliente);
+            $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
+            $('#modalVerAbono input[name="celular"]').val(data.celular);
+            $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
+            $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+            $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
+            $('#modalVerAbono input[name="responsable"]').val(data.responsable);
+          
+  
+            }
+  
+           });
+  
+  
+        });
+  
 
 
 
 // =========================================
 
-/// EDITAR REGISTROS DE ABONOS DE CLIENTES
+/// EDITAR REGISTROS DE TRATAMIENTO DE CLIENTES
 
 // =========================================
 
 $('body').on('click', '.editarAbono', function (e) {
  
+  e.preventDefault();
 
         $('#form_editar_abono')[0].reset();
         let id = $(this).data('id');
       
       $.ajax({
-          url: 'editar_abono/'+id,
-          method: 'GET',
-          data: {  id: id },
+        url: '/editar_abono/'+id,
+        method: 'GET',
+        data: {  id: id },
+  
          
           success: function(data) {
 
-            $('#livesearch').hide();
-            $('#nombreCliente').show();
-                
-
-            
+           
+           
             $('#modalEditarAbono').modal('show');
             $('#modalEditarAbono input[name="id_abono"]').val(data.id)
             $('#modalEditarAbono input[name="id_cliente"]').val(data.id_cliente);
@@ -975,11 +1038,14 @@ $('body').on('click', '.editarAbono', function (e) {
             $('#modalEditarAbono input[name="valor_abono"]').val(data.valor_abono);
             $('#modalEditarAbono input[name="descripcion"]').val(data.descripcion);
             $('#modalEditarAbono input[name="responsable"]').val(data.responsable);
+
           }
         });
- 
+      });
 
 
+             
+  
  // =========================================
  
  // ACTUALIZAR DATOS DE ABONO
@@ -1003,16 +1069,19 @@ let btn = $('#editar_abono')
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
         $('#editar_abono').attr('disabled', true);
+
         event.preventDefault();
+
         try {
        
       let id = $(this).data('id');
       
       $.ajax({
-        url: 'actualizar_abono/'+id,
-        method: "POST",
-        data: $(this).serialize(),
-        dataType: "json",
+       
+            url: 'actualizar_abono/'+id,
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
             success: function(data) {
                 
                 $('#editar_abono').prop("required", true);
@@ -1034,44 +1103,6 @@ let btn = $('#editar_abono')
 
 
 
-
-// =========================================
-
-/// MOSTRAR REGISTROS DE ABONOS DE CLIENTES
-
-// =========================================
-
-$('body').on('click', '.mostrarAbono', function(e) {
-        e.preventDefault();
-        let id = $(this).data('id');
-        $('#form_ver_abono')[0].reset();
-       
-        $.ajax({
-          url: 'ver_abono/'+id,
-          method: 'GET',
-          data: {  id: id },
-         
-          success: function(data) {
-           
-            $('#nombreClientes').append('<div>'+data.nombre+'</div');
-            $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
-            $('#modalVerAbono input[name="celular"]').val(data.celular);
-            $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
-            $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
-            $('#modalVerAbono input[name="responsable"]').val(data.responsable);
-            $('#modalVerAbono input[name="fecha"]').val(data.created_at);
-        
-
-          }
-
-         });
-
-
-      });
-
-        
-   });
-       
   
 
 // =========================================

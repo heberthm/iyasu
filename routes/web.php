@@ -68,6 +68,7 @@ Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'up
 
 Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');
 
+
 Route::post('buscarmascota', [MascotasController::class,'buscarMascota'])->name('buscarmascota');
 
 Route::post('/editarCliente/{id_cliente}',[App\Http\Controllers\ClientesController::class ,'update'])->name('editarCliente');
@@ -93,14 +94,13 @@ Route::post('crear_abono', [App\Http\Controllers\abonosClientesController::class
 
 Route::get('editar_abono/{id_abono}', [App\Http\Controllers\abonosClientesController::class, 'edit']);
 
-Route::get('ver_abono/{id_abono}', [App\Http\Controllers\abonosClientesController::class, 'show']);
+Route::get('ver_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'show']);
 
 Route::post('actualizar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'update']);
 
-
 Route::delete('/eliminar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'destroy']);
 
-
+ 
 Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
 
 Route::post('crear_tratamiento', [App\Http\Controllers\registrar_tratamientoController::class, 'store']);
@@ -108,6 +108,9 @@ Route::post('crear_tratamiento', [App\Http\Controllers\registrar_tratamientoCont
 Route::get('editar_tratamientos/{id_tratamiento}', [App\Http\Controllers\registrar_tratamientoController::class, 'edit']);
 
 Route::post('actualizar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'update']);
+
+Route::get('ver_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'show']);
+
 
 Route::delete('/eliminar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'destroy']);
 

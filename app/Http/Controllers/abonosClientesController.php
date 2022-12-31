@@ -8,6 +8,8 @@ use App\Models\Cliente;
 
 use App\Models\abonos_clientes;
 
+use App\Models\registrar_tratamientos;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -46,11 +48,11 @@ class abonosClientesController extends Controller
     
 
     
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerAbono"  title="Ver abono" class="fa fa-eye mostrarAbono"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerAbono"  title="Ver datos del abono" class="fa fa-eye verAbono"></a> 
                    
                     <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarAbono" title="Editar abono"   class="fa fa-edit editarAbono"></a>   
                     
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar abono" class="fa fa-trash eliminarAbono"></a>';
+                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar abono" class="fa fa-trash eliminarAbono"></a>';
                     
                      
                     return $actionBtn;
@@ -134,8 +136,7 @@ class abonosClientesController extends Controller
     {
         $id_abonos  = abonos_clientes::find($id);
         return response()->json($id_abonos);
-
-       
+      
     }
 
     /**

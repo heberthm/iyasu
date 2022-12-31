@@ -48,11 +48,11 @@ class registrar_tratamientoController extends Controller
               ->addColumn('action', function($data) {
   
   
-                  $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerRegistrTratamiento"  title="Ver datos del tratamiento" class="fa fa-eye mostrar_historia"></a> 
+                  $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerTratamiento"  title="Ver datos del tratamiento" class="fa fa-eye verTratamiento"></a> 
                  
-                  <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
   
-                  <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash eliminarTratamiento"></a>';
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash eliminarTratamiento"></a>';
                   
                    
                   return $actionBtn;
@@ -137,7 +137,9 @@ class registrar_tratamientoController extends Controller
      */
     public function show($id)
     {
-        //
+        $id_tratamiento  = registrar_tratamientos::find($id);
+        return response()->json($id_tratamiento);
+      
     }
 
     /**
