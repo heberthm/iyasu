@@ -38,6 +38,11 @@ class historiasClinicasController extends Controller
               ->where('clientes.id_cliente',  $id);
     
                return datatables()->of($id)
+
+               ->addColumn('created_at', function($row)  {  
+                $date = date("d-m-Y", strtotime($row->created_at));
+                return $date;
+              })
                                                                                                            
                 ->addColumn('action', 'atencion')
                 ->rawColumns(['action'])

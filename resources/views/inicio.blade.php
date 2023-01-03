@@ -167,7 +167,7 @@ FORMULARIO RECEPCION DE PACIENTES
               
                
                 <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3">
-              </span> Pacientes que cumplen años el mes de:  &nbsp; </h3> <p><b>{{  now()->translatedFormat('F');  }}</b></p>
+              </span> Pacientes que cumplen años el mes de: &nbsp; </h3> <p><b>{{  now()->translatedFormat('F');  }}</b></p>
                  
                 
                     

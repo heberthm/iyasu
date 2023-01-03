@@ -85,7 +85,11 @@ Route::get('/listado_controles/{id_controles}', [App\Http\Controllers\controlesC
 
 Route::post('/crear_control', [App\Http\Controllers\controlesController::class, 'store']);
 
-Route::post('/editar_control/{id_control}', [App\Http\Controllers\controlesController::class, 'update']);
+Route::post('/actualizar_control/{id}', [App\Http\Controllers\controlesController::class, 'update']);
+
+Route::get('/editar_control/{id}', [App\Http\Controllers\controlesController::class, 'edit']);
+
+Route::delete('/eliminar_control/{id}', [App\Http\Controllers\controlesController::class, 'destroy']);
 
 
 Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index']);

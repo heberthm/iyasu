@@ -24,7 +24,7 @@ class controlesController extends Controller
 
           //  $id = $request->id_cliente;
 
-          $id = cliente::leftjoin('controles', 'controles.id_cliente', '=', 'clientes.id_cliente')
+          $id = cliente::join('controles', 'controles.id_cliente', '=', 'clientes.id_cliente')
           ->select('clientes.id_cliente',  'controles.id', 'controles.id_cliente', 'controles.user_id',  
           'controles.num_control', 'controles.peso', 'controles.abd', 'controles.grasa', 'controles.grasa',
            'controles.agua', 'controles.created_at')
@@ -139,7 +139,9 @@ class controlesController extends Controller
      */
     public function edit($id)
     {
-       //
+       
+        $id_abono  = controles::find($id);
+        return response()->json($id_abono);
     }
 
     /**
@@ -151,24 +153,20 @@ class controlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-            $id = array('id' => $request->id_control);
-            $updateArray = [
-                            'num_control' => $request->num_control,
-                            'peso'        => $request->peso,
-                            'abd'         => $request->abd,
-                            'grasa'       => $request->grasa,
-                            'agua'        => $request->agua,
-                                                       
-                           ];
-              
-              $id_cliente  = controles::where($id)->update($updateArray);
-     
-            } catch (\Exception  $exception) {
-                return back()->withError($exception->getMessage())->withInput();
-            }
-    
-              return response()->json(['success'=>'Successfully']);
+       
+              $id = $request->input('id_abono');
+
+              $control = controles::find($id);
+              $control ->user_id  = $request->userId;
+              $control->num_control = $request->num_control;
+              $control->peso = $request->peso;
+              $control->abd = $request->abd;
+              $control->grasa = $request->grasa;
+              $control->agua = $request->agua;
+              $control->save();
+           
+              return response()->json(['success'=>'update successfully.']);
+
          
     }
 

@@ -42,7 +42,7 @@ class ClientesController extends Controller
             ->whereMonth('fecha_nacimiento', Carbon::now()->month))
           
             ->addColumn('fecha_nacimiento', function($row)  {  
-                $date = date("d-M-Y", strtotime($row->fecha_nacimiento));
+                $date = date("d-m-Y", strtotime($row->fecha_nacimiento));
                     return $date;
               })
            
@@ -50,6 +50,8 @@ class ClientesController extends Controller
            
             ->make(true);
         } 
+
+        
         return view('inicio');
  
       

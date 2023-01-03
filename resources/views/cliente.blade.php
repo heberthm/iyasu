@@ -24,14 +24,6 @@ a.editable-empty {
    background-color: #f5f5f5 !important;
 }
 
-.modalVerControlesMedicos {
-    z-index: 1500;
-}
-
-
-.modalEditarControl {
-    z-index: 1300;
-}
 
 
 /*
@@ -91,7 +83,7 @@ thead {
                       Crear control clínico
                       </button>  &nbsp;
                     
-                     <div class="ocultar-boton">
+                     <div id="ocultar-boton">
                       <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modalAgregarHistoriaClinica"
                       style="position: absolute; top: 0; left: 300px">
                       <span class="fa fa-plus fa-fw" ></span>  
@@ -132,6 +124,7 @@ DATATABLE MASCOTAS
                          <th>Peso</th>
                          <th>IMC</th>
                          <th>ABD inicial</th>
+                         <th>Fecha</th>
                          <th></th>
                       </tr>
 
@@ -1163,19 +1156,21 @@ DATATABLE MASCOTAS
           </div>
 
 
-          <div class="col-md-4">
+          <div class="col-md-8">
               
               <div class="form-group">
 
                 <label for="fecha de creacion" class="control-label font-weight-normal"><b>Fecha de creación</b></label>
 
-                <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }}</p>       
+                <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }} &nbsp;  {{ \Carbon\Carbon::parse($id_cliente->created_at)->diffForHumans() }}</p>       
+
+              
 
               </div>
 
           </div>
 
-      </div>
+     
               
                   
               
@@ -1612,10 +1607,6 @@ DATATABLE MASCOTAS
 
 
 
-
-@forelse($controles as $control)
-
-
  <!--=====================================
 
    EDITAR CONTROL MÉDICO
@@ -1668,7 +1659,7 @@ DATATABLE MASCOTAS
                             <label for="num control" class="control-label">Núm. control</label>
             
             
-                            <input type="number" name="num_control" class="form-control" id="num_control" value="{{ $control->num_control }}" autofocus required autocomplete="off">
+                            <input type="number" name="num_control" class="form-control" id="num_control"  autofocus required autocomplete="off">
             
                           
                             <div class="alert-message" id="numControlError"></div>
@@ -1685,7 +1676,7 @@ DATATABLE MASCOTAS
             
                             <label for="peso" class="control-label">Peso</label>
             
-                            <input type="number" name="peso" class="form-control" id="peso" value="{{ $control->peso }}" required autocomplete="off">
+                            <input type="number" name="peso" class="form-control" id="peso"  required autocomplete="off">
             
                               <div class="alert-message" id="pesoError"></div>
                             
@@ -1700,7 +1691,7 @@ DATATABLE MASCOTAS
                             <label for="abd" class="control-label">ABD</label>
 
 
-                            <input type="number" class="form-control" id="abd" name="abd" value="{{ $control->abd }}" required >
+                            <input type="number" class="form-control" id="abd" name="abd"  required >
                          
                             <div class="alert-message" id="ABDError" ></div>
                               
@@ -1717,7 +1708,7 @@ DATATABLE MASCOTAS
                               <label for="grasa" class="control-label">Grasa</label>
 
 
-                              <input type="number" name="grasa" class="form-control" id="grasa" value="{{ $control->grasa }}" autocomplete="off">
+                              <input type="number" name="grasa" class="form-control" id="grasa"  autocomplete="off">
 
                             
                               <div class="alert-message" id="grasaError"></div>
@@ -1732,31 +1723,14 @@ DATATABLE MASCOTAS
             
                             <label for="agua" class="control-label">Agua</label>
             
-                            <input type="number" name="agua" class="form-control" id="agua" value="{{ $control->agua }}" required autocomplete="off">
+                            <input type="number" name="agua" class="form-control" id="agua"  required autocomplete="off">
                             
                               <div class="alert-message" id="aguaError"></div>
                                         
                             </div>
                         </div>
                          
-                              
-            
-
-                      <div class="col-md-5">
-                          <div class="form-group">
-            
-                       
-                            <label for="fecha de creacion" class="control-label font-weight-normal"><b>Fecha de registro</b></label>
-
-                            <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }}</p>       
-
-                          </div>
-
-                      </div>
-
-                  
-              
-                        
+                    
             
         </div>
           
@@ -1775,8 +1749,7 @@ DATATABLE MASCOTAS
 
                  <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
                   
-
-                 <input type="hidden" name="id_control" class="form-control" id="id_control" value="{{ $control->id}}" readonly>  
+                 <input type="hidden" name="id_abono" id="id_abono">
 
                  
                   <!--     
@@ -1807,10 +1780,6 @@ DATATABLE MASCOTAS
 </div>
                 
 
-@empty
-    
-@endforelse
-
 
 
 
@@ -1821,7 +1790,7 @@ MODAL DATATABLE CONTROLES MEDICOS
 ============================================-->
 
 
-<div class="modal fade" id="modalVerControlesMedicos" tabindex="-9999" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalVerControlesMedicos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
        
 
   <div class="modal-dialog modal-lg" role="document">
@@ -1996,18 +1965,6 @@ DESHABILITAR TECLAS CRTL, U, F12
 </script>
 
 
-<script>
-
-$('#modalVerControlesMedicos').on('shown.bs.modal', function () {
-   var table = $('#Table_control_medico').DataTable();
-   table.columns.adjust();
-});
-
-
-</script>
-
-
-
 
 
 <!-- ========================================== 
@@ -2113,6 +2070,7 @@ let today = new Date();
                     { data: 'peso_inicial', name: 'peso_inicial' },     
                     { data: 'imc', name: 'imc' },
                     { data: 'abd_inicial', name: 'abd_inical' },
+                    { data: 'created_at', name: 'created_at' },
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
@@ -2145,23 +2103,31 @@ let today = new Date();
         }
                     
                 },
-       
-     
+
+
+ //===============================================
+
+ // MOSTRAR / OCULTAR BOTÓN CREAR HISTORIA CLINICA               
+
+ //================================================
+
+    "fnFooterCallback": function (nRow, aaData, iStart, iEnd, aiDisplay) {
+
+    if (aiDisplay.length > 0) {
+      $('#ocultar-boton').css({"display" : "none"});
+    }
+    else {
+      $('#ocultar-boton').css({"display" : "block"});
+    }
+}
+
+                
       
     });
 
 
 
 
-if (table.data.length == 0) {
-
-   $('.ocultar-boton').css({"display" : "none"});
-
-  } else if (table.data.length !== 0) {
-       
-    $('.ocultar-boton').css({"display" : "block"});
-  }
-  
 
 
 
@@ -2572,8 +2538,8 @@ let btn = $('#crear_control_clinico')
                 
               
                
-location.reload(true);
-                toastr["success"]("Control médico creada correctamente.");
+                location.reload(true);
+                toastr["success"]("Control médico creado correctamente.");
               
 
 
@@ -2591,73 +2557,102 @@ location.reload(true);
 
 
 
+  
+// =========================================
 
+/// EDITAR REGISTROS DE TRATAMIENTO DE CLIENTES
 
 // =========================================
 
-//  EDITAR DATOS DEL CONTROL
+$('body').on('click', '.editarControl', function (e) {
+ 
+ e.preventDefault();
 
-// ==============================================  
+       $('#form_editar_control')[0].reset();
+       $('#modalVerControlesMedicos').modal('hide');
+       let id = $(this).data('id');
+     
+     $.ajax({
+       url: '/editar_control/'+id,
+       method: 'GET',
+       data: {  id: id },
+ 
+        
+         success: function(data) {
+         
+          
+          // $('#modalEditarControl').modal('show');
+           $('#modalEditarControl input[name="id_abono"]').val(data.id)
+           $('#modalEditarControl input[name="id_cliente"]').val(data.id_cliente);
+           $('#modalEditarControl input[name="num_control"]').val(data.num_control);
+           $('#modalEditarControl input[name="peso"]').val(data.peso);
+           $('#modalEditarControl input[name="abd"]').val(data.abd);
+           $('#modalEditarControl input[name="grasa"]').val(data.grasa);
+           $('#modalEditarControl input[name="agua"]').val(data.agua);
+           $('#modalEditarControl input[name="fecha"]').val(data.created_at);
+         
 
+         }
+       });
+     });
 
-    $(document).ready(function() {
-      
-      $('#form_editar_control').off('submit').on('submit', function (e) {
-           
-          e.preventDefault();
+             
+  
+ // =========================================
+ 
+ // ACTUALIZAR DATOS DE CONTROL
 
-            let id = $('#id_control').val();
+ // =========================================
 
-           // Update Data
+ 
+ $('#form_editar_control').off('submit').on('submit', function (event) {
 
-        $.ajaxSetup({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+/* Configurar botón submit con spinner */
+let btn = $('#editar_control') 
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+        $('#editar_control').attr('disabled', true);
 
-                      
+      //  event.preventDefault();
 
-        let btn = $('#editar_control') 
-        let existingHTML =btn.html() //store exiting button HTML
-        //Add loading message and spinner
-        $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
-
-        setTimeout(function() {
-          $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
-        },5000) //5 seconds
-
+        try {
        
-
-            $.ajax({
+      let id = $(this).data('id');
+      
+      $.ajax({
+       
+            url: '/actualizar_control/'+id,
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(data) {
+                
+                $('#editar_control').prop("required", true);
+               // $('#selectBuscarCliente').html("");
                
-                url: '/editar_control/' +id,
-                type: "POST",
-                data: $(this).serialize(),
-                dataType: "json",
-
-                success: function (data) {
-                 // $('#form_editar_cliente')[0].reset();
-                  $('#modalEditarControl').modal('hide');
-                  $("#editar_control"). attr("disabled", true);
-                     //   $('#agregar_cliente').attr('disabled', true);
-                        toastr["success"]("los datos se han editado correctamente");
-                     
-                        location.reload(true);
-
-                     // table.ajax.reload();
-                },
-                error:function(error){
-                    console.log(error);
-                }
-            });
-        });
-
+               // $('#form_editar_control')[0].reset();
+              
+             
+                  
+             //   table.ajax.reload();
+                location.reload(true);
+                toastr["success"]("datos actualizados correctamente.");
+         
+            }
+         });
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.", "Información");
+          }
     });
-
-
-
-
 
 
 
@@ -2672,7 +2667,9 @@ location.reload(true);
  $(document).on('click', '.eliminarControl', function (event) {
      
      event.preventDefault();
+
         let id = $(this).data('id');
+
        swal({
                title: "Esta seguro de eliminar?",
                text: "La acción es permanente!",
@@ -2688,7 +2685,7 @@ location.reload(true);
                    let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
    
                    $.ajax({
-                       type: 'POST',
+                       type: 'delete',
                        url: "/eliminar_control/"+id,
                        data: {id:id},
                        dataType: 'JSON',
@@ -2696,10 +2693,10 @@ location.reload(true);
    
                       //   if (data.success === true) {
    
-                               swal("História eliminada correctamente!", data.message, "success");
+                               swal("Control eliminado correctamente!", data.message, "success");
                            
-                              table.ajax.reload();
-                            //  $('#table_mascotas').html(data);
+                    // table.ajax.reload();
+                    location.reload(true);     
                            
                    
                          //  } else {
@@ -2919,114 +2916,6 @@ $(document).ready(function() {
 });
 
 </script>
-
-
-<!-- ============================================
-
- FUNCIÓN Edit
-
- ================================================ -->
-
-
- <script>
-
-/*
-
-$('#edit').on('click', function () {
-        let id = $(this).data('id');
-         
-        // ajax
-        $.ajax({
-            type:"POST",
-            url: '/editarCliente',
-            data: { id_cliente: id_cliente },
-            dataType: 'json',
-            success: function(res){
-              $('#ajaxBookModel').html("Edit Book");
-              $('#ajax-book-model').modal('show');
-              $('#id_cliente').val(res.id_cliente);
-              $('#title').val(res.title);
-              $('#code').val(res.code);
-              $('#author').val(res.author);
-           }
-        });
-    });
-
-*/
-
-</script>
-
-
-
-
-<!--  ============================================
-
-EDIATAR DATOS DE CLIENTES
-
-================================================= -->
-
-<!-- 
-
-<script>
-
-$(document).ready(function() {
-
-  $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-   
-
-$('#cedula').editable({
-                mode:'inline',  
-                url: 'editarCliente/{id_cliente}',
-                title: "Cédula del cliente",
-                pk: cliente.id_cliente,
-                value: cliente.cedula,
-                type: 'text',
-                emptytext: 'Sin indicar',
-                placement: "right",
-                validate: function (value) {
-                    if ($.trim(value) == '') {
-                        return 'Falta ingresar valores';
-                    }
-                },
-                success: function (response, newValue) {
-                    $('#cedula').attr("href", 'Céd:' + newValue);
-                }
-            });
-
-
- 
-
-            $('#nombre').editable({
-                mode:'inline',  
-                url: 'editarCliente/{id_cliente}',
-                title: "Cédula del cliente",
-                pk: cliente.id_cliente,
-                value: cliente.nombre,
-                type: 'text',
-                emptytext: 'Sin indicar',
-                placement: "right",
-                validate: function (value) {
-                    if ($.trim(value) == '') {
-                        return 'Falta ingresar valores';
-                    }
-                },
-                success: function (response, newValue) {
-                    $('#nombre').attr("href", 'Nom:' + newValue);
-                }
-            });
-
-
-
-     });
-
-    -->
-
-</script>
-
 
 
 
