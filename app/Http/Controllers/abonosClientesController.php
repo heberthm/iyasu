@@ -28,10 +28,12 @@ class abonosClientesController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = abonos_clientes::leftjoin('clientes', 'clientes.id_cliente', '=', 'abonos_clientes.id_cliente')
+              $id = abonos_clientes::join('clientes', 'clientes.id_cliente', '=', 'abonos_clientes.id_cliente')
+              ->leftjoin('registrar_tratamientos', 'registrar_tratamientos.id_cliente', '=', 'abonos_clientes.id_cliente')
               ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.id_cliente', 'clientes.cedula', 'clientes.nombre', 
-               'clientes.celular', 'abonos_clientes.id', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.descripcion', 
-               'abonos_clientes.responsable', 'abonos_clientes.valor_abono', 'abonos_clientes.created_at' )->get();
+              'registrar_tratamientos.valor_tratamiento', 'clientes.celular', 'abonos_clientes.id', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.descripcion', 
+               'abonos_clientes.responsable', 'abonos_clientes.valor_abono',  'abonos_clientes.saldo',
+               'abonos_clientes.created_at' )->get();
                   
                
     
@@ -72,11 +74,14 @@ class abonosClientesController extends Controller
            
            
             return view('abonos', compact('id_clientes'));
-  
     
 
         
     }
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -110,14 +115,18 @@ class abonosClientesController extends Controller
    
           $data ->user_id       = $request->userId;
           $data ->id_cliente    = $request->livesearch;
-          
+          $data ->id_tratamiento = $request->id_tratamiento;
+
           $data->nombre         = $request->nombreCliente;
           $data->celular        = $request->celular;
           $data->valor_abono    = $request->valor_abono;
           $data ->descripcion   = $request->descripcion;
           $data ->responsable   = $request->responsable;
+          $data ->saldo         = $request->saldo;
          
           $data->save();
+
+          
 
          // $id =$data->id;
        
