@@ -149,9 +149,9 @@ DATATABLE LISTA DE ESPERA
                         <th>Paciente</th>
                         <th>Tel/Cel</th>
                          <th>Fecha abono</th>
+                         <th>Vr. tratam.</th>
                          <th>Vr. abono</th>
-                        <!-- <th>Saldo</th>  -->
-                       
+                         <th>Saldo</th>                         
                          <th ></th>
                      
                      </tr>
@@ -236,7 +236,7 @@ DATATABLE LISTA DE ESPERA
 
                </div>
 
-                <div class="alert-message" id="livesearchError"></div>
+                <div class="alert-message" id="nombreClienteError"></div>
                  
              
             </div>
@@ -273,11 +273,36 @@ DATATABLE LISTA DE ESPERA
 
 
 
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="saldo actual" class="control-label">Saldo actual</label>
+
+                <input type="number" name="valor_tratamiento" class="form-control" id="valor_tratamiento" readonly>
+                 
+                           
+               </div>
+            </div>
+
+
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="saldo" class="control-label">Nuevo saldo</label>
+
+                <input type="number" name="saldo" class="form-control" id="saldo" readonly>
+                
+                 
+               </div>
+            </div>
+
+
+
             <div class="col-md-12">
 
               <div class="form-group">
 
-                <label for="Descripcion" class="control-label">Descripción</label>
+                <label for="Descripcion" class="control-label">Tratamiento</label>
 
                 <input type="text" name="descripcion" class="form-control " id="descripcion" required autocomplete="off">
 
@@ -294,9 +319,9 @@ DATATABLE LISTA DE ESPERA
 
             <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
 
-            <input type="hidden" name="id_abono" id="id_abono">
+            <input type="hidden" name="id_tratamiento" id="id_tratamiento">
 
-            </div>
+          </div>
 
 
       <div class="modal-footer">
@@ -393,6 +418,17 @@ DATATABLE LISTA DE ESPERA
           </div>
 
 
+          
+          <div class="col-md-3">
+              <div class="form-group">
+
+                <label for="valor tratamiento" class="control-label">Valor tratamiento</label>
+
+                <input type="text" name="valor_tratamiento" class="form-control  border-0" id="valor_tratamiento" >
+                           
+               </div>
+            </div>
+
 
             <div class="col-md-3">
               <div class="form-group">
@@ -416,9 +452,8 @@ DATATABLE LISTA DE ESPERA
                </div>
             </div>
 
-
-
-     
+       
+            
             <div class="col-md-4">
               <div class="form-group">
 
@@ -429,18 +464,6 @@ DATATABLE LISTA DE ESPERA
                </div>
             </div>
  
-
-          
-
-            <div class="col-md-3">
-              <div class="form-group">
-
-                <label for="valor tratamiento" class="control-label">Valor tratamiento</label>
-
-                <input type="text" name="valor_tratamiento" class="form-control  border-0" id="valor_tratamiento" >
-                           
-               </div>
-            </div>
 
           
 
@@ -524,7 +547,7 @@ DATATABLE LISTA DE ESPERA
                           
                     <input type="text" name="nombreCliente" class="form-control " id="nombreCliente"  required autocomplete="off">
 
-                <div class="alert-message" id="livesearchError"></div>
+                <div class="alert-message" id="nombreClienteError"></div>
                  
             </div>
 
@@ -666,6 +689,28 @@ $(document).ready(function () {
 
 
 
+<!-- ===============================================
+
+MULTIPLICAR INPUTS PARA HALLAR SALDO DE TRATAMIENTO
+
+===================================================== -->
+
+<script>
+
+$(document).ready(function () {
+   $("#valor_abono").on('blur',function(){
+
+    $("#saldo").val(parseInt($("#valor_tratamiento").val()) - parseInt($("#valor_abono").val()));
+
+    
+
+   });
+});
+
+</script>
+
+
+
 
 <!-- =======================================
 
@@ -674,45 +719,42 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 ============================================ -->
 
 <script type="text/javascript">
+
   $('.livesearch').select2({
     placeholder: 'Buscar cliente por nombre...',
     language: "es",
     allowClear: true,
     minimumInputLength: 3,
     ajax: {
-      // url: '/ajax-autocomplete-search',
-
-     
-      url: 'ajax-autocomplete-search', 
+         
+      url: 'buscar_tratamiento', 
 
       dataType: 'json',
       delay: 250,
       processResults: function(data) {
-
 
         return {
           results: $.map(data, function(item) {
             return {
               text: item.nombre,
               id: item.id_cliente,
+              id_tratamiento: item.id_tratamiento,
+              tratamiento: item.tratamiento,
               celular: item.celular,
+              saldo: item.saldo,
              
             }
-
-            // location.href = '/clientes/' + id
-            // window.location.href =('clientes/id');      
-
-            //  window.location.href =('/clientes'+ item['id']);  
+        
           })
 
         };
 
       },
 
-
       cache: true,
 
     }
+    
 
   });
   
@@ -735,17 +777,14 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
     $.ajax({
      
-   
-        url: '/cliente/' +id, 
+        url: 'buscar_tratamiento', 
 
         method: "GET",
         data: $(this).serialize(),
         dataType: "json",
        
         success: function(data) {
-
-          
-       
+        
 
          }
 
@@ -767,8 +806,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
    $('#id_cliente').val(id_cliente);
 
     $('#nombreCliente').val(cliente);
-
-   
+  
         
 
   });
@@ -789,6 +827,11 @@ $('.livesearch').on('select2:opening', function (e) {
 
 $('.livesearch').html('');
 $('#celular').val('');
+$('#valor_tratamiento').val('');
+$('#descripcion').val('');
+$('#valor_abono').val('');
+$('#saldo').val('');
+
 
 });
 
@@ -809,10 +852,25 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 $('#livesearch').on('select2:select', function(evt){
     
     let celular = evt.params.data.celular;
+    let tratamiento = evt.params.data.tratamiento;
+    let valor_tratamiento = evt.params.data.saldo;
+    let id_tratamiento = evt.params.data.id_tratamiento;
   
     var opt = "<option value='"+celular+"' selected ='selected'> </option>";
     $("#celular").html(opt);
     $("#celular").val(celular).trigger("change");
+
+    var opt = "<option value='"+tratamiento+"' selected ='selected'> </option>";
+    $("#descripcion").html(opt);
+    $("#descripcion").val(tratamiento).trigger("change");
+
+    var opt = "<option value='"+valor_tratamiento+"' selected ='selected'> </option>";
+    $("#valor_tratamiento").html(opt);
+    $("#valor_tratamiento").val(valor_tratamiento).trigger("change");
+
+    var opt = "<option value='"+id_tratamiento+"' selected ='selected'> </option>";
+    $("#id_tratamiento").html(opt);
+    $("#id_tratamiento").val(id_tratamiento).trigger("change");
 });
 
 </script>
@@ -860,7 +918,9 @@ $('#livesearch').on('select2:select', function(evt){
                     { data: 'nombre', name: 'nombre' },                  
                     { data: 'celular', name: 'celular' },
                     { data: 'created_at', name: 'created_at' },  
+                    { data: 'valor_tratamiento', name: 'valor_tratamiento' },
                     { data: 'valor_abono', name: 'valor_Abono' },
+                    { data: 'saldo', name: 'saldo' },
                         
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -868,12 +928,12 @@ $('#livesearch').on('select2:select', function(evt){
                 
                  ],
         
-                   order: [2, 'desc'],
+                   order: [2, 'ASC'],
 
                    "columnDefs": [
                         { "orderable": false,
                           "render": $.fn.dataTable.render.number( '.' ),
-                          "targets":[3],
+                          "targets":[3,4,5],
                           className: 'dt-body-left',
                         }
                    ],
@@ -993,6 +1053,7 @@ $('body').on('click', '.verAbono', function(e) {
             $('#modalVerAbono input[name="celular"]').val(data.celular);
             $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
             $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+            $('#modalVerAbono input[name="saldo"]').val(data.saldo);
             $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
             $('#modalVerAbono input[name="responsable"]').val(data.responsable);
           

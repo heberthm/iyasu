@@ -179,7 +179,7 @@ FORMULARIO RECEPCION DE PACIENTES
        
 <!-- ==================================
 
-DATATABLE LISTA DE ESPERA
+DATATABLE CLIENTES QUE CUMPLEN AÑOS
 
 ====================================== -->
 
@@ -1784,6 +1784,9 @@ let btn = $('#agregar_cliente2')
                 $('#agregar_cliente2').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
+               $('#modalAdd input[name="livesearch2"]').val() = ('#nombre_cliente').val();  
+               $('#modalAdd input[name="celular"]').val() = ('#celular').val();         
+
                 $('#form_crear_cliente2')[0].reset();
                 $('#modalAgregarCliente2').modal('hide');
               
@@ -1857,7 +1860,9 @@ SELECT2 - BUSQUEDAD DE CLIENTES
   
   
   //================================================
+
    // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
+
   //================================================
 
   $('#livesearch').off('change').on('change', function() {
@@ -1952,9 +1957,11 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
 
 
 
-//================================================
-   // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
-  //================================================
+//==================================================
+
+ // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
+
+//==================================================
 
   $('.livesearch2').off('change').on('change', function() {
   
@@ -1977,8 +1984,7 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
 
       $('#cliente').val(cliente);
           
-  
-
+ 
       
 
     $.ajax({
@@ -2298,9 +2304,11 @@ $('.selectBuscarCliente').html('');
 
 <script>
 
+//==================================================
+
+// SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
+
 //================================================
-   // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
-  //================================================
 
   $('#livesearch').off('change').on('change', function() {
    

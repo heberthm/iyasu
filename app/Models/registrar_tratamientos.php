@@ -9,7 +9,7 @@ class registrar_tratamientos extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','id_cliente', 'nombre', 'celular', 'tratamiento', 'valor_tratamiento','responsable',];
+    protected $fillable = ['user_id','id_cliente', 'nombre', 'celular', 'tratamiento', 'valor_tratamiento','responsable', 'estado'];
 
     public function cliente()
     {

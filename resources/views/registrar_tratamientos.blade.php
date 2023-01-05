@@ -299,6 +299,10 @@ DATATABLE LISTA DE ESPERA
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
+            <input type="text" name="saldo" class="form-control" id="saldo">  
+
+            <input type="text" name="estado" class="form-control" id="estado" value="Pendiente" readonly>  
+            
             
             </div>
 
@@ -795,6 +799,28 @@ $(document).ready(function () {
  </script>
 
 
+<!-- ========================================
+
+ESCRIBIR EN DOS INPUTS ALMISMO TIEMPO
+
+============================================== -->
+
+<script>
+
+$(document).ready(function(){
+
+    $('#valor_tratamiento').change(function(){
+
+    let valor = $(this).val();
+
+    $('#saldo').val(valor);
+  })
+})
+
+</script>
+
+
+
 <!-- =======================================
 
 SELECT2 - BUSQUEDAD DE CLIENTES
@@ -990,7 +1016,7 @@ $('#livesearch').on('select2:select', function(evt){
                 
                  ],
         
-                   order: [3, 'desc'],
+                   order: [3, 'DESC'],
 
                    "columnDefs": [
                         { "orderable": false,

@@ -74,6 +74,27 @@ class registrar_tratamientoController extends Controller
 
     }
 
+
+    
+    public function selectSearchAbonos(Request $request)
+    {
+    	
+
+        if($request->has('q')){
+            $search = $request->q;
+          
+            $id =registrar_tratamientos::select('id as id_tratamiento', "id_cliente", "nombre", "celular", "saldo", "tratamiento", "valor_tratamiento", "estado")
+                   
+            		->where('nombre',  'LIKE', "%${search}%" )
+                    ->where('estado', '=', 'Pendiente')
+                  
+                   // ->orWhere('cedula', 'LIKE', "%{$search}%") 
+            		->get();
+        }
+        return response()->json($id);
+        
+    }
+
     
 
     /**
@@ -108,9 +129,10 @@ class registrar_tratamientoController extends Controller
           $data ->tratamiento        = $request->tratamiento;  
           $data ->nombre             = $request->nombreCliente;  
           $data ->celular            = $request->celular;           
-       /*   $data->tratamiento         = $tratam;  */
           $data->valor_tratamiento   = $request->valor_tratamiento;
+          $data->saldo              = $request->saldo;
           $data->responsable         = $request->responsable;
+          $data->estado              = $request->estado;
          
 
                

@@ -94,6 +94,8 @@ Route::delete('/eliminar_control/{id}', [App\Http\Controllers\controlesControlle
 
 Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index']);
 
+Route::get('buscar_tratamiento', [App\Http\Controllers\registrar_tratamientoController::class, 'selectSearchAbonos']);
+
 Route::post('crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
 
 Route::get('editar_abono/{id_abono}', [App\Http\Controllers\abonosClientesController::class, 'edit']);
@@ -114,7 +116,6 @@ Route::get('editar_tratamientos/{id_tratamiento}', [App\Http\Controllers\registr
 Route::post('actualizar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'update']);
 
 Route::get('ver_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'show']);
-
 
 Route::delete('/eliminar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'destroy']);
 

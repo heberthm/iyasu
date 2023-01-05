@@ -21,7 +21,9 @@ class CreateRegistrarTratamientosTable extends Migration
             $table->string('celular',30)->nullable();
             $table->string('tratamiento',800)->nullable();
             $table->string('valor_tratamiento',12)->nullable();
+            $table->string('saldo',12)->nullable();
             $table->string('responsable',40)->nullable();
+            $table->string('estado',20)->nullable();
             $table->timestamps();
         });
     }

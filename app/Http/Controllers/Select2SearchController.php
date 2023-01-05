@@ -79,9 +79,6 @@ class Select2SearchController extends Controller
    
  }
 
-
-  
-  
     
        
   } 
