@@ -149,7 +149,7 @@ DATATABLE LISTA DE ESPERA
                         <th>Paciente</th>
                         <th>Tel/Cel</th>
                          <th>Fecha abono</th>
-                         <th>Vr. tratam.</th>
+                         <th>Saldo actual</th>
                          <th>Vr. abono</th>
                          <th>Saldo</th>                         
                          <th ></th>
@@ -313,13 +313,20 @@ DATATABLE LISTA DE ESPERA
 
 
  
-            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::check() ? Auth::user()->name : null}}">
 
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::check() ? Auth::user()->id : null}}" readonly>  
 
             <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
 
             <input type="hidden" name="id_tratamiento" id="id_tratamiento">
+
+            <input type="hidden" name="valor_tratamiento2" id="valor_tratamiento2">
+
+            <input type="hidden" name="estado" id="estado">
+
+
+
 
           </div>
 
@@ -470,9 +477,9 @@ DATATABLE LISTA DE ESPERA
 
 
 
-            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::check() ? Auth::user()->name : null }}">
 
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::check() ? Auth::user()->id : null }}" readonly>  
 
             <input type="hidden" name="id_abono" id="id_abono">
 
@@ -612,13 +619,13 @@ DATATABLE LISTA DE ESPERA
 
             
 
-            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::check() ? Auth::user()->name : null }}">
 
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::check() ? Auth::user()->id : null }}" readonly>  
 
             <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
 
-            <input type="hidden" name="id_abono" id="id_abono">
+            <input type="hidden" name="id_abono" id="id_abono" value="Pendiente">
 
 
             </div>
@@ -702,10 +709,42 @@ $(document).ready(function () {
 
     $("#saldo").val(parseInt($("#valor_tratamiento").val()) - parseInt($("#valor_abono").val()));
 
-    
+    $('#estado').val('');
+   
 
    });
 });
+
+</script>
+
+
+
+<script>
+
+/*
+
+$(document).ready(function () {
+
+      $('#valor_abono').on('change', function() {
+
+             
+        let input = document.getElementById('saldo');
+      
+        if(input.value.length === 0) {
+
+        $('#estado').val('Pagado');
+    
+      } else if(input.value.length !== 0) {
+     
+        $('#estado').val('Pendiente');
+
+    }
+  
+  })
+
+})
+
+*/
 
 </script>
 
@@ -741,7 +780,9 @@ SELECT2 - BUSQUEDAD DE CLIENTES
               id_tratamiento: item.id_tratamiento,
               tratamiento: item.tratamiento,
               celular: item.celular,
+              valor_tratamiento: item.valor_tratamiento,
               saldo: item.saldo,
+              estado: item.estado,
              
             }
         
@@ -828,6 +869,7 @@ $('.livesearch').on('select2:opening', function (e) {
 $('.livesearch').html('');
 $('#celular').val('');
 $('#valor_tratamiento').val('');
+$('#valor_tratamiento2').val('');
 $('#descripcion').val('');
 $('#valor_abono').val('');
 $('#saldo').val('');
@@ -853,8 +895,11 @@ $('#livesearch').on('select2:select', function(evt){
     
     let celular = evt.params.data.celular;
     let tratamiento = evt.params.data.tratamiento;
+    let valor_tratamiento2 = evt.params.data.valor_tratamiento;
     let valor_tratamiento = evt.params.data.saldo;
+    let saldo_actual =  evt.params.data.valor_tratamiento;
     let id_tratamiento = evt.params.data.id_tratamiento;
+    let estado = evt.params.data.estado;
   
     var opt = "<option value='"+celular+"' selected ='selected'> </option>";
     $("#celular").html(opt);
@@ -868,9 +913,18 @@ $('#livesearch').on('select2:select', function(evt){
     $("#valor_tratamiento").html(opt);
     $("#valor_tratamiento").val(valor_tratamiento).trigger("change");
 
+    var opt = "<option value='"+valor_tratamiento2+"' selected ='selected'> </option>";
+    $("#valor_tratamiento2").html(opt);
+    $("#valor_tratamiento2").val(valor_tratamiento2).trigger("change");
+
+
     var opt = "<option value='"+id_tratamiento+"' selected ='selected'> </option>";
     $("#id_tratamiento").html(opt);
     $("#id_tratamiento").val(id_tratamiento).trigger("change");
+
+    var opt = "<option value='"+estado+"' selected ='selected'> </option>";
+    $("#estado").html(opt);
+    $("#estado").val(estado).trigger("change");
 });
 
 </script>
@@ -918,7 +972,7 @@ $('#livesearch').on('select2:select', function(evt){
                     { data: 'nombre', name: 'nombre' },                  
                     { data: 'celular', name: 'celular' },
                     { data: 'created_at', name: 'created_at' },  
-                    { data: 'valor_tratamiento', name: 'valor_tratamiento' },
+                    { data: 'saldo_actual', name: 'saldo_actual' },
                     { data: 'valor_abono', name: 'valor_Abono' },
                     { data: 'saldo', name: 'saldo' },
                         

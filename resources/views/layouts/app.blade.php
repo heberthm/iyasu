@@ -218,7 +218,7 @@ ARCHIVOS JS
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
             
-                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> &nbsp;
+                <span class="d-none d-md-inline">{{ Auth::check() ? Auth::user()->name : null }}</span> &nbsp;
                     <img src="../img/avatar4.png"
                      class="user-image img-circle elevation-2" alt="User Image"> 
             </a>
@@ -229,8 +229,8 @@ ARCHIVOS JS
                          class="img-circle elevation-2"
                          alt="User Image">
                     <p>
-                        {{ Auth::user()->name }}
-                        <small>Registrado desde:  {{ Auth::user()->created_at->format('M. Y') }}</small>
+                        {{ Auth::check() ? Auth::user()->name : null }}
+                        <small>Registrado desde:  {{ Auth::check() ? Auth::user()->created_at->format('M. Y') : null }}</small>
                     </p>
                 </li>
                 <!-- Menu Footer-->

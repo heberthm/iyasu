@@ -90,12 +90,12 @@ FORMULARIO CREAR TRATAMIENTO
              
     <div class="card-header">
                    
-                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de registro de tratamientos</h3>
+                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de registro de tratamientos de clientes</h3>
                   
                    <div class="pull-right">
                       <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalACrearTratamiento">
                             <span class="fa fa-list fa-fw" ></span>  
-                            Crear tratamiento
+                            Crear tratamiento de cliente
                         </button>  &nbsp;
                   </div> 
                     
@@ -299,9 +299,9 @@ DATATABLE LISTA DE ESPERA
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
-            <input type="text" name="saldo" class="form-control" id="saldo">  
+            <input type="hidden" name="saldo" class="form-control" id="saldo">  
 
-            <input type="text" name="estado" class="form-control" id="estado" value="Pendiente" readonly>  
+            <input type="hidden" name="estado" class="form-control" id="estado" value="Pendiente" readonly>  
             
             
             </div>

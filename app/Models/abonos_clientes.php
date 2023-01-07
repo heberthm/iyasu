@@ -9,7 +9,7 @@ class abonos_clientes extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','id_cliente','nombre', 'celular', 'valor_abono','saldo','responsable','descripcion'];
+    protected $fillable = ['user_id','id_cliente','nombre', 'celular', 'valor_tratamiento', 'saldo_actual', 'valor_abono','saldo','responsable','descripcion'];
 
 
     

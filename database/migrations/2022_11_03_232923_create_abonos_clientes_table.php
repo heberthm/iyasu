@@ -20,6 +20,8 @@ class CreateAbonosClientesTable extends Migration
             $table->string('id_tratamiento')->nullable();
             $table->string('nombre',60)->nullable();
             $table->string('celular',25)->nullable();
+            $table->string('valor_tratamiento',12)->nullable();
+            $table->string('saldo_actual',12)->nullable();
             $table->string('valor_abono',12)->nullable();
             $table->string('saldo',12)->nullable();
             $table->string('responsable',40)->nullable();
