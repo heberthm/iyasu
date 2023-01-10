@@ -693,7 +693,7 @@ $(document).ready(function(){
   {    
    $('#error_cedula').html('<label class="text-danger">Debe escribir número de cédula.</label>');
    $('#cedula').addClass('has-error');
-   $('#agregar_cliente').attr('disabled', 'disabled');
+   $('#agregar_profesional').attr('disabled', 'disabled');
   }
   else
   {
@@ -708,7 +708,7 @@ $(document).ready(function(){
      
       $('#error_cedula').html('<label class="text-danger">El profesional ya existe.</label>');
       $('#cedula').addClass('has-error');
-      $('#agregar_cliente').attr('disabled', 'disabled');
+      $('#agregar_profesional').attr('disabled', 'disabled');
 
      }
      else
@@ -716,7 +716,7 @@ $(document).ready(function(){
 
       $('#error_cedula').html('<label class="text-success">Disponible.</label>');
       $('#cedula').removeClass('has-error');
-      $('#agregar_cliente').attr('disabled', false);
+      $('#agregar_profesional').attr('disabled', false);
 
      
      }
