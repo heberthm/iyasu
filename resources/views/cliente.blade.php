@@ -300,8 +300,7 @@ DATATABLE MASCOTAS
                             <div  id="datos_historia_clinica">
                                 <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5>
                                     <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a>
-                                  <!--  <a class="mx-1 raza" style="color:black">{{$id_cliente->peso}}</a> -->
-                                  <!--  <a class="mx-1 edad" style="color:black">{{$id_cliente->estatura}}</a> -->
+                                  
                             </div>
                         </div>
 
@@ -331,7 +330,7 @@ DATATABLE MASCOTAS
               
                               <label for="Estatura" class="control-label font-weight-normal">Estatura</label>
                            
-                              <input type="number" name="estatura" class="form-control" id="estatura" autofocus="true"  autocomplete="off">
+                              <input type="number" name="estatura" class="form-control" id="estatura" autofocus="true"  required autocomplete="off">
                                           
                               <div class="alert-message" id="estaturaError"></div>
                                 
@@ -347,7 +346,7 @@ DATATABLE MASCOTAS
               
                                 <label for="peso inicial" class="control-label font-weight-normal">Peso inicial</label>
               
-                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial"  >
+                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial"  require >
               
                                   <div class="alert-message" id="pesoInicialError"></div>
               
@@ -364,7 +363,7 @@ DATATABLE MASCOTAS
               
                               <label for="abd inicial" class="control-label font-weight-normal">ABD inicial</label>
               
-                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control"  autocomplete="off">
+                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control"  required autocomplete="off">
               
                               <div class="alert-message" id="abdInicialError"></div>
               
@@ -526,7 +525,7 @@ DATATABLE MASCOTAS
               <div class="form-group">
                   <label for="profesional" class="control-label font-weight-normal">Atendido por</label>
                   
-                  <select name="profesional" class="form-control" id="profesional"placeholder="Seleccione profesional">
+                  <select name="profesional" class="form-control" id="profesional"  required placeholder="Seleccione profesional">
                     <option value=""></option>
                       @foreach($profesionales as $prof) 
                       <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>

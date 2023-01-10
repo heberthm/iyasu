@@ -127,6 +127,19 @@ Route::get('terapias_adicionales', [App\Http\Controllers\terapias_adicionalesCon
 
 Route::get('profesionales', [App\Http\Controllers\profesionalesController::class, 'index']);
 
+Route::post('crear_profesional', [App\Http\Controllers\profesionalesController::class, 'store']);
+
+Route::post('verificar_profesional', [App\Http\Controllers\profesionalesController::class, 'verificarProfesional']);
+
+
+Route::get('ver_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'show']);
+
+Route::get('editar_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'edit']);
+
+Route::post('actualizar_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'update']);
+
+Route::delete('eliminar_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'destroy']);
+
 
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');
 Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);

@@ -69,7 +69,7 @@ class Select2SearchController extends Controller
 } else {
 
 
-    $profesionales = profesionales::select('id_profesional','nombre')->get(); 
+    $profesionales = profesionales::select('id','nombre')->get(); 
     $terapias = terapias::select('id_terapias','terapia')->get();
     $terapias_adicionales = terapias_adicionales::select('id_terapias_adicionales','terapias_adicionales')->get();
     $controles = controles::select()->get(); 

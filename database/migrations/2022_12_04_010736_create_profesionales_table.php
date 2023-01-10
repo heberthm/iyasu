@@ -14,10 +14,8 @@ class CreateProfesionalesTable extends Migration
     public function up()
     {
         Schema::create('profesionales', function (Blueprint $table) {
-            $table->bigIncrements('id_profesional');
+            $table->bigIncrements('id');
             $table->string('user_id')->required();
-            $table->string('id_cliente')->required();
-            $table->string('id_pagos')->required();
             $table->string('cedula',18)->unique()->required();
             $table->string('nombre',60)->required();
             $table->string('profesion',60)->required();
