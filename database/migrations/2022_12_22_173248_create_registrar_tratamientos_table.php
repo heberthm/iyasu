@@ -25,6 +25,8 @@ class CreateRegistrarTratamientosTable extends Migration
             $table->string('responsable',40)->nullable();
             $table->string('estado',20)->nullable();
             $table->timestamps();
+
+           // $table->foreign('id')->references('id')->on('abonos_clientes')->onDelete('cascade');
         });
     }
 

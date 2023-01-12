@@ -45,7 +45,7 @@ class profesionalesController extends Controller
   
                   $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalMostrarProfesional"  title="Ver datos del profesional" class="fa fa-eye verProfesional"></a> 
                  
-                  <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarProfesional"  title="Editar datos del profesional" class="fa fa-edit editarProfesional"></a>
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarProfesional"  title="Editar datos del profesional" class="fa fa-edit editarProfesional"></a>
   
 
                   <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'title="Eliminar datos del profesional" class="fa fa-trash eliminarProfesional"></a>';

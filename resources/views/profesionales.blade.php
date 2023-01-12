@@ -362,7 +362,7 @@ DATATABLE LISTA DE PROFESIONALES
 
                 <div class="form-group">
 
-                      <input type="number" name="cedula" class="form-control  border-0" id="cedula" required autocomplete="off">
+                      <input type="number" name="cedula" class="form-control  border-0" id="cedula"  autocomplete="off">
                
                 </div>
 

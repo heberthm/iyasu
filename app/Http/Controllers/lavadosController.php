@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\models\terapias;
+use App\models\lavados;
 
-class terapiasController extends Controller
+class lavadosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +15,12 @@ class terapiasController extends Controller
      */
     public function index()
     {
-
-                
+                  
         if(request()->ajax()) {
     
             //  $id = $request->id_cliente;
   
-            $id = terapias::select('id', 'user_id', 'terapia', 'valor_terapia')->get();
+            $id = lavados::select('id', 'user_id', 'lavado', 'valor_lavado')->get();
               
   
              return datatables()->of($id)
@@ -31,8 +30,8 @@ class terapiasController extends Controller
               ->addColumn('action', function($data) {
   
   
-                  $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarTerapia"  title="Editar terapia" class="fa fa-edit editarTerapia"></a>
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'title="Eliminar terapia" class="fa fa-trash eliminarTerapia"></a>';
+                  $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarLavado"  title="Editar terapia" class="fa fa-edit editarLavado"></a>
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'title="Eliminar terapia" class="fa fa-trash eliminarLavado"></a>';
                   
                    
                   return $actionBtn;
@@ -43,7 +42,7 @@ class terapiasController extends Controller
               ->make(true);
           } 
 
-        return view('terapias');
+        return view('lavados');
     }
 
     /**
@@ -66,17 +65,17 @@ class terapiasController extends Controller
     {
         $validatedData = $request->validate([
           
-            'terapia'              =>    'required|max:90',
-            'valor_terapia'        =>    'required|max:12',
+            'lavado'              =>    'required|max:90',
+            'valor_lavado'        =>    'required|max:12',
             
            ]);
    
           try {
-          $data = new terapias();
+          $data = new lavados();
    
           $data ->user_id           = $request->userId;
-          $data->terapia            = $request->terapia;
-          $data->valor_terapia      = $request->valor_terapia;
+          $data->lavado            = $request->lavado;
+          $data->valor_lavado      = $request->valor_lavado;
               
           } catch (\Exception  $exception) {
               return back()->withError($exception->getMessage())->withInput();
@@ -88,7 +87,6 @@ class terapiasController extends Controller
          // $id =$data->id;
        
          return response()->json(['success'=>'Successfully']);
-           
     }
 
     /**
@@ -99,8 +97,7 @@ class terapiasController extends Controller
      */
     public function show($id)
     {
-        $id_terapias  = terapias::find($id);
-        return response()->json($id_terapias);
+        //
     }
 
     /**
@@ -111,8 +108,8 @@ class terapiasController extends Controller
      */
     public function edit($id)
     {
-        $id_terapia  = terapias::find($id);
-        return response()->json($id_terapia);
+        $id_lavado = lavados::find($id);
+        return response()->json($id_lavado);
     }
 
     /**
@@ -126,11 +123,11 @@ class terapiasController extends Controller
     {
         $id_terapia = $request->input('id_terapia');
 
-        $data = terapias::find($id_terapia);
+        $data = lavados::find($id_terapia);
           
-        $data ->user_id            = $request->userId;
-        $data->terapia             = $request->terapia;
-        $data->valor_terapia       = $request->valor_terapia;
+        $data ->user_id           = $request->userId;
+        $data->lavado             = $request->lavado;
+        $data->valor_lavado       = $request->valor_lavado;
        
                
 
@@ -147,7 +144,7 @@ class terapiasController extends Controller
      */
     public function destroy($id)
     {
-        terapias::find($id)->delete();
+        lavados::find($id)->delete();
      
         return response()->json(['success'=>'deleted successfully.']);
     }

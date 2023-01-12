@@ -79,12 +79,12 @@
              
     <div class="card-header">
                    
-                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de terapias adicional</h3>
+                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de lavados</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearTerapia">
+                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearLavado">
                             <span class="fa fa-list fa-fw" ></span>  
-                            Crear terapia adicional
+                            Crear lavado
                         </button>  &nbsp;
                   </div> 
                     
@@ -98,7 +98,7 @@
 
 <!-- ==================================
 
-DATATABLE LISTA DE ESPERA
+DATATABLE LAVADOS
 
 ======================================== -->
 
@@ -106,11 +106,11 @@ DATATABLE LISTA DE ESPERA
        <div class="row">
          <div class="col-lg-12">
                                              
-               <table id="table_terapias" class="table dt-responsive table-hover" style="width:100%">
+               <table id="table_lavados" class="table dt-responsive table-hover" style="width:100%">
                    <thead>
                       <tr>
                                         
-                        <th>Terapia adicional</th>
+                        <th>lavado</th>
                         <th>Precio</th>
                                         
                          <th ></th>
@@ -143,11 +143,11 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL AGREGAR TERAPIA
+    MODAL AGREGAR LAVADO
 
 ==========================================-->
 
-<div class="modal fade" id="modalCrearTerapia"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalCrearLavado"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -157,7 +157,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Agregar terapia adicional</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Agregar lavado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -172,7 +172,7 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_terapia" action="{{ url('terapias') }}" >
+        <form method="POST" id="form_agregar_lavado" action="{{ url('lavados') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
@@ -186,11 +186,11 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group">
 
-                <label for="Terapia" class="control-label">Terapia</label>
+                <label for="lavado" class="control-label">Lavado</label>
 
-                <input type="text" name="terapia" class="form-control " id="terapia" required autocomplete="off">
+                <input type="text" name="lavado" class="form-control " id="lavado" required autocomplete="off">
 
-                 <div class="alert-message" id="terapiaError"></div>
+                 <div class="alert-message" id="lavadoError"></div>
                 
               </div>
             </div>
@@ -201,11 +201,11 @@ DATATABLE LISTA DE ESPERA
             <div class="col-md-3">
               <div class="form-group">
 
-                <label for="valor_terapia" class="control-label">Valor</label>
+                <label for="valor_lavado" class="control-label">Valor</label>
 
-                <input type="number" name="valor_terapia" class="form-control" id="valor_terapia" required autocomplete="off">
+                <input type="number" name="valor_lavado" class="form-control" id="valor_lavado" required autocomplete="off">
                 
-                  <div class="alert-message" id="valorTerapiaError"></div>
+                  <div class="alert-message" id="valorLavadoError"></div>
                            
                </div>
             </div>
@@ -218,7 +218,7 @@ DATATABLE LISTA DE ESPERA
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_terapia" name="agregar_terapia" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="agregar_lavado" name="agregar_lavado" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -238,11 +238,11 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL EDITAR TERAPIAS
+    MODAL EDITAR LAVADO
 
 ======================================-->
 
-<div class="modal fade" id="modalEditarTerapia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditarLavado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 <div class="modal-dialog modal-lg">
@@ -251,7 +251,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Editar terapia</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Editar lavado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -266,7 +266,7 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_editar_terapia" action="{{ url('terapias') }}" >
+        <form method="POST" id="form_editar_lavado" action="{{ url('lavados') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
@@ -277,13 +277,13 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group"  >
 
-                <label for="terapia" class="control-label">Tarapia</label>
+                <label for="lavado" class="control-label">lavado</label>
 
 
-                <input type="text" name="terapia" class="form-control" id="terapia" autofocus required autocomplete="off">
+                <input type="text" name="lavado" class="form-control" id="lavado" autofocus required autocomplete="off">
 
              
-                <div class="alert-message" id="terapiaError"></div>
+                <div class="alert-message" id="lavadoError"></div>
                  
               </div>
 
@@ -295,11 +295,11 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group">
 
-                <label for="valor_terapia" class="control-label">Valor</label>
+                <label for="valor_lavado" class="control-label">Valor</label>
 
-                <input type="text" name="valor_terapia" class=" form-control" id="valor_terapia" required autocomplete="off">
+                <input type="text" name="valor_lavado" class=" form-control" id="valor_lavado" required autocomplete="off">
 
-                 <div class="alert-message" id="valorTerapiaError"></div>
+                 <div class="alert-message" id="valorLavadoError"></div>
                 
               </div>
             </div>
@@ -307,7 +307,7 @@ DATATABLE LISTA DE ESPERA
         </div>    
 
             <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
-            <input type="hidden" name="id_terapia" class=" form-control" id="id_terapia" required autocomplete="off">
+            <input type="hidden" name="id_lavado" class=" form-control" id="id_lavado" required autocomplete="off">
 
 
 
@@ -315,7 +315,7 @@ DATATABLE LISTA DE ESPERA
 
       <div class="modal-footer">
 
-        <button type="submit" id="editar_terapia" name="editar_terapia" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="editar_lavado" name="editar_lavado" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -338,11 +338,11 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL VER TERAPIA
+    MODAL VER LAVADO
 
 ======================================-->
 
-<div class="modal fade" id="modalVerTerapia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalVerLavado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -352,7 +352,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Ver terapia</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Ver lavado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -367,7 +367,7 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_ver_terapia" action="{{ url('terapias') }}" >
+        <form method="POST" id="form_ver_lavado" action="{{ url('lavados') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
@@ -378,13 +378,13 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group"  >
 
-                <label for="terapia" class="control-label">Terapia</label>
+                <label for="lavado" class="control-label">Lavado</label>
 
 
-                <input type="text" name="terapia" class="form-control border-0" id="egreso" readonly autocomplete="off">
+                <input type="text" name="lavado" class="form-control border-0" id="lavado" readonly autocomplete="off">
 
              
-                <div class="alert-message" id="terapiaError"></div>
+                <div class="alert-message" id="lavadoError"></div>
                  
               </div>
 
@@ -396,11 +396,11 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group">
 
-                <label for="valor_terapia" class="control-label">Valor</label>
+                <label for="valor_lavado" class="control-label">Valor</label>
 
-                <input type="text" name="valor_terapia" class="form-control border-0" id="valor_terapia" readonly autocomplete="off">
+                <input type="text" name="valor_lavado" class="form-control border-0" id="valor_lavado" readonly autocomplete="off">
 
-                 <div class="alert-message" id="valorTerapiaError"></div>
+                 <div class="alert-message" id="valorLavadoError"></div>
                 
               </div>
             </div>
@@ -491,7 +491,7 @@ $(document).ready(function () {
     });
 
 
-    let table =  $('#table_terapias').DataTable({
+    let table =  $('#table_lavados').DataTable({
 
   
            processing: true,
@@ -503,13 +503,13 @@ $(document).ready(function () {
         
                             
            type: "GET",
-           ajax: 'terapias_adicionales',
+           ajax: 'lavados',
 
                     
            columns: [
                    
-                    { data: 'terapias_adicionales', name: 'terapia_adicionales' }, 
-                    { data: 'valor_terapia', name: 'valor_terapia' },
+                    { data: 'lavado', name: 'lavado' }, 
+                    { data: 'valor_lavado', name: 'valor_lavado' },
                    
                    
                    
@@ -531,7 +531,7 @@ $(document).ready(function () {
             "language": {
                 
                             
-                        "emptyTable": "No hay terapias registradas.",
+                        "emptyTable": "No hay lavados registradas.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
@@ -561,11 +561,11 @@ $(document).ready(function () {
 
 // =========================================
 
-/// GUARDAR TERAPIAS
+/// GUARDAR LAVADO
 
 // =========================================
 
-$('#form_agregar_terapia').off('submit').on('submit', function (event) {
+$('#form_agregar_lavado').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -573,31 +573,31 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#agregar_terapia') 
+let btn = $('#agregar_lavado') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#agregar_terapia').attr('disabled', true);
+        $('#agregar_lavado').attr('disabled', true);
 
         event.preventDefault();
 
         try {
 
         $.ajax({
-            url: "crear_terapia_adicional",
+            url: "crear_lavado",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                   table.ajax.reload();
-                $('#agregar_terapia').prop("required", true);
+                $('#agregar_lavado').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_agregar_terapia')[0].reset();
-                $('#modalCrearTerapia').modal('hide');
+                $('#form_agregar_lavado')[0].reset();
+                $('#modalCrearLavado').modal('hide');
                   
              //   table.ajax.reload();
              //   location.reload(true);
@@ -616,31 +616,32 @@ let btn = $('#agregar_terapia')
 
 // =========================================
 
-/// EDITAR REGISTROS DEL PROFESIONAL
+/// EDITAR LAVADO
 
 // =========================================
 
-$('body').on('click', '.editarTerapia', function (e) {
+$('body').on('click', '.editarLavado', function (e) {
  
   e.preventDefault();
 
-        $('#form_editar_terapia')[0].reset();
+        $('#form_editar_lavado')[0].reset();
         let id = $(this).data('id');
       
       $.ajax({
-        url: '/editar_terapia_adicional/'+id,
+        url: 'editar_lavado/'+id,
         method: 'GET',
         data: {  id: id },
   
          
           success: function(data) {
-        
+
            
-            $('#modalEditarTerapia').modal('show');
            
-            $('#modalEditarTerapia input[name="id_terapia"]').val(data.id);
-            $('#modalEditarTerapia input[name="terapia"]').val(data.terapias_adicionales);
-            $('#modalEditarTerapia input[name="valor_terapia"]').val(data.valor_terapia);
+            $('#modalEditarLavado').modal('show');
+           
+            $('#modalEditarLavado input[name="id_lavado"]').val(data.id);
+            $('#modalEditarLavado input[name="lavado"]').val(data.lavado);
+            $('#modalEditarLavado input[name="valor_lavado"]').val(data.valor_lavado);
             
 
           }
@@ -652,12 +653,12 @@ $('body').on('click', '.editarTerapia', function (e) {
   
  // =========================================
  
- // ACTUALIZAR DATOS DEL PROFESIONAL
+ // ACTUALIZAR DATOS DEL LAVADO
 
  // =========================================
 
  
-$('#form_editar_terapia').off('submit').on('submit', function (event) {
+$('#form_editar_lavado').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -665,14 +666,14 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#editar_terapia') 
+let btn = $('#editar_lavado') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#editar_terapia').attr('disabled', true);
+        $('#editar_lavado').attr('disabled', true);
 
         event.preventDefault();
 
@@ -682,17 +683,17 @@ let btn = $('#editar_terapia')
       
       $.ajax({
        
-            url: 'actualizar_terapia_adicional/'+id,
+            url: 'actualizar_lavado/'+id,
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                 
-                $('#editar_profesional').prop("required", true);
+                $('#editar_lavado').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_editar_')[0].reset();
-                $('#modalEditarProfesional').modal('hide');
+                $('#form_editar_lavado')[0].reset();
+                $('#modalEditarLavado').modal('hide');
                   
                 table.ajax.reload();
              //   location.reload(true);
@@ -717,7 +718,7 @@ let btn = $('#editar_terapia')
 
 
   
-$(document).on('click', '.eliminarTerapia', function (event) {
+$(document).on('click', '.eliminarLavado', function (event) {
      
   event.preventDefault();
      let id = $(this).data('id');
@@ -737,14 +738,14 @@ $(document).on('click', '.eliminarTerapia', function (event) {
 
                 $.ajax({
                     type: 'delete',
-                    url: 'eliminar_terapia_adicional/'+id,
+                    url: 'eliminar_lavado/'+id,
                     data: {id:id},
                     dataType: 'JSON',
                     success: function (data) {
 
                    //   if (data.success === true) {
 
-                            swal("Datos de terapia eliminados correctamente!", data.message, "success");
+                            swal("Datos de lavado eliminados correctamente!", data.message, "success");
                         
                            table.ajax.reload();
                          //  $('#table_mascotas').html(data);

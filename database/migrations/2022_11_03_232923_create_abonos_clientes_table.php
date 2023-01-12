@@ -17,7 +17,7 @@ class CreateAbonosClientesTable extends Migration
             $table->bigIncrements('id');
             $table->string('id_cliente')->nullable();
             $table->string('user_id')->nullable();
-            $table->string('id_tratamiento')->nullable();
+            $table->bigInteger('id_tratamiento')->nullable();
             $table->string('nombre',60)->nullable();
             $table->string('celular',25)->nullable();
             $table->string('valor_tratamiento',12)->nullable();

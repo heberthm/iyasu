@@ -68,75 +68,11 @@
 
 
 
-  
-<!-- =============================
-
-REGISTRO DE INGRESOS O EGRSOS 
-
-================================== -->
-
+ 
 
 <div class="container-fluid">
-
- <!--
-
-<div class="row">
-          
-          <section class="col-lg-12">
-         
-            <div class="card card-light">
-                <div class="card-header">
-                   
-                    <h3 class="card-title"><span style="color: #28a745;" class="fas fa-database mr-3"></span>Registros contables</h3>
-                   
-               </div>
-
-             <!--
-
-                <div class="card-body">
-
-                  <div class="row">
-                
-                      <div class="col-lg-6">
-                        
-                    
-                      
-                     
-                          <button class="btn btn-outline-success ml-2" data-toggle="modal" data-target="#modalAgregarSaldoInicial" style="text-align:left"><span class="fas fa-tags mr-2" tabindex="3"></span> Saldo inicial</button>
-                          <button class="btn btn-outline-info ml-2" data-toggle="modal" data-target="#modalAgregarIngreso" style="text-align:left"><span class="fas fa-plus mr-2" tabindex="3"></span> Ingresos</button>
-                          <button class="btn btn-outline-danger ml-2" data-toggle="modal" data-target="#modalAgregarEgreso" style="text-align:left"><span class="fas fa-minus mr-2" tabindex="3"></span> Egresos</button>
-                   
-
-                     </div>  
-                    
-                   
-                    
-                       <span><h5 style="text-align:right">   </h5></span>  &nbsp;
-
-                       <p> <span><h5 style="text-align:right">   </h5></span>  </p>
-                      
-
-                   
-
-                     </div>     
-                                  
-                  </div>
-               </div>
-              
-            </div>
-
-              -->
-
-            <!-- /.card-body -->
-            
-       
+      
   
-
-<!-- ====================================
-
-FORMULARIO RECEPCION DE PACIENTES
-
-=========================================  -->
 
 
 <div class="card card-light">
@@ -146,7 +82,7 @@ FORMULARIO RECEPCION DE PACIENTES
                    <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de terapias</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalACrearAbono">
+                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearTerapia">
                             <span class="fa fa-list fa-fw" ></span>  
                             Crear terapia
                         </button>  &nbsp;
@@ -160,34 +96,11 @@ FORMULARIO RECEPCION DE PACIENTES
                    
 
 
-
-<!-- ===================================
-DATAPICKER BOOTSTRAP
-========================================  -->
-
-<!--
-
-<div class="row input-daterange">
-      <div class="col-md-3">
-          <input type="text" name="from_date" id="from_date" class="form-control" placeholder="Fecha inicial" readonly />
-      </div>
-      <div class="col-md-3">
-          <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Fecha final" readonly />
-      </div>
-      <div class="col-md-3">
-          <button type="button" name="filter" id="filter" class="btn btn-primary">Filtrar</button>
-          <button type="button" name="refresh" id="refresh" class="btn btn-default">Refrescar</button>
-      </div>
-  </div>
-  <br />
-
--->
-
-
-
 <!-- ==================================
+
 DATATABLE LISTA DE ESPERA
-====================================== -->
+
+======================================== -->
 
 
        <div class="row">
@@ -230,11 +143,11 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL AGREGAR SALDO
+    MODAL AGREGAR TERAPIA
 
-======================================-->
+==========================================-->
 
-<div class="modal fade" id="modalACrearAbono"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalCrearTerapia"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -244,7 +157,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Agregar terapia</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -259,7 +172,7 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_saldo" action="{{ url('/guardar_saldo') }}" >
+        <form method="POST" id="form_agregar_terapia" action="{{ url('terapias') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
@@ -268,33 +181,16 @@ DATATABLE LISTA DE ESPERA
 
             
 
-              <div class="form-group" >
-
-                <label for="cliente" class="control-label">Cliente</label>
-
-
-                <div class="form-group">
-                        <select class="livesearch form-control"  id="livesearch" name="livesearch" style="width: 100%;"></select>
-                    </div>
-
-             
-                <div class="alert-message" id="livesearchError"></div>
-                 
-             
-
-            </div>
-
-
-
-            <div class="col-md-5">
+            
+            <div class="col-md-6">
 
               <div class="form-group">
 
-                <label for="Celular" class="control-label">Tel/Cel</label>
+                <label for="Terapia" class="control-label">Terapia</label>
 
-                <input type="text" name="celular" class="form-control " id="celular" required autocomplete="off">
+                <input type="text" name="terapia" class="form-control " id="terapia" required autocomplete="off">
 
-                 <div class="alert-message" id="responsableError"></div>
+                 <div class="alert-message" id="terapiaError"></div>
                 
               </div>
             </div>
@@ -305,24 +201,24 @@ DATATABLE LISTA DE ESPERA
             <div class="col-md-3">
               <div class="form-group">
 
-                <label for="valor_abono" class="control-label">Vr. abono</label>
+                <label for="valor_terapia" class="control-label">Valor</label>
 
-                <input type="number" name="descripcion" class="form-control" id="descripcion" required autocomplete="off">
+                <input type="number" name="valor_terapia" class="form-control" id="valor_terapia" required autocomplete="off">
                 
-                  <div class="alert-message" id="descripcionError"></div>
+                  <div class="alert-message" id="valorTerapiaError"></div>
                            
                </div>
             </div>
  
-            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+         </div>
 
+         <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
-            </div>
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_registro" name="agregar_registro" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="agregar_terapia" name="agregar_terapia" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -342,13 +238,12 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL AGREGAR INGRESO
+    MODAL EDITAR TERAPIAS
 
 ======================================-->
 
-<div class="modal fade" id="modalAgregarIngreso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditarTerapia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
-
 
 <div class="modal-dialog modal-lg">
   
@@ -356,7 +251,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar ingreso</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Editar terapia</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -371,24 +266,24 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_ingreso" action="{{ url('/guardar_ingreso') }}" >
+        <form method="POST" id="form_editar_terapia" action="{{ url('terapias') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-6">
 
               <div class="form-group"  >
 
-                <label for="Ingreso" class="control-label">Valor ingreso</label>
+                <label for="terapia" class="control-label">Tarapia</label>
 
 
-                <input type="number" name="ingreso" class="form-control" id="ingreso" autofocus required autocomplete="off">
+                <input type="text" name="terapia" class="form-control" id="terapia" autofocus required autocomplete="off">
 
              
-                <div class="alert-message" id="saldoError"></div>
+                <div class="alert-message" id="terapiaError"></div>
                  
               </div>
 
@@ -400,36 +295,27 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group">
 
-                <label for="Nombre" class="control-label">Responsable</label>
+                <label for="valor_terapia" class="control-label">Valor</label>
 
-                <input type="text" name="responsable" class="typeahead form-control text-capitalize" id="responsable" required autocomplete="off">
+                <input type="text" name="valor_terapia" class=" form-control" id="valor_terapia" required autocomplete="off">
 
-                 <div class="alert-message" id="responsableError"></div>
+                 <div class="alert-message" id="valorTerapiaError"></div>
                 
               </div>
             </div>
 
+        </div>    
+
+            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+            <input type="hidden" name="id_terapia" class=" form-control" id="id_terapia" required autocomplete="off">
 
 
 
-            <div class="col-md-5">
-              <div class="form-group">
-
-                <label for="telefono" class="control-label">Descripción</label>
-
-                <input type="text" name="descripcion" class="form-control" id="descripcion" required autocomplete="off">
-                
-                  <div class="alert-message" id="descripcionError"></div>
-                           
-               </div>
-            </div>
- 
-            </div>
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_ingreso" name="agregar_ingreso" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="editar_terapia" name="editar_terapia" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -452,11 +338,11 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL AGREGAR EGRESO
+    MODAL VER TERAPIA
 
 ======================================-->
 
-<div class="modal fade" id="modalAgregarEgreso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalVerTerapia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -466,7 +352,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar Egreso</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Ver terapia</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -481,24 +367,24 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_egreso" action="{{ url('/guardar_egreso') }}" >
+        <form method="POST" id="form_ver_terapia" action="{{ url('terapias') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-6">
 
               <div class="form-group"  >
 
-                <label for="Egreso" class="control-label">Valor Egreso</label>
+                <label for="terapia" class="control-label">Terapia</label>
 
 
-                <input type="number" name="egreso" class="form-control" id="egreso" autofocus required autocomplete="off">
+                <input type="text" name="terapia" class="form-control border-0" id="egreso" readonly autocomplete="off">
 
              
-                <div class="alert-message" id="saldoError"></div>
+                <div class="alert-message" id="terapiaError"></div>
                  
               </div>
 
@@ -510,11 +396,11 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group">
 
-                <label for="Nombre" class="control-label">Responsable</label>
+                <label for="valor_terapia" class="control-label">Valor</label>
 
-                <input type="text" name="responsable" class="typeahead form-control text-capitalize" id="responsable" required autocomplete="off">
+                <input type="text" name="valor_terapia" class="form-control border-0" id="valor_terapia" readonly autocomplete="off">
 
-                 <div class="alert-message" id="responsableError"></div>
+                 <div class="alert-message" id="valorTerapiaError"></div>
                 
               </div>
             </div>
@@ -522,24 +408,10 @@ DATATABLE LISTA DE ESPERA
 
 
 
-            <div class="col-md-5">
-              <div class="form-group">
-
-                <label for="telefono" class="control-label">Descripción</label>
-
-                <input type="text" name="descripcion" class="form-control" id="descripcion" required autocomplete="off">
-                
-                  <div class="alert-message" id="descripcionError"></div>
-                           
-               </div>
-            </div>
- 
-            </div>
-
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_egreso" name="agregar_egreso" class="btn btn-primary loader">Guardar</button>
+        
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -557,115 +429,6 @@ DATATABLE LISTA DE ESPERA
 
 
 
-
-
-
- <!--=====================================
-
-    MODAL EDITAR REGISTRO
-
-======================================-->
-
-<div class="modal fade" id="modalEdiatarRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    
-
-
-<div class="modal-dialog modal-lg">
-  
-  <div class="modal-content">
-  
-  <div class="modal-header">
-   
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Editar registro</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     
-           <span aria-hidden="true">&times;</span>
-     
-        </button>
-    
-      </div>
-
-      <div class="modal-body">
-
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
-
-        <form method="POST" id="form_editar_registro" action="{{ url('/editar_registro/id') }}" >
-
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
-
-
-          <div class="row">
-
-            <div class="col-md-3">
-
-              <div class="form-group">
-
-                <label for="Egreso" class="control-label">Valor</label>
-
-           
-
-                <input type="number" name="registro" class="form-control" id="registro" autofocus required autocomplete="off">
-
-             
-                <div class="alert-message" id="registroError"></div>
-                 
-              </div>
-
-            </div>
-
-
-  
-            <div class="col-md-4">
-
-              <div class="form-group">
-
-                <label for="Nombre" class="control-label">Responsable</label>
-
-                <input type="text" name="responsable" class="typeahead form-control text-capitalize" id="responsable" required autocomplete="off">
-
-                 <div class="alert-message" id="responsableError"></div>
-                
-              </div>
-            </div>
-
-
-
-
-            <div class="col-md-5">
-              <div class="form-group">
-
-                <label for="telefono" class="control-label">Descripción</label>
-
-                <input type="text" name="descripcion" class="form-control" id="descripcion"  required autocomplete="off">
-                
-                  <div class="alert-message" id="descripcionError"></div>
-                           
-               </div>
-            </div>
- 
-            </div>
-
-
-      
-
-      <div class="modal-footer">
-
-        <button type="submit" id="editar_registro" name="editar_registro" class="btn btn-primary loader">Guardar</button>
-        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-</form>
-</div>
-
-
-</div>
 
 
 
@@ -710,96 +473,9 @@ $(document).ready(function () {
 
 
 
-
-<!-- =======================================
-
-SELECT2 - BUSQUEDAD DE CLIENTES
-
-============================================ -->
-
-<script type="text/javascript">
-  $('.livesearch').select2({
-    placeholder: 'Buscar cliente por nombre...',
-    language: "es",
-    allowClear: true,
-    minimumInputLength: 3,
-    ajax: {
-      // url: '/ajax-autocomplete-search',
-
-      url: '{{ url("/ajax-autocomplete-search") }}',
-
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-
-
-        return {
-          results: $.map(data, function(item) {
-            return {
-              text: item.nombre,
-              id: item.id_cliente
-            }
-
-            // location.href = '/clientes/' + id
-            // window.location.href =('clientes/id');      
-
-            //  window.location.href =('/clientes'+ item['id']);  
-          })
-
-        };
-
-      },
-
-
-      cache: true,
-
-    }
-
-  });
-  
-  
-  //================================================
-   // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
-  //================================================
-
-  $('#livesearch').off('change').on('change', function() {
-   
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-    let id = $(this).val();
-
-    $.ajax({
-     
-   
-      url: '/cliente/' +id, 
-
-        method: "GET",
-        data: $(this).serialize(),
-        dataType: "json",
-        success: function(data) {
-   
-
-         }
-
-    });
-
-   // window.location.href = 'cliente/' +id;
-
-  });
-</script>
-
-
-
-
-
-
 <!-- ===================================================
 
- DATATABLE ABONOS
+ DATATABLE PROFESIONALES
 
 ======================================================= --->
 
@@ -824,20 +500,32 @@ SELECT2 - BUSQUEDAD DE CLIENTES
            info: true,
            filter: true,
            responsive: true,
-                                    
+        
+                            
            type: "GET",
            ajax: 'terapias',
 
-            
+                    
            columns: [
                    
-                    { data: 'terapia', name: 'terapia' },                  
+                    { data: 'terapia', name: 'terapia' }, 
                     { data: 'valor_terapia', name: 'valor_terapia' },
-                                
+                   
+                   
+                   
+                   
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
                    order: [[0, 'desc']],
+
+                   "columnDefs": [
+                        { "orderable": false,
+                          "render": $.fn.dataTable.render.number( '.' ),
+                          "targets":[1],
+                          className: 'dt-body-left',
+                        }
+                   ],
           
           
             "language": {
@@ -867,9 +555,224 @@ SELECT2 - BUSQUEDAD DE CLIENTES
       
     });
 
-  });
+
+
+
+
+// =========================================
+
+/// GUARDAR TERAPIAS
+
+// =========================================
+
+$('#form_agregar_terapia').off('submit').on('submit', function (event) {
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+/* Configurar botón submit con spinner */
+let btn = $('#agregar_terapia') 
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+        $('#agregar_terapia').attr('disabled', true);
+
+        event.preventDefault();
+
+        try {
+
+        $.ajax({
+            url: "crear_terapia",
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(data) {
+                  table.ajax.reload();
+                $('#agregar_terapia').prop("required", true);
+               // $('#selectBuscarCliente').html("");
+               
+                $('#form_agregar_terapia')[0].reset();
+                $('#modalCrearTerapia').modal('hide');
+                  
+             //   table.ajax.reload();
+             //   location.reload(true);
+                toastr["success"]("registro creado correctamente.");
+         
+            }
+         });
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.", "Información");
+          }
+    });
+
+
+
+
+
+// =========================================
+
+/// EDITAR REGISTROS DEL PROFESIONAL
+
+// =========================================
+
+$('body').on('click', '.editarTerapia', function (e) {
+ 
+  e.preventDefault();
+
+        $('#form_editar_terapia')[0].reset();
+        let id = $(this).data('id');
+      
+      $.ajax({
+        url: '/editar_terapia/'+id,
+        method: 'GET',
+        data: {  id: id },
+  
+         
+          success: function(data) {
+
+           
+           
+            $('#modalEditarTerapia').modal('show');
+           
+            $('#modalEditarTerapia input[name="id_terapia"]').val(data.id);
+            $('#modalEditarTerapia input[name="terapia"]').val(data.terapia);
+            $('#modalEditarTerapia input[name="valor_terapia"]').val(data.valor_terapia);
+            
+
+          }
+        });
+      });
+
+
+             
+  
+ // =========================================
+ 
+ // ACTUALIZAR DATOS DEL PROFESIONAL
+
+ // =========================================
+
+ 
+$('#form_editar_terapia').off('submit').on('submit', function (event) {
+
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+/* Configurar botón submit con spinner */
+let btn = $('#editar_terapia') 
+    let existingHTML =btn.html() //store exiting button HTML
+    //Add loading message and spinner
+    $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+    setTimeout(function() {
+      $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    },5000) //5 seconds
+        $('#editar_terapia').attr('disabled', true);
+
+        event.preventDefault();
+
+        try {
+       
+      let id = $(this).data('id');
+      
+      $.ajax({
+       
+            url: 'actualizar_terapia/'+id,
+            method: "POST",
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function(data) {
+                
+                $('#editar_profesional').prop("required", true);
+               // $('#selectBuscarCliente').html("");
+               
+                $('#form_editar_')[0].reset();
+                $('#modalEditarProfesional').modal('hide');
+                  
+                table.ajax.reload();
+             //   location.reload(true);
+                toastr["success"]("datos actualizados correctamente.");
+         
+            }
+         });
+        } catch(e) {
+          toastr["danger"]("Se ha presentado un error.", "Información");
+          }
+    });
+
+
+
+  
+
+// =========================================
+
+/// ELIMINAR REGISTROS DEL PROFESIONAL
+
+// =========================================   
+
+
+  
+$(document).on('click', '.eliminarTerapia', function (event) {
+     
+  event.preventDefault();
+     let id = $(this).data('id');
+    swal({
+            title: "Esta seguro de eliminar?",
+            text: "La acción es permanente!",
+            type: "warning",
+            showCancelButton: !0,
+            confirmButtonText: "Si, Eliminar",
+            cancelButtonText: "No, cancelar",
+            reverseButtons: !0
+     
+          }).then(function (e) {
+
+            if (e.value === true) {
+                let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajax({
+                    type: 'delete',
+                    url: 'eliminar_terapia/'+id,
+                    data: {id:id},
+                    dataType: 'JSON',
+                    success: function (data) {
+
+                   //   if (data.success === true) {
+
+                            swal("Datos de terapia eliminados correctamente!", data.message, "success");
+                        
+                           table.ajax.reload();
+                         //  $('#table_mascotas').html(data);
+                        
+                
+                      //  } else {
+                     //       swal("Error!", data.message, "error");
+                     //   }
+                    }
+                });
+
+            } else {
+                e.dismiss;
+            }
+
+        }, function (dismiss) {
+            return false;
+        })
+      });
+
+
+
+});
+
 
 </script>
+
 
 
 

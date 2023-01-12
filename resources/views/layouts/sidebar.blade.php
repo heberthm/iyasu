@@ -116,7 +116,7 @@
           </li>
           
             <li class="nav-item">
-            <a href="{{ url('inicio') }}" class="nav-link {{ request()->is('inicio') ? '' : '' }}">
+            <a href="{{ url('lavados') }}" class="nav-link {{ request()->is('lavados') ? 'Active' : '' }}">
 
                   <i class="nav-icon fas fa-cogs white"></i>
                   <p>
@@ -129,8 +129,8 @@
      
 
       
-      <li class="nav-item has-treeview">
-        <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? '' : '' }}">
+      <li class="nav-item">
+        <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'Active' : '' }}">
 
           <i class="nav-icon fas fa-user-plus green"></i>
           <p>

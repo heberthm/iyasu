@@ -79,12 +79,12 @@
              
     <div class="card-header">
                    
-                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de terapias adicional</h3>
+                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-users mr-3"></span>Listado de usuarios</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearTerapia">
+                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearUsuario">
                             <span class="fa fa-list fa-fw" ></span>  
-                            Crear terapia adicional
+                            Crear usuario
                         </button>  &nbsp;
                   </div> 
                     
@@ -98,7 +98,7 @@
 
 <!-- ==================================
 
-DATATABLE LISTA DE ESPERA
+DATATABLE USUARIOS
 
 ======================================== -->
 
@@ -106,12 +106,13 @@ DATATABLE LISTA DE ESPERA
        <div class="row">
          <div class="col-lg-12">
                                              
-               <table id="table_terapias" class="table dt-responsive table-hover" style="width:100%">
+               <table id="table_usuarios" class="table dt-responsive table-hover" style="width:100%">
                    <thead>
                       <tr>
                                         
-                        <th>Terapia adicional</th>
-                        <th>Precio</th>
+                        <th>nombre</th>
+                        <th>email</th>
+                        <th>perfil</th>
                                         
                          <th ></th>
                      
@@ -143,13 +144,93 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL AGREGAR TERAPIA
+    MODAL AGREGAR USUARIOS
 
 ==========================================-->
 
-<div class="modal fade" id="modalCrearTerapia"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    
 
+<div class="modal fade" id="modalCrearUsuario" tabindex="-1" data-target="#registerModal" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+ 
+   <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModal">{{ __('Register') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="registerForm">
+                    @csrf
+
+                    <div class="form-group row">
+                        <label for="nameInput" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="nameInput" type="text" class="form-control" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
+
+                            <span class="invalid-feedback" role="alert" id="nameError">
+                                <strong></strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="emailInput" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="emailInput" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                            <span class="invalid-feedback" role="alert" id="emailError">
+                                <strong></strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="passwordInput" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="passwordInput" type="password" class="form-control" name="password" required autocomplete="new-password">
+
+                            <span class="invalid-feedback" role="alert" id="passwordError">
+                                <strong></strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Register') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+ <!--=====================================
+
+    MODAL EDITAR USUARIO
+
+======================================-->
+
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    
 
 <div class="modal-dialog modal-lg">
   
@@ -157,7 +238,7 @@ DATATABLE LISTA DE ESPERA
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Agregar terapia adicional</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Editar usuario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -172,53 +253,102 @@ DATATABLE LISTA DE ESPERA
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_terapia" action="{{ url('terapias') }}" >
+        <form method="POST" id="form_editar_usuario" action="{{ url('usuarios') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
+                   
+          <div class="col-md-6">
+
+            <div class="form-group">
+
+                <label for="nombre" class="control-label">nombre</label>
+
+                <input type="text" name="nombre" class="form-control " id="nombre" required autocomplete="off">
+
+                <div class="alert-message" id="nombreError"></div>
             
+          </div>
+        </div>
 
+
+
+
+          <div class="col-md-6">
+       
+          <div class="form-group">
+
+            <label for="email" class="control-label">Email</label>
+
+            <input type="email" name="email" class="form-control" id="email" required autocomplete="off">
             
-            <div class="col-md-6">
-
-              <div class="form-group">
-
-                <label for="Terapia" class="control-label">Terapia</label>
-
-                <input type="text" name="terapia" class="form-control " id="terapia" required autocomplete="off">
-
-                 <div class="alert-message" id="terapiaError"></div>
-                
-              </div>
-            </div>
-
-
-
-
-            <div class="col-md-3">
-              <div class="form-group">
-
-                <label for="valor_terapia" class="control-label">Valor</label>
-
-                <input type="number" name="valor_terapia" class="form-control" id="valor_terapia" required autocomplete="off">
-                
-                  <div class="alert-message" id="valorTerapiaError"></div>
-                           
-               </div>
-            </div>
- 
+                <div class="alert-message" id="emailError"></div>
+                        
+          </div>
          </div>
 
-         <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+     </div>
+
+
+        <div class="col-md-6">
+          <div class="form-group">
+
+            <label for="repetir_email" class="control-label">Repetir email</label>
+
+            <input type="email" name="repetir_email" class="form-control" id="repetir_email" required autocomplete="off">
+            
+                <div class="alert-message" id="repetirEmailError"></div>
+                        
+            </div>
+          </div>
+
+       </div>
+
+
+       <div class="col-md-6">
+
+         <div class="form-group">
+
+            <label for="contraseña" class="control-label">contraseña</label>
+
+            <input type="text" name="contraseña" class="form-control " id="contraseña" required autocomplete="off">
+
+            <div class="alert-message" id="contraseñaError"></div>
+            
+         </div>
+       </div>
+
+
+
+      <div class="col-md-3">
+          <div class="form-group">
+
+            <label for="perfil" class="control-label">Perfil</label>
+
+            <input type="text" name="perfil" class="form-control" id="perfil" required autocomplete="off">
+            
+                <div class="alert-message" id="perfilError"></div>
+                        
+         </div>
+      </div>
+
+ </div>
+
+
+
+
+<input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+<input type="hidden" name="id_usuario" class=" form-control" id="id_usuario" required autocomplete="off">
+
 
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_terapia" name="agregar_terapia" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="editar_usuario" name="editar_usuario" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -232,203 +362,6 @@ DATATABLE LISTA DE ESPERA
 
 
 </div>
-
-
-
-
- <!--=====================================
-
-    MODAL EDITAR TERAPIAS
-
-======================================-->
-
-<div class="modal fade" id="modalEditarTerapia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    
-
-<div class="modal-dialog modal-lg">
-  
-  <div class="modal-content">
-  
-  <div class="modal-header">
-   
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Editar terapia</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     
-           <span aria-hidden="true">&times;</span>
-     
-        </button>
-    
-      </div>
-
-      <div class="modal-body">
-
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
-
-        <form method="POST" id="form_editar_terapia" action="{{ url('terapias') }}" >
-
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
-
-
-          <div class="row">
-
-            <div class="col-md-6">
-
-              <div class="form-group"  >
-
-                <label for="terapia" class="control-label">Tarapia</label>
-
-
-                <input type="text" name="terapia" class="form-control" id="terapia" autofocus required autocomplete="off">
-
-             
-                <div class="alert-message" id="terapiaError"></div>
-                 
-              </div>
-
-            </div>
-
-
-
-            <div class="col-md-4">
-
-              <div class="form-group">
-
-                <label for="valor_terapia" class="control-label">Valor</label>
-
-                <input type="text" name="valor_terapia" class=" form-control" id="valor_terapia" required autocomplete="off">
-
-                 <div class="alert-message" id="valorTerapiaError"></div>
-                
-              </div>
-            </div>
-
-        </div>    
-
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
-            <input type="hidden" name="id_terapia" class=" form-control" id="id_terapia" required autocomplete="off">
-
-
-
-
-
-      <div class="modal-footer">
-
-        <button type="submit" id="editar_terapia" name="editar_terapia" class="btn btn-primary loader">Guardar</button>
-        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-</form>
-</div>
-
-
-</div>
-
-
-
-
-
-
-
- <!--=====================================
-
-    MODAL VER TERAPIA
-
-======================================-->
-
-<div class="modal fade" id="modalVerTerapia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    
-
-
-<div class="modal-dialog modal-lg">
-  
-  <div class="modal-content">
-  
-  <div class="modal-header">
-   
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-male mr-3"></span>Ver terapia</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     
-           <span aria-hidden="true">&times;</span>
-     
-        </button>
-    
-      </div>
-
-      <div class="modal-body">
-
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
-
-        <form method="POST" id="form_ver_terapia" action="{{ url('terapias') }}" >
-
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
-
-
-          <div class="row">
-
-            <div class="col-md-6">
-
-              <div class="form-group"  >
-
-                <label for="terapia" class="control-label">Terapia</label>
-
-
-                <input type="text" name="terapia" class="form-control border-0" id="egreso" readonly autocomplete="off">
-
-             
-                <div class="alert-message" id="terapiaError"></div>
-                 
-              </div>
-
-            </div>
-
-
-
-            <div class="col-md-4">
-
-              <div class="form-group">
-
-                <label for="valor_terapia" class="control-label">Valor</label>
-
-                <input type="text" name="valor_terapia" class="form-control border-0" id="valor_terapia" readonly autocomplete="off">
-
-                 <div class="alert-message" id="valorTerapiaError"></div>
-                
-              </div>
-            </div>
-
-
-
-
-
-      <div class="modal-footer">
-
-        
-        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-</form>
-</div>
-
-
-</div>
-
-
-
-
 
 
 
@@ -475,7 +408,7 @@ $(document).ready(function () {
 
 <!-- ===================================================
 
- DATATABLE PROFESIONALES
+ DATATABLE USUARIOS
 
 ======================================================= --->
 
@@ -491,7 +424,7 @@ $(document).ready(function () {
     });
 
 
-    let table =  $('#table_terapias').DataTable({
+    let table =  $('#table_usuario').DataTable({
 
   
            processing: true,
@@ -503,35 +436,27 @@ $(document).ready(function () {
         
                             
            type: "GET",
-           ajax: 'terapias_adicionales',
+           ajax: 'usuarios',
 
                     
            columns: [
                    
-                    { data: 'terapias_adicionales', name: 'terapia_adicionales' }, 
-                    { data: 'valor_terapia', name: 'valor_terapia' },
+                    { data: 'nombre', name: 'nombre' }, 
+                    { data: 'email', name: 'email' },
+                    { data: 'perfil', name: 'perfil' },
                    
-                   
-                   
+       
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
                    order: [[0, 'desc']],
 
-                   "columnDefs": [
-                        { "orderable": false,
-                          "render": $.fn.dataTable.render.number( '.' ),
-                          "targets":[1],
-                          className: 'dt-body-left',
-                        }
-                   ],
-          
+                           
           
             "language": {
-                
-                            
-                        "emptyTable": "No hay terapias registradas.",
+                                   
+                        "emptyTable": "No hay lavados registradas.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
@@ -561,11 +486,11 @@ $(document).ready(function () {
 
 // =========================================
 
-/// GUARDAR TERAPIAS
+/// GUARDAR LAVADO
 
 // =========================================
 
-$('#form_agregar_terapia').off('submit').on('submit', function (event) {
+$('#form_agregar_usuario').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -573,35 +498,35 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#agregar_terapia') 
+let btn = $('#agregar_usuario') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#agregar_terapia').attr('disabled', true);
+        $('#agregar_usuario').attr('disabled', true);
 
         event.preventDefault();
 
         try {
 
         $.ajax({
-            url: "crear_terapia_adicional",
+            url: "crear_usuario",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                   table.ajax.reload();
-                $('#agregar_terapia').prop("required", true);
+                $('#agregar_usuario').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_agregar_terapia')[0].reset();
-                $('#modalCrearTerapia').modal('hide');
+                $('#form_agregar_usuario')[0].reset();
+                $('#modalCrearUsuario').modal('hide');
                   
              //   table.ajax.reload();
              //   location.reload(true);
-                toastr["success"]("registro creado correctamente.");
+                toastr["success"]("usuario creado correctamente.");
          
             }
          });
@@ -616,31 +541,32 @@ let btn = $('#agregar_terapia')
 
 // =========================================
 
-/// EDITAR REGISTROS DEL PROFESIONAL
+/// EDITAR USUARIO
 
 // =========================================
 
-$('body').on('click', '.editarTerapia', function (e) {
+$('body').on('click', '.editarUsuario', function (e) {
  
   e.preventDefault();
 
-        $('#form_editar_terapia')[0].reset();
+        $('#form_editar_usuario')[0].reset();
         let id = $(this).data('id');
       
       $.ajax({
-        url: '/editar_terapia_adicional/'+id,
+        url: 'editar_usuario/'+id,
         method: 'GET',
         data: {  id: id },
   
          
           success: function(data) {
-        
+         
            
-            $('#modalEditarTerapia').modal('show');
+            $('#modalEditarUsuario').modal('show');
            
-            $('#modalEditarTerapia input[name="id_terapia"]').val(data.id);
-            $('#modalEditarTerapia input[name="terapia"]').val(data.terapias_adicionales);
-            $('#modalEditarTerapia input[name="valor_terapia"]').val(data.valor_terapia);
+            $('#modalEditarUsuario input[name="id_usuario"]').val(data.id);
+            $('#modalEditarUsuario input[name="nombre"]').val(data.nombre);
+            $('#modalEditarUsuario input[name="email"]').val(data.email);
+            $('#modalEditarUsuario input[name="perfil"]').val(data.perfil);
             
 
           }
@@ -652,12 +578,12 @@ $('body').on('click', '.editarTerapia', function (e) {
   
  // =========================================
  
- // ACTUALIZAR DATOS DEL PROFESIONAL
+ // ACTUALIZAR DATOS DEL USUARIO
 
  // =========================================
 
  
-$('#form_editar_terapia').off('submit').on('submit', function (event) {
+$('#form_editar_usuario').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -665,14 +591,14 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#editar_terapia') 
+let btn = $('#editar_usuario') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#editar_terapia').attr('disabled', true);
+        $('#editar_usuario').attr('disabled', true);
 
         event.preventDefault();
 
@@ -682,17 +608,17 @@ let btn = $('#editar_terapia')
       
       $.ajax({
        
-            url: 'actualizar_terapia_adicional/'+id,
+            url: 'actualizar_usuario/'+id,
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                 
-                $('#editar_profesional').prop("required", true);
+                $('#editar_usuario').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_editar_')[0].reset();
-                $('#modalEditarProfesional').modal('hide');
+                $('#form_editar_usuario')[0].reset();
+                $('#modalEditarUsuario').modal('hide');
                   
                 table.ajax.reload();
              //   location.reload(true);
@@ -717,7 +643,7 @@ let btn = $('#editar_terapia')
 
 
   
-$(document).on('click', '.eliminarTerapia', function (event) {
+$(document).on('click', '.eliminarUsuario', function (event) {
      
   event.preventDefault();
      let id = $(this).data('id');
@@ -737,14 +663,14 @@ $(document).on('click', '.eliminarTerapia', function (event) {
 
                 $.ajax({
                     type: 'delete',
-                    url: 'eliminar_terapia_adicional/'+id,
+                    url: 'eliminar_usuario/'+id,
                     data: {id:id},
                     dataType: 'JSON',
                     success: function (data) {
 
                    //   if (data.success === true) {
 
-                            swal("Datos de terapia eliminados correctamente!", data.message, "success");
+                            swal("Datos de usuario eliminados correctamente!", data.message, "success");
                         
                            table.ajax.reload();
                          //  $('#table_mascotas').html(data);

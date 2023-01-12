@@ -13,6 +13,8 @@ use App\Http\Controllers\Auth\RegisterController;
  use App\Http\Controllers\terapiasController;
  use App\Http\Controllers\terapias_adicionalesController;
  use App\Http\Controllers\profesionalesController;
+ use App\Http\Controllers\lavadosController;
+
 
 
 
@@ -37,6 +39,9 @@ use App\Http\Controllers\Controller;
 Route::get('/', function () {
     return view('auth.login');
 });
+
+
+// Route::get('/auth.register', [App\Http\Controllers\Auth\RegisterController::class,'registration']);
 
 Auth::routes();
 
@@ -123,7 +128,37 @@ Route::delete('/eliminar_tratamiento/{id}', [App\Http\Controllers\registrar_trat
 
 Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index']);
 
+Route::post('crear_terapia', [App\Http\Controllers\terapiasController::class, 'store']);
+
+Route::get('editar_terapia/{id}', [App\Http\Controllers\terapiasController::class, 'edit']);
+
+Route::post('actualizar_terapia/{id}', [App\Http\Controllers\terapiasController::class, 'update']);
+
+Route::delete('eliminar_terapia/{id}', [App\Http\Controllers\terapiasController::class, 'destroy']);
+
+
 Route::get('terapias_adicionales', [App\Http\Controllers\terapias_adicionalesController::class, 'index']);
+
+Route::post('crear_terapia_adicional', [App\Http\Controllers\terapias_adicionalesController::class, 'store']);
+
+Route::get('editar_terapia_adicional/{id}', [App\Http\Controllers\terapias_adicionalesController::class, 'edit']);
+
+Route::post('actualizar_terapia_adicional/{id}', [App\Http\Controllers\terapias_adicionalesController::class, 'update']);
+
+Route::delete('eliminar_terapia_adicional/{id}', [App\Http\Controllers\terapias_adicionalesController::class, 'destroy']);
+
+
+Route::get('lavados', [App\Http\Controllers\lavadosController::class, 'index']);
+
+Route::post('crear_lavado', [App\Http\Controllers\lavadosController::class, 'store']);
+
+Route::get('editar_lavado/{id}', [App\Http\Controllers\lavadosController::class, 'edit']);
+
+Route::get('actualizar_lavado/{id}', [App\Http\Controllers\lavadosController::class, 'update']);
+
+Route::delete('eliminar_lavado/{id}', [App\Http\Controllers\lavadosController::class, 'destroy']);
+
+
 
 Route::get('profesionales', [App\Http\Controllers\profesionalesController::class, 'index']);
 

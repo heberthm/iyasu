@@ -65,7 +65,7 @@ class registrar_tratamientoController extends Controller
           } 
   
     
-          $terapias = terapias::select('id_terapias','terapia')->get();
+          $terapias = terapias::select('id','terapia')->get();
 
 
         return view('registrar_tratamientos', compact('terapias'));
@@ -85,7 +85,7 @@ class registrar_tratamientoController extends Controller
           
             $id =registrar_tratamientos::select('id as id_tratamiento', "id_cliente", "nombre", "celular", "saldo", "tratamiento", "valor_tratamiento", "estado")
                    
-            		->where('nombre',  'LIKE', "%${search}%" )
+            		->where('nombre',  'LIKE', "%{search}%" )
                     ->where('estado', '=', 'Pendiente')
                   
                    // ->orWhere('cedula', 'LIKE', "%{$search}%") 

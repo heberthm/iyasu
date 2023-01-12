@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTerapiasAdicionalesTable extends Migration
+class CreateTerapiasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTerapiasAdicionalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('terapias_adicionales', function (Blueprint $table) {
-            $table->bigIncrements('id_terapias_adicionales');
-            $table->string('id_cliente')->required();
+        Schema::create('terapias', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('user_id')->required();
-            $table->string('terapias_adicionales',380)->nullable();
+            $table->string('terapia',380)->nullable();
             $table->string('valor_terapia',12)->nullable();
+            
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTerapiasAdicionalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('terapias_adicionales');
+        Schema::dropIfExists('terapias');
     }
 }
