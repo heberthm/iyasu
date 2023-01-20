@@ -79,12 +79,12 @@
              
     <div class="card-header">
                    
-                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de lavados</h3>
+                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-users mr-3"></span>Listado de usuarios</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearLavado">
+                      <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearUsuario">
                             <span class="fa fa-list fa-fw" ></span>  
-                            Crear lavado
+                            Crear usuario
                         </button>  &nbsp;
                   </div> 
                     
@@ -98,7 +98,7 @@
 
 <!-- ==================================
 
-DATATABLE LAVADOS
+DATATABLE USUARIOS
 
 ======================================== -->
 
@@ -106,12 +106,13 @@ DATATABLE LAVADOS
        <div class="row">
          <div class="col-lg-12">
                                              
-               <table id="table_lavados" class="table dt-responsive table-hover" style="width:100%">
+               <table id="table_usuarios" class="table dt-responsive table-hover" style="width:100%">
                    <thead>
                       <tr>
                                         
-                        <th>lavado</th>
-                        <th>Precio</th>
+                        <th>nombre</th>
+                        <th>email</th>
+                        <th>perfil</th>
                                         
                          <th ></th>
                      
@@ -143,13 +144,93 @@ DATATABLE LAVADOS
 
  <!--=====================================
 
-    MODAL AGREGAR LAVADO
+    MODAL AGREGAR USUARIOS
 
 ==========================================-->
 
-<div class="modal fade" id="modalCrearLavado"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    
 
+<div class="modal fade" id="modalCrearUsuario" tabindex="-1" data-target="#registerModal" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+ 
+   <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModal">{{ __('Register') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="registerForm">
+                    @csrf
+
+                    <div class="form-group row">
+                        <label for="nameInput" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="nameInput" type="text" class="form-control" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
+
+                            <span class="invalid-feedback" role="alert" id="nameError">
+                                <strong></strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="emailInput" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="emailInput" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                            <span class="invalid-feedback" role="alert" id="emailError">
+                                <strong></strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="passwordInput" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="passwordInput" type="password" class="form-control" name="password" required autocomplete="new-password">
+
+                            <span class="invalid-feedback" role="alert" id="passwordError">
+                                <strong></strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Register') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+ <!--=====================================
+
+    MODAL EDITAR USUARIO
+
+======================================-->
+
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    
 
 <div class="modal-dialog modal-lg">
   
@@ -157,7 +238,7 @@ DATATABLE LAVADOS
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Agregar lavado</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Editar usuario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -172,53 +253,102 @@ DATATABLE LAVADOS
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
 
-        <form method="POST" id="form_agregar_lavado" action="{{ url('lavados') }}" >
+        <form method="POST" id="form_editar_usuario" action="{{ url('usuarios') }}" >
 
      <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
           <div class="row">
 
+                   
+          <div class="col-md-6">
+
+            <div class="form-group">
+
+                <label for="nombre" class="control-label">nombre</label>
+
+                <input type="text" name="nombre" class="form-control " id="nombre" required autocomplete="off">
+
+                <div class="alert-message" id="nombreError"></div>
             
+          </div>
+        </div>
 
+
+
+
+          <div class="col-md-6">
+       
+          <div class="form-group">
+
+            <label for="email" class="control-label">Email</label>
+
+            <input type="email" name="email" class="form-control" id="email" required autocomplete="off">
             
-            <div class="col-md-6">
-
-              <div class="form-group">
-
-                <label for="lavado" class="control-label">Lavado</label>
-
-                <input type="text" name="lavado" class="form-control " id="lavado" required autocomplete="off">
-
-                 <div class="alert-message" id="lavadoError"></div>
-                
-              </div>
-            </div>
-
-
-
-
-            <div class="col-md-3">
-              <div class="form-group">
-
-                <label for="valor_lavado" class="control-label">Valor</label>
-
-                <input type="number" name="valor_lavado" class="form-control" id="valor_lavado" required autocomplete="off">
-                
-                  <div class="alert-message" id="valorLavadoError"></div>
-                           
-               </div>
-            </div>
- 
+                <div class="alert-message" id="emailError"></div>
+                        
+          </div>
          </div>
 
-         <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+     </div>
+
+
+        <div class="col-md-6">
+          <div class="form-group">
+
+            <label for="repetir_email" class="control-label">Repetir email</label>
+
+            <input type="email" name="repetir_email" class="form-control" id="repetir_email" required autocomplete="off">
+            
+                <div class="alert-message" id="repetirEmailError"></div>
+                        
+            </div>
+          </div>
+
+       </div>
+
+
+       <div class="col-md-6">
+
+         <div class="form-group">
+
+            <label for="contraseña" class="control-label">contraseña</label>
+
+            <input type="text" name="contraseña" class="form-control " id="contraseña" required autocomplete="off">
+
+            <div class="alert-message" id="contraseñaError"></div>
+            
+         </div>
+       </div>
+
+
+
+      <div class="col-md-3">
+          <div class="form-group">
+
+            <label for="perfil" class="control-label">Perfil</label>
+
+            <input type="text" name="perfil" class="form-control" id="perfil" required autocomplete="off">
+            
+                <div class="alert-message" id="perfilError"></div>
+                        
+         </div>
+      </div>
+
+ </div>
+
+
+
+
+<input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+<input type="hidden" name="id_usuario" class=" form-control" id="id_usuario" required autocomplete="off">
+
 
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_lavado" name="agregar_lavado" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="editar_usuario" name="editar_usuario" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -232,200 +362,6 @@ DATATABLE LAVADOS
 
 
 </div>
-
-
-
-
- <!--=====================================
-
-    MODAL EDITAR LAVADO
-
-======================================-->
-
-<div class="modal fade" id="modalEditarLavado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    
-
-<div class="modal-dialog modal-lg">
-  
-  <div class="modal-content">
-  
-  <div class="modal-header">
-   
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Editar lavado</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     
-           <span aria-hidden="true">&times;</span>
-     
-        </button>
-    
-      </div>
-
-      <div class="modal-body">
-
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
-
-        <form method="POST" id="form_editar_lavado" action="{{ url('lavados') }}" >
-
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
-
-
-          <div class="row">
-
-            <div class="col-md-6">
-
-              <div class="form-group"  >
-
-                <label for="lavado" class="control-label">lavado</label>
-
-
-                <input type="text" name="lavado" class="form-control" id="lavado" autofocus required autocomplete="off">
-
-             
-                <div class="alert-message" id="lavadoError"></div>
-                 
-              </div>
-
-            </div>
-
-
-
-            <div class="col-md-4">
-
-              <div class="form-group">
-
-                <label for="valor_lavado" class="control-label">Valor</label>
-
-                <input type="text" name="valor_lavado" class=" form-control" id="valor_lavado" required autocomplete="off">
-
-                 <div class="alert-message" id="valorLavadoError"></div>
-                
-              </div>
-            </div>
-
-        </div>    
-
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
-            <input type="hidden" name="id_lavado" class=" form-control" id="id_lavado" required autocomplete="off">
-
-
-      <div class="modal-footer">
-
-        <button type="submit" id="editar_lavado" name="editar_lavado" class="btn btn-primary loader">Guardar</button>
-        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-</form>
-</div>
-
-
-</div>
-
-
-
-
-
-
-
- <!--=====================================
-
-    MODAL VER LAVADO
-
-======================================-->
-
-<div class="modal fade" id="modalVerLavado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    
-
-
-<div class="modal-dialog modal-lg">
-  
-  <div class="modal-content">
-  
-  <div class="modal-header">
-   
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-shower mr-3"></span>Ver lavado</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     
-           <span aria-hidden="true">&times;</span>
-     
-        </button>
-    
-      </div>
-
-      <div class="modal-body">
-
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
-
-        <form method="POST" id="form_ver_lavado" action="{{ url('lavados') }}" >
-
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
-
-
-          <div class="row">
-
-            <div class="col-md-6">
-
-              <div class="form-group"  >
-
-                <label for="lavado" class="control-label">Lavado</label>
-
-
-                <input type="text" name="lavado" class="form-control border-0" id="lavado" readonly autocomplete="off">
-
-             
-                <div class="alert-message" id="lavadoError"></div>
-                 
-              </div>
-
-            </div>
-
-
-
-            <div class="col-md-4">
-
-              <div class="form-group">
-
-                <label for="valor_lavado" class="control-label">Valor</label>
-
-                <input type="text" name="valor_lavado" class="form-control border-0" id="valor_lavado" readonly autocomplete="off">
-
-                 <div class="alert-message" id="valorLavadoError"></div>
-                
-              </div>
-            </div>
-
-
-
-
-
-      <div class="modal-footer">
-
-        
-        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-</form>
-</div>
-
-
-</div>
-
-
-
-
 
 
 
@@ -472,7 +408,7 @@ $(document).ready(function () {
 
 <!-- ===================================================
 
- DATATABLE PROFESIONALES
+ DATATABLE USUARIOS
 
 ======================================================= --->
 
@@ -488,7 +424,7 @@ $(document).ready(function () {
     });
 
 
-    let table =  $('#table_lavados').DataTable({
+    let table =  $('#table_usuario').DataTable({
 
   
            processing: true,
@@ -500,34 +436,26 @@ $(document).ready(function () {
         
                             
            type: "GET",
-           ajax: 'lavados',
+           ajax: 'usuarios',
 
                     
            columns: [
                    
-                    { data: 'lavado', name: 'lavado' }, 
-                    { data: 'valor_lavado', name: 'valor_lavado' },
+                    { data: 'nombre', name: 'nombre' }, 
+                    { data: 'email', name: 'email' },
+                    { data: 'perfil', name: 'perfil' },
                    
-                   
-                   
+       
                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
                    order: [[0, 'desc']],
 
-                   "columnDefs": [
-                        { "orderable": false,
-                          "render": $.fn.dataTable.render.number( '.' ),
-                          "targets":[1],
-                          className: 'dt-body-left',
-                        }
-                   ],
-          
+                           
           
             "language": {
-                
-                            
+                                   
                         "emptyTable": "No hay lavados registradas.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
@@ -562,7 +490,7 @@ $(document).ready(function () {
 
 // =========================================
 
-$('#form_agregar_lavado').off('submit').on('submit', function (event) {
+$('#form_agregar_usuario').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -570,35 +498,35 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#agregar_lavado') 
+let btn = $('#agregar_usuario') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#agregar_lavado').attr('disabled', true);
+        $('#agregar_usuario').attr('disabled', true);
 
         event.preventDefault();
 
         try {
 
         $.ajax({
-            url: "crear_lavado",
+            url: "crear_usuario",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                   table.ajax.reload();
-                $('#agregar_lavado').prop("required", true);
+                $('#agregar_usuario').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_agregar_lavado')[0].reset();
-                $('#modalCrearLavado').modal('hide');
+                $('#form_agregar_usuario')[0].reset();
+                $('#modalCrearUsuario').modal('hide');
                   
              //   table.ajax.reload();
              //   location.reload(true);
-                toastr["success"]("registro creado correctamente.");
+                toastr["success"]("usuario creado correctamente.");
          
             }
          });
@@ -613,32 +541,32 @@ let btn = $('#agregar_lavado')
 
 // =========================================
 
-/// EDITAR LAVADO
+/// EDITAR USUARIO
 
 // =========================================
 
-$('body').on('click', '.editarLavado', function (e) {
+$('body').on('click', '.editarUsuario', function (e) {
  
   e.preventDefault();
 
-        $('#form_editar_lavado')[0].reset();
+        $('#form_editar_usuario')[0].reset();
         let id = $(this).data('id');
       
       $.ajax({
-        url: 'editar_lavado/'+id,
+        url: 'editar_usuario/'+id,
         method: 'GET',
         data: {  id: id },
   
          
           success: function(data) {
-
+         
            
+            $('#modalEditarUsuario').modal('show');
            
-            $('#modalEditarLavado').modal('show');
-           
-            $('#modalEditarLavado input[name="id_lavado"]').val(data.id);
-            $('#modalEditarLavado input[name="lavado"]').val(data.lavado);
-            $('#modalEditarLavado input[name="valor_lavado"]').val(data.valor_lavado);
+            $('#modalEditarUsuario input[name="id_usuario"]').val(data.id);
+            $('#modalEditarUsuario input[name="nombre"]').val(data.nombre);
+            $('#modalEditarUsuario input[name="email"]').val(data.email);
+            $('#modalEditarUsuario input[name="perfil"]').val(data.perfil);
             
 
           }
@@ -650,12 +578,12 @@ $('body').on('click', '.editarLavado', function (e) {
   
  // =========================================
  
- // ACTUALIZAR DATOS DEL LAVADO
+ // ACTUALIZAR DATOS DEL USUARIO
 
  // =========================================
 
  
-$('#form_editar_lavado').off('submit').on('submit', function (event) {
+$('#form_editar_usuario').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -663,14 +591,14 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#editar_lavado') 
+let btn = $('#editar_usuario') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#editar_lavado').attr('disabled', true);
+        $('#editar_usuario').attr('disabled', true);
 
         event.preventDefault();
 
@@ -680,17 +608,17 @@ let btn = $('#editar_lavado')
       
       $.ajax({
        
-            url: 'actualizar_lavado/'+id,
+            url: 'actualizar_usuario/'+id,
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                 
-                $('#editar_lavado').prop("required", true);
+                $('#editar_usuario').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_editar_lavado')[0].reset();
-                $('#modalEditarLavado').modal('hide');
+                $('#form_editar_usuario')[0].reset();
+                $('#modalEditarUsuario').modal('hide');
                   
                 table.ajax.reload();
              //   location.reload(true);
@@ -715,7 +643,7 @@ let btn = $('#editar_lavado')
 
 
   
-$(document).on('click', '.eliminarLavado', function (event) {
+$(document).on('click', '.eliminarUsuario', function (event) {
      
   event.preventDefault();
      let id = $(this).data('id');
@@ -735,14 +663,14 @@ $(document).on('click', '.eliminarLavado', function (event) {
 
                 $.ajax({
                     type: 'delete',
-                    url: 'eliminar_lavado/'+id,
+                    url: 'eliminar_usuario/'+id,
                     data: {id:id},
                     dataType: 'JSON',
                     success: function (data) {
 
                    //   if (data.success === true) {
 
-                            swal("Datos de lavado eliminados correctamente!", data.message, "success");
+                            swal("Datos de usuario eliminados correctamente!", data.message, "success");
                         
                            table.ajax.reload();
                          //  $('#table_mascotas').html(data);

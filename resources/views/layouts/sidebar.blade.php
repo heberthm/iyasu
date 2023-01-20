@@ -48,7 +48,7 @@
 
 
         <li class="nav-item">
-          <a href="{{ url('/') }}" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+          <a href="{{ url('pago_honorarios') }}" class="nav-link {{ request()->is('pago_honorarios') ? 'active' : '' }}">
            <!-- <i class="nav-icon fas fa-list green"></i> -->
             <i class="nav-icon fas  fa-usd"></i>
             <p>
@@ -76,11 +76,23 @@
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-inicio green"></i>
           <p>
-          Configurar
+          Administración
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
+
+
+        <li class="nav-item">
+          <a href="{{ url('libro_diario') }}" class="nav-link {{ request()->is('libro_diario') ? 'Active' : '' }}">
+
+              <i class="nav-icon fas fa-book green"></i>
+              <p>
+               Libro diario
+              </p>
+           </a>   
+          </li>
+
 
         <li class="nav-item">
           <a href="{{ url('profesionales') }}" class="nav-link {{ request()->is('profesionales') ? 'Active' : '' }}">
@@ -127,7 +139,7 @@
         </ul>
       </li>
      
-
+        
       
       <li class="nav-item">
         <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'Active' : '' }}">
@@ -140,10 +152,6 @@
         </a>
        
       </li>
-
-
-       
-       
       
           <li class="nav-item">
                 <a class="nav-link" href="{{ url('logout') }}"

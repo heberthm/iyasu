@@ -36,24 +36,23 @@ use App\Http\Controllers\Controller;
 */
 
 
+
 Route::get('/', function () {
     return view('auth.login');
 });
-
-
-// Route::get('/auth.register', [App\Http\Controllers\Auth\RegisterController::class,'registration']);
 
 Auth::routes();
 
 
 
 
-Route::get('/inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
+Route::get('inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
+
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('auth.register');
 
 
-
-Route::get('search', [Select2SearchController::class,'index']);
-Route::get('ajax-autocomplete-search', [Select2SearchController::class, 'selectSearch']);
+Route::get('search', [App\Http\Controllers\Select2SearchController::class,'index']);
+Route::get('ajax-autocomplete-search', [App\Http\Controllers\Select2SearchController::class, 'selectSearch']);
 
 
 //Route::get('fullcalender', [CalendarController::class, 'index']);verificarcliente
@@ -154,9 +153,10 @@ Route::post('crear_lavado', [App\Http\Controllers\lavadosController::class, 'sto
 
 Route::get('editar_lavado/{id}', [App\Http\Controllers\lavadosController::class, 'edit']);
 
-Route::get('actualizar_lavado/{id}', [App\Http\Controllers\lavadosController::class, 'update']);
+Route::post('actualizar_lavado/{id}', [App\Http\Controllers\lavadosController::class, 'update']);
 
 Route::delete('eliminar_lavado/{id}', [App\Http\Controllers\lavadosController::class, 'destroy']);
+
 
 
 
@@ -174,6 +174,19 @@ Route::get('editar_profesional/{id}', [App\Http\Controllers\profesionalesControl
 Route::post('actualizar_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'update']);
 
 Route::delete('eliminar_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'destroy']);
+
+
+Route::get('pago_honorarios', [App\Http\Controllers\HonorariosProfesionalesController::class, 'index']);
+
+Route::get('buscar_pago_honorarios', [App\Http\Controllers\HonorariosProfesionalesController::class, 'selectSearchPagosHonorarios']);
+
+Route::post('crear_pago_honorarios', [App\Http\Controllers\HonorariosProfesionalesController::class, 'store']);
+
+Route::get('ver_pago_honorarios/{id}', [App\Http\Controllers\HonorariosProfesionalesController::class, 'show']);
+
+Route::get('editar_pago_honorarios/{id}', [App\Http\Controllers\HonorariosProfesionalesController::class, 'edit']);
+
+Route::post('actualizar_pago_honorarios/{id}', [App\Http\Controllers\HonorariosProfesionalesController::class, 'update']);
 
 
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');

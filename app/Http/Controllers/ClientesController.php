@@ -221,6 +221,7 @@ class ClientesController extends Controller
                         'celular' => $request->celular,
                         'direccion' => $request->direccion,
                         'barrio' => $request->barrio,
+                        'municipio' => $request->municipio,
                         'email' => $request->email,
                        
                        ];

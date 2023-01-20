@@ -192,7 +192,10 @@ DATATABLE MASCOTAS
               <div class="card-body">
                 <!-- Date -->
                 <div class="form-group">
-                <table class="table">
+
+               <div id="datos_clientes">   
+
+                <table class="table_clientes">
                       <tbody  style="font-size:95%;">
 
            
@@ -261,7 +264,7 @@ DATATABLE MASCOTAS
                       
                     </table>
 
-                      
+                
 
                                   
                 
@@ -1335,7 +1338,7 @@ DATATABLE MASCOTAS
                         </div>
             
             
-                        <div class="col-md-8">
+                        <div class="col-md-5">
             
                             <div class="form-group">
             
@@ -1352,6 +1355,21 @@ DATATABLE MASCOTAS
             
             
                
+                        <div class="col-md-3">
+            
+                            <div class="form-group">
+
+                              <label for="municipio" class="control-label">Municipio</label>
+
+                              <input type="text" name="municipio" class="form-control text-capitalize" id="municipio"  value="{{$id_cliente->municipio}}" 
+                              required onkeypress="return isNumber(event)">
+
+                                <div class="alert-message" id="municipioError"></div>
+
+                            </div>
+
+                        </div>
+
                       
             
                         <div class="col-md-4">
@@ -2378,7 +2396,9 @@ EDITAR DATOS DEL PACIENTE
                      //   $('#agregar_cliente').attr('disabled', true);
                         toastr["success"]("los datos se han editado correctamente");
                      
-                        location.reload(true);
+                       // location.reload(true);
+
+                     //  $('#datos_clientes').load('#datos_clientes');
                 },
                 error:function(error){
                     console.log(error);

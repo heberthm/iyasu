@@ -121,9 +121,9 @@ class lavadosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id_terapia = $request->input('id_terapia');
+        $id_lavado = $request->input('id_lavado');
 
-        $data = lavados::find($id_terapia);
+        $data = lavados::find($id_lavado);
           
         $data ->user_id           = $request->userId;
         $data->lavado             = $request->lavado;

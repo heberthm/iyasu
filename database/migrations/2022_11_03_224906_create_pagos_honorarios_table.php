@@ -14,12 +14,13 @@ class CreatePagosHonorariosTable extends Migration
     public function up()
     {
         Schema::create('pagos_honorarios', function (Blueprint $table) {
-            $table->bigIncrements('id_cliente');
-            $table->string('cedula',18)->unique()->required();
+            $table->bigIncrements('id');
             $table->string('user_id')->required();
             $table->string('id_profesional',25)->required();
-            $table->string('valor_pago',60)->nullable();
-            $table->string('fecha_pago',60)->nullable();
+            $table->string('cedula',18)->unique()->required();
+            $table->string('nombre',40)->nullable();
+            $table->string('celular',12)->nullable();
+            $table->string('valor_pago',12)->nullable();
             $table->timestamps();
         });
     }

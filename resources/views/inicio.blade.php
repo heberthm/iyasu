@@ -434,15 +434,14 @@ CALENDAR - AGENDAR   MEDICA
                 <label for="CboMedico" class="control-label">profesional</label>
 
 
-                <select class="form-control text-capitalize" name="medico" id="medico" onkeypress="return handleEnter(this, event)" required>
-                  <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
+                <select name="profesional" class="form-control" id="profesional"  required placeholder="Seleccione profesional">
+                <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
+                      @foreach($profesionales as $prof) 
+                      <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
+                      @endforeach
+                  </select>
 
-                  <option value="Eduardo Correa medina">Eduardo Correa medina</option>
-                  <option value="Eliana Buitrago Rosales">Eliana Buitrago Rosales</option>
 
-
-
-                </select>
 
               </div>
             </div>
@@ -699,15 +698,14 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 <label for="CboMedico" class="control-label">profesional</label>
 
 
-                <select class="form-control text-capitalize" name="medico" id="medico" onkeypress="return handleEnter(this, event)" required>
-                  <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
 
-                  <option value="Eduardo Correa medina">Eduardo Correa medina</option>
-                  <option value="Eliana Buitrago Rosales">Eliana Buitrago Rosales</option>
+                <select name="profesional" class="form-control" id="profesional"  required placeholder="Seleccione profesional">
+                <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
+                      @foreach($profesionales as $prof) 
+                      <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
+                      @endforeach
+                  </select>
 
-
-
-                </select>
               </div>
             </div>
 
@@ -1088,10 +1086,10 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                   </div>
               </div>
 
-         </div>   
+         
 
 
-            <div class="col-md-8">
+            <div class="col-md-12">
 
               <div class="form-group">
 
@@ -1355,10 +1353,10 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                   </div>
               </div>
 
-         </div>   
+        
 
 
-            <div class="col-md-8">
+            <div class="col-md-12">
 
               <div class="form-group">
 
@@ -1837,7 +1835,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
         return {
           results: $.map(data, function(item) {
             return {
-              text: item.nombre,
+              text: item.nombre + ' '+ ' - '+ 'Cédula' + ' '+ item.cedula + ' '+ ' - '+ 'Teléfono' + ' '+ item.celular,
               id: item.id_cliente
             }
 
@@ -1936,7 +1934,7 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
          return {
           results: $.map(data, function(item) {
             return {
-              text: item.nombre,
+              text: item.nombre + ' '+ ' - '+ 'Cédula' + ' '+ item.cedula,
               id: item.id_cliente,
               celular: item.celular,
            

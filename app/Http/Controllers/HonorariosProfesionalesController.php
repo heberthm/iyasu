@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\models\profesionales;
+use App\Models\pagos_honorarios;
+
+use App\Models\profesionales;
 
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
 
-
-class profesionalesController extends Controller
+class  HonorariosProfesionalesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,14 +28,14 @@ class profesionalesController extends Controller
     
             //  $id = $request->id_cliente;
   
-            $id = profesionales::select('id', 'cedula', 'nombre', 'celular', 'fecha_nacimiento',  
-                                          'profesion', 'email')->get();
+            $id = pagos_honorarios::select('id', 'id_profesional', 'nombre', 'cedula', 'celular','valor_pago', 'created_at', )->get();
+    
               
   
              return datatables()->of($id)
 
-             ->addColumn('fecha_nacimiento', function($row)  {  
-                $date = date("d-m-Y", strtotime($row->fecha_nacimiento));
+             ->addColumn('created_at', function($row)  {  
+                $date = date("d-m-Y  h:i a", strtotime($row->created_at));
                     return $date;
               })
            
@@ -44,12 +45,12 @@ class profesionalesController extends Controller
               ->addColumn('action', function($data) {
   
   
-                  $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalMostrarProfesional"  title="Ver datos del profesional" class="fa fa-eye verProfesional"></a> 
+                  $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalVerPagoHonorario"  title="Ver datos de honorarios de profesional" class="fa fa-eye verPagoHonorario"></a> 
                  
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarProfesional"  title="Editar datos del profesional" class="fa fa-edit editarProfesional"></a>
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarPagoHonorario"  title="Editar datos de pago de honorarios" class="fa fa-edit editarPagoHonorario"></a>
   
 
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'title="Eliminar datos del profesional" class="fa fa-trash eliminarProfesional"></a>';
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'title="Eliminar datos de honorario" class="fa fa-trash eliminarpagoHonorario"></a>';
                   
                    
                   return $actionBtn;
@@ -60,15 +61,33 @@ class profesionalesController extends Controller
               ->make(true);
           } 
   
-          $profesionales = profesionales::select('id','nombre')->get(); 
-
-         
-          return view('profesionales');
+                 
+          return view('honorarios_profesionales');
          // dd($id_cliente);
         
            
   }
-    
+   
+
+  public function selectSearchPagosHonorarios(Request $request)
+  {
+      
+
+      if($request->has('q')){
+          $search = $request->q;
+        
+          $profesional =profesionales::select('id',  "nombre", 'cedula', "celular")
+                 
+                  ->where('nombre',  'LIKE', "%${search}%" )
+                  ->get();
+      }
+      return response()->json($profesional);
+      
+  }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -90,24 +109,23 @@ class profesionalesController extends Controller
     {
         $validatedData = $request->validate([
           
-            'cedula'              =>    'required|max:18',
             'nombre'              =>    'required|max:40',
-            'profesion'           =>    'required|max:60',
-            'email'               =>    'required|max:40',
-            'celular'             =>    'required|max:25',
+            'cedula'              =>    'required|max:18',
+            'celular'             =>    'required|max:18',
+            'valor_honorario'     =>    'required|max:12',
+          
            ]);
    
           try {
-          $data = new profesionales;
+          $data = new pagos_honorarios();
    
           $data ->user_id           = $request->userId;
-          $data->cedula             = $request->cedula;
+          $data->id_profesional     = $request->id_profesional;
           $data->nombre             = $request->nombre;
+          $data->cedula             = $request->cedula;
           $data->celular            = $request->celular;
-          $data->profesion          = $request->profesion;
-          $data->fecha_nacimiento   = $request->fecha_nacimiento;    
-          $data->email              = $request->email;   
-           
+          $data->valor_pago         = $request->valor_honorario;
+              
        
               
           } catch (\Exception  $exception) {
@@ -127,30 +145,6 @@ class profesionalesController extends Controller
     }
 
 
-    
-    public function verificarProfesional(Request $request)
-    {
-      if($request->get('cedula'))
-      {
-       $cedula = $request->get('cedula');
-       $data = DB::table("profesionales")
-        ->where('cedula', $cedula)
-        ->where('user_id', Auth::user()->id)
-        ->count();
-       if($data > 0)
-       {
-        echo 'unique';
-       }
-       else
-       {
-        echo 'not_unique';
-       }
-     
-      }
-    } 
- 
-
-
     /**
      * Display the specified resource.
      *
@@ -159,8 +153,8 @@ class profesionalesController extends Controller
      */
     public function show($id)
     {
-        $id_profesional  = profesionales::find($id);
-        return response()->json($id_profesional);
+        $id_pagos  = pagos_honorarios::find($id);
+        return response()->json($id_pagos);
     }
 
     /**
@@ -171,8 +165,8 @@ class profesionalesController extends Controller
      */
     public function edit($id)
     {
-        $id_profesional  = profesionales::find($id);
-        return response()->json($id_profesional);
+        $id_pagos  = pagos_honorarios::find($id);
+        return response()->json($id_pagos);
     }
 
     /**
@@ -184,18 +178,17 @@ class profesionalesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id_profesional = $request->input('id_profesional');
+        $id = $request->input('id_pagos');
 
-        $data = profesionales::find($id_profesional);
-          
+        $data = pagos_honorarios::find($id);
+        
        
-        $data->cedula             = $request->cedula;
-        $data->nombre             = $request->nombre;
-        $data->celular            = $request->celular;
-        $data->profesion          = $request->profesion;
-        $data->fecha_nacimiento   = $request->fecha_nacimiento;    
-        $data->email              = $request->email;   
-               
+          $data->user_id           = $request->userId;
+          $data->nombre             = $request->nombre;
+          $data->cedula             = $request->cedula;
+          $data->celular            = $request->celular;
+          $data->valor_pago         = $request->valor_pago;
+            
 
         $data->save();
      
@@ -210,7 +203,7 @@ class profesionalesController extends Controller
      */
     public function destroy($id)
     {
-        profesionales::find($id)->delete();
+        pagos_honorarios::find($id)->delete();
      
         return response()->json(['success'=>'deleted successfully.']);
     }
