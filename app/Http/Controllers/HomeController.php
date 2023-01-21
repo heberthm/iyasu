@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\profesionales;
 
+use App\Models\terapias;
+
 class HomeController extends Controller
 {
     /**
@@ -27,6 +29,7 @@ class HomeController extends Controller
     {
 
         $profesionales = profesionales::select('id','nombre')->get(); 
-        return view('inicio', compact('profesionales'));
+        $terapias = terapias::select('id','terapia', 'color')->orderBy('terapia', 'ASC')->get(); 
+        return view('inicio', compact('profesionales', 'terapias'));
     }
 }

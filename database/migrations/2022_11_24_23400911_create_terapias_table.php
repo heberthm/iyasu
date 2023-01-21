@@ -17,6 +17,7 @@ class CreateTerapiasTable extends Migration
             $table->bigIncrements('id');
             $table->string('user_id')->required();
             $table->string('terapia',380)->nullable();
+            $table->string('color',15)->nullable();
             $table->string('valor_terapia',12)->nullable();
             
             $table->timestamps();

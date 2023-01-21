@@ -182,7 +182,7 @@ DATATABLE LISTA DE ESPERA
             
 
             
-            <div class="col-md-6">
+            <div class="col-md-5">
 
               <div class="form-group">
 
@@ -195,6 +195,20 @@ DATATABLE LISTA DE ESPERA
               </div>
             </div>
 
+
+            
+            <div class="col-md-3">
+              <div class="form-group">
+
+                <label for="color" class="control-label">Asignar color</label>
+
+                <input type="color" name="color" class="form-control" id="color" value="#1560F6" required autocomplete="off">
+                
+                  <div class="alert-message" id="valorTerapiaError"></div>
+                           
+               </div>
+            </div>
+ 
 
 
 
@@ -273,7 +287,7 @@ DATATABLE LISTA DE ESPERA
 
           <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-5">
 
               <div class="form-group"  >
 
@@ -290,8 +304,25 @@ DATATABLE LISTA DE ESPERA
             </div>
 
 
+             
+            <div class="col-md-3">
 
-            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="color" class="control-label">Asignar color</label>
+
+                <input type="color" name="color" class="form-control" id="color" value="#1560F6" required autocomplete="off">
+                
+                  <div class="alert-message" id="valorTerapiaError"></div>
+                           
+               </div>
+            </div>
+ 
+
+
+
+
+            <div class="col-md-3">
 
               <div class="form-group">
 
@@ -641,6 +672,7 @@ $('body').on('click', '.editarTerapia', function (e) {
            
             $('#modalEditarTerapia input[name="id_terapia"]').val(data.id);
             $('#modalEditarTerapia input[name="terapia"]').val(data.terapia);
+             $('#modalEditarTerapia input[name="color"]').val(data.color);
             $('#modalEditarTerapia input[name="valor_terapia"]').val(data.valor_terapia);
             
 
@@ -689,11 +721,11 @@ let btn = $('#editar_terapia')
             dataType: "json",
             success: function(data) {
                 
-                $('#editar_profesional').prop("required", true);
+                $('#editar_terapia').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_editar_')[0].reset();
-                $('#modalEditarProfesional').modal('hide');
+              //  $('#form_editar_')[0].reset();
+                $('#modalEditarTerapia').modal('hide');
                   
                 table.ajax.reload();
              //   location.reload(true);

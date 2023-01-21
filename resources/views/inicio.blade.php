@@ -313,14 +313,17 @@ CALENDAR - AGENDAR   MEDICA
             
             <div class="col-md-5">
 
-               <select id="selector" class="form-control"  placeholder="Filtrar eventos" >
+
+            <select id="selector" class="form-control"  placeholder="Filtrar eventos" >
+                   
+                       <option value="todos">Mostrar todos</option>
+                          @foreach($profesionales as $prof) 
+                          <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
+                          @endforeach
+            </select>
+            
                  
-                  <option value="todos">Mostrar todos</option>
-                  <option value="Eduardo Correa medina">Eduardo Correa medina</option>
-                  <option value="Eliana Buitrago Rosales">Eliana Buitrago Rosales</option>
-                  <option value="David Restrepo">David Restrepo</option>
-               </select>
-           
+                
             </div>
       
 
@@ -434,7 +437,7 @@ CALENDAR - AGENDAR   MEDICA
                 <label for="CboMedico" class="control-label">profesional</label>
 
 
-                <select name="profesional" class="form-control" id="profesional"  required placeholder="Seleccione profesional">
+                <select name="medico" class="form-control" id="medico"  required placeholder="Seleccione profesional">
                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
                       @foreach($profesionales as $prof) 
                       <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
@@ -446,43 +449,21 @@ CALENDAR - AGENDAR   MEDICA
               </div>
             </div>
 
-           
-
-            <div class="col-md-6">
+            <div class="col-lg-6">
 
 
               <div class="form-group">
 
                 <label for="Servicios" class="control-label">Terapias</label>
 
-                <select name="servicio" id="servicio" class="form-control " required  onChange="update()">
-
-                  <option value="" style='color: #cccccc'>Seleccionar una opción </option>
-
-                  <option style="color:68538B" value="#68538B" >control</option>
-
-                  <option style="color:#1560F6;" value="#1560F6" >terapia con imanes</option>
-
-                  <option style="color:#0CA46A;" value="#0CA46A">colonterapia</option>
-
-                  <option style="color:#8C7657;" value="#8C7657" >lodoterapia</option>
-
-                  <option style="color:#D51051;" value="#D51051">colonterapia - lodoterapia</option>
-
-                  <option style="color: #D51051;" value="#D51051" >drenaje</option>
-
-                  <option style="color:#0A5E2E;" value="#0A5E2E">masaje</option>
-
-                  <option style="color:#A845C9;" value="#A845C9">biomagnetismo</option>
-
-                  <option style="color:E83A07;" value="#E83A07">auriculoterapia</option>
-
-                  <option style="color:#BA963B;" value="#BA963B">terapia neural</option>
-
-
-
+                <select name="servicio" class="form-control" id="servicio">
+                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar terapia</option>
+                      @foreach($terapias as $terap) 
+                      <option value="{{$terap->color}}">{{$terap->terapia}}</option>
+                      @endforeach
                 </select>
-              </div>
+               
+               </div>
             </div>
 
 
@@ -699,18 +680,18 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
 
 
-                <select name="profesional" class="form-control" id="profesional"  required placeholder="Seleccione profesional">
-                <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
+                <select name="medico" class="form-control" id="medico"  required placeholder="Seleccione profesional">
+                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
                       @foreach($profesionales as $prof) 
                       <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
                       @endforeach
-                  </select>
+                </select>
 
               </div>
             </div>
 
         
-          
+                   
 
             <div class="col-lg-6">
 
@@ -719,32 +700,12 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="Servicios" class="control-label">Terapias</label>
 
-                <select name="servicios" id="servicios" class="form-control text-capitalize" required  onChange="editColor()">
-
-               
-                  <option value="">Seleccione una opción</option>
-
-                      <option style="color:68538B" value="#68538B" >control</option>
-
-                      <option style="color:#1560F6;" value="#1560F6" >terapia con imanes</option>
-
-                      <option style="color:#0CA46A;" value="#0CA46A">colonterapia</option>
-
-                      <option style="color:#8C7657;" value="#8C7657" >lodoterapia</option>
-
-                      <option style="color:#D51051;" value="#D51051">colonterapia - lodoterapia</option>
-
-                      <option style="color: #D51051;" value="#D51051" >drenaje</option>
-
-                      <option style="color:#0A5E2E;" value="#0A5E2E">masaje</option>
-
-                      <option style="color:#A845C9;" value="#A845C9">biomagnetismo</option>
-
-                      <option style="color:#E83A07;" value="#E83A07">auriculoterapia</option>
-
-                      <option style="color:#BA963B;" value="#BA963B">terapia neural</option>
-
-                  </select>
+                <select name="servicios" class="form-control" id="servicios"  required placeholder="Seleccionar terapia">
+                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar terapia</option>
+                      @foreach($terapias as $terap) 
+                      <option value="{{$terap->color}}">{{$terap->terapia}}</option>
+                      @endforeach
+                </select>
               </div>
             </div>
             </div>
@@ -758,7 +719,8 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="color" class="control-label">Color</label>
 
-                <input type="color"  id="color2" name="color"  value="#1560F6" class="form-control text-capitalize" required autocomplete="off">
+                <input type="color" id="color2" name="color" value="#1560F6" class="form-control text-capitalize" required autocomplete="off">
+
 
               </div>
             </div>
@@ -832,7 +794,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
           </div>
 
 
-          <input type="hidden" name="titulo" id="titulo" >
+          <input type="text" name="titulo" id="titulo" >
 
 
           <!-- 
@@ -1934,7 +1896,7 @@ SELECTBUSCARCLIENTE - CALENDARIO DE CITAS
          return {
           results: $.map(data, function(item) {
             return {
-              text: item.nombre + ' '+ ' - '+ 'Cédula' + ' '+ item.cedula,
+              text: item.nombre, // + ' '+ ' - '+ 'Cédula' + ' '+ item.cedula,
               id: item.id_cliente,
               celular: item.celular,
            
@@ -2467,8 +2429,9 @@ $('.selectBuscarCliente').html('');
         $('#ModalEdit #medico').val(event.medico);
         $('#ModalEdit #descripcion').val(event.descripcion);
           
-      //  $('#ModalEdit #servicios').html(event.title);
-        $('#ModalEdit #titulo').val(event.title);
+        $('#ModalEdit #servicios').val(event.title); 
+       
+       // $('#ModalEdit #titulo').val(event.title);
        
         $('#ModalEdit #color2').val(event.color);
 
@@ -2941,12 +2904,12 @@ EDITAR DATOS DE FULLCALENDAR
       
 
         $('#cliente').val(data.cliente);
-        $('#mascota').val(data.mascota);
+        $('#medico').val(data.medico);
         $('#especie').html(data.especie);
         $('#telefono').val(data.telefono);
         $('#descripcion').val(data.descripcion);
-       
-        $('#ModalEdit #titulo').val(data.title);
+        $('#servicios').val(data.title);
+        $('#titulo').val(data.title);
        
         $('#ModalEdit #color2').val(data.color);
 
@@ -2984,29 +2947,6 @@ EDITAR DATOS DE FULLCALENDAR
 
 
 
-<!-- =========================================
-
-VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
-
-============================================ -->
-
-
- <script type="text/javascript">
- 
-
-   
-  	function update() {
-				let select = document.getElementById('servicio');
-				let option = select.options[select.selectedIndex];
-
-				document.getElementById('color').value = option.value;
-		   	document.getElementById('title').value = option.text;
-			}
-
-	
-</script>
-
-
 
 
 <!-- =========================================
@@ -3016,18 +2956,50 @@ VINCULAR SELECT COLOR CON SERVICIOS - EDITAR
 ============================================ -->
 
 
- <script type="text/javascript">
- 
 
-  	function editColor() {
+<script type="text/javascript">
+ 
+ $("#servicios").change(function(){
+   
+
 				let select = document.getElementById('servicios');
 				let option = select.options[select.selectedIndex];
 
 				document.getElementById('color2').value = option.value;
 		   	document.getElementById('titulo').value = option.text;
-			}
+			
 
-		</script>
+    });   
+	
+</script>
+
+
+
+
+<!-- =========================================
+
+VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
+
+============================================ -->
+
+
+ <script type="text/javascript">
+ 
+ $("#servicio").change(function(){
+   
+
+				let select = document.getElementById('servicio');
+				let option = select.options[select.selectedIndex];
+
+				document.getElementById('color').value = option.value;
+		   	document.getElementById('title').value = option.text;
+			
+
+    });   
+	
+</script>
+
+
 
 
 
