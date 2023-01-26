@@ -8,6 +8,9 @@ use App\Models\profesionales;
 
 use App\Models\terapias;
 
+use App\Models\Cliente;
+
+
 class HomeController extends Controller
 {
     /**
@@ -27,7 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+       
         $profesionales = profesionales::select('id','nombre')->get(); 
         $terapias = terapias::select('id','terapia', 'color')->orderBy('terapia', 'ASC')->get(); 
         return view('inicio', compact('profesionales', 'terapias'));

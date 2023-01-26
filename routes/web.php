@@ -67,7 +67,7 @@ Route::post('verificar_cliente', [App\Http\Controllers\ClientesController::class
 Route::get('fullcalendareventmaster',[CalendarController::class,'index']);
 Route::post('fullcalendareventmaster/create',[CalendarController::class,'create']);
 Route::post('fullcalendareventmaster/update',[CalendarController::class,'update']);
-Route::post('fullcalendareventmaster/delete',[CalendarController::class,'destroy']);
+Route::delete('fullcalendareventmaster/delete/{id}',[CalendarController::class,'destroy']);
 Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'update_event']);
 
 Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');

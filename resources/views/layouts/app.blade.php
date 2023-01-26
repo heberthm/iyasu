@@ -30,6 +30,8 @@
 <!-- Datatable Jquery -->
     <link href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css" rel="stylesheet" />
    
+    <link href="{{asset('css/buttons.dataTables2.2.3.min.css')}}" rel="stylesheet"/>
+
 
        
 <!-- Select2 css -->
@@ -51,12 +53,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 
-          
+<!-- DateTimePicker css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+ 
+
 <!-- x-editable-bs4 css -->
-
-
-<link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/x-editable-bs4@1.5.5/dist/bootstrap4-editable/css/bootstrap-editable.css"> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/x-editable-bs4@1.5.5/dist/bootstrap4-editable/css/bootstrap-editable.css"> 
 
       <!--  <link href="{{asset('css/bootstrap-editable.css')}}" rel="stylesheet"/> -->
 
@@ -98,6 +100,10 @@ ARCHIVOS JS
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
 
 
+<!-- DateTimePicker js -->  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+
 <!-- Select2 js -->  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/es.min.js"  ></script>  
@@ -112,7 +118,7 @@ ARCHIVOS JS
 
 <!-- Font-awesome css -->
 <script src="https://kit.fontawesome.com/d57c775029.js" crossorigin="anonymous"></script>
-
+ 
 
 <!--  tippy js -->
 <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.cjs.min.js"></script>
@@ -122,13 +128,60 @@ ARCHIVOS JS
 <!-- DataTable js -->
 <script src='https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js'  defer ></script>
 
+
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.js" defer></script>
+
+<script src="{{asset('js/dataTables.buttons1.2.4.js')}}" defer></script>
+
+<script src="{{asset('js/buttons.print1.2.4.js')}}" defer></script>
+
+
 <script src='https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js'  defer ></script>
 
 <script src='https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js'  defer ></script>
 
 <script src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js' defer></script>
 
-<script src='https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js' defer></script>
+
+
+<!--If Print button or buttons:true, this is required for any Buttons or Dom items to appear -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js" defer></script> -->
+
+<script src="{{asset('js/buttons.print1.2.4.js')}}" defer></script>
+
+
+<!--Required for Excel button to appear-->
+ <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js" defer ></script> ---->
+
+ <script src="{{asset('js/jszip2.5.0.js')}}" defer></script>
+
+
+<!--Required for PDF button to appear-->
+<!-- <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.js"></script> -->
+
+<script src="{{asset('js/pdfmake0.1.18.js')}}" defer></script>
+
+
+ 
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script> -->
+
+<script src="{{asset('js/vfs_fonts0.1.36.js')}}" defer></script>
+
+
+
+<!-- Font-awesome js -->
+<!-- <script src="https://kit.fontawesome.com/d57c775029.js" crossorigin="anonymous"></script> -->
+
+ <script src="{{asset('js/kit.fontawesome-d57c775029.js')}}" defer></script>
+
+
+<!-- SweetAlert2 -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script> -->
+
+<script src="{{asset('js/sweetalert2.all.min.js')}}" defer></script>
+
+
 
 
 

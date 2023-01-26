@@ -476,7 +476,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="color" class="control-label">Color</label>
 
-                <input type="color" id="color" name="color" value="#1560F6" class="form-control text-capitalize" required autocomplete="off">
+                <input type="color" id="color" name="color" list="ListadoColores" value="#1560F6" class="form-control text-capitalize" required autocomplete="off">
 
               </div>
             </div>
@@ -503,13 +503,16 @@ CALENDAR - AGENDAR   MEDICA
 
               <div class="form-group">
 
-                <label for="hora_ini" class="control-label">Hora ini</label>
+              <label for="hora_ini" class="control-label">Hora inicial</label>
+              
+              <div class="input-group bootstrap-timepicker timepicker pull-right">
+               
+              <input id="start" name="start" type="text" class="form-control input-small" required>
+             
+                </div>
 
-                <input type="text" name="hora_ini" class="form-control" id="hora_ini" readonly >
               </div>
             </div>
-
-
 
 
 
@@ -519,14 +522,14 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="hora_fin" class="control-label">Hora fin</label>
 
-                <input type="text" name="end" class="form-control" id="hora_fin" readonly >
+                <input type="text" name="end" class="form-control" id="end"  >
 
               </div>
             </div>
 
 
 
-
+     <!--
 
             <div class="col-md-3">
 
@@ -541,18 +544,14 @@ CALENDAR - AGENDAR   MEDICA
 
           </div>
 
+        -->
 
 
           <!--    <div class="form-group">
         <label for="start" class="col-sm-2 control-label">Fecha inicial</label>
   
       -->
-        <div class="col-sm-10">
-         
-          <input type="hidden" name="start" class="form-control" id="start" readonly>
-         
-        </div>
-
+      
         
       		<input type="hidden" id="title" name="title" >
         
@@ -562,17 +561,7 @@ CALENDAR - AGENDAR   MEDICA
 
           
 
-          <!-- 
-          <div class="form-group">
-        <label for="end" class="col-sm-2 control-label">Fecha final</label>
-
-  -->
-          <div class="col-sm-10">
-        
-          <input type="hidden" name="end" class="form-control" id="end" readonly>
-        
-        </div>
-    
+         
       </div>
 
     
@@ -626,6 +615,9 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
   <div class="modal-header">
    
       <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-edit mr-3"></span>Editar citas</h5>
+
+
+      
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -747,7 +739,12 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="hora_ini" class="control-label">Hora ini</label>
 
-                <input type="text" name="hora_ini" class="form-control" id="hora_ini" readonly>
+                <div class='input-group date' id='hora_ini'>
+                  <input type='text' class="form-control" name="hora_ini" id="hora_ini" />
+                  <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
               </div>
             </div>
 
@@ -761,13 +758,14 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="hora_fin" class="control-label">Hora fin</label>
 
-                <input type="text" name="end" class="form-control" id="hora_fin" readonly>
+                <input type="text" name="hora_fin" class="form-control" id="hora_fin" >
 
               </div>
             </div>
 
 
 
+            <!--
 
 
             <div class="col-md-3">
@@ -784,6 +782,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
           </div>
 
 
+          -->
 
           <!--    <div class="form-group">
 <label for="start" class="col-sm-2 control-label">Fecha inicial</label>
@@ -794,7 +793,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
           </div>
 
 
-          <input type="text" name="titulo" id="titulo" >
+          <input type="hidden" name="titulo" id="titulo" >
 
 
           <!-- 
@@ -826,6 +825,9 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 -->
 
       <div class="modal-footer">
+
+     
+      <button type="button" id="eliminar_evento" name="eliminar_evento" class="btn btn-outline-danger elminar_evento mr-auto">Eliminar evento</button>
 
         <button type="submit" id="Editar_cita" name="Editar_cita" class="btn btn-primary">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -1378,6 +1380,23 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
 
 
+<datalist id="ListadoColores">
+    <option>#831d9f</option>
+    <option>#ce3b3b</option>
+    <option>#5e66d4</option>
+    <option>#33997a</option>
+    <option>#f05724</option>
+    <option>#939e3d</option>
+    <option>#be7b3c</option>
+    <option>#e8d15e</option>
+    <option>#c26fd3</option>
+    <option>#c2bd1e</option>
+    <option>#000000</option>
+    <option>#013298</option>
+    <option>#9602c7</option>
+    <option>#4d4d4d</option>
+    <option>#21BA45</option>
+</datalist>
 
 
 
@@ -1605,6 +1624,27 @@ $(document).ready(function () {
 
 </script>
 
+
+
+
+<script type="text/javascript">
+
+//============================================
+
+// DATATIMEPICKER HORA_INI EDITAR CALENDARIO
+
+//============================================
+
+
+    $(function () {
+
+        $('#start').datetimepicker();
+        locale: 'es'
+       
+  
+    });
+
+</script>
 
 
 
@@ -2341,10 +2381,10 @@ $('.selectBuscarCliente').html('');
       //displayEventTime: true,
       // themeSystem: 'bootstrap4',
 
-        timeFormat: "h:mm a",
+        timeFormat: "H:mm a",
 
         slotLabelFormat: [
-          'h: (mm)a',
+          'H: (mm)a',
         ],
 
 
@@ -2421,8 +2461,6 @@ $('.selectBuscarCliente').html('');
      
           
         $('#ModalEdit #cliente').val(event.cliente);
-        $('#ModalEdit #mascota').val(event.mascota);
-        $('#ModalEdit #especie').val(event.especie);
         $('#ModalEdit #telefono').val(event.telefono);
        // $('#ModalEdit #email').html(event.email);
 
@@ -2431,12 +2469,12 @@ $('.selectBuscarCliente').html('');
           
         $('#ModalEdit #servicios').val(event.title); 
        
-       // $('#ModalEdit #titulo').val(event.title);
+        $('#ModalEdit #titulo').val(event.title);
        
         $('#ModalEdit #color2').val(event.color);
 
-        $('#ModalEdit #hora_ini').val(moment(event.start).format('hh:mm A'));
-        $('#ModalEdit #hora_fin').val(moment(event.end).format('hh:mm A'));
+        $('#ModalEdit #hora_ini').val(moment(event.start).format('YYYY-MM-DD HH:mm:ss'));
+        $('#ModalEdit #hora_fin').val(moment(event.end).format('YYYY-MM-DD HH:mm:ss'));
         $('#ModalEdit #fecha_actual').val(moment(event.start).format('DD-MM-YYYY'));
        
 
@@ -2494,15 +2532,15 @@ $('.selectBuscarCliente').html('');
       events: SITEURL + "inicio",
       displayEventTime: true,
       eventLimit: true, // allow "more" link when too many events
-      minTime: "08:00",
+      minTime: "07:00",
       maxTime: "20:00",
       nowIndicator: true,
-      timeFormat: "h:mm a",
+      timeFormat: "H:mm a",
       slotDuration: '00:30:00',
 
       
       slotLabelFormat: [
-        'h: (mm)a',
+        'H: (mm)a',
       ],
 
       header: {
@@ -2689,6 +2727,33 @@ $('.selectBuscarCliente').html('');
 
       eventClick: function(event) {
 
+
+      $('#ModalEdit #id').val(event.id);
+     
+          
+     $('#ModalEdit #cliente').val(event.cliente);
+     $('#ModalEdit #telefono').val(event.telefono);
+    // $('#ModalEdit #email').html(event.email);
+
+     $('#ModalEdit #medico').val(event.medico);
+     $('#ModalEdit #descripcion').val(event.descripcion);
+       
+     $('#ModalEdit #servicios').val(event.title); 
+    
+     $('#ModalEdit #titulo').val(event.title);
+    
+     $('#ModalEdit #color2').val(event.color);
+
+     $('#ModalEdit #hora_ini').val(moment(event.start).format('YYYY-MM-DD HH:mm:ss'));
+     $('#ModalEdit #hora_fin').val(moment(event.end).format('YYYY-MM-DD HH:mm:ss'));
+     $('#ModalEdit #fecha_actual').val(moment(event.start).format('DD-MM-YYYY'));
+    
+
+     $('#ModalEdit').modal('show');
+
+
+        /*
+
         $('.popover').popover('hide');
         let deleteMsg = confirm("Desea eliminar este evento?");
         if (deleteMsg) {
@@ -2705,7 +2770,10 @@ $('.selectBuscarCliente').html('');
             }
           });
         }
+        */
       }
+      
+      
     });
 
 
@@ -3424,6 +3492,77 @@ e.preventDefault();
 
 
 });
+
+</script>
+
+
+
+<script>
+
+// ======================================= 
+
+//  ELIMINAR EVENTO DE CALENDARIO
+
+// ========================================= 
+
+
+
+  
+$('#eliminar_evento').off('click').on('click', function (event, e) {     
+
+     event.preventDefault();
+
+        let id = $('#id').val();
+
+       swal({
+               title: "Esta seguro de eliminar?",
+               text: "La acción es permanente!",
+               type: "warning",
+               showCancelButton: !0,
+               confirmButtonText: "Si, Eliminar",
+               cancelButtonText: "No, cancelar",
+               reverseButtons: !0
+        
+             }).then(function (e) {
+   
+               if (e.value === true) {
+                   let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+   
+                   $.ajax({
+                       type: 'delete',
+                       url: '/fullcalendareventmaster/delete/'+id,
+                      
+                       dataType: 'JSON',
+                       success: function (data) {
+   
+                      //   if (data.success === true) {
+   
+                               swal("Cita eliminada correctamente!", data.message, "success");
+                           
+                               $('#ModalEdit').modal('hide');
+                               
+                               $('#calendar').fullCalendar('refetchEvents');
+                               $('#calendar2').fullCalendar('refetchEvents');
+
+                             
+                   
+                         //  } else {
+                        //       swal("Error!", data.message, "error");
+                        //   }
+                       }
+                   });
+   
+               } else {
+                   e.dismiss;
+               }
+   
+           }, function (dismiss) {
+               return false;
+           })
+  
+   });
+   
+ 
 
 </script>
 

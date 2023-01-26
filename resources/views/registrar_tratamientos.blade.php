@@ -992,11 +992,29 @@ $('#livesearch').on('select2:select', function(evt){
   
            processing: true,
            serverSide: true,
-           paging: true,
-           info: true,
-           filter: true,
-           responsive: true,
-        
+          
+           
+           dom: '<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"<"dt-buttons btn-group flex-wrap"B>><"col-sm-12 col-md-4"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+
+           
+          buttons: [ 
+                    
+                   { extend: 'excelHtml5', footer: true, text: 'Excel', title: 'Listado tratamientos de clientes',
+                  
+                    exportOptions: {
+                    columns: [ 0, 1, 2, 3]
+                    
+                  }},
+
+                   { extend: 'pdfHtml5', footer: true, text: 'PDF', title: 'Listado tratamientos de clientes',
+                  
+                    exportOptions: {
+                    columns: [0, 1, 2, 3]
+                    
+                  }}, 
+            
+                ],
+         
                             
            type: "GET",
            ajax: 'registrar_tratamientos',
@@ -1038,7 +1056,7 @@ $('#livesearch').on('select2:select', function(evt){
                         "thousands": ",",
                         "lengthMenu": "Mostrar _MENU_ Entradas",
                         "loadingRecords": "Cargando...",
-                        "processing": "Procesando...",
+                        
                         "search": "Buscar:",
                         "zeroRecords": "Sin resultados encontrados",
                         "paginate": {

@@ -189,13 +189,11 @@ DATATABLE MASCOTAS
                  -->
 
               </div>
+             
               <div class="card-body">
                 <!-- Date -->
                 <div class="form-group">
-
-               <div id="datos_clientes">   
-
-                <table class="table_clientes">
+                <table class="table" id="table_clientes">
                       <tbody  style="font-size:95%;">
 
            
@@ -254,7 +252,7 @@ DATATABLE MASCOTAS
                      
                        <td>
                         
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarCliente" style="text-align:left"><span class="fa fa-edit fa-fw" tabindex="3"></span> Editar datos del paciente</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarCliente" style="text-align:left"><span class="fa fa-edit fa-fw" tabindex="3"></span> Editar datos del cliente</button>
                      <!--   <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarCliente" onclick="editarCliente();" >
                          <span class="fa fa-edit fa-fw" ></span> Editar datos </button>  -->
                         </td>
@@ -264,7 +262,7 @@ DATATABLE MASCOTAS
                       
                     </table>
 
-                
+                      
 
                                   
                 
@@ -2396,7 +2394,9 @@ EDITAR DATOS DEL PACIENTE
                      //   $('#agregar_cliente').attr('disabled', true);
                         toastr["success"]("los datos se han editado correctamente");
                      
-                       // location.reload(true);
+                        location.reload(true);
+                       // table_clientes.draw(true);
+                       // table.append(tbody);
 
                      //  $('#datos_clientes').load('#datos_clientes');
                 },

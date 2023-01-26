@@ -45,7 +45,7 @@ class CalendarController extends Controller
         'title'        =>    'required|max:90',
         'cliente'      =>    'required|max:35',
         'telefono'     =>    'required|max:25',
-        'medico'       =>    'required|max:25',
+        'medico'       =>    'required|max:45',
         'color'        =>    'required|max:25',
       ]);
    
@@ -106,7 +106,8 @@ class CalendarController extends Controller
                         'userId' => $request->userId,
                         'descripcion' => $request->descripcion,
                         'medico' => $request->medico,
-                        'color' => $request->color,
+                        'start' => $request->hora_ini,
+                        'end' => $request->hora_fin,
                        ];
           
           $event  = Events::where($id)->update($updateArray);
@@ -121,7 +122,7 @@ class CalendarController extends Controller
    /* ELIMINAR DATOS DE EVENTOS  */ 
  /* ============================= */ 
 
-    public function destroy(Request $request)
+ public function destroy(Request $request)
     {
         $event = Events::where('id',$request->id)->delete();
    

@@ -776,10 +776,29 @@ $('#id_profesional').val('');
   
            processing: true,
            serverSide: true,
-           paging: true,
-           info: true,
-           filter: true,
-           responsive: true,
+          
+           
+           dom: '<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"<"dt-buttons btn-group flex-wrap"B>><"col-sm-12 col-md-4"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+
+           
+          buttons: [ 
+                    
+                   { extend: 'excelHtml5', footer: true, text: 'Excel', title: 'Pago de honorarios a médicos',
+                  
+                    exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4 ]
+                    
+                  }},
+
+                   { extend: 'pdfHtml5', footer: true, text: 'PDF', title: 'Pago de honorarios a médicos',
+                  
+                    exportOptions: {
+                    columns: [0, 1, 2, 3, 4 ]
+                    
+                  }}, 
+            
+                ],
+         
         
                             
            type: "GET",
