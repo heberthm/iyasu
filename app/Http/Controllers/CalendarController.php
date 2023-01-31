@@ -42,7 +42,7 @@ class CalendarController extends Controller
 
      
       $validatedData = $request->validate([
-        'title'        =>    'required|max:90',
+        'servicios2'   =>    'required|max:90',
         'cliente'      =>    'required|max:35',
         'telefono'     =>    'required|max:25',
         'medico'       =>    'required|max:45',
@@ -52,7 +52,7 @@ class CalendarController extends Controller
 
 
         $insertArr = [ 
-                       'title' => $request->title,
+                       'title' => $request->servicios2,
                        'start' => $request->start,
                        'end' => $request->end,
                        'cliente' => $request->cliente,
@@ -100,12 +100,13 @@ class CalendarController extends Controller
 
              $id = array('id' => $request->id);
         $updateArray = [
-                        'title' => $request->titulo,
+                        'title' => $request->servicios,
                         'cliente' => $request->cliente,
                         'telefono' => $request->telefono,
                         'userId' => $request->userId,
                         'descripcion' => $request->descripcion,
                         'medico' => $request->medico,
+                        'color' => $request->color2,
                         'start' => $request->hora_ini,
                         'end' => $request->hora_fin,
                        ];

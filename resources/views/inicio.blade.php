@@ -481,13 +481,20 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="Servicios" class="control-label">Terapias</label>
 
+                <input type="text" id="servicios2" name="servicios2"  class="form-control" required autocomplete="off">
+
+
+                <!--
+
                 <select name="servicio" class="form-control" id="servicio">
                  <option value="" selected="selected" style='color: #cccccc'>Seleccionar terapia</option>
                       @foreach($terapias as $terap) 
-                      <option value="{{$terap->color}}">{{$terap->terapia}}</option>
+                      <option value="{{$terap->color}}">{{$terap->terapia}} {{$terap->color}}</option>
                       @endforeach
                 </select>
                
+               -->
+
                </div>
             </div>
 
@@ -741,7 +748,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="color" class="control-label">Color</label>
 
-                <input type="color" id="color2" name="color" list="ListadoColores" value="#1560F6" class="form-control" required autocomplete="off">
+                <input type="color" id="color2" name="color2" list="ListadoColores" value="#1560F6" class="form-control" required autocomplete="off">
 
 
               </div>
@@ -1766,7 +1773,7 @@ $(document).ready(function () {
 
   
 function getlist_calendartipos() {
-            let list = ['Control', 'Consulta', 'Domicilio', 'Vacuna', 'Cirugía', 'Toma de muestra', 'Ecografía', 'Radiología', 'Punción', 'Odontología', 'Electrocardiograma', 'Ecocardiograma', 'Reparto', 'Certificación', 'Citología', 'Oncología', 'Control telefónico'];
+            let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
             
             return list
         }
@@ -1775,46 +1782,35 @@ function getlist_calendartipos() {
          
 //============================================
 
-// LISTADO DE TERAPIAS DROPDONW
+// LISTADO DE COLORES Y TERAPIAS 
 
 //============================================
 
 
 function calendar_colors(v) {
-            if (v == 'Cirugía') {
-                color = '#0070c6';
-            } else if (v == 'Peluquería') {
-                color = '#c8beac';
-            } else if (v == 'Control') {
-                color = '#fd0100';
-            } else if (v == 'Consulta') {
-                color = '#bc9bff';
-            } else if (v == 'Domicilio') {
-                color = '#93d04f';
-            } else if (v == 'Vacuna') {
-                color = '#ff679a';
-            } else if (v == 'Toma de muestra') {
-                color = '#ffc000';
-            } else if (v == 'Ecografía') {
-                color = '#35ccfb';
-            } else if (v == 'Radiología') {
-                color = '#ff00fe';
-            } else if (v == 'Punción') {
-                color = '#a32606';
-            } else if (v == 'Odontología') {
-                color = '#008001';
-            } else if (v == 'Electrocardiograma') {
-                color = '#969696';
-            } else if (v == 'Ecocardiograma') {
-                color = '#000000';
-            } else if (v == 'Reparto') {
-                color = '#013298';
-            } else if (v == 'Certificación') {
-                color = '#9602c7';
-            } else if (v == 'Citología') {
-                color = '#4d4d4d';
+            if (v == 'auriculoterapia') {
+                color = '#c2bd1e';
+            } else if (v == 'biomagnetismo') {
+                color = '#c26fd3';
+            } else if (v == 'colonterapia') {
+                color = '#5e66d4';
+            } else if (v == 'colonterapia - lodoterapia') {
+                color = '#939e3d';
+            } else if (v == 'control') {
+                color = '#33997a';
+            } else if (v == 'drenaje') {
+                color = '#be7b3c';
+            } else if (v == 'lodoterapia') {
+                color = '#5e66d4';
+            } else if (v == 'masaje') {
+                color = '#e8d15e';
+            } else if (v == 'terapia con imanes') {
+                color = '#f05724';
+            } else if (v == 'terapia neural') {
+                color = '#831d9f';
+          
             } else {
-                color = '#21BA45'
+                color = '#3d85c6'
             }
             return color
         }
@@ -1830,7 +1826,7 @@ function calendar_colors(v) {
 
 
 
-let $color = $('#ModalEdit').find('input[name="color"]');
+let $color = $('#ModalEdit').find('input[name="color2"]');
 
           // autocomplete titulo
           let list = getlist_calendartipos();
@@ -1860,21 +1856,71 @@ let $color = $('#ModalEdit').find('input[name="color"]');
             tribute.detach($titulo);
             tribute.attach($titulo);
 
+            $titulo.off('mousedown').on('mousedown', function () {
+                tribute.showMenuForCollection($titulo[0]);
+            });
+            $titulo.off('focusout').on('focusout', function () {
+                $('.tribute-container').hide();
+            });
+
+
+
+               
+//==================================================
+
+// AUTOCOMPLETAR DROPDOWN SERVICIOS 2 CON tribute js
+
+//==================================================
+
+
+
+let $color2 = $('#ModalAdd').find('input[name="color"]');
+
+          // autocomplete titulo
+          let list2 = getlist_calendartipos();
+            let tribute2 = new Tribute({
+                autocompleteMode: true,
+                noMatchTemplate: function () {
+                    return "";
+                },
+                menuItemTemplate: function (item) {
+                    let color = calendar_colors(item.original.value);
+                    return item.string + ' <i style="color:' + color + ';" class="fas fa-circle ml-2"></i>';
+                },
+                selectTemplate: function (item) {
+                    color = calendar_colors(item.original.value);
+                    $color2.val(color);
+                    return item.original.value;
+                },
+              
+                values: $.map(list2, function (value, i) {
+                    return {'key': value, 'value': value}
+                })
+            });
+
+            let $titulo2 = $('#ModalAdd').find('input[name="servicios2"]');
+
+
+            tribute2.detach($titulo2);
+            tribute2.attach($titulo2);
+
+            $titulo2.off('mousedown').on('mousedown', function () {
+                tribute2.showMenuForCollection($titulo2[0]);
+            });
+            $titulo2.off('focusout').on('focusout', function () {
+                $('.tribute-container').hide();
+            });
+ 
+ 
+
 
 });
 
 
 
-</script>
-
-
-
-
-
-<script>
-
 
 </script>
+
 
 
 
@@ -2701,8 +2747,7 @@ $('.selectBuscarCliente').html('');
           
         $('#ModalEdit #servicios').val(event.title); 
        
-        $('#ModalEdit #titulo').val(event.title);
-       
+             
         $('#ModalEdit #color2').val(event.color);
 
         $('#ModalEdit #hora_ini').val(moment(event.start).format('YYYY-MM-DD HH:mm:ss'));
@@ -3236,17 +3281,17 @@ VINCULAR SELECT COLOR CON SERVICIOS - EDITAR
 
 ============================================ -->
 
-
+<!--
 
 <script type="text/javascript">
  
- $("#servicios").change(function(){
+ $("#servicios2").change(function(){
    
 
-				let select = document.getElementById('servicios');
+				let select = document.getElementById('servicios2');
 				let option = select.options[select.selectedIndex];
 
-				document.getElementById('color2').value = option.value;
+				document.getElementById('color').value = option.value;
 		   	document.getElementById('titulo').value = option.text;
 			
 
@@ -3254,7 +3299,7 @@ VINCULAR SELECT COLOR CON SERVICIOS - EDITAR
 	
 </script>
 
-
+  -->
 
 
 <!-- =========================================
