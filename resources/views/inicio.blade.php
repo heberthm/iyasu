@@ -61,6 +61,31 @@
   pointer-events:none;
 }
 
+.tribute-container li {
+  padding: 5px 5px;
+  cursor: pointer;
+  background: #fff;
+  font-size: 0.8rem;
+}
+
+.tribute-container li.highlight {
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.tribute-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: auto;
+    max-height: 136px;
+    max-width: 500px;
+    overflow: auto;
+    display: block;
+    z-index: 999999;
+    padding-top: 10px;
+}
 
 </style>
 
@@ -476,7 +501,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="color" class="control-label">Color</label>
 
-                <input type="color" id="color" name="color" list="ListadoColores" value="#1560F6" class="form-control text-capitalize" required autocomplete="off">
+                <input type="color" id="color" name="color" list="ListadoColores" value="#1560F6" class="form-control" required autocomplete="off">
 
               </div>
             </div>
@@ -505,11 +530,10 @@ CALENDAR - AGENDAR   MEDICA
 
               <label for="hora_ini" class="control-label">Hora inicial</label>
               
-              <div class="input-group bootstrap-timepicker timepicker pull-right">
                
-              <input id="start" name="start" type="text" class="form-control input-small" required>
+              <input type="text" id="start" name="start"  class="form-control" required>
              
-                </div>
+              
 
               </div>
             </div>
@@ -522,7 +546,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="hora_fin" class="control-label">Hora fin</label>
 
-                <input type="text" name="end" class="form-control" id="end"  >
+                <input type="text" name="end" class="form-control" id="end" required >
 
               </div>
             </div>
@@ -671,7 +695,6 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 <label for="CboMedico" class="control-label">profesional</label>
 
 
-
                 <select name="medico" class="form-control" id="medico"  required placeholder="Seleccione profesional">
                  <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
                       @foreach($profesionales as $prof) 
@@ -692,12 +715,19 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="Servicios" class="control-label">Terapias</label>
 
+
+                <input type="text" id="servicios" name="servicios" value="#1560F6" class="form-control" required autocomplete="off">
+
+
+        <!--
                 <select name="servicios" class="form-control" id="servicios"  required placeholder="Seleccionar terapia">
-                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar terapia</option>
+                 <option value="" selected="selected" ></option>
                       @foreach($terapias as $terap) 
                       <option value="{{$terap->color}}">{{$terap->terapia}}</option>
                       @endforeach
                 </select>
+         -->
+
               </div>
             </div>
             </div>
@@ -711,7 +741,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="color" class="control-label">Color</label>
 
-                <input type="color" id="color2" name="color" value="#1560F6" class="form-control text-capitalize" required autocomplete="off">
+                <input type="color" id="color2" name="color" list="ListadoColores" value="#1560F6" class="form-control" required autocomplete="off">
 
 
               </div>
@@ -738,16 +768,12 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               <div class="form-group">
 
                 <label for="hora_ini" class="control-label">Hora ini</label>
+              
+                  <input type='text' class="form-control" name="hora_ini" id="hora_ini" required>
+                       
 
-                <div class='input-group date' id='hora_ini'>
-                  <input type='text' class="form-control" name="hora_ini" id="hora_ini" />
-                  <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
               </div>
             </div>
-
 
 
 
@@ -758,7 +784,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="hora_fin" class="control-label">Hora fin</label>
 
-                <input type="text" name="hora_fin" class="form-control" id="hora_fin" >
+                <input type="text" name="hora_fin" class="form-control" id="hora_fin" required>
 
               </div>
             </div>
@@ -827,7 +853,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
       <div class="modal-footer">
 
      
-      <button type="button" id="eliminar_evento" name="eliminar_evento" class="btn btn-outline-danger elminar_evento mr-auto">Eliminar evento</button>
+      <button type="button" id="eliminar_evento" name="eliminar_evento" class="btn btn-outline-danger elminar_evento mr-auto">Eliminar cita</button>
 
         <button type="submit" id="Editar_cita" name="Editar_cita" class="btn btn-primary">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -1620,9 +1646,61 @@ $(document).ready(function () {
    $("body").on("contextmenu",function(e){
      return false;
    });
+
+  });
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+//============================================
+
+// DATATIMEPICKER HORA_INI GUARDAR CITA CALENDARIO
+
+//============================================
+
+
+$(document).ready(function () {
+
+  jQuery.datetimepicker.setLocale('es');
+
+  jQuery('#start').datetimepicker({
+      format:'Y-m-d H:i',
+      lang:'es',
+
+  });
 });
 
 </script>
+
+
+
+
+
+<script type="text/javascript">
+
+//============================================
+
+// DATATIMEPICKER HORA_INI GUARDAR CITA CALENDARIO
+
+//============================================
+
+
+$(document).ready(function () {
+
+  $('#end').datetimepicker({
+      format:'Y-m-d H:i',
+     
+      
+  });
+});
+
+
+</script>
+
 
 
 
@@ -1636,15 +1714,169 @@ $(document).ready(function () {
 //============================================
 
 
-    $(function () {
+$(document).ready(function () {
 
-        $('#start').datetimepicker();
-        locale: 'es'
-       
+ 
+  jQuery('#hora_ini').datetimepicker({
+
+    format:'Y-m-d H:i',
   
-    });
+  });
+});
 
 </script>
+
+
+
+
+
+<script type="text/javascript">
+
+//============================================
+
+// DATATIMEPICKER HORA_INI EDITAR CALENDARIO
+
+//============================================
+
+
+$(document).ready(function () {
+
+  $('#hora_fin').datetimepicker({
+      format:'Y-m-d H:i',
+     
+     
+  });
+});
+
+
+</script>
+
+
+
+
+<script>
+
+//============================================
+
+// LISTA DROPDOWN DE TERAPIAS
+
+//============================================
+
+$(document).ready(function () {
+
+  
+function getlist_calendartipos() {
+            let list = ['Control', 'Consulta', 'Domicilio', 'Vacuna', 'Cirugía', 'Toma de muestra', 'Ecografía', 'Radiología', 'Punción', 'Odontología', 'Electrocardiograma', 'Ecocardiograma', 'Reparto', 'Certificación', 'Citología', 'Oncología', 'Control telefónico'];
+            
+            return list
+        }
+
+   
+         
+//============================================
+
+// LISTADO DE TERAPIAS DROPDONW
+
+//============================================
+
+
+function calendar_colors(v) {
+            if (v == 'Cirugía') {
+                color = '#0070c6';
+            } else if (v == 'Peluquería') {
+                color = '#c8beac';
+            } else if (v == 'Control') {
+                color = '#fd0100';
+            } else if (v == 'Consulta') {
+                color = '#bc9bff';
+            } else if (v == 'Domicilio') {
+                color = '#93d04f';
+            } else if (v == 'Vacuna') {
+                color = '#ff679a';
+            } else if (v == 'Toma de muestra') {
+                color = '#ffc000';
+            } else if (v == 'Ecografía') {
+                color = '#35ccfb';
+            } else if (v == 'Radiología') {
+                color = '#ff00fe';
+            } else if (v == 'Punción') {
+                color = '#a32606';
+            } else if (v == 'Odontología') {
+                color = '#008001';
+            } else if (v == 'Electrocardiograma') {
+                color = '#969696';
+            } else if (v == 'Ecocardiograma') {
+                color = '#000000';
+            } else if (v == 'Reparto') {
+                color = '#013298';
+            } else if (v == 'Certificación') {
+                color = '#9602c7';
+            } else if (v == 'Citología') {
+                color = '#4d4d4d';
+            } else {
+                color = '#21BA45'
+            }
+            return color
+        }
+
+
+
+                
+//==================================================
+
+// AUTOCOMPLETAR DROPDOWN SERVICIOS CON tribute js
+
+//==================================================
+
+
+
+let $color = $('#ModalEdit').find('input[name="color"]');
+
+          // autocomplete titulo
+          let list = getlist_calendartipos();
+            let tribute = new Tribute({
+                autocompleteMode: true,
+                noMatchTemplate: function () {
+                    return "";
+                },
+                menuItemTemplate: function (item) {
+                    let color = calendar_colors(item.original.value);
+                    return item.string + ' <i style="color:' + color + ';" class="fas fa-circle ml-2"></i>';
+                },
+                selectTemplate: function (item) {
+                    color = calendar_colors(item.original.value);
+                    $color.val(color);
+                    return item.original.value;
+                },
+              
+                values: $.map(list, function (value, i) {
+                    return {'key': value, 'value': value}
+                })
+            });
+
+            let $titulo = $('#ModalEdit').find('input[name="servicios"]');
+
+
+            tribute.detach($titulo);
+            tribute.attach($titulo);
+
+
+});
+
+
+
+</script>
+
+
+
+
+
+<script>
+
+
+</script>
+
+
 
 
 
@@ -2751,30 +2983,11 @@ $('.selectBuscarCliente').html('');
 
      $('#ModalEdit').modal('show');
 
-
-        /*
-
-        $('.popover').popover('hide');
-        let deleteMsg = confirm("Desea eliminar este evento?");
-        if (deleteMsg) {
-          $.ajax({
-            type: "POST",
-            url: SITEURL + '/fullcalendareventmaster/delete',
-            data: "&id=" + event.id,
-            success: function(response) {
-              if (parseInt(response) > 0) {
-                $('#calendar2').fullCalendar('removeEvents', event.id);
-                $("#calendar").fullCalendar('refetchEvents');
-                displayMessage("El evento se ha eliminado.");
-              }
-            }
-          });
-        }
-        */
       }
+   
       
       
-    });
+ });
 
 
 

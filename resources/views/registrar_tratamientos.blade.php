@@ -992,7 +992,12 @@ $('#livesearch').on('select2:select', function(evt){
   
            processing: true,
            serverSide: true,
-          
+                                           
+           type: "GET",
+           ajax: 'registrar_tratamientos',
+
+
+
            
            dom: '<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"<"dt-buttons btn-group flex-wrap"B>><"col-sm-12 col-md-4"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
 
@@ -1015,9 +1020,6 @@ $('#livesearch').on('select2:select', function(evt){
             
                 ],
          
-                            
-           type: "GET",
-           ajax: 'registrar_tratamientos',
 
                     
            columns: [
@@ -1056,7 +1058,7 @@ $('#livesearch').on('select2:select', function(evt){
                         "thousands": ",",
                         "lengthMenu": "Mostrar _MENU_ Entradas",
                         "loadingRecords": "Cargando...",
-                        
+                        "processing": "Procesando...",                       
                         "search": "Buscar:",
                         "zeroRecords": "Sin resultados encontrados",
                         "paginate": {

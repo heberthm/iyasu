@@ -956,34 +956,32 @@ $('#livesearch').on('select2:select', function(evt){
   
            processing: true,
            serverSide: true,
-         
+                                             
+           type: "GET",
+           ajax: 'abonos',
+
+
 
            dom: '<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"<"dt-buttons btn-group flex-wrap"B>><"col-sm-12 col-md-4"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
 
            
-          buttons: [ 
-                    
-                   { extend: 'excelHtml5', footer: true, text: 'Excel', title: 'Abonos de clientes',
-                  
-                    exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5 ]
-                    
-                  }},
+        buttons: [ 
+          
+              { extend: 'excelHtml5', footer: true, text: 'Excel', title: 'Abonos de clientes',
+              
+                exportOptions: {
+                columns: [ 0, 1, 2, 3, 4, 5 ]
+                
+              }},
 
-                   { extend: 'pdfHtml5', footer: true, text: 'PDF', title: 'Abonos de clientes',
-                  
-                    exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5 ]
-                    
-                  }}, 
-            
-                ],
-         
-
-                            
-           type: "GET",
-           ajax: 'abonos',
-
+              { extend: 'pdfHtml5', footer: true, text: 'PDF', title: 'Abonos de clientes',
+              
+                exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5 ]
+                
+              }}, 
+  
+         ],
 
          
         
@@ -1027,7 +1025,7 @@ $('#livesearch').on('select2:select', function(evt){
                         "thousands": ",",
                         "lengthMenu": "Mostrar _MENU_ Entradas",
                         "loadingRecords": "Cargando...",
-                      
+                        "processing": "Procesando...",                      
                         "search": "Buscar:",
                         "zeroRecords": "Sin resultados encontrados",
                         "paginate": {

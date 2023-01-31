@@ -54,8 +54,8 @@
 
 
 <!-- DateTimePicker css -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
- 
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+
 
 <!-- x-editable-bs4 css -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/x-editable-bs4@1.5.5/dist/bootstrap4-editable/css/bootstrap-editable.css"> 
@@ -69,7 +69,9 @@
 
 <!-- <link href="{{asset('css/select2.min.css')}}" rel="stylesheet"/> ->
 
-  
+  <!-- tribute js-->
+  <link href="https://cdn.jsdelivr.net/npm/tributejs@5.1.3/dist/tribute.min.css" rel="stylesheet"></link>
+
 
     
   <!-- Fullcalendar 3.10.2 css --> 
@@ -99,9 +101,6 @@ ARCHIVOS JS
 <!-- Jquery 3.5 js -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
 
-
-<!-- DateTimePicker js -->  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
 
 <!-- Select2 js -->  
@@ -144,29 +143,32 @@ ARCHIVOS JS
 <script src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js' defer></script>
 
 
+<!-- Tribute js -->
+<script src="https://cdn.jsdelivr.net/npm/tributejs@5.1.3/dist/tribute.min.js"></script> 
+
 
 <!--If Print button or buttons:true, this is required for any Buttons or Dom items to appear -->
 <!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js" defer></script> -->
 
-<script src="{{asset('js/buttons.print1.2.4.js')}}" defer></script>
+<script src="{{asset('js/buttons.print1.2.4.js')}}"  ></script>
 
 
 <!--Required for Excel button to appear-->
  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js" defer ></script> ---->
 
- <script src="{{asset('js/jszip2.5.0.js')}}" defer></script>
+ <script src="{{asset('js/jszip2.5.0.js')}}" ></script>
 
 
 <!--Required for PDF button to appear-->
 <!-- <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.js"></script> -->
 
-<script src="{{asset('js/pdfmake0.1.18.js')}}" defer></script>
+<script src="{{asset('js/pdfmake0.1.18.js')}}" ></script>
 
 
  
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script> -->
 
-<script src="{{asset('js/vfs_fonts0.1.36.js')}}" defer></script>
+<script src="{{asset('js/vfs_fonts0.1.36.js')}}" ></script>
 
 
 
@@ -184,7 +186,6 @@ ARCHIVOS JS
 
 
 
-
 <!-- Fullcalendar 3.10 js -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js' defer></script>
 
@@ -195,7 +196,11 @@ ARCHIVOS JS
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale-all.min.js' defer></script>
 
- 
+
+<!-- DateTimePicker js -->  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" defer></script>
+
+
 
 <!-- Tidio js --> 
 <!-- <script src="//code.tidio.co/zffhz4jdjbaro6re8swf82onrcpo6ojy.js" async></script> -->
@@ -245,7 +250,7 @@ ARCHIVOS JS
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-danger navbar-badge">15</span>
+            <span class="badge badge-danger navbar-badge"></span>
             </a>
           
     </li>
@@ -253,13 +258,13 @@ ARCHIVOS JS
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
             
                 <span class="d-none d-md-inline">{{ Auth::check() ? Auth::user()->name : null }}</span> &nbsp;
-                    <img src="../img/avatar4.png"
+                    <img src="../img/avatar2.png"
                      class="user-image img-circle elevation-2" alt="User Image"> 
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="../img/avatar4.png"
+                    <img src="../img/avatar2.png"
                          class="img-circle elevation-2"
                          alt="User Image">
                     <p>
