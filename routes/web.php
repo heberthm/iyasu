@@ -44,11 +44,9 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
-
 Route::get('inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
 
-Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('auth.register');
+Route::get('auth.register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('auth.register');
 
 
 Route::get('search', [App\Http\Controllers\Select2SearchController::class,'index']);

@@ -65,7 +65,7 @@ class registrar_tratamientoController extends Controller
           } 
   
     
-          $terapias = terapias::select('id','terapia')->get();
+          $terapias = terapias::select('id','terapia', 'valor_terapia')->get();
 
 
         return view('registrar_tratamientos', compact('terapias'));
@@ -194,11 +194,11 @@ class registrar_tratamientoController extends Controller
           
         $data->user_id             = $request->userId;
         $data ->id_cliente         = $request->id_cliente;   
-        $data ->tratamiento        = $request->tratamiento;  
+        $data ->tratamiento        = $request->tratamiento2;  
         $data ->nombre             = $request->nombreCliente;  
         $data ->celular            = $request->celular;           
      /*   $data->tratamiento         = $tratam;  */
-        $data->valor_tratamiento   = $request->valor_tratamiento;
+        $data->valor_tratamiento   = $request->valor_tratamiento2;
         $data->responsable         = $request->responsable;
        
          

@@ -1582,12 +1582,14 @@ DATATABLE MASCOTAS
             -->
                   
             
-                <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
+              <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
 
-                 <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
-                  
+              <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
+          
+
+
             
-                  <!--     
+          <!--     
             
             <div id="enlace_listado">  
                       
@@ -1660,7 +1662,9 @@ DATATABLE MASCOTAS
                   <div class="modal-body">
             
             
-                    <form method="POST" id="form_editar_control" action="{{ url('/crear_control') }}" >
+                    <form method="POST" id="form_editar_control" action="{{ url('/actualizar_control') }}" > 
+
+                    
             
                   <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
                    
@@ -1764,7 +1768,9 @@ DATATABLE MASCOTAS
 
                  <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
                   
-                 <input type="hidden" name="id_abono" id="id_abono">
+                
+                 <input type="text" name="id_control" class="form-control" id="id_control"  readonly>  
+
 
                  
                   <!--     
@@ -1857,7 +1863,9 @@ MODAL DATATABLE CONTROLES MEDICOS
                    
               </table>
 
-              </div>       
+
+
+           </div>       
       </div>
       <div class="modal-footer">
         
@@ -2437,7 +2445,7 @@ DATATABLE CONTROL MÉDICO
     let id =$('#id_cliente').val();
  
 
-    let table =  $('#Table_control_medico').DataTable({
+    let table2 =  $('#Table_control_medico').DataTable({
   
            processing: true,
            serverSide: true,
@@ -2553,11 +2561,11 @@ let btn = $('#crear_control_clinico')
                 $('#form_control_medico')[0].reset();
                 $('#modalControlMedico').modal('hide');
 
-              //  table.ajax.reload();
+                table2.ajax.reload();
                 
               
                
-                location.reload(true);
+               // location.reload(true);
                 toastr["success"]("Control médico creado correctamente.");
               
 
@@ -2579,7 +2587,7 @@ let btn = $('#crear_control_clinico')
   
 // =========================================
 
-/// EDITAR REGISTROS DE TRATAMIENTO DE CLIENTES
+/// EDITAR CONTROL MÉDICO
 
 // =========================================
 
@@ -2589,6 +2597,7 @@ $('body').on('click', '.editarControl', function (e) {
 
        $('#form_editar_control')[0].reset();
        $('#modalVerControlesMedicos').modal('hide');
+     
        let id = $(this).data('id');
      
      $.ajax({
@@ -2601,7 +2610,7 @@ $('body').on('click', '.editarControl', function (e) {
          
           
           // $('#modalEditarControl').modal('show');
-           $('#modalEditarControl input[name="id_abono"]').val(data.id)
+           $('#modalEditarControl input[name="id_control"]').val(data.id)
            $('#modalEditarControl input[name="id_cliente"]').val(data.id_cliente);
            $('#modalEditarControl input[name="num_control"]').val(data.num_control);
            $('#modalEditarControl input[name="peso"]').val(data.peso);
@@ -2641,7 +2650,7 @@ let btn = $('#editar_control')
     },5000) //5 seconds
         $('#editar_control').attr('disabled', true);
 
-      //  event.preventDefault();
+        event.preventDefault();
 
         try {
        
@@ -2658,11 +2667,11 @@ let btn = $('#editar_control')
                 $('#editar_control').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-               // $('#form_editar_control')[0].reset();
-              
-             
+               $('#modalEditarControl').modal('hide');
+
+               
                   
-             //   table.ajax.reload();
+               // table2.ajax.reload();
                 location.reload(true);
                 toastr["success"]("datos actualizados correctamente.");
          

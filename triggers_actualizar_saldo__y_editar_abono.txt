@@ -1,0 +1,9 @@
+CREATE TRIGGER `actualizar_saldo` AFTER INSERT ON `abonos_clientes`
+ FOR EACH ROW UPDATE registrar_tratamientos
+SET saldo =   new.saldo
+WHERE id = new.id_tratamiento
+
+CREATE TRIGGER `editar_abono` BEFORE UPDATE ON `abonos_clientes`
+ FOR EACH ROW UPDATE abonos_clientes SET 
+saldo = new.saldo
+where id = new.id

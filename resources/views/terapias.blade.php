@@ -83,7 +83,7 @@
                   
                    <div class="pull-right">
                       <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalCrearTerapia">
-                            <span class="fa fa-list fa-fw" ></span>  
+                            <span class="fas fa-male fa-fw" ></span>  
                             Crear terapia
                         </button>  &nbsp;
                   </div> 
@@ -111,7 +111,7 @@ DATATABLE LISTA DE ESPERA
                       <tr>
                                         
                         <th>Terapia</th>
-                        <th>Precio</th>
+                        <th>Valor</th>
                                         
                          <th ></th>
                      
@@ -196,6 +196,7 @@ DATATABLE LISTA DE ESPERA
             </div>
 
 
+            <!--
             
             <div class="col-md-3">
               <div class="form-group">
@@ -209,7 +210,7 @@ DATATABLE LISTA DE ESPERA
                </div>
             </div>
  
-
+          -->
 
 
             <div class="col-md-3">
@@ -303,7 +304,7 @@ DATATABLE LISTA DE ESPERA
 
             </div>
 
-
+     <!--
              
             <div class="col-md-3">
 
@@ -317,7 +318,7 @@ DATATABLE LISTA DE ESPERA
                            
                </div>
             </div>
- 
+       -->
 
 
 
@@ -548,7 +549,7 @@ $(document).ready(function () {
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                  ],
         
-                   order: [[0, 'desc']],
+                   order: [[0, 'asc']],
 
                    "columnDefs": [
                         { "orderable": false,
@@ -672,7 +673,7 @@ $('body').on('click', '.editarTerapia', function (e) {
            
             $('#modalEditarTerapia input[name="id_terapia"]').val(data.id);
             $('#modalEditarTerapia input[name="terapia"]').val(data.terapia);
-             $('#modalEditarTerapia input[name="color"]').val(data.color);
+         //  $('#modalEditarTerapia input[name="color"]').val(data.color);
             $('#modalEditarTerapia input[name="valor_terapia"]').val(data.valor_terapia);
             
 

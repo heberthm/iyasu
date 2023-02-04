@@ -147,7 +147,7 @@ DATATABLE LISTA DE ESPERA
                       <tr>
                                         
                         <th>Paciente</th>
-                        <th>Tel/Cel</th>
+                        <th>Tratamiento</th>
                          <th>Fecha abono</th>
                          <th>Saldo actual</th>
                          <th>Vr. abono</th>
@@ -991,7 +991,7 @@ $('#livesearch').on('select2:select', function(evt){
 
 
                     { data: 'nombre', name: 'nombre' },                  
-                    { data: 'celular', name: 'celular' },
+                    { data: 'descripcion', name: 'descripcion' },
                     { data: 'created_at', name: 'created_at', orderable: true },  
                     { data: 'saldo_actual', name: 'saldo_actual' },
                     { data: 'valor_abono', name: 'valor_Abono' },

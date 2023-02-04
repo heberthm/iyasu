@@ -140,9 +140,9 @@
       </li>
      
         
-      
+    
       <li class="nav-item">
-        <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'Active' : '' }}">
+        <a href="{{ url('auth.register') }}" class="nav-link {{ request()->is('auth.register') ? 'Active' : '' }}">
 
           <i class="nav-icon fas fa-user-plus green"></i>
           <p>
@@ -152,6 +152,7 @@
         </a>
        
       </li>
+     
       
           <li class="nav-item">
                 <a class="nav-link" href="{{ url('logout') }}"

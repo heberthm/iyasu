@@ -20,5 +20,8 @@ class historias_clinicas extends Model
          return $this->belongsTo(Cliente::class);
      }
 
+     public function controles(){
+        return $this->hasMany(controles::class);
+    }
 
 }

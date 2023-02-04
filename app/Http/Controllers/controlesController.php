@@ -140,8 +140,8 @@ class controlesController extends Controller
     public function edit($id)
     {
        
-        $id_abono  = controles::find($id);
-        return response()->json($id_abono);
+        $id_control  = controles::find($id);
+        return response()->json($id_control);
     }
 
     /**
@@ -154,7 +154,7 @@ class controlesController extends Controller
     public function update(Request $request, $id)
     {
        
-              $id = $request->input('id_abono');
+              $id = $request->input('id_control');
 
               $control = controles::find($id);
               $control ->user_id  = $request->userId;

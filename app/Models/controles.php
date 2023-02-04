@@ -9,7 +9,7 @@ class controles extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','id_cliente', 'num_control','peso','abd','grasa','agua'];
+    protected $fillable = ['user_id','id_cliente','num_control','peso','abd','grasa','agua'];
 
     protected $id = 'id_control';
 
@@ -18,5 +18,9 @@ class controles extends Model
         return $this->belongsTo(Cliente::class);
     }
 
+    public function historias_clinicas()
+    {
+        return $this->belongsTo(historias_clinicas::class);
+    }
 
  }

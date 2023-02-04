@@ -262,16 +262,16 @@ DATATABLE LISTA DE ESPERA
                 <label for="tratamiento" class="control-label ">Tratamiento</label>
 
 
-                <input type="text" name="tratamiento" class="form-control" id="tratamiento" required autocomplete="off">
-
-               <!--                          
-                <select class="form-control select2-multiple" name="tratamientos[]" multiple="multiple" placeholder="Seleccione opciones" style="width:100%" >
-                    @foreach($terapias as $prof)
-                          <option value="{{$prof->terapia}}">{{$prof->terapia}}</option>
-                  @endforeach   
+              <!--  <input type="text" name="tratamiento" class="form-control" id="tratamiento" required autocomplete="off"> -->
+                
+                
+                <select name="tratamientos" class="form-control" id="tratamientos"  required placeholder="Seleccione profesional">
+                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
+                      @foreach($terapias as $terap) 
+                      <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
+                      @endforeach
                 </select>
 
-              -->
 
 
 
@@ -301,6 +301,8 @@ DATATABLE LISTA DE ESPERA
 
             <input type="hidden" name="saldo" class="form-control" id="saldo">  
 
+            <input type="hidden" name="tratamiento" class="form-control" id="tratamiento">  
+
             <input type="hidden" name="estado" class="form-control" id="estado" value="Pendiente" readonly>  
             
             
@@ -324,8 +326,6 @@ DATATABLE LISTA DE ESPERA
 
 </div>
 
-
- 
 
 
 
@@ -405,16 +405,17 @@ DATATABLE LISTA DE ESPERA
                 <label for="tratamiento" class="control-label">Tratamiento</label>
 
 
-                <input type="text" name="tratamiento" class="form-control" id="tratamiento" required autocomplete="off">
+            <!--    <input type="text" name="tratamiento" class="form-control" id="tratamiento" required autocomplete="off"> -->
 
-               <!--                          
-                <select class="form-control select2-multiple" name="tratamientos[]" multiple="multiple" placeholder="Seleccione opciones" style="width:100%" >
-                    @foreach($terapias as $prof)
-                          <option value="{{$prof->terapia}}">{{$prof->terapia}}</option>
-                  @endforeach   
+              
+                <select name="tratamientos2" class="form-control" id="tratamientos2"  required placeholder="Seleccione profesional">
+                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
+                      @foreach($terapias as $terap) 
+                      <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
+                      @endforeach
                 </select>
 
-              -->
+
 
 
 
@@ -431,7 +432,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="valor_abono" class="control-label">Valor</label>
 
-                <input type="number" name="valor_tratamiento" class="form-control" id="valor_tratamiento" required autocomplete="off">
+                <input type="number" name="valor_tratamiento2" class="form-control" id="valor_tratamiento2" required autocomplete="off">
                 
                   <div class="alert-message" id="valorTratamientoError"></div>
                            
@@ -445,6 +446,10 @@ DATATABLE LISTA DE ESPERA
             <input type="hidden" name="id_tratamiento" class="form-control" id="id_tratamiento"  readonly>  
 
             <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
+
+            <input type="hidden" name="saldo2" class="form-control" id="saldo2">  
+
+            <input type="hidden" name="tratamiento2" class="form-control" id="tratamiento2">  
 
 
             </div>
@@ -809,15 +814,58 @@ ESCRIBIR EN DOS INPUTS ALMISMO TIEMPO
 
 $(document).ready(function(){
 
-    $('#valor_tratamiento').change(function(){
 
-    let valor = $(this).val();
+  $("#tratamientos").change(function(){
+   
 
-    $('#saldo').val(valor);
-  })
-})
+   let select = document.getElementById('tratamientos');
+   let option = select.options[select.selectedIndex];
+
+   document.getElementById('valor_tratamiento').value = option.value;
+   document.getElementById('saldo').value = option.value;
+   document.getElementById('tratamiento').value = option.text;
+ 
+
+  });   
+
+});  
 
 </script>
+
+
+
+
+
+<!-- ========================================
+
+ESCRIBIR EN DOS INPUTS ALMISMO TIEMPO 2
+
+============================================== -->
+
+<script>
+
+$(document).ready(function(){
+
+
+  $("#tratamientos2").change(function(){
+   
+
+   let select = document.getElementById('tratamientos2');
+   let option = select.options[select.selectedIndex];
+
+   document.getElementById('valor_tratamiento2').value = option.value;
+   document.getElementById('saldo2').value = option.value;
+   document.getElementById('tratamiento2').value = option.text;
+ 
+
+  });   
+
+});  
+
+</script>
+
+
+
 
 
 
@@ -1204,10 +1252,11 @@ $('body').on('click', '.editarTratamiento', function (e) {
             $('#modalEditarTratamiento input[name="id_cliente"]').val(data.id_cliente);
             $('#modalEditarTratamiento input[name="nombreCliente"]').val(data.nombre);
             $('#modalEditarTratamiento input[name="celular"]').val(data.celular);
-            $('#modalEditarTratamiento input[name="tratamiento"]').val(data.tratamiento);
-            $('#modalEditarTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+            $('#modalEditarTratamiento input[name="tratamiento2"]').val(data.tratamiento);
+            $('#modalEditarTratamiento input[name="saldo2"]').val(data.valor_tratamiento);
+            $('#modalEditarTratamiento input[name="valor_tratamiento2"]').val(data.valor_tratamiento);
             $('#modalEditarTratamiento input[name="responsable"]').val(data.responsable);
-
+            
           }
         });
       });

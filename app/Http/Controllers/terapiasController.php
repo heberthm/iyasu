@@ -77,7 +77,7 @@ class terapiasController extends Controller
           $data ->user_id           = $request->userId;
           $data->terapia            = $request->terapia;
           $data->valor_terapia      = $request->valor_terapia;
-          $data->color              = $request->color;
+       //   $data->color              = $request->color;
               
           } catch (\Exception  $exception) {
               return back()->withError($exception->getMessage())->withInput();
@@ -132,7 +132,7 @@ class terapiasController extends Controller
         $data ->user_id            = $request->userId;
         $data->terapia             = $request->terapia;
         $data->valor_terapia       = $request->valor_terapia;
-        $data->color               = $request->color;
+      //  $data->color               = $request->color;
                
 
         $data->save();

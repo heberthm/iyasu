@@ -17,7 +17,7 @@ class CreateHistoriasClinicasTable extends Migration
         Schema::create('historias_clinicas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id')->required();
-            $table->unsignedBigInteger('id_cliente')->required();
+            $table->integer('id_cliente')->unsigned();  
             $table->string('profesional',50);
             $table->string('estatura',3);
             $table->string('peso_inicial',3)->nullable();
@@ -34,10 +34,12 @@ class CreateHistoriasClinicasTable extends Migration
             $table->string('num_lavado',3)->nullable();
             $table->string('dias_lavados',3)->nullable();
             $table->string('observaciones',400)->nullable();
+           
+             //KEYS
+             $table->index(['id_cliente']);
+            
             $table->timestamps();
 
-                       
-            
 
         });
     }
@@ -50,5 +52,6 @@ class CreateHistoriasClinicasTable extends Migration
     public function down()
     {
         Schema::dropIfExists('historias_clinicas');
+        
     }
 }

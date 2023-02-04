@@ -481,7 +481,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="Servicios" class="control-label">Terapias</label>
 
-                <input type="text" id="servicios2" name="servicios2"  class="form-control" required autocomplete="off">
+                <input type="text" id="servicios2" name="servicios2"  class="form-control  text-lowercase" required autocomplete="off">
 
 
                 <!--
@@ -723,7 +723,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 <label for="Servicios" class="control-label">Terapias</label>
 
 
-                <input type="text" id="servicios" name="servicios" value="#1560F6" class="form-control" required autocomplete="off">
+                <input type="text" id="servicios" name="servicios"  class="form-control text-lowercase" required autocomplete="off">
 
 
         <!--
@@ -748,7 +748,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="color" class="control-label">Color</label>
 
-                <input type="color" id="color2" name="color2" list="ListadoColores" value="#1560F6" class="form-control" required autocomplete="off">
+                <input type="color" id="color2" name="color2" list="ListadoColores" value="#1560F6" class="form-control text-lowercase" required autocomplete="off">
 
 
               </div>
@@ -1773,7 +1773,7 @@ $(document).ready(function () {
 
   
 function getlist_calendartipos() {
-            let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
+            let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 'lavado', 'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
             
             return list
         }
@@ -1800,6 +1800,8 @@ function calendar_colors(v) {
                 color = '#33997a';
             } else if (v == 'drenaje') {
                 color = '#be7b3c';
+            } else if (v == 'lavado') {
+                color = '#95C4F0';
             } else if (v == 'lodoterapia') {
                 color = '#5e66d4';
             } else if (v == 'masaje') {
@@ -3006,7 +3008,7 @@ $('.selectBuscarCliente').html('');
 
 
       $('#ModalEdit #id').val(event.id);
-     
+   
           
      $('#ModalEdit #cliente').val(event.cliente);
      $('#ModalEdit #telefono').val(event.telefono);
@@ -3030,7 +3032,7 @@ $('.selectBuscarCliente').html('');
 
       }
    
-      
+     
       
  });
 
@@ -3236,17 +3238,20 @@ EDITAR DATOS DE FULLCALENDAR
         $('#descripcion').val(data.descripcion);
         $('#servicios').val(data.title);
         $('#titulo').val(data.title);
-       
+              
         $('#ModalEdit #color2').val(data.color);
 
         $('#calendar').fullCalendar('refetchEvents');
-        $('#fullCalModal').fullCalendar('refetchEvents');
+        $('#calendar2').fullCalendar('refetchEvents');
+
+       
+
 
           // $('#agregar').attr('disabled', true);
           $('#editar_calendario')[0].reset();
           $('#ModalEdit').modal('hide');
           $('#agenda_modal').modal('hide');
-          toastr["success"]("los datos se han actulizado correctamente");
+          toastr["success"]("los datos se han actulizado correctamente 2");
 
 
 
