@@ -18,6 +18,8 @@ class CreateHistoriasClinicasTable extends Migration
             $table->bigIncrements('id');
             $table->string('user_id')->required();
             $table->integer('id_cliente')->unsigned();  
+            $table->string('nombre',50);
+            $table->string('edad',10);
             $table->string('profesional',50);
             $table->string('estatura',3);
             $table->string('peso_inicial',3)->nullable();

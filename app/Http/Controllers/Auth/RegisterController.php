@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +25,52 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+
+    public function index()
+    {
+      
+                
+        if(request()->ajax()) {
+
+          //  $id = $request->id_cliente;
+
+          $id = User::select('id','name',  'email', 'created_at');
+
+           return datatables()->of($id)
+
+           ->addColumn('created_at', function($row)  {  
+            $date = date("d-m-Y", strtotime($row->created_at));
+            return $date;
+          })
+                                                                                                       
+            ->addColumn('action', 'atencion')
+            ->rawColumns(['action'])
+            ->addColumn('action', function($data) {
+
+           
+
+                $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarUsuario"  title="Editar datos del usuario" class="fa fa-edit editarUsuario"></a>
+
+                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar usuario" class="fa fa-trash eliminarUsuario"></a>';
+                
+                 
+                return $actionBtn;
+           
+
+               
+            })
+           
+           
+            ->make(true);
+        } 
+
+       
+        return view('register');
+
+    }
+
+
+
     /**
      * Where to redirect users after registration.
      *
@@ -31,6 +78,7 @@ class RegisterController extends Controller
      */
    // protected $redirectTo = RouteServiceProvider::HOME;
 
+   
     /**
      * Create a new controller instance.
      *
@@ -44,7 +92,7 @@ class RegisterController extends Controller
     public function registration()
     {
 
-          return view('auth.register');
+          return view('register');
     }
 
     /**
@@ -53,12 +101,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(Request $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+        return Validator::make($request, [
+            'nombre' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'clave' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -68,12 +116,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
+        
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => $request['nombre'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['clave']),
         ]);
     }
 }

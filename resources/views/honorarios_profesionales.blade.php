@@ -191,7 +191,7 @@ DATATABLE LISTA DE PROFESIONALES
 
           <div class="row">
 
-          <div class="col-md-4">
+          <div class="col-md-5">
 
               <div class="form-group" >
 
@@ -212,7 +212,7 @@ DATATABLE LISTA DE PROFESIONALES
          </div>
 
 
-         <div class="col-md-4">
+         <div class="col-md-3">
 
               <div class="form-group">
 
@@ -601,7 +601,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 <script type="text/javascript">
 
   $('.livesearch').select2({
-    placeholder: 'Buscar cliente por nombre...',
+    placeholder: 'Buscar profesional por nombre...',
     language: "es",
     allowClear: true,
     minimumInputLength: 3,
@@ -1000,7 +1000,7 @@ $('body').on('click', '.editarPagoHonorario', function (e) {
   
  // =========================================
  
- // ACTUALIZAR DATOS DEL PROFESIONAL
+ // ACTUALIZAR DATOS DE HONORARIOS
 
  // =========================================
 
@@ -1059,13 +1059,13 @@ let btn = $('#editar_pago_honorario')
 
 // =========================================
 
-/// ELIMINAR REGISTROS DEL PROFESIONAL
+/// ELIMINAR DATOS DE HONORARIO
 
 // =========================================   
 
 
   
-$(document).on('click', '.eliminarProfesional', function (event) {
+$(document).on('click', '.eliminarpagoHonorario', function (event) {
      
   event.preventDefault();
      let id = $(this).data('id');
@@ -1085,7 +1085,7 @@ $(document).on('click', '.eliminarProfesional', function (event) {
 
                 $.ajax({
                     type: 'delete',
-                    url: 'eliminar_profesional/'+id,
+                    url: 'eliminar_honorario/'+id,
                     data: {id:id},
                     dataType: 'JSON',
                     success: function (data) {

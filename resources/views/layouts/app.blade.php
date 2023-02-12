@@ -146,6 +146,9 @@ ARCHIVOS JS
 <!-- Tribute js -->
 <script src="https://cdn.jsdelivr.net/npm/tributejs@5.1.3/dist/tribute.min.js"></script> 
 
+<!-- bootstrap-show-password.min.jst -->
+<script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+
 
 <!--If Print button or buttons:true, this is required for any Buttons or Dom items to appear -->
 <!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js" defer></script> -->

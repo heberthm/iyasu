@@ -17,7 +17,7 @@ class CreatePagosHonorariosTable extends Migration
             $table->bigIncrements('id');
             $table->string('user_id')->required();
             $table->string('id_profesional',25)->required();
-            $table->string('cedula',18)->unique()->required();
+            $table->string('cedula',18)->required();
             $table->string('nombre',40)->nullable();
             $table->string('celular',12)->nullable();
             $table->string('valor_pago',12)->nullable();

@@ -70,28 +70,20 @@ thead {
 
 <div class="row">
    <div class="col-lg-8">
-        <div class="card card-light" id="card_mascotas">
+        <div class="card card-light">
               <div class="card-header" >
                 <h3 class="card-title"><span  style="color:#28a745;"
                     class="fas fa-list-alt mr-3"></span>História clínica</h3>
 
-                    <div class="btn-toolbar">
-
-                      <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modalControlMedico" 
-                      style="position: absolute; top: 0; left: 500px">
-                      <span class="fa fa-street-view fa-fw" ></span>  
-                      Crear control clínico
-                      </button>  &nbsp;
                     
-                     <div id="ocultar-boton">
-                      <button type="button" class="btn btn-primary float-left" data-toggle="modal" data-target="#modalAgregarHistoriaClinica"
-                      style="position: absolute; top: 0; left: 300px">
-                      <span class="fa fa-plus fa-fw" ></span>  
-                      Crear história clínica
-                      </button>
-                    </div>
+                                  
+                     
+                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAgregarHistoriaClinica">
+                    <span class="fa fa-plus fa-fw" tabindex="3"></span>  Crear história clínica
+                    </button>
+                  
 
-                    </div>
+                    
                     
               </div>
               
@@ -107,7 +99,10 @@ DATATABLE MASCOTAS
      
 @forelse($id_clientes as $id_cliente)
           
- 
+
+@empty
+    
+@endforelse 
 
 
   
@@ -570,7 +565,14 @@ DATATABLE MASCOTAS
                   <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
               
                   <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente }}" readonly>  
-                    
+                 
+                  
+                  <input type="hidden" name="nombre" class="form-control" id="nombre" value="{{ $id_cliente->nombre }}" readonly>  
+             
+                  <input type="hidden" name="edad" class="form-control" id="edad" value="{{ $id_cliente->edad }}" readonly>  
+
+                 
+         
               
                     <!--     
               
@@ -603,7 +605,7 @@ DATATABLE MASCOTAS
 
  <!--=====================================
 
-    MODAL EDATAR DATOS DE  HISTÓRIA CLÍNICA
+    MODAL EDITAR DATOS DE  HISTÓRIA CLÍNICA
 
 =========================================-->
 
@@ -639,7 +641,7 @@ DATATABLE MASCOTAS
                     <div class="modal-body">
               
               
-                    <form method="POST" id="form_editar_historia_clinica" action="{{ url('/editar_historia/id_clientes') }}" >
+                    <form method="POST" id="form_editar_historia_clinica" action="{{ url('/editar_historia/id') }}" >
                     
                   <!-- @csrf -->
               
@@ -655,7 +657,7 @@ DATATABLE MASCOTAS
               
                               <label for="Estatura" class="control-label font-weight-normal">Estatura</label>
                            
-                              <input type="number" name="estatura" class="form-control" id="estatura" value="{{$id_cliente->estatura}}" autofocus="true"  autocomplete="off">
+                              <input type="number" name="estatura" class="form-control" id="estatura" autofocus="true"  autocomplete="off">
                                           
                               <div class="alert-message" id="estaturaError"></div>
                                 
@@ -671,7 +673,7 @@ DATATABLE MASCOTAS
               
                                 <label for="peso inicial" class="control-label font-weight-normal">Peso inicial</label>
               
-                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial" value="{{$id_cliente->peso_inicial}}"  >
+                                <input type="number" name="peso_inicial" class="form-control" id="peso_inicial"  >
               
                                   <div class="alert-message" id="pesoInicialError"></div>
               
@@ -688,7 +690,7 @@ DATATABLE MASCOTAS
               
                               <label for="abd inicial" class="control-label font-weight-normal">ABD inicial</label>
               
-                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control" value="{{$id_cliente->abd_inicial}}"   autocomplete="off">
+                              <input type="number"  id="abd_inicial" name="abd_inicial"  class="form-control"  autocomplete="off">
               
                               <div class="alert-message" id="abdInicialError"></div>
               
@@ -702,7 +704,7 @@ DATATABLE MASCOTAS
               
                                 <label for="grasa inicial" class="control-label font-weight-normal">Grasa inicial</label>
               
-                                <input type="number"  id="grasa_inicial" name="grasa_inicial"  class="form-control text-capitalize" value="{{$id_cliente->grasa_inicial}}"   autocomplete="off">
+                                <input type="number"  id="grasa_inicial" name="grasa_inicial"  class="form-control"   autocomplete="off">
               
                                 <div class="alert-message" id="grasaInicialError"></div>
               
@@ -718,7 +720,7 @@ DATATABLE MASCOTAS
               
                               <label for="agua inicial" class="control-label font-weight-normal">Agua inicial</label>
               
-                              <input type="number" name="agua_inicial" class="form-control" id="agua_inicial" value="{{$id_cliente->agua_inicial}}"  autocomplete="off">
+                              <input type="number" name="agua_inicial" class="form-control" id="agua_inicial"   autocomplete="off">
                 
                                 <div class="alert-message" id="aguaInicialError"></div>
               
@@ -733,7 +735,7 @@ DATATABLE MASCOTAS
               
                                   <label for="IMC" class="control-label font-weight-normal">IMC</label>
               
-                                  <input type="number" name="imc" class="form-control" id="imc" value="{{$id_cliente->imc}}"   autocomplete="off">
+                                  <input type="number" name="imc" class="form-control" id="imc" autocomplete="off">
               
                                   <div class="alert-message" id="imcError"></div>
               
@@ -750,7 +752,7 @@ DATATABLE MASCOTAS
               
                                   <label for="grasa viseral" class="control-label font-weight-normal">Grasa viseral</label>
               
-                                  <input type="number" name="grasa_viseral" class="form-control" id="grasa_viseral"  value="{{$id_cliente->grasa_viseral}}" autocomplete="off">
+                                  <input type="number" name="grasa_viseral" class="form-control" id="grasa_viseral"   autocomplete="off">
               
                                   <div class="alert-message" id="grasaViseralError"></div>
               
@@ -765,7 +767,7 @@ DATATABLE MASCOTAS
 
                             <label for="edad metabolica" class="control-label font-weight-normal">Edad metabolica</label>
 
-                            <input type="number" name="edad_metabolica" class="form-control" id="edad_metabolica"  value="{{$id_cliente->edad_metabolica}}" autocomplete="off">
+                            <input type="number" name="edad_metabolica" class="form-control" id="edad_metabolica" autocomplete="off">
 
                             <div class="alert-message" id="edadMetabolicaError"></div>
 
@@ -780,7 +782,7 @@ DATATABLE MASCOTAS
 
                             <label for="paquete desintoxicacion" class="control-label font-weight-normal">Paquete desintoxicacion</label>
 
-                            <input type="text" name="paquete_desintoxicacion" class="form-control" id="paquete_desintoxicacion" value="{{$id_cliente->paquete_desintoxicacion}}"  autocomplete="off">
+                            <input type="text" name="paquete_desintoxicacion" class="form-control" id="paquete_desintoxicacion"  autocomplete="off">
 
                             <div class="alert-message" id="paqueteDesentoxicacionError"></div>
 
@@ -796,7 +798,7 @@ DATATABLE MASCOTAS
 
                           <label for="lavado" class="control-label font-weight-normal">Lavado</label>
 
-                          <input type="text" name="tipo_lavado" class="form-control" id="tipo_lavado" value="{{$id_cliente->tipo_lavado}}"  autocomplete="off">
+                          <input type="text" name="tipo_lavado" class="form-control" id="tipo_lavado"  autocomplete="off">
 
                           <div class="alert-message" id="tipoLavadoError"></div>
 
@@ -813,7 +815,7 @@ DATATABLE MASCOTAS
 
                           <label for="terapia" class="control-label font-weight-normal">Terapia</label>
 
-                          <input type="text" name="terapias" class="form-control" id="terapias" value="{{$id_cliente->terapias}}"  autocomplete="off">
+                          <input type="text" name="terapias" class="form-control" id="terapias"  autocomplete="off">
 
                           <div class="alert-message" id="terapiasError"></div>
 
@@ -831,7 +833,7 @@ DATATABLE MASCOTAS
 
                 <label for="terapias adicionales" class="control-label font-weight-normal">Terapias adicionales</label>
 
-                <input type="text" name="terapias_adicionales" class="form-control" id="terapias_adicionales" value="{{$id_cliente->terapias_adicionales}}"  autocomplete="off">
+                <input type="text" name="terapias_adicionales" class="form-control" id="terapias_adicionales"  autocomplete="off">
 
                 <div class="alert-message" id="terapiasAdicionalesError"></div>
 
@@ -846,7 +848,7 @@ DATATABLE MASCOTAS
               <div class="form-group">
                   <label for="medico_tratante" class="control-label font-weight-normal">Atendido por</label>
                   
-                  <input type="text" name="profesional" class="form-control" id="profesional" value="{{$id_cliente->profesional}}" autocomplete="off">
+                  <input type="text" name="profesional" class="form-control" id="profesional"  autocomplete="off">
 
                  <div class="alert-message" id="diasLavadosError"></div>
 
@@ -861,7 +863,7 @@ DATATABLE MASCOTAS
 
                 <label for="Observaciones" class="control-label font-weight-normal">Observaciones</label>
 
-                <input type="text" name="observaciones" class="form-control" id="observaciones" value="{{$id_cliente->observaciones}}"  autocomplete="off">
+                <input type="text" name="observaciones" class="form-control" id="observaciones"   autocomplete="off">
 
                 <div class="alert-message" id="observacionesError"></div>
 
@@ -888,8 +890,11 @@ DATATABLE MASCOTAS
                   <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>  
               
                   <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente }}" readonly>  
-                    
-              
+                  
+                  <input type="hidden" name="id_historia" class="form-control" id="id_historia" readonly>  
+
+                  
+
                     <!--     
               
               <div id="enlace_listado">  
@@ -901,8 +906,8 @@ DATATABLE MASCOTAS
               -->
         
                 <div class="modal-footer">
-        
-                <button type="submit" id="agregar_historia" name="agregar_historia" class="btn btn-primary">Guardar</button>
+                        
+                <button type="submit" id="editar_historia" name="editar_historia" class="btn btn-primary">Guardar</button>
                 <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         
                 </div>
@@ -959,7 +964,7 @@ DATATABLE MASCOTAS
                     <div class="modal-body">
               
               
-                    <form method="POST" id="form_crear_historia_clinica" action="{{ url('/clientes') }}" >
+                    <form method="POST" id="form_mostrar_historia_clinica" action="{{ url('clientes') }}" >
                     
                   <!-- @csrf -->
               
@@ -975,7 +980,8 @@ DATATABLE MASCOTAS
               
                               <label for="Estatura" class="control-label font-weight-normal"><b>Estatura</b></label>
 
-                              <p>{{ $id_cliente->estatura }}</p>                            
+                                                      
+                              <input type="text" name="estatura" class="form-control  border-0" id="estatura" >
                                 
                             </div>
                         </div>
@@ -989,7 +995,7 @@ DATATABLE MASCOTAS
               
                                 <label for="peso inicial" class="control-label font-weight-normal"><b>Peso inicial</b></label>
               
-                                <p>{{ $id_cliente->peso_inicial }}</p>       
+                                <input type="text" name="peso_inicial" class="form-control  border-0" id="peso_inicial" >
               
                               </div>
               
@@ -1004,7 +1010,7 @@ DATATABLE MASCOTAS
               
                               <label for="abd inicial" class="control-label font-weight-normal"><b>ABD inicial</b></label>
               
-                              <p>{{$id_cliente->abd_inicial}}</p>       
+                              <input type="text" name="abd_inicial" class="form-control  border-0" id="abd_inicial" >    
               
                             </div>
                           </div>
@@ -1016,7 +1022,8 @@ DATATABLE MASCOTAS
               
                                 <label for="grasa inicial" class="control-label font-weight-normal"><b>Grasa inicial</b></label>
               
-                                <p>{{$id_cliente->grasa_inicial}}</p>          
+                                <input type="text" name="grasa_inicial" class="form-control  border-0" id="grasa_inicial" >    
+          
               
                               </div>
               
@@ -1030,7 +1037,8 @@ DATATABLE MASCOTAS
               
                               <label for="agua inicial" class="control-label font-weight-normal"><b>Agua inicial</b></label>
               
-                              <p>{{ $id_cliente->agua_inicial }}</p>         
+                              <input type="text" name="agua_inicial" class="form-control  border-0" id="agua_inicial" >    
+         
               
                             </div>
                           </div>  
@@ -1043,7 +1051,8 @@ DATATABLE MASCOTAS
               
                                   <label for="IMC" class="control-label font-weight-normal"><b>IMC</b></label>
               
-                                  <p>{{ $id_cliente->imc }}</p>       
+                                  <input type="text" name="imc" class="form-control  border-0" id="imc" >    
+     
               
                                 </div>
               
@@ -1058,7 +1067,8 @@ DATATABLE MASCOTAS
               
                                   <label for="grasa viseral" class="control-label font-weight-normal"><b>Grasa viseral</b></label>
               
-                                  <p>{{ $id_cliente->grasa_viseral }}</p>       
+                                  <input type="text" name="grasa_viseral" class="form-control  border-0" id="grasa_viseral" >    
+     
               
                                 </div>
               
@@ -1071,7 +1081,8 @@ DATATABLE MASCOTAS
 
                             <label for="edad metabolica" class="control-label font-weight-normal"><b>Edad metabolica</b></label>
 
-                            <p>{{ $id_cliente->edad_metabolica }}</p>       
+                            <input type="text" name="edad_metabolica" class="form-control  border-0" id="edad_metabolica" >    
+      
 
                           </div>
 
@@ -1082,9 +1093,10 @@ DATATABLE MASCOTAS
               
                           <div class="form-group">
 
-                            <label for="paquete desentoxicacion" class="control-label font-weight-normal"><b>Paquete desintoxicacion</b></label>
+                            <label for="paquete desintoxicacion" class="control-label font-weight-normal"><b>Paquete desintoxicacion</b></label>
 
-                            <p>{{ $id_cliente->paquete_desintoxicacion }}</p>       
+                            <input type="text" name="paquete_desintoxicacion" class="form-control  border-0" id="paquete_desintoxicacion" >    
+      
 
                           </div>
 
@@ -1098,7 +1110,8 @@ DATATABLE MASCOTAS
 
                           <label for="terapias" class="control-label font-weight-normal"><b>Terapias</b></label>
 
-                          <p>{{ $id_cliente->terapias }}</p>       
+                          <input type="text" name="terapias" class="form-control  border-0" id="terapias" >    
+
 
                         </div>
 
@@ -1111,7 +1124,8 @@ DATATABLE MASCOTAS
 
                           <label for="terapias adicionales" class="control-label font-weight-normal"><b>Terapias adicionales</b></label>
 
-                          <p>{{ $id_cliente->terapias_adicionales }}</p>       
+                          <input type="text" name="terapias_adicionales" class="form-control  border-0" id="terapias_adicionales" >    
+    
 
                         </div>
 
@@ -1123,7 +1137,8 @@ DATATABLE MASCOTAS
 
                           <label for="tipo lavado" class="control-label font-weight-normal"><b>Tipo lavado</b></label>
 
-                          <p>{{ $id_cliente->tipo_lavado }}</p>       
+                          <input type="text" name="tipo_lavado" class="form-control  border-0" id="tipo_lavado" >    
+   
 
                         </div>
 
@@ -1137,7 +1152,7 @@ DATATABLE MASCOTAS
               <div class="form-group">
                   <label for="medico_tratante" class="control-label font-weight-normal"><b>Atendido por</b></label>
                   
-                  <p>{{ $id_cliente->profesional }}</p>       
+                  <input type="text" name="profesional" class="form-control  border-0" id="profesional" >    
 
                   
               </div>
@@ -1149,7 +1164,8 @@ DATATABLE MASCOTAS
 
                 <label for="Observaciones" class="control-label font-weight-normal"><b>Observaciones</b></label>
 
-                <p>{{ $id_cliente->observaciones }}</p>       
+                <input type="text" name="observaciones" class="form-control  border-0" id="observaciones" >    
+ 
 
               </div>
 
@@ -1162,7 +1178,11 @@ DATATABLE MASCOTAS
 
                 <label for="fecha de creacion" class="control-label font-weight-normal"><b>Fecha de creación</b></label>
 
-                <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }} &nbsp;  {{ \Carbon\Carbon::parse($id_cliente->created_at)->diffForHumans() }}</p>       
+             
+                <input type="text" name="fecha" class="form-control  border-0" id="fecha" >    
+
+             
+             <!--   <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }} &nbsp;  {{ \Carbon\Carbon::parse($id_cliente->created_at)->diffForHumans() }}</p>   -->    
 
               
 
@@ -1190,6 +1210,9 @@ DATATABLE MASCOTAS
               
                   <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id }}" readonly>  
                     
+                  <input type="hidden" name="id_historia" class="form-control" id="id_historia"  readonly>  
+
+
               
                     <!--     
               
@@ -1202,6 +1225,14 @@ DATATABLE MASCOTAS
               -->
         
                 <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary float-left mt-5" data-toggle="modal" data-target="#modalControlMedico" 
+                  style="position: absolute; top: 0; left: 500px">
+                  <span class="fa fa-street-view fa-fw" ></span>  
+                  Crear control clínico
+              </button> 
+
+
         
                 <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         
@@ -1453,7 +1484,7 @@ DATATABLE MASCOTAS
 
 ======================================-->
 
-<div class="modal fade" id="modalControlMedico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalControlMedico"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
@@ -1586,6 +1617,7 @@ DATATABLE MASCOTAS
 
               <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
           
+              <input type="text" name="id_historia" class="form-control" id="id_historia"  readonly>  
 
 
             
@@ -1618,9 +1650,6 @@ DATATABLE MASCOTAS
                 
 
 
-@empty
-    
-@endforelse
 
 
 
@@ -1769,7 +1798,7 @@ DATATABLE MASCOTAS
                  <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
                   
                 
-                 <input type="text" name="id_control" class="form-control" id="id_control"  readonly>  
+                 <input type="text" name="id_historia" class="form-control" id="id_historia"  readonly>  
 
 
                  
@@ -1811,7 +1840,7 @@ MODAL DATATABLE CONTROLES MEDICOS
 ============================================-->
 
 
-<div class="modal fade" id="modalVerControlesMedicos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalVerControlesMedicos" tabindex="99999" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
        
 
   <div class="modal-dialog modal-lg" role="document">
@@ -1836,7 +1865,7 @@ MODAL DATATABLE CONTROLES MEDICOS
       </div>
       <div class="modal-body">
       
-                   
+                    
  <div class="row">
    <div class="col-lg-12">
            
@@ -2125,7 +2154,9 @@ let today = new Date();
             "previous": "Anterior"
         }
                     
-                },
+   },
+
+
 
 
  //===============================================
@@ -2133,6 +2164,9 @@ let today = new Date();
  // MOSTRAR / OCULTAR BOTÓN CREAR HISTORIA CLINICA               
 
  //================================================
+
+
+/*
 
     "fnFooterCallback": function (nRow, aaData, iStart, iEnd, aiDisplay) {
 
@@ -2144,6 +2178,8 @@ let today = new Date();
     }
 }
 
+
+*/
                 
       
     });
@@ -2160,9 +2196,6 @@ let today = new Date();
 // AGREGAR HISTORIA CLINCIA
 
 // ==================================================
-
-
-
 
 $('#form_crear_historia_clinica').off('submit').on('submit', function (event) {
 
@@ -2222,9 +2255,124 @@ let btn = $('#agregar_historia')
 
 
 
+
+    
+// =========================================
+
+/// VER REGISTROS DE HISTÓRIA CLÍNICA
+
+// =========================================
+
+
+$('body').on('click', '.mostrar_historia', function(e) {
+  
+           
+  let id = $(this).data('id');
+
+  let id_historia = $(this).data('id');
+
+     $('#modalControlMedico input[name="id_historia"]').val(id_historia);
+  
+ //   $('#form_mostrar_historia_clinica')[0].reset();
+ 
+  $.ajax({
+    url: '/ver_historia/'+id,
+    method: 'GET',
+    data: {  id: id },
+   
+    success: function(data) {
+     
+     
+    $('#modalMostrarHistoriaClinica').modal('show');
+    $('#modalMostrarHistoriaClinica input[name="id_historia"]').val(data.id)
+    $('#modalMostrarHistoriaClinica input[name="estatura"]').val(data.estatura);
+    $('#modalMostrarHistoriaClinica input[name="peso_inicial"]').val(data.peso_inicial);
+    $('#modalMostrarHistoriaClinica input[name="abd_inicial"]').val(data.abd_inicial);
+    $('#modalMostrarHistoriaClinica input[name="grasa_inicial"]').val(data.grasa_inicial);
+    $('#modalMostrarHistoriaClinica input[name="agua_inicial"]').val(data.agua_inicial);
+    $('#modalMostrarHistoriaClinica input[name="imc"]').val(data.imc);
+    $('#modalMostrarHistoriaClinica input[name="grasa_viseral"]').val(data.grasa_viseral);
+    $('#modalMostrarHistoriaClinica input[name="edad_metabolica"]').val(data.edad_metabolica);
+    $('#modalMostrarHistoriaClinica input[name="paquete_desintoxicacion"]').val(data.paquete_desintoxicacion);
+    $('#modalMostrarHistoriaClinica input[name="terapias"]').val(data.terapias);
+    $('#modalMostrarHistoriaClinica input[name="terapias_adicionales"]').val(data.terapias_adicionales);
+    $('#modalMostrarHistoriaClinica input[name="tipo_lavado"]').val(data.tipo_lavado);
+    $('#modalMostrarHistoriaClinica input[name="profesional"]').val(data.profesional);
+    $('#modalMostrarHistoriaClinica input[name="observaciones"]').val(data.observaciones);
+    $('#modalMostrarHistoriaClinica input[name="fecha"]').val(data.created_at);
+
+
+
+
+
+
+  
+
+    }
+
+   });
+
+
+});
+
+
+
+
+// =========================================
+
+/// EDITAR REGISTROS DE TRATAMIENTO DE CLIENTES
+
+// =========================================
+
+$('body').on('click', '.editarHistoria', function (e) {
+
+e.preventDefault();
+
+//$('#form_editar_abono')[0].reset();
+let id = $(this).data('id');
+
+$.ajax({
+url: '/editar_historia/'+id,
+method: 'GET',
+data: {  id: id },
+
+ 
+  success: function(data) {
+
+   
+  
+    $('#modalEditarHistoriaClinica').modal('show');
+    $('#modalEditarHistoriaClinica input[name="id_historia"]').val(data.id)
+    $('#modalEditarHistoriaClinica input[name="estatura"]').val(data.estatura);
+    $('#modalEditarHistoriaClinica input[name="peso_inicial"]').val(data.peso_inicial);
+    $('#modalEditarHistoriaClinica input[name="abd_inicial"]').val(data.abd_inicial);
+    $('#modalEditarHistoriaClinica input[name="grasa_inicial"]').val(data.grasa_inicial);
+    $('#modalEditarHistoriaClinica input[name="agua_inicial"]').val(data.agua_inicial);
+    $('#modalEditarHistoriaClinica input[name="imc"]').val(data.imc);
+    $('#modalEditarHistoriaClinica input[name="grasa_viseral"]').val(data.grasa_viseral);
+    $('#modalEditarHistoriaClinica input[name="edad_metabolica"]').val(data.edad_metabolica);
+    $('#modalEditarHistoriaClinica input[name="paquete_desintoxicacion"]').val(data.paquete_desintoxicacion);
+    $('#modalEditarHistoriaClinica input[name="terapias"]').val(data.terapias);
+    $('#modalEditarHistoriaClinica input[name="terapias_adicionales"]').val(data.terapias_adicionales);
+    $('#modalEditarHistoriaClinica input[name="tipo_lavado"]').val(data.tipo_lavado);
+    $('#modalEditarHistoriaClinica input[name="profesional"]').val(data.profesional);
+    $('#modalEditarHistoriaClinica input[name="observaciones"]').val(data.observaciones);
+    $('#modalEditarHistoriaClinica input[name="fecha"]').val(data.created_at);
+
+
+
+
+  }
+});
+});
+
+
+
+
+
 // =======================================
 
-// EDITAR HISTORIA CLINICA
+// ACTUALIZAR HISTORIA CLINICA
 
 // ======================================
 
@@ -2245,7 +2393,7 @@ $('#form_editar_historia_clinica').off('submit').on('submit', function (e) {
                        
  /* Configurar botón submit con spinner */
  
-         let btn = $('#editar_cliente') 
+         let btn = $('#editar_historia') 
          let existingHTML =btn.html() //store exiting button HTML
          //Add loading message and spinner
          $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
@@ -2258,7 +2406,7 @@ $('#form_editar_historia_clinica').off('submit').on('submit', function (e) {
  
              $.ajax({
                 
-                 url: '/editar_historia/' +id,
+                 url: '/actualizar_historia/' +id,
                  type: "POST",
                  data: $(this).serialize(),
                  dataType: "json",
@@ -2269,7 +2417,7 @@ $('#form_editar_historia_clinica').off('submit').on('submit', function (e) {
  
                   // $('#form_editar_cliente')[0].reset();
                    $('#modalEditarHistoriaClinica').modal('hide');
-                   $("#editar_cliente"). attr("disabled", true);
+                   $("#editar_historia"). attr("disabled", true);
                       //   $('#agregar_cliente').attr('disabled', true);
                          toastr["success"]("los datos se han editado correctamente");
                       

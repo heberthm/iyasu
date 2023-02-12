@@ -46,7 +46,12 @@ Auth::routes();
 
 Route::get('inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
 
-Route::get('auth.register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('auth.register');
+Route::get('listado_usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('listado_usuarios');
+
+Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('registrar_usuario');
+
+Route::post('crear_usuario', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('crear_usuario');
+
 
 
 Route::get('search', [App\Http\Controllers\Select2SearchController::class,'index']);
@@ -70,14 +75,21 @@ Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'up
 
 Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');
 
+Route::post('/actualizar/{id_cliente}',[App\Http\Controllers\ClientesController::class ,'update'])->name('editarCliente');
 
-Route::post('buscarmascota', [MascotasController::class,'buscarMascota'])->name('buscarmascota');
 
-Route::post('/editarCliente/{id_cliente}',[App\Http\Controllers\ClientesController::class ,'update'])->name('editarCliente');
 
-Route::get('/historia_clinica/{id}', [App\Http\Controllers\historiasClinicasController::class, 'index']);
+Route::get('historia_clinica/{id}', [App\Http\Controllers\historiasClinicasController::class, 'index']);
 
 Route::post('/crear_historia', [App\Http\Controllers\historiasClinicasController::class, 'store']);
+
+Route::get('/ver_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'show']);
+
+Route::get('/editar_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'edit']);
+
+Route::post('/actualizar_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'update']);
+
+
 
 Route::post('/editar_historia/{id_cliente}', [App\Http\Controllers\historiasClinicasController::class, 'update']);
 
@@ -185,6 +197,8 @@ Route::get('ver_pago_honorarios/{id}', [App\Http\Controllers\HonorariosProfesion
 Route::get('editar_pago_honorarios/{id}', [App\Http\Controllers\HonorariosProfesionalesController::class, 'edit']);
 
 Route::post('actualizar_pago_honorarios/{id}', [App\Http\Controllers\HonorariosProfesionalesController::class, 'update']);
+
+Route::delete('eliminar_honorario/{id}', [App\Http\Controllers\HonorariosProfesionalesController::class, 'destroy']);
 
 
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');

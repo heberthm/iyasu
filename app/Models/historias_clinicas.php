@@ -9,7 +9,7 @@ class historias_clinicas extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','id_cliente','estatura','edad','peso_inicial','abd_inicial',
+    protected $fillable = ['user_id','nombre','edad','id_cliente','estatura','edad','peso_inicial','abd_inicial',
     'grasa_inicial','agua_inicial','imc','grasa_viseral','edad_metabolica','terapias', 'paquete','paquete_desintoxicacion','valor_paquete','terapias_adicionales',
     'tipo_lavado','num_lavado','dias_lavados','observaciones'];
     

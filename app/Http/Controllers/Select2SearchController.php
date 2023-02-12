@@ -47,7 +47,7 @@ class Select2SearchController extends Controller
    {
 
     $id_clientes = Cliente::leftjoin('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
-    ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.id_cliente', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 
+    ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 
     'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'municipio',
     'historias_clinicas.id', 'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 
     'historias_clinicas.abd_inicial', 'historias_clinicas.agua_inicial', 'historias_clinicas.grasa_inicial', 'historias_clinicas.imc', 
@@ -56,7 +56,7 @@ class Select2SearchController extends Controller
       'historias_clinicas.profesional', 'historias_clinicas.observaciones','historias_clinicas.created_at')
 
     ->where('clientes.id_cliente',  $id_clientes)
-     ->where('clientes.user_id', Auth::user()->id)
+   
     ->get();
 
 

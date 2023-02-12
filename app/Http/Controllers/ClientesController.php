@@ -38,7 +38,7 @@ class ClientesController extends Controller
           if(request()->ajax()) {
             return datatables()->of(Cliente::select("user_id", "id_cliente", "nombre", "celular", 'fecha_nacimiento', "created_at")
             
-            ->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->whereMonth('fecha_nacimiento', Carbon::now()->month))
           
             ->addColumn('fecha_nacimiento', function($row)  {  
@@ -160,7 +160,7 @@ class ClientesController extends Controller
        $cedula = $request->get('cedula');
        $data = DB::table("clientes")
         ->where('cedula', $cedula)
-        ->where('user_id', Auth::user()->id)
+       
         ->count();
        if($data > 0)
        {

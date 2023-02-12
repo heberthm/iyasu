@@ -190,6 +190,8 @@ class  HonorariosProfesionalesController extends Controller
           $data->valor_pago         = $request->valor_pago;
             
 
+            
+
         $data->save();
      
         return response()->json(['success'=>'update successfully.']);

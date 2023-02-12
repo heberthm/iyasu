@@ -90,11 +90,11 @@ FORMULARIO RECEPCION DE PACIENTES
              
     <div class="card-header">
                    
-                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de abonos de pacientes</h3>
+                   <h3 class="card-title"><span style="color: #28a745;" class="fas fa-users mr-3"></span>Listado de usuarios</h3>
                   
                    <div class="pull-right">
-                      <button type="button" class="btn btn-primary float-right"  data-toggle="modal" data-target="#modalACrearAbono">                            <span class="fa fa-list fa-fw" ></span>  
-                            Crear abono
+                      <button type="button" class="btn btn-primary  float-right"  data-toggle="modal" data-target="#modalCrearUsuario">                            <span class="fa fa-list fa-fw" ></span>  
+                            Crear usuario
                         </button>  &nbsp;
                   </div> 
                     
@@ -106,52 +106,27 @@ FORMULARIO RECEPCION DE PACIENTES
                    
 
 
-                      
-
-<!-- ===================================
-
-DATAPICKER BOOTSTRAP
-
-========================================  -->
-
-<!--
-
-<div class="row input-daterange">
-      <div class="col-md-3">
-          <input type="text" name="from_date" id="from_date" class="form-control" placeholder="Fecha inicial" readonly />
-      </div>
-      <div class="col-md-3">
-          <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Fecha final" readonly />
-      </div>
-      <div class="col-md-3">
-          <button type="button" name="filter" id="filter" class="btn btn-primary">Filtrar</button>
-          <button type="button" name="refresh" id="refresh" class="btn btn-default">Refrescar</button>
-      </div>
-  </div>
-  <br />
-
--->
-
+ 
 
 
 <!-- ==================================
-DATATABLE LISTA DE ESPERA
+
+DATATABLE USUARIOS
+
 ====================================== -->
 
 
        <div class="row">
          <div class="col-lg-12">
                                              
-               <table id="table_registros_contables" class="table dt-responsive table-hover" style="width:100%">
+               <table id="table_registros_usuarios" class="table dt-responsive table-hover" style="width:100%">
                    <thead>
                       <tr>
                                         
-                        <th>Paciente</th>
-                        <th>Tratamiento</th>
-                         <th>Fecha abono</th>
-                         <th>Saldo actual</th>
-                         <th>Vr. abono</th>
-                         <th>Saldo</th>                         
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Fecha de registro</th>
+                                      
                          <th ></th>
                      
                      </tr>
@@ -180,21 +155,21 @@ DATATABLE LISTA DE ESPERA
 
  <!--=====================================
 
-    MODAL AGREGAR ABONO
+    MODAL AGREGAR USUARIO
 
 ======================================-->
 
-<div class="modal fade" id="modalACrearAbono"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalCrearUsuario"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     
 
 
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-mb">
   
   <div class="modal-content">
   
   <div class="modal-header">
    
-     <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar abono</h5> 
+     <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-user mr-3"></span>Agregar usuario</h5> 
    
     
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -205,135 +180,89 @@ DATATABLE LISTA DE ESPERA
     
       </div>
 
-      <div class="modal-body">
+     
+     <div class="modal-body">
+        <form method="POST" id="formCrearUsuario">
+           
+            <div class="input-group mb-3">
+              
+              <input type="text" class="form-control text-capitalize" id="nombre" name="nombre" placeholder="Nombre completo" required>
 
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
+                  <div class="input-group-append">
 
-        <form  id="form_agregar_abono" method="POST" action="{{ url('abonos}') }}"  >
+                    <div class="input-group-text">
 
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
+                      <span class="fas fa-user"></span>
 
+                    </div>
 
-          <div class="row">
+                  </div>
 
-          <div class="col-md-4">
-
-              <div class="form-group" >
-
-                <label for="cliente" class="control-label">Cliente</label>
-
-
-                <div class="form-group">
-                        <select class="livesearch form-control"  id="livesearch" name="livesearch" style="width: 100%;"></select>
-                   
-
-             
-                    <input type="hidden" name="nombreCliente" class="form-control " id="nombreCliente" required autocomplete="off">
-
-
-
-               </div>
-
-                <div class="alert-message" id="nombreClienteError"></div>
-                 
-             
-            </div>
-         </div>
-
-
-
-            <div class="col-md-4">
-
-              <div class="form-group">
-
-                <label for="Celular" class="control-label">Tel/Cel</label>
-
-                <input type="text" name="celular" class="form-control " id="celular" required autocomplete="off">
-
-                 <div class="alert-message" id="responsableError"></div>
-                
-              </div>
             </div>
 
 
-          
-            <div class="col-md-4">
-              <div class="form-group">
+           <div class="input-group mb-3">
 
-                <label for="valor_abono" class="control-label">Vr. abono</label>
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
 
-                <input type="number" name="valor_abono" class="form-control" id="valor_abono" required autocomplete="off">
-                
-                  <div class="alert-message" id="valorAbonoError"></div>
-                           
-               </div>
-            </div>
+              <div class="input-group-append">
 
+                 <div class="input-group-text">
 
+                   <span class="fas fa-envelope"></span>
 
-            <div class="col-md-4">
-              <div class="form-group">
-
-                <label for="saldo actual" class="control-label">Saldo actual</label>
-
-                <input type="number" name="valor_tratamiento" class="form-control" id="valor_tratamiento" readonly>
-                 
-                           
-               </div>
-            </div>
-
-
-            <div class="col-md-4">
-              <div class="form-group">
-
-                <label for="saldo" class="control-label">Nuevo saldo</label>
-
-                <input type="number" name="saldo" class="form-control" id="saldo" readonly>
-                
-                 
-               </div>
-            </div>
-
-
-
-            <div class="col-md-12">
-
-              <div class="form-group">
-
-                <label for="Descripcion" class="control-label">Tratamiento</label>
-
-                <input type="text" name="descripcion" class="form-control " id="descripcion" required autocomplete="off">
-
-                <div class="alert-message" id="descripcionError"></div>
-                
+                 </div>
              </div>
-            </div>
-
-
- 
-            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::check() ? Auth::user()->name : null}}">
-
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::check() ? Auth::user()->id : null}}" readonly>  
-
-            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
-
-            <input type="hidden" name="id_tratamiento" id="id_tratamiento">
-
-            <input type="hidden" name="valor_tratamiento2" id="valor_tratamiento2">
-
-            <input type="hidden" name="estado" id="estado">
-
-
-
 
           </div>
 
 
+          <div class="input-group mb-3">
+
+            <input type="password"  data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" class="form-control" name="clave" placeholder="Contraseña" required>
+
+             <!--
+            <div class="input-group-append">
+
+              <div class="input-group-text">
+
+                 <span class="fas fa-lock"></span>
+
+              </div>
+
+            </div>
+           
+         -->
+               
+
+          </div>
+
+
+          <div class="input-group mb-3">
+
+            <input type="password" data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" data-validation="confirmation"  class="form-control" id="repetir_clave" name="repetir_clave" placeholder="Repetir contraseña" required>
+
+          <!--
+            <div class="input-group-append">
+
+              <div class="input-group-text">
+
+                 <span class="fas fa-lock"></span>
+
+              </div>
+
+            </div>
+           
+         -->
+
+          </div>
+                                            
+
+
+
       <div class="modal-footer">
 
-        <button type="submit" id="agregar_abono" name="agregar_abono"  class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="agregar_usuario" name="agregar_usuario"  class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -677,6 +606,32 @@ $(window).on('load', function () {
 
 
 
+<!-- ================================================
+
+ FUNCIÓN FOCUS PARA PRIMER INPUT modalEditarCliente
+
+ ================================================= -->
+
+
+ <script>
+
+$(document).ready(function() {
+  
+  $('#modalCrearUsuario').on('shown.bs.modal', function () {
+  
+   $('#nombre').focus();
+   
+
+  });
+});
+
+</script>
+
+
+
+
+
+
 <!-- =======================================
 
 DESHABILITAR CLICK DERECHO
@@ -696,56 +651,40 @@ $(document).ready(function () {
 
 
 
-<!-- ===============================================
+<!-- =======================================
 
-MULTIPLICAR INPUTS PARA HALLAR SALDO DE TRATAMIENTO
+MOSTRAR / OCULTAR CLAVE
 
-===================================================== -->
+============================================ -->
 
 <script>
-
-$(document).ready(function () {
-   $("#valor_abono").on('blur',function(){
-
-    $("#saldo").val(parseInt($("#valor_tratamiento").val()) - parseInt($("#valor_abono").val()));
-
-    $('#estado').val('');
-   
-
-   });
-});
-
+  $(function() {
+    $('#clave').password()
+  })
 </script>
 
 
+<!-- =======================================
 
-<script>
+CONFIRMAR CLAVE
 
-/*
+============================================ -->
 
-$(document).ready(function () {
 
-      $('#valor_abono').on('change', function() {
-
-             
-        let input = document.getElementById('saldo');
-      
-        if(input.value.length === 0) {
-
-        $('#estado').val('Pagado');
-    
-      } else if(input.value.length !== 0) {
-     
-        $('#estado').val('Pendiente');
-
-    }
-  
-  })
-
-})
-
-*/
-
+<script type="text/javascript">
+    $(function () {
+        $("#agregar_usuario").click(function () {
+            var password = $("#clave").val();
+            var confirmPassword = $("#repetir_clave").val();
+            if (password != confirmPassword) {
+                alert("La contraseña no coincide.");
+                
+                return false;
+            }
+            return true;
+           
+        });
+    });
 </script>
 
 
@@ -753,189 +692,21 @@ $(document).ready(function () {
 
 <!-- =======================================
 
-SELECT2 - BUSQUEDAD DE CLIENTES
+MOSTRAR / OCULTAR CLAVE
 
 ============================================ -->
 
-<script type="text/javascript">
-
-  $('.livesearch').select2({
-    placeholder: 'Buscar cliente por nombre...',
-    language: "es",
-    allowClear: true,
-    minimumInputLength: 3,
-    ajax: {
-         
-      url: 'buscar_tratamiento', 
-
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-
-        return {
-          results: $.map(data, function(item) {
-            return {
-              text: item.nombre,
-              id: item.id_cliente,
-              id_tratamiento: item.id_tratamiento,
-              tratamiento: item.tratamiento,
-              celular: item.celular,
-              valor_tratamiento: item.valor_tratamiento,
-              saldo: item.saldo,
-              estado: item.estado,
-             
-            }
-        
-          })
-
-        };
-
-      },
-
-      cache: true,
-
-    }
-    
-
-  });
-  
-  
-  //================================================
-
-   // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
-
-  //================================================
-
-  $('#livesearch').off('change').on('change', function() {
-   
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-    let id = $(this).val();
-
-    $.ajax({
-     
-        url: 'buscar_tratamiento', 
-
-        method: "GET",
-        data: $(this).serialize(),
-        dataType: "json",
-       
-        success: function(data) {
-        
-
-         }
-
-    });
-
-   // window.location.href = 'cliente/' +id;
-
-   $('#id_cliente').val('');
-   $('#nombreCliente').val('');
-   
-                     
-    let cliente = '';
-    let id_cliente ='';
-                                              
-    cliente = $(".livesearch").text();
-
-    id_cliente = $(".livesearch").val();
-
-   $('#id_cliente').val(id_cliente);
-
-    $('#nombreCliente').val(cliente);
-  
-        
-
-  });
-</script>
-
-
-
-<!-- ============================================
-
-BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
-
-================================================= -->
-
-
 <script>
-
-$('.livesearch').on('select2:opening', function (e) { 
-
-$('.livesearch').html('');
-$('#celular').val('');
-$('#valor_tratamiento').val('');
-$('#valor_tratamiento2').val('');
-$('#descripcion').val('');
-$('#valor_abono').val('');
-$('#saldo').val('');
-
-
-});
-
-
+  $(function() {
+    $('#repetir_clave').password()
+  })
 </script>
-
-
-
-<!-- =======================================================
-
-PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
-
-============================================================ -->
-
-
-<script>
-
-$('#livesearch').on('select2:select', function(evt){
-    
-    let celular = evt.params.data.celular;
-    let tratamiento = evt.params.data.tratamiento;
-    let valor_tratamiento2 = evt.params.data.valor_tratamiento;
-    let valor_tratamiento = evt.params.data.saldo;
-    let saldo_actual =  evt.params.data.valor_tratamiento;
-    let id_tratamiento = evt.params.data.id_tratamiento;
-    let estado = evt.params.data.estado;
-  
-    var opt = "<option value='"+celular+"' selected ='selected'> </option>";
-    $("#celular").html(opt);
-    $("#celular").val(celular).trigger("change");
-
-    var opt = "<option value='"+tratamiento+"' selected ='selected'> </option>";
-    $("#descripcion").html(opt);
-    $("#descripcion").val(tratamiento).trigger("change");
-
-    var opt = "<option value='"+valor_tratamiento+"' selected ='selected'> </option>";
-    $("#valor_tratamiento").html(opt);
-    $("#valor_tratamiento").val(valor_tratamiento).trigger("change");
-
-    var opt = "<option value='"+valor_tratamiento2+"' selected ='selected'> </option>";
-    $("#valor_tratamiento2").html(opt);
-    $("#valor_tratamiento2").val(valor_tratamiento2).trigger("change");
-
-
-    var opt = "<option value='"+id_tratamiento+"' selected ='selected'> </option>";
-    $("#id_tratamiento").html(opt);
-    $("#id_tratamiento").val(id_tratamiento).trigger("change");
-
-    var opt = "<option value='"+estado+"' selected ='selected'> </option>";
-    $("#estado").html(opt);
-    $("#estado").val(estado).trigger("change");
-});
-
-</script>
-
-
 
 
 
 <!-- ===================================================
 
- DATATABLE TRATAMIENTO CLIENTES
+ DATATABLE USUARIOS
 
 ======================================================= --->
 
@@ -951,73 +722,38 @@ $('#livesearch').on('select2:select', function(evt){
     });
 
 
-    let table =  $('#table_registros_contables').DataTable({
+    let table =  $('#table_registros_usuarios').DataTable({
 
   
            processing: true,
            serverSide: true,
                                              
            type: "GET",
-           ajax: 'abonos',
-
-
-
-           dom: '<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"<"dt-buttons btn-group flex-wrap"B>><"col-sm-12 col-md-4"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-
-           
-        buttons: [ 
-          
-              { extend: 'excelHtml5', footer: true, text: 'Excel', title: 'Abonos de clientes',
-              
-                exportOptions: {
-                columns: [ 0, 1, 2, 3, 4, 5 ]
-                
-              }},
-
-              { extend: 'pdfHtml5', footer: true, text: 'PDF', title: 'Abonos de clientes',
-              
-                exportOptions: {
-                columns: [0, 1, 2, 3, 4, 5 ]
-                
-              }}, 
-  
-         ],
-
-         
+           ajax: 'listado_usuarios',
+             
         
 
                     
            columns: [
 
 
-                    { data: 'nombre', name: 'nombre' },                  
-                    { data: 'descripcion', name: 'descripcion' },
+                    { data: 'name', name: 'name' },                  
+                    { data: 'email', name: 'email' },
                     { data: 'created_at', name: 'created_at', orderable: true },  
-                    { data: 'saldo_actual', name: 'saldo_actual' },
-                    { data: 'valor_abono', name: 'valor_Abono' },
-                    { data: 'saldo', name: 'saldo' },
-                        
-                   
+                                     
                     {data: 'action', name: 'action', orderable: false, searchable: false},
-                   
+                  
                 
                  ],
         
-                   order: [2, 'ASC'],
+                   order: [2, 'asc'],
 
-                   "columnDefs": [
-                        { "orderable": false,
-                          "render": $.fn.dataTable.render.number( '.' ),
-                          "targets":[3,4,5],
-                          className: 'dt-body-left',
-                        }
-                   ],
-          
+                            
           
             "language": {
                 
                             
-                        "emptyTable": "No hay abonos registrados.",
+                        "emptyTable": "No hay usuarios registrados.",
                         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
                         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
                         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
@@ -1046,11 +782,11 @@ $('#livesearch').on('select2:select', function(evt){
 
 // =========================================
 
-/// GUARDAR REGISTROS DE ABONOS DE CLIENTES
+/// GUARDAR REGISTROS DE USUARIO
 
 // =========================================
 
-$('#form_agregar_abono').off('submit').on('submit', function (event) {
+$('#formCrearUsuario').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -1058,35 +794,35 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#agregar_abono') 
+let btn = $('#agregar_usuario') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#agregar_abono').attr('disabled', true);
+        $('#agregar_usuario').attr('disabled', true);
 
         event.preventDefault();
 
         try {
 
         $.ajax({
-            url: "crear_abono",
+            url: "crear_usuario",
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                   table.ajax.reload();
-                $('#agregar_tratamiento').prop("required", true);
+                $('#agregar_usuario').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_agregar_abono')[0].reset();
-                $('#modalACrearAbono').modal('hide');
+                $('#formCrearUsuario')[0].reset();
+                $('#modalCrearUsuario').modal('hide');
                   
              //   table.ajax.reload();
              //   location.reload(true);
-                toastr["success"]("Abono registrado correctamente.");
+                toastr["success"]("Usuario creado correctamente.");
          
             }
          });

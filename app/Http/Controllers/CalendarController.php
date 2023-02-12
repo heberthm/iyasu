@@ -24,7 +24,7 @@ class CalendarController extends Controller
          $start = (!empty($_GET["start"])) ? ($_GET["start"]) : ('');
          $end =   (!empty($_GET["end"])) ? ($_GET["end"]) : ('');
         
-         $data = Events::whereDate('start', '>=', $start)->whereDate('end', '<=', $end)->where('userId', Auth::user()->id)->get(['id','title','start', 'end', 'color', 'cliente', 'telefono','descripcion','medico']);
+         $data = Events::whereDate('start', '>=', $start)->whereDate('end', '<=', $end)->get(['id','title','start', 'end', 'color', 'cliente', 'telefono','descripcion','medico']);
  
          return Response::json($data);
           }

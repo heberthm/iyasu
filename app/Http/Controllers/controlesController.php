@@ -44,9 +44,9 @@ class controlesController extends Controller
 
            
 
-                $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarControl"  title="Editar datos de control clínico" class="fa fa-edit editarControl"></a>
+                $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarControl"  title="Editar datos de control clínico" class="fa fa-edit editarControl"></a>
 
-                <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar control médico" class="fa fa-trash eliminarControl"></a>';
+                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar control médico" class="fa fa-trash eliminarControl"></a>';
                 
                  
                 return $actionBtn;
@@ -95,13 +95,14 @@ class controlesController extends Controller
         try {
         $data = new controles;
  
-        $data ->user_id            = $request->userId;
-        $data ->id_cliente         = $request->id_cliente;        
+        $data->user_id            = $request->userId;
+        $data->id_cliente         = $request->id_cliente;
+        $data->id_historia        = $request->id_historia;           
         $data->num_control         = $request->num_control;
         $data->peso                = $request->peso;
-        $data->abd                = $request->abd;
-        $data->grasa              = $request->grasa;       
-        $data->agua               = $request->agua;
+        $data->abd                 = $request->abd;
+        $data->grasa               = $request->grasa;       
+        $data->agua                = $request->agua;
              
      
             

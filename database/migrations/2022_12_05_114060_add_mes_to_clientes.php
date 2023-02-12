@@ -14,7 +14,8 @@ class AddMesToClientes extends Migration
     public function up()
     {
         Schema::table('clientes', function (Blueprint $table) {
-            //
+            
+            $table->bigInteger('id_historia')->after('user_id');
         });
     }
 

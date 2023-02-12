@@ -29,7 +29,7 @@ class abonosClientesController extends Controller
               //  $id = $request->id_cliente;
     
               $id = abonos_clientes::join('clientes', 'clientes.id_cliente', '=', 'abonos_clientes.id_cliente')
-               ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.id_cliente', 'clientes.cedula', 'clientes.nombre', 
+               ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.cedula', 'clientes.nombre', 
                 'clientes.celular', 'abonos_clientes.id', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.descripcion', 
                'abonos_clientes.responsable', 'abonos_clientes.valor_abono','abonos_clientes.valor_tratamiento',   'abonos_clientes.saldo_actual',  'abonos_clientes.saldo',
                'abonos_clientes.created_at' )->get();

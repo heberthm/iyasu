@@ -27,14 +27,15 @@ class historiasClinicasController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = cliente::join('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
-              ->select('clientes.id_cliente', 'clientes.nombre', 'clientes.cedula',  'clientes.celular', 'clientes.direccion',
-              'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'historias_clinicas.id', 'historias_clinicas.id_cliente', 
-              'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 'historias_clinicas.abd_inicial', 
-              'historias_clinicas.grasa_inicial', 'historias_clinicas.imc', 'historias_clinicas.grasa_viseral',
-              'historias_clinicas.edad_metabolica', 'historias_clinicas.terapias',
-              'historias_clinicas.num_lavado', 'historias_clinicas.dias_lavados', 'historias_clinicas.observaciones', 'historias_clinicas.created_at')
-    
+              $id = Cliente::leftjoin('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
+              ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 
+              'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'municipio',
+              'historias_clinicas.id', 'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 
+              'historias_clinicas.abd_inicial', 'historias_clinicas.agua_inicial', 'historias_clinicas.grasa_inicial', 'historias_clinicas.imc', 
+              'historias_clinicas.grasa_viseral', 'historias_clinicas.edad_metabolica', 'historias_clinicas.terapias', 'historias_clinicas.terapias_adicionales',
+              'historias_clinicas.paquete_desintoxicacion', 'historias_clinicas.tipo_lavado', 'historias_clinicas.num_lavado', 'historias_clinicas.dias_lavados',
+              'historias_clinicas.profesional', 'historias_clinicas.observaciones','historias_clinicas.created_at')
+             
               ->where('clientes.id_cliente',  $id);
     
                return datatables()->of($id)
@@ -49,11 +50,11 @@ class historiasClinicasController extends Controller
                 ->addColumn('action', function($data) {
     
     
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalMostrarHistoriaClinica"  title="Ver datos história clínica" class="fa fa-eye mostrar_historia"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalMostrarHistoriaClinica"  title="Ver datos história clínica" class="fa fa-eye mostrar_historia"></a> 
                    
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit edit"></a>
+                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit editarHistoria"></a>
     
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id_cliente.'" data-target="#modalVerControlesMedicos"  title="Ver controles realizados" class="fa fa-street-view control"></a>
+                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerControlesMedicos"  title="Control médico" class="fa fa-street-view verControl"></a>
 
                     <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar abono" class="fa fa-trash eliminarHistoria"></a>';
 
@@ -171,7 +172,9 @@ class historiasClinicasController extends Controller
      */
     public function show($id)
     {
-        //
+      $id_historia  = historias_clinicas::find($id);
+      return response()->json($id_historia);
+    
     }
 
     /**
@@ -182,7 +185,8 @@ class historiasClinicasController extends Controller
      */
     public function edit($id)
     {
-        //
+      $id_historia  = historias_clinicas::find($id);
+      return response()->json($id_historia);
     }
 
     /**
