@@ -81,7 +81,7 @@ REGISTRO DE INGRESOS O EGRSOS
 
 <!-- ====================================
 
-FORMULARIO RECEPCION DE PACIENTES
+FORMULARIO RECEPCION DE USUARIOS
 
 =========================================  -->
 
@@ -219,7 +219,7 @@ DATATABLE USUARIOS
 
           <div class="input-group mb-3">
 
-            <input type="password"  data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" class="form-control" name="clave" placeholder="Contraseña" required>
+            <input type="password"  data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" class="form-control" id="clave" name="clave" placeholder="Contraseña" required>
 
              <!--
             <div class="input-group-append">
@@ -240,8 +240,9 @@ DATATABLE USUARIOS
 
           <div class="input-group mb-3">
 
-            <input type="password" data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" data-validation="confirmation"  class="form-control" id="repetir_clave" name="repetir_clave" placeholder="Repetir contraseña" required>
+            <input type="password" data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" data-validation="confirmation"  class="form-control" id="repetir_clave" name="repetir_clave" placeholder="Repetir contraseña" required autocomplete="off">
 
+            <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
           <!--
             <div class="input-group-append">
 
@@ -276,18 +277,16 @@ DATATABLE USUARIOS
 
 
 </div>
-
-   
+ 
 
 
  <!--=====================================
 
-    MODAL VER DATOS DE ABONO
+    MODAL EDITAR USUARIO
 
 ======================================-->
 
-<div class="modal fade" id="modalVerAbono"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
- 
+<div class="modal fade" id="modalEditarUsuario"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 
 <div class="modal-dialog modal-lg">
@@ -296,7 +295,7 @@ DATATABLE USUARIOS
   
   <div class="modal-header">
    
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Ver datos abono</h5>
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-user mr-3"></span>Editar datos del usuario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
      
            <span aria-hidden="true">&times;</span>
@@ -306,267 +305,92 @@ DATATABLE USUARIOS
       </div>
 
       <div class="modal-body">
-
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
-
-        <form method="POST" id="form_ver_abono" action="{{ url('abonos') }}"  >
-
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
-
-
-          <div class="row">
-
-            <div class="col-md-6">
-
-              <div class="form-group" >
-
-              <label for="nombreCliente" class="control-label">Nombre</label>
-
-              <input type="text" name="nombreCliente" class="form-control  border-0" id="nombreCliente" >
-
-            </div>
-          </div>
-
-
-            <div class="col-md-6">
-
-              <div class="form-group">
-
-              <label for="celular" class="control-label">Celular</label>
-
-              <input type="text" name="celular" class="form-control  border-0" id="celular" >
-                
-              </div>
-            </div>
-
-
-            <div class="col-md-12">
-
-            <div class="form-group">
-
-              <label for="Descripcion" class="control-label">Descripción</label>
-
-              <input type="text" name="descripcion" class="form-control  border-0" id="descripcion" >
+        <form method="POST" id="formEditarUsuario">
+           
+            <div class="input-group mb-3">
               
-            </div>
-          </div>
+              <input type="text" class="form-control text-capitalize" id="nombre" name="nombre" placeholder="Nombre completo" required>
 
+                  <div class="input-group-append">
 
-          
-          <div class="col-md-3">
-              <div class="form-group">
+                    <div class="input-group-text">
 
-                <label for="valor tratamiento" class="control-label">Valor tratamiento</label>
+                      <span class="fas fa-user"></span>
 
-                <input type="text" name="valor_tratamiento" class="form-control  border-0" id="valor_tratamiento" >
-                           
-               </div>
-            </div>
+                    </div>
 
-
-            <div class="col-md-3">
-              <div class="form-group">
-
-                <label for="valor_abono" class="control-label">Vr. abono</label>
-
-                <input type="text" name="valor_abono" class="form-control  border-0" id="valor_abono" >
-                           
-               </div>
-            </div>
- 
-
-
-            <div class="col-md-3">
-              <div class="form-group">
-
-                <label for="valor_abono" class="control-label">Saldo</label>
-
-                <input type="text" name="saldo" class="form-control  border-0" id="saldo" >
-                           
-               </div>
-            </div>
-
-       
-            
-            <div class="col-md-4">
-              <div class="form-group">
-
-                <label for="valor_abono" class="control-label">Responsable</label>
-
-                <input type="text" name="responsable" class="form-control  border-0" id="responsable" >
-                           
-               </div>
-            </div>
- 
-
-          
-
-
-
-
-            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::check() ? Auth::user()->name : null }}">
-
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::check() ? Auth::user()->id : null }}" readonly>  
-
-            <input type="hidden" name="id_abono" id="id_abono">
-
+                  </div>
 
             </div>
 
 
-      <div class="modal-footer">
+           <div class="input-group mb-3">
 
-        <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
 
-      </div>
+              <div class="input-group-append">
 
-    </div>
-  </div>
-</div>
+                 <div class="input-group-text">
 
-</form>
-</div>
+                   <span class="fas fa-envelope"></span>
 
-
-</div>
-
-
-
-
- <!--=====================================
-
-    MODAL EDITAR ABONO
-
-======================================-->
-
-<div class="modal fade" id="modalEditarAbono"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-
-
-
-<div class="modal-dialog modal-lg">
-  
-  <div class="modal-content">
-  
-  <div class="modal-header">
-   
-      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Editar datos de abono</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-     
-           <span aria-hidden="true">&times;</span>
-     
-        </button>
-    
-      </div>
-
-      <div class="modal-body">
-
-          @if (session('error'))
-          <div class="alert alert-danger">{{ session('error') }}</div>
-          @endif
-
-        <form method="POST" id="form_editar_abono" action="{{ url('actualizar_abono/{id}') }}" >
-
-     <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
-
-
-          <div class="row">
-
-            
-            <div class="col-md-4">
-
-              <div class="form-group" >
-
-                <label for="cliente" class="control-label">Cliente</label>
-                          
-                    <input type="text" name="nombreCliente" class="form-control " id="nombreCliente"  required autocomplete="off">
-
-                <div class="alert-message" id="nombreClienteError"></div>
-                 
-            </div>
-
-          </div>
-
-
-
-            <div class="col-md-4">
-
-              <div class="form-group">
-
-                <label for="Celular" class="control-label">Tel/Cel</label>
-
-                <input type="text" name="celular" class="form-control " id="celular"   required autocomplete="off">
-
-                 <div class="alert-message" id="responsableError"></div>
-                
-              </div>
-            </div>
-
-
-         
-            <div class="col-md-4">
-              <div class="form-group">
-
-                <label for="valor_abono" class="control-label">Vr. abono</label>
-
-                <input type="number" name="valor_abono" class="form-control" id="valor_abono"   required autocomplete="off">
-                
-                  <div class="alert-message" id="valorAbonoError"></div>
-                           
-               </div>
-            </div>
-
-
-            <div class="col-md-6">
-
-              <div class="form-group">
-
-                <label for="Descripcion" class="control-label">Descripción</label>
-
-                <input type="text" name="descripcion" class="form-control " id="descripcion"  required autocomplete="off">
-
-                <div class="alert-message" id="descripcionError"></div>
-                
+                 </div>
              </div>
-           </div>
+
+          </div>
 
 
+          <div class="input-group mb-3">
 
-            <div class="col-md-6">
-              <div class="form-group">
+            <input type="password"  data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" class="form-control" id="clave2" name="clave" placeholder="Contraseña" required>
 
-                <label for="valor_abono" class="control-label">Responsable</label>
+             <!--
+            <div class="input-group-append">
 
-                <input type="text" name="responsable" class="form-control" id="responsable"  readonly  autocomplete="off">
-                
-                  <div class="alert-message" id="responsableError"></div>
-                           
-               </div>
-            </div>
+              <div class="input-group-text">
 
-            
+                 <span class="fas fa-lock"></span>
 
-            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::check() ? Auth::user()->name : null }}">
-
-            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::check() ? Auth::user()->id : null }}" readonly>  
-
-            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente"  readonly>  
-
-            <input type="hidden" name="id_abono" id="id_abono" value="Pendiente">
-
+              </div>
 
             </div>
+           
+         -->
+               
+
+          </div>
 
 
+          <div class="input-group mb-3">
 
+            <input type="password" data-toggle="password"  data-message="Mostrar/Ocultar Contraseña" data-validation="confirmation"  class="form-control" id="repetir_clave2" name="repetir_clave" placeholder="Repetir contraseña" required autocomplete="off">
+
+            <div style="margin-top: 7px;" id="CheckPasswordMatch2"></div>
+          <!--
+            <div class="input-group-append">
+
+              <div class="input-group-text">
+
+                 <span class="fas fa-lock"></span>
+
+              </div>
+
+            </div>
+           
+         -->
+
+            <input type="hidden" name="id_usuario" id="id_usuario">
+
+          </div>
+                                            
+
+           
 
 
 
       <div class="modal-footer">
 
-        <button type="submit" id="editar_abono" name="editar_abono" class="btn btn-primary loader">Guardar</button>
+        <button type="submit" id="editar_usuario" name="editar_usuario" class="btn btn-primary loader">Guardar</button>
         <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
       </div>
@@ -666,26 +490,72 @@ MOSTRAR / OCULTAR CLAVE
 
 <!-- =======================================
 
-CONFIRMAR CLAVE
+CONFIRMAR CLAVE - GUARDAR
 
 ============================================ -->
 
 
 <script type="text/javascript">
-    $(function () {
-        $("#agregar_usuario").click(function () {
-            var password = $("#clave").val();
-            var confirmPassword = $("#repetir_clave").val();
-            if (password != confirmPassword) {
-                alert("La contraseña no coincide.");
-                
-                return false;
-            }
-            return true;
-           
-        });
-    });
+   
+   $(document).ready(function () {
+   $("#repetir_clave").on('keyup', function(){
+   
+    
+    var user_pass = $("#clave").val();
+    var user_pass2 = $("#repetir_clave").val();
+
+    if(user_pass.length == 0){
+      $("#CheckPasswordMatch").html("El campo es oligatorio.").css("color","red");
+        $("#agregar_usuario").attr('disabled',true);
+    } else if (user_pass == user_pass2 ){
+        $("#agregar_usuario").attr('disabled',false);
+        $("#CheckPasswordMatch").html("Clave correcta.").css("color","green");
+
+    } else {
+        $("#agregar_usuario").attr('disabled',true);
+        $("#CheckPasswordMatch").html("La clave no coincide !").css("color","red");
+    }
+  
+   });
+});
+
 </script>
+
+
+
+<!-- =======================================
+
+CONFIRMAR CLAVE -EDITAR
+
+============================================ -->
+
+
+<script type="text/javascript">
+   
+   $(document).ready(function () {
+   $("#repetir_clave2").on('keyup', function(){
+   
+    
+    var user_pass = $("#clave2").val();
+    var user_pass2 = $("#repetir_clave2").val();
+
+    if(user_pass.length == 0){
+      $("#CheckPasswordMatch2").html("El campo es oligatorio.").css("color","red");
+        $("#editar_usuario").attr('disabled',true);
+    } else if (user_pass == user_pass2 ){
+        $("#editar_usuario").attr('disabled',false);
+        $("#CheckPasswordMatch2").html("Clave correcta.").css("color","green");
+
+    } else {
+        $("#editar_usuario").attr('disabled',true);
+        $("#CheckPasswordMatch2").html("La clave no coincide !").css("color","red");
+    }
+  
+   });
+});
+
+</script>
+
 
 
 
@@ -833,66 +703,24 @@ let btn = $('#agregar_usuario')
 
 
 
-    
-// =========================================
-
-/// VER REGISTROS DE ABONO DE CLIENTES
 
 // =========================================
 
-
-$('body').on('click', '.verAbono', function(e) {
-  
-           
-          let id = $(this).data('id');
-          $('#form_ver_abono')[0].reset();
-         
-          $.ajax({
-            url: 'ver_abono/'+id,
-            method: 'GET',
-            data: {  id: id },
-           
-            success: function(data) {
-             
-  
-             
-            $('#modalVerAbono').modal('show');
-            $('#modalVerAbono input[name="id_abono"]').val(data.id)
-            $('#modalVerAbono input[name="id_cliente"]').val(data.id_cliente);
-            $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
-            $('#modalVerAbono input[name="celular"]').val(data.celular);
-            $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
-            $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
-            $('#modalVerAbono input[name="saldo"]').val(data.saldo);
-            $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
-            $('#modalVerAbono input[name="responsable"]').val(data.responsable);
-          
-  
-            }
-  
-           });
-  
-  
-        });
-  
-
-
+/// EDITAR REGISTROS DE USUARIO
 
 // =========================================
 
-/// EDITAR REGISTROS DE TRATAMIENTO DE CLIENTES
-
-// =========================================
-
-$('body').on('click', '.editarAbono', function (e) {
+$('body').on('click', '.editarUsuario', function (e) {
  
   e.preventDefault();
 
-        $('#form_editar_abono')[0].reset();
+        $('#formEditarUsuario')[0].reset();
         let id = $(this).data('id');
+
+        $('#CheckPasswordMatch2').html('');
       
       $.ajax({
-        url: '/editar_abono/'+id,
+        url: 'editar_usuario/'+id,
         method: 'GET',
         data: {  id: id },
   
@@ -901,14 +729,12 @@ $('body').on('click', '.editarAbono', function (e) {
 
            
            
-            $('#modalEditarAbono').modal('show');
-            $('#modalEditarAbono input[name="id_abono"]').val(data.id)
-            $('#modalEditarAbono input[name="id_cliente"]').val(data.id_cliente);
-            $('#modalEditarAbono input[name="nombreCliente"]').val(data.nombre);
-            $('#modalEditarAbono input[name="celular"]').val(data.celular);
-            $('#modalEditarAbono input[name="valor_abono"]').val(data.valor_abono);
-            $('#modalEditarAbono input[name="descripcion"]').val(data.descripcion);
-            $('#modalEditarAbono input[name="responsable"]').val(data.responsable);
+            $('#modalEditarUsuario').modal('show');
+            $('#modalEditarUsuario input[name="id_usuario"]').val(data.id)
+            $('#modalEditarUsuario input[name="nombre"]').val(data.name);
+            $('#modalEditarUsuario input[name="email"]').val(data.email);
+            $('#modalEditarUsuario input[name="clave"]').val(data.password);
+          
 
           }
         });
@@ -924,7 +750,7 @@ $('body').on('click', '.editarAbono', function (e) {
  // =========================================
 
  
-$('#form_editar_abono').off('submit').on('submit', function (event) {
+$('#formEditarUsuario').off('submit').on('submit', function (event) {
 
 $.ajaxSetup({
   headers: {
@@ -932,14 +758,14 @@ $.ajaxSetup({
   }
 });
 /* Configurar botón submit con spinner */
-let btn = $('#editar_abono') 
+let btn = $('#editar_usuario') 
     let existingHTML =btn.html() //store exiting button HTML
     //Add loading message and spinner
     $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
     setTimeout(function() {
       $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
     },5000) //5 seconds
-        $('#editar_abono').attr('disabled', true);
+        $('#editar_usuario').attr('disabled', true);
 
         event.preventDefault();
 
@@ -949,17 +775,17 @@ let btn = $('#editar_abono')
       
       $.ajax({
        
-            url: 'actualizar_abono/'+id,
+            url: 'actualizar_usuario/'+id,
             method: "POST",
             data: $(this).serialize(),
             dataType: "json",
             success: function(data) {
                 
-                $('#editar_abono').prop("required", true);
+                $('#editar_usuario').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-                $('#form_editar_abono')[0].reset();
-                $('#modalEditarAbono').modal('hide');
+                $('#formEditarUsuario')[0].reset();
+                $('#modalEditarUsuario').modal('hide');
                   
                 table.ajax.reload();
              //   location.reload(true);

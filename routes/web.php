@@ -48,9 +48,13 @@ Route::get('inicio', [App\Http\Controllers\HomeController::class, 'index'])->nam
 
 Route::get('listado_usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('listado_usuarios');
 
-Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('registrar_usuario');
+Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('register');
 
 Route::post('crear_usuario', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('crear_usuario');
+
+Route::get('editar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'edit']);
+
+Route::post('actualizar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update']);
 
 
 

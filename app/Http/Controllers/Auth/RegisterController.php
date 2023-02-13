@@ -125,4 +125,33 @@ class RegisterController extends Controller
             'password' => Hash::make($request['clave']),
         ]);
     }
+
+    public function edit($id)
+    {
+       
+        $id_usuario  = User::find($id);
+        return response()->json($id_usuario);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+       
+              $id = $request->input('id_usuario');
+
+              $user = User::find($id);
+
+              $user ->name  = $request->nombre;
+              $user->email = $request->email;
+              $user->password = Hash::make($request->clave);
+              
+              $user->save();
+           
+              return response()->json(['success'=>'update successfully.']);
+
+         
+    }
+
+
+
 }
