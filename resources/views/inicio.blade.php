@@ -87,6 +87,38 @@
     padding-top: 10px;
 }
 
+.modal.modal-fullscreen .modal-dialog {
+
+  width:100vw;
+
+  height:100vh;
+
+  margin:0;
+
+  padding:0;
+
+  max-width:none;
+}
+ 
+.modal.modal-fullscreen .modal-content {
+
+  height:auto;
+
+  height:100vh;
+
+  border-radius:0;
+  border:none;
+}
+ 
+
+.modal.modal-fullscreen .modal-body {
+
+  overflow-y:auto;
+}
+
+
+
+
 </style>
 
 
@@ -127,7 +159,8 @@ BUSCADOR DE CLIENTES - SELECT2
                           style="color:#212529;"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="javascript:historial_registros();">Ver listado de clientes</a>
+                          <a class="dropdown-item" data-target="#modalVerListadoClientes" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+                           href="#modalVerListadoClientes">Ver listado de clientes</a>
                         </div>
                    </span> 
 
@@ -1099,7 +1132,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               </div>
             </div>
 
-            <input type="hidden" name="estado" class="form-control" id="estado" value="1" autocomplete="off">
+            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
 
           </div>
 
@@ -1241,7 +1274,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 
                  <div class="form-group">
                  
-                 <input type="date" class="form-control" name="fecha_nacimientos" id="fecha_nacimiento2" required/>
+                 <input type="date" class="form-control" name="fecha_nacimiento2" id="fecha_nacimiento2" required/>
                           
                   
                  
@@ -1366,7 +1399,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               </div>
             </div>
 
-            <input type="hidden" name="estado" class="form-control" id="estado" value="1" autocomplete="off">
+            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
 
           </div>
 
@@ -1570,6 +1603,82 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
    </div>
        
  </div>
+
+
+
+
+
+
+<!--  =======================================
+
+MODAL DATATABLE LISTADO DE CLIENTES
+
+============================================-->
+
+
+<div class="modal fade modal-fullscreen" id="modalVerListadoClientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       
+
+  <div class="modal-dialog modal-xl role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+      <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-users mr-3"></span>Listado de clientes</h5>
+                       
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+                    
+ <div class="row">
+   <div class="col-lg-12">
+           
+            
+               <table id="Table_listado_clientes" class="table table-hover"  width="100%" >
+                   <thead>
+                      <tr>
+                                        
+                         <th>Nombre</th>  
+                         <th>Email</th>              
+                         <th>Teléfono</th>
+                         <th>Dirección</th>
+                         <th>Barrio</th>
+                         <th>Ciudad</th>
+                         <th>fecha Nac.</th>
+                         <th>fecha Reg.</th>
+                         
+                         <th></th>
+                      </tr>
+
+                  </thead>
+
+                        <tbody>
+                       
+                        </tbody>    
+
+                   
+              </table>
+
+
+
+           </div>       
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
         
 
 
@@ -2019,7 +2128,7 @@ let btn = $('#agregar_cliente')
 
 //============================================
 
-// AGREGAR CLIENTE NUEVO 2
+// AGREGAR CLIENTE NUEVO
 
 //============================================
 
@@ -2064,7 +2173,8 @@ let btn = $('#agregar_cliente2')
                 $('#agregar_cliente2').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-              
+               $('#modalAdd input[name="livesearch2"]').val() = ('#nombre_cliente').val();  
+               $('#modalAdd input[name="celular"]').val() = ('#celular').val();         
 
                 $('#form_crear_cliente2')[0].reset();
                 $('#modalAgregarCliente2').modal('hide');
@@ -3117,6 +3227,132 @@ $('#ModalCalendar').on('shown.bs.modal', function() {
 
 
 
+
+
+ <!-- =========================================
+
+DATATABLE MOSTRAR LISTADO DE CLIENTES
+
+==============================================  -->
+
+
+
+<script type = "text/javascript" >
+  
+  $(document).ready(function() {
+
+     $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+   // let id =$('#id_cliente').val();
+ 
+
+    let table =  $('#Table_listado_clientes').DataTable({
+  
+           processing: true,
+           serverSide: true,
+           paging: true,
+           info: true,
+           filter: true,
+           responsive: true,
+           autoWidth: false,
+    
+          
+           type: "GET",
+
+           ajax: 'inicio',
+   
+   
+                 
+           columns: [
+                   
+                  
+                    { data: 'nombre', name: 'nombre' },         
+                    { data: 'email', name: 'email' },     
+                    { data: 'celular', name: 'celular' },
+                    { data: 'direccion', name: 'direccion' },
+                    { data: 'barrio', name: 'barrio' },
+                    { data: 'municipio', name: 'municipio' },
+                    { data: 'fecha_nacimiento', name: 'fecha_nacimiento' },
+                    { data: 'created_at', name: 'created_at' },
+                   
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                 ],
+        
+                   order: [[0, 'desc']],
+    
+             "language": {
+                
+              /*  "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading..n.</span> ',  */
+                        
+
+            
+        
+        "emptyTable": "No hay clientes registrados.",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+                    
+   },
+
+});
+
+});
+
+</script>
+
+
+
+
+
+<!-- =========================================
+
+ACTIVAR / DESACTIVAR CLIENTES - BOOTSTRAP TOGGLE
+
+==============================================  -->
+
+<script>
+   $(document).ready(function() {
+   $(function() { 
+           $('.toggle-class').change(function() { 
+           var status = $(this).prop('checked') == true ? 1 : 0;  
+           var product_id = $(this).data('id');  
+           $.ajax({ 
+    
+               type: "GET", 
+               dataType: "json", 
+               url: '/status/update', 
+               data: {'status': status, 'product_id': product_id}, 
+               success: function(data){ 
+               console.log(data.success) 
+            } 
+         }); 
+      }) 
+   }); 
+  }); 
+</script>
+
+
+
+
+
 <!-- =========================================
 
 INSERTAR DATOS A FULLCALENDAR
@@ -3645,7 +3881,6 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
       
     });
    
-
 //============================================
 
 // AGREGAR CLIENTE A LISTA DE ESPERA
