@@ -53,6 +53,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 
+<!-- bootstrap button-toggle 2.2 -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
 <!-- DateTimePicker css -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
 
@@ -154,6 +157,8 @@ ARCHIVOS JS
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/additional-methods.min.js"></script>
 
+<!-- bootstrap buttom-toggle 2.2 -->
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> 
 
 <!--If Print button or buttons:true, this is required for any Buttons or Dom items to appear -->
 <!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js" defer></script> -->

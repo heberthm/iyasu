@@ -27,7 +27,7 @@ class historiasClinicasController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = Cliente::leftjoin('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
+              $id = Cliente::join('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
               ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 
               'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'municipio',
               'historias_clinicas.id', 'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 
@@ -98,6 +98,8 @@ class historiasClinicasController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+          'nombre'                               =>    'max:60',
+          'estatura'                             =>    'max:3',
           'estatura'                             =>    'max:3',
           'profesional'                          =>    'max:60',
           'peso_inicial'                         =>    'max:3',
@@ -126,8 +128,10 @@ class historiasClinicasController extends Controller
         $getterapias_adicionales = $request->terapias_adicionales;
         $teraps = implode(',', $getterapias_adicionales);
 
-        $data ->user_id         = $request->userId;
+        $data->user_id          = $request->userId;
         $data->id_cliente       = $request->id_cliente;
+        $data->nombre           = $request->nombre;
+         $data->edad            = $request->edad;
         $data->profesional      = $request->profesional;
         $data->estatura         = $request->estatura;
         $data->peso_inicial     = $request->peso_inicial;

@@ -77,24 +77,31 @@ class ClientesController extends Controller
    
 
 
-        $insertArr = [ 
-                       'user_id' => $request->userId,
-                       'cedula' => $request->cedula2,
-                       'fecha_nacimiento' => $request->fecha_nacimientos,
-                       'edad' => $request->edad2,
-                       'nombre' => $request->nombre,
-                       'celular' => $request->celular,
-                       'direccion' => $request->direccion,
-                       'barrio' => $request->barrio,
-                       'municipio' => $request->municipio,
-                       'email' => $request->email,
-                       'estado' => $request->estado,
+      $data = new Cliente;
+ 
+      $data ->user_id            = $request->userId;
+      
+      $data->cedula              = $request->cedula2;
+      $data->fecha_nacimiento    = $request->fecha_nacimientos;
+      $data->edad                = $request->edad2;
+      $data->nombre              = $request->nombre;       
+      $data->celular             = $request->celular;
+      $data->direccion           = $request->direccion;
+      $data->barrio              = $request->barrio;
+      $data->municipio           = $request->municipio;
+      $data->email               = $request->email;
+      $data->estado              = $request->estado;
+      
+   
+      /*    
+      } catch (\Exception  $exception) {
+          return back()->withError($exception->getMessage())->withInput();
+      }
+      */
+    
+      $data->save();
 
-                    ];
-                    
-        $event = cliente::insert($insertArr);   
-       
-        return Response::json($event);
+     return Response::json($data);
     }
 
    

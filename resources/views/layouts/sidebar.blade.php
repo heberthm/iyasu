@@ -18,9 +18,9 @@
          
                <li class="nav-item">
             <a href="{{ url('inicio') }}" class="nav-link {{ request()->is('inicio') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-asterisk green"></i>
+                <i class="nav-icon fas fa-users green"></i>
                 <p>
-                 Inicio
+                 Clientes
                 </p>
             </a>
           </li>
@@ -140,18 +140,17 @@
       </li>
      
         
-    
-      <li class="nav-item">
-        <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'Active' : '' }}">
 
-          <i class="nav-icon fas fa-user-plus green"></i>
-          <p>
-            Crear usuario
-           
-          </p>
-        </a>
-       
-      </li>
+      <li class="nav-item">
+          <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'Active' : '' }}">
+
+              <i class="nav-icon fas fa-user green"></i>
+              <p>
+                Crear usuario
+              </p>
+          </a> 
+
+          </li>
      
       
           <li class="nav-item">

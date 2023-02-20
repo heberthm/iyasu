@@ -1099,7 +1099,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               </div>
             </div>
 
-            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
+            <input type="hidden" name="estado" class="form-control" id="estado" value="1" autocomplete="off">
 
           </div>
 
@@ -1241,7 +1241,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 
                  <div class="form-group">
                  
-                 <input type="date" class="form-control" name="fecha_nacimiento2" id="fecha_nacimiento2" required/>
+                 <input type="date" class="form-control" name="fecha_nacimientos" id="fecha_nacimiento2" required/>
                           
                   
                  
@@ -1366,7 +1366,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               </div>
             </div>
 
-            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
+            <input type="hidden" name="estado" class="form-control" id="estado" value="1" autocomplete="off">
 
           </div>
 
@@ -2019,7 +2019,7 @@ let btn = $('#agregar_cliente')
 
 //============================================
 
-// AGREGAR CLIENTE NUEVO
+// AGREGAR CLIENTE NUEVO 2
 
 //============================================
 
@@ -2064,8 +2064,7 @@ let btn = $('#agregar_cliente2')
                 $('#agregar_cliente2').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-               $('#modalAdd input[name="livesearch2"]').val() = ('#nombre_cliente').val();  
-               $('#modalAdd input[name="celular"]').val() = ('#celular').val();         
+              
 
                 $('#form_crear_cliente2')[0].reset();
                 $('#modalAgregarCliente2').modal('hide');

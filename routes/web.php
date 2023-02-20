@@ -56,6 +56,7 @@ Route::get('editar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController:
 
 Route::post('actualizar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update']);
 
+Route::get('/status/update', [ProductController::class, 'updateStatus'])->name('update.status');
 
 
 Route::get('search', [App\Http\Controllers\Select2SearchController::class,'index']);
@@ -80,6 +81,8 @@ Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'up
 Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');
 
 Route::post('/actualizar/{id_cliente}',[App\Http\Controllers\ClientesController::class ,'update'])->name('editarCliente');
+
+Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
 
 
 
@@ -205,9 +208,13 @@ Route::post('actualizar_pago_honorarios/{id}', [App\Http\Controllers\HonorariosP
 Route::delete('eliminar_honorario/{id}', [App\Http\Controllers\HonorariosProfesionalesController::class, 'destroy']);
 
 
+
+Route::get('libro_diario', [App\Http\Controllers\LibroDiarioController::class, 'index']);
+
+Route::post('crear_registro_diario', [App\Http\Controllers\LibroDiarioController::class, 'store']);
+
+
+
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');
-Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
-
-
 
 //Route::delete('eliminar_cita/{id}', [App\Http\Controllers\ListadoCitaMedicaController::class, 'destroy'])->name('eliminar_cita');

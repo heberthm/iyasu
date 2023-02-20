@@ -13,6 +13,7 @@ class Cliente extends Model
                            'email', 'mes', 'estado'];
 
     protected $id = 'id_cliente';
+    
   
     public function historias_clinicas(){
         return $this->hasMany(historias_clinicas::class);

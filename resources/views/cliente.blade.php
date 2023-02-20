@@ -943,7 +943,7 @@ DATATABLE MASCOTAS
                 
                     <div class="modal-header">
            
-                    <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-list-alt mr-3"></span>Datos de História clínica </h5>
+                    <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-list-alt mr-3"></span>História clínica </h5>
 
                     <div class="col-6 align-items-center" style="font-size: small;">
                             <div  id="datos_historia_clinica">
@@ -1104,7 +1104,7 @@ DATATABLE MASCOTAS
 
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         
                         <div class="form-group">
 
@@ -1118,7 +1118,7 @@ DATATABLE MASCOTAS
                   </div>
 
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
               
                         <div class="form-group">
 
@@ -1179,10 +1179,10 @@ DATATABLE MASCOTAS
                 <label for="fecha de creacion" class="control-label font-weight-normal"><b>Fecha de creación</b></label>
 
              
-                <input type="text" name="fecha" class="form-control  border-0" id="fecha" >    
+              <!--  <input type="text" name="fecha" class="form-control  border-0" id="fecha" >   --> 
 
              
-             <!--   <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }} &nbsp;  {{ \Carbon\Carbon::parse($id_cliente->created_at)->diffForHumans() }}</p>   -->    
+                <p>{{ date('d-m-Y  h:i A', strtotime($id_cliente->created_at)) }} &nbsp;  {{ \Carbon\Carbon::parse($id_cliente->created_at)->diffForHumans() }}</p>    
 
               
 
@@ -1227,9 +1227,16 @@ DATATABLE MASCOTAS
                 <div class="modal-footer">
 
                 <button type="button" class="btn btn-primary float-left mt-5" data-toggle="modal" data-target="#modalControlMedico" 
-                  style="position: absolute; top: 0; left: 500px">
+                  style="position: absolute; top: 0; left: 420px">
                   <span class="fa fa-street-view fa-fw" ></span>  
                   Crear control clínico
+              </button> 
+
+
+              <button type="button" class="btn btn-primary float-left mt-5" data-toggle="modal" data-target="#modalVerControlesMedicos" 
+                  style="position: absolute; top: 0; left: 620px">
+                  <span class="fa fa-eye fa-fw" ></span>  
+                  Ver controles 
               </button> 
 
 
@@ -1617,7 +1624,7 @@ DATATABLE MASCOTAS
 
               <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" value="{{ $id_cliente->id_cliente}}" readonly>  
           
-              <input type="text" name="id_historia" class="form-control" id="id_historia"  readonly>  
+              <input type="hidden" name="id_historia" class="form-control" id="id_historia"  readonly>  
 
 
             
@@ -2078,7 +2085,7 @@ let today = new Date();
 
  <!-- =========================================
 
- MOSTRAR DATOS HISTÓRIA CLINICA
+DATATABLE MOSTRAR DATOS HISTÓRIA CLINICA
 
 ==============================================  -->
 
@@ -2102,9 +2109,9 @@ let today = new Date();
   
            processing: true,
            serverSide: true,
-           paging: false,
-           info: false,
-           filter: false,
+           paging: true,
+           info: true,
+           filter: true,
            responsive: true,
            autoWidth: false,
     
@@ -2538,7 +2545,7 @@ EDITAR DATOS DEL PACIENTE
 
             $.ajax({
                
-                url: '/editarCliente/' +id,
+                url: '/actualizar/' +id,
                 type: "POST",
                 data: $(this).serialize(),
                 dataType: "json",
