@@ -153,7 +153,7 @@ class ClientesController extends Controller
  
         $data->save();
 
-        $id =$data->id;
+        $id =$data->id_cliente;
      
         return redirect()->route('cliente', $id);
           

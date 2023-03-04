@@ -87,6 +87,39 @@
     padding-top: 10px;
 }
 
+
+.modal.modal-fullscreen .modal-dialog {
+
+width:100vw;
+
+height:100vh;
+
+margin:0;
+
+padding:0;
+
+max-width:none;
+}
+
+.modal.modal-fullscreen .modal-content {
+
+height:auto;
+
+height:100vh;
+
+border-radius:0;
+border:none;
+}
+
+
+.modal.modal-fullscreen .modal-body {
+
+overflow-y:auto;
+}
+
+
+
+
 </style>
 
 
@@ -1637,7 +1670,7 @@ MODAL DATATABLE LISTADO DE CLIENTES
                      <td>{{ $cliente->created_at }}</td>
                      <td</td>
                      <td>
-                        <input data-id="{{$cliente->id_cliente}}" class="switch" type="checkbox" data-size="xs" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="On" data-off="Off" {{ $cliente->estado ? 'checked' : '' }}>
+                        <input data-id="{{$cliente->id_cliente}}" class="switch" type="checkbox" data-size="xs"  {{ $cliente->estado ? 'checked' : '' }}>
                      </td>
                   </tr>
 
@@ -2324,8 +2357,7 @@ DATATABLE MOSTRAR LISTADO DE CLIENTES
 
     let table =  $('#Table_listado_clientes').DataTable({
   
-           processing: false,
-           serverSide: false,
+           
            paging: true,
            info: true,
            filter: true,

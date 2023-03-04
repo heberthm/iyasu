@@ -12,8 +12,8 @@ class Cliente extends Model
     protected $fillable = ['cedula','user_id', 'fecha_nacimiento','edad', 'nombre', 'direccion','barrio', 'municipio', 'celular',
                            'email', 'mes', 'estado'];
 
-   // protected $primaryKey = 'id_cliente';
-    protected $id = 'id_cliente';
+    protected $primaryKey = 'id_cliente';
+   // protected $id = 'id_cliente';
   
     public function historias_clinicas(){
         return $this->hasMany(historias_clinicas::class);
