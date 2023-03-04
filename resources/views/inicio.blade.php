@@ -87,38 +87,6 @@
     padding-top: 10px;
 }
 
-.modal.modal-fullscreen .modal-dialog {
-
-  width:100vw;
-
-  height:100vh;
-
-  margin:0;
-
-  padding:0;
-
-  max-width:none;
-}
- 
-.modal.modal-fullscreen .modal-content {
-
-  height:auto;
-
-  height:100vh;
-
-  border-radius:0;
-  border:none;
-}
- 
-
-.modal.modal-fullscreen .modal-body {
-
-  overflow-y:auto;
-}
-
-
-
-
 </style>
 
 
@@ -159,7 +127,7 @@ BUSCADOR DE CLIENTES - SELECT2
                           style="color:#212529;"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" data-target="#modalVerListadoClientes" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+                        <a class="dropdown-item" data-target="#modalVerListadoClientes" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
                            href="#modalVerListadoClientes">Ver listado de clientes</a>
                         </div>
                    </span> 
@@ -514,7 +482,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="Servicios" class="control-label">Terapias</label>
 
-                <input type="text" id="servicios2" name="servicios2"  class="form-control  text-lowercase" required autocomplete="off">
+                <input type="text" id="servicios2" name="servicios2"  class="form-control" required autocomplete="off">
 
 
                 <!--
@@ -756,7 +724,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                 <label for="Servicios" class="control-label">Terapias</label>
 
 
-                <input type="text" id="servicios" name="servicios"  class="form-control text-lowercase" required autocomplete="off">
+                <input type="text" id="servicios" name="servicios" value="#1560F6" class="form-control" required autocomplete="off">
 
 
         <!--
@@ -781,7 +749,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <label for="color" class="control-label">Color</label>
 
-                <input type="color" id="color2" name="color2" list="ListadoColores" value="#1560F6" class="form-control text-lowercase" required autocomplete="off">
+                <input type="color" id="color2" name="color2" list="ListadoColores" value="#1560F6" class="form-control" required autocomplete="off">
 
 
               </div>
@@ -1132,7 +1100,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               </div>
             </div>
 
-            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
+            <input type="hidden" name="estado" class="form-control" id="estado" value="1" autocomplete="off">
 
           </div>
 
@@ -1399,7 +1367,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
               </div>
             </div>
 
-            <input type="hidden" name="estado" class="form-control" id="estado" value="habilitado" autocomplete="off">
+            <input type="hidden" name="estado" class="form-control" id="estado" value="1" autocomplete="off">
 
           </div>
 
@@ -1608,7 +1576,6 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
 
 
-
 <!--  =======================================
 
 MODAL DATATABLE LISTADO DE CLIENTES
@@ -1627,21 +1594,61 @@ MODAL DATATABLE LISTADO DE CLIENTES
 
       <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-users mr-3"></span>Listado de clientes</h5>
                        
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       
-                    
- <div class="row">
+      <div class="row">
    <div class="col-lg-12">
            
             
                <table id="Table_listado_clientes" class="table table-hover"  width="100%" >
+                  
                    <thead>
-                      <tr>
-                                        
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Barrio</th>
+                        <th>Ciudad</th>
+                        <th>Fecha Nac.</th>
+                        <th>Fecha reg.</th>
+                        <th>Estado</th>
+                    </tr> 
+                  </thead>
+                 
+            <tbody>
+
+                  <tr>
+                        
+                @foreach($clientes as $cliente)
+                  <tr>
+                     <td>{{ $cliente->nombre }}</td>
+                     <td>{{ $cliente->email }}</td>
+                     <td>{{ $cliente->celular }}</td>
+                     <td>{{ $cliente->direccion }}</td>
+                     <td>{{ $cliente->barrio }}</td>
+                     <td>{{ $cliente->municipio }}</td>
+                     <td>{{ $cliente->fecha_nacimiento }}</td>
+                     <td>{{ $cliente->created_at }}</td>
+                     <td</td>
+                     <td>
+                        <input data-id="{{$cliente->id_cliente}}" class="switch" type="checkbox" data-size="xs" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="On" data-off="Off" {{ $cliente->estado ? 'checked' : '' }}>
+                     </td>
+                  </tr>
+
+           </tbody>
+
+               @endforeach
+
+
+
+
+                      <!--
                          <th>Nombre</th>  
                          <th>Email</th>              
                          <th>Teléfono</th>
@@ -1651,7 +1658,10 @@ MODAL DATATABLE LISTADO DE CLIENTES
                          <th>fecha Nac.</th>
                          <th>fecha Reg.</th>
                          
-                         <th></th>
+                         <th>Estado</th>
+
+                      -->
+
                       </tr>
 
                   </thead>
@@ -1674,6 +1684,7 @@ MODAL DATATABLE LISTADO DE CLIENTES
     </div>
   </div>
 </div>
+
 
 
 
@@ -1882,7 +1893,7 @@ $(document).ready(function () {
 
   
 function getlist_calendartipos() {
-            let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 'lavado', 'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
+            let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
             
             return list
         }
@@ -1909,8 +1920,6 @@ function calendar_colors(v) {
                 color = '#33997a';
             } else if (v == 'drenaje') {
                 color = '#be7b3c';
-            } else if (v == 'lavado') {
-                color = '#95C4F0';
             } else if (v == 'lodoterapia') {
                 color = '#5e66d4';
             } else if (v == 'masaje') {
@@ -2173,8 +2182,7 @@ let btn = $('#agregar_cliente2')
                 $('#agregar_cliente2').prop("required", true);
                // $('#selectBuscarCliente').html("");
                
-               $('#modalAdd input[name="livesearch2"]').val() = ('#nombre_cliente').val();  
-               $('#modalAdd input[name="celular"]').val() = ('#celular').val();         
+              
 
                 $('#form_crear_cliente2')[0].reset();
                 $('#modalAgregarCliente2').modal('hide');
@@ -2288,6 +2296,144 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
   });
 </script>
+
+
+
+
+ <!-- =========================================
+
+DATATABLE MOSTRAR LISTADO DE CLIENTES
+
+==============================================  -->
+
+
+
+<script type = "text/javascript" >
+  
+  $(document).ready(function() {
+
+     $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+   // let id =$('#id_cliente').val();
+ 
+
+    let table =  $('#Table_listado_clientes').DataTable({
+  
+           processing: false,
+           serverSide: false,
+           paging: true,
+           info: true,
+           filter: true,
+           responsive: true,
+           autoWidth: false,
+              
+             
+   
+           /*      
+           columns: [
+                   
+                  
+                    { data: 'nombre', name: 'nombre' },         
+                    { data: 'email', name: 'email' },     
+                    { data: 'celular', name: 'celular' },
+                    { data: 'direccion', name: 'direccion' },
+                    { data: 'barrio', name: 'barrio' },
+                    { data: 'municipio', name: 'municipio' },
+                    { data: 'fecha_nacimiento', name: 'fecha_nacimiento' },
+                    { data: 'created_at', name: 'created_at' },
+                   
+                 ],
+
+                
+                       
+                   order: [[0, 'desc']],
+
+              */
+                    
+             "language": {
+                
+              /*  "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading..n.</span> ',  */
+                        
+
+            
+        
+        "emptyTable": "No hay clientes registrados.",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+                    
+   },
+
+  });
+});
+
+
+
+
+// =========================================
+
+//ACTIVAR / DESACTIVAR CLIENTES - BOOTSTRAP TOGGLE
+
+// ============================================== 
+
+
+   $(document).ready(function() {
+  
+      $('.switch').change(function () {
+
+    //  $('body').on('change', '.switch', function(e) {
+
+        
+            let estado = $(this).prop('checked') === true ? 1 : 0;
+            let id = $(this).data('id');
+     
+         
+           $.ajax({ 
+    
+               type: "GET", 
+               dataType: "json", 
+               url: 'actualizar_cliente', 
+               data: {'estado': estado, 'id': id}, 
+               success: function(data){ 
+               console.log(data.success) 
+
+                  if(estado === 1) {
+                    toastr["success"]("El cliente se ha habilitado.");
+                          
+                  } 
+                  else if(estado === 0) {
+                    toastr["success"]("El cliente se ha deshabilitado temporalmente.");
+                  }
+              }
+         
+      }) 
+   }); 
+  
+
+});
+
+</script>
+
+
+
 
 
 
@@ -3117,7 +3263,7 @@ $('.selectBuscarCliente').html('');
 
 
       $('#ModalEdit #id').val(event.id);
-   
+     
           
      $('#ModalEdit #cliente').val(event.cliente);
      $('#ModalEdit #telefono').val(event.telefono);
@@ -3141,7 +3287,7 @@ $('.selectBuscarCliente').html('');
 
       }
    
-     
+      
       
  });
 
@@ -3224,132 +3370,6 @@ $('#ModalCalendar').on('shown.bs.modal', function() {
 
 
 </script>
-
-
-
-
-
- <!-- =========================================
-
-DATATABLE MOSTRAR LISTADO DE CLIENTES
-
-==============================================  -->
-
-
-
-<script type = "text/javascript" >
-  
-  $(document).ready(function() {
-
-     $.ajaxSetup({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-
-   // let id =$('#id_cliente').val();
- 
-
-    let table =  $('#Table_listado_clientes').DataTable({
-  
-           processing: true,
-           serverSide: true,
-           paging: true,
-           info: true,
-           filter: true,
-           responsive: true,
-           autoWidth: false,
-    
-          
-           type: "GET",
-
-           ajax: 'inicio',
-   
-   
-                 
-           columns: [
-                   
-                  
-                    { data: 'nombre', name: 'nombre' },         
-                    { data: 'email', name: 'email' },     
-                    { data: 'celular', name: 'celular' },
-                    { data: 'direccion', name: 'direccion' },
-                    { data: 'barrio', name: 'barrio' },
-                    { data: 'municipio', name: 'municipio' },
-                    { data: 'fecha_nacimiento', name: 'fecha_nacimiento' },
-                    { data: 'created_at', name: 'created_at' },
-                   
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                 ],
-        
-                   order: [[0, 'desc']],
-    
-             "language": {
-                
-              /*  "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading..n.</span> ',  */
-                        
-
-            
-        
-        "emptyTable": "No hay clientes registrados.",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-        "infoEmpty": "Mostrando 0 to 0 de 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-                    
-   },
-
-});
-
-});
-
-</script>
-
-
-
-
-
-<!-- =========================================
-
-ACTIVAR / DESACTIVAR CLIENTES - BOOTSTRAP TOGGLE
-
-==============================================  -->
-
-<script>
-   $(document).ready(function() {
-   $(function() { 
-           $('.toggle-class').change(function() { 
-           var status = $(this).prop('checked') == true ? 1 : 0;  
-           var product_id = $(this).data('id');  
-           $.ajax({ 
-    
-               type: "GET", 
-               dataType: "json", 
-               url: '/status/update', 
-               data: {'status': status, 'product_id': product_id}, 
-               success: function(data){ 
-               console.log(data.success) 
-            } 
-         }); 
-      }) 
-   }); 
-  }); 
-</script>
-
-
 
 
 
@@ -3473,20 +3493,17 @@ EDITAR DATOS DE FULLCALENDAR
         $('#descripcion').val(data.descripcion);
         $('#servicios').val(data.title);
         $('#titulo').val(data.title);
-              
+       
         $('#ModalEdit #color2').val(data.color);
 
         $('#calendar').fullCalendar('refetchEvents');
-        $('#calendar2').fullCalendar('refetchEvents');
-
-       
-
+        $('#fullCalModal').fullCalendar('refetchEvents');
 
           // $('#agregar').attr('disabled', true);
           $('#editar_calendario')[0].reset();
           $('#ModalEdit').modal('hide');
           $('#agenda_modal').modal('hide');
-          toastr["success"]("los datos se han actulizado correctamente 2");
+          toastr["success"]("los datos se han actulizado correctamente");
 
 
 
@@ -3881,6 +3898,7 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
       
     });
    
+
 //============================================
 
 // AGREGAR CLIENTE A LISTA DE ESPERA

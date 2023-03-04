@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbonosClientesTable extends Migration
+class CreateRegistrarTratamientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class CreateAbonosClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('abonos_clientes', function (Blueprint $table) {
+        Schema::create('registrar_tratamientos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('id_cliente')->nullable();
-            $table->string('user_id')->nullable();
-            $table->bigInteger('id_tratamiento')->nullable();
+            $table->string('id_cliente')->required();
+            $table->string('user_id')->required();
             $table->string('nombre',60)->nullable();
-            $table->string('celular',25)->nullable();
+            $table->string('celular',30)->nullable();
+            $table->string('tratamiento',800)->nullable();
             $table->string('valor_tratamiento',12)->nullable();
-            $table->string('saldo_actual',12)->nullable();
-            $table->string('valor_abono',12)->nullable();
             $table->string('saldo',12)->nullable();
             $table->string('responsable',40)->nullable();
-            $table->string('descripcion',120)->nullable();
             $table->string('estado',20)->nullable();
 
+           
+
             $table->timestamps();
+
+           // $table->foreign('id')->references('id')->on('abonos_clientes')->onDelete('cascade');
         });
     }
 
@@ -39,6 +40,6 @@ class CreateAbonosClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abonos');
+        Schema::dropIfExists('registrar_tratamientos');
     }
 }

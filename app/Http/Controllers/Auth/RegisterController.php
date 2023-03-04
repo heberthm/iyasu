@@ -34,7 +34,7 @@ class RegisterController extends Controller
 
           //  $id = $request->id_cliente;
 
-          $id = User::select('id','name',  'email', 'created_at');
+          $id = User::select('id','name', 'email', 'created_at');
 
            return datatables()->of($id)
 
@@ -150,6 +150,21 @@ class RegisterController extends Controller
               return response()->json(['success'=>'update successfully.']);
 
          
+    }
+
+
+
+      /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+     
+        return response()->json(['success'=>'deleted successfully.']);
     }
 
 

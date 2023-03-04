@@ -33,7 +33,6 @@
     <link href="{{asset('css/buttons.dataTables2.2.3.min.css')}}" rel="stylesheet"/>
 
 
-       
 <!-- Select2 css -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css" rel="stylesheet" />
@@ -42,8 +41,7 @@
 <!-- SweetAlert2 -->
     <link href="<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"  rel="stylesheet" />
     
- 
-  
+   
   <!-- Fullcalendar 3.10.2 css --> 
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css' rel='stylesheet' />
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.print.css' rel='stylesheet' media='print' />
@@ -53,8 +51,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 
-<!-- bootstrap button-toggle 2.2 -->
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 <!-- DateTimePicker css -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
@@ -90,6 +86,13 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" /> 
 <!-- <link href="{{asset('css/toastr2.1.3.min.css')}}" rel="stylesheet"/> -->
 
+ 
+
+   
+<!-- bootstrap button-toggle 3.6 -->
+ <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet"> 
+<!-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> -->
+       
 
 
 
@@ -103,7 +106,6 @@ ARCHIVOS JS
 
 <!-- Jquery 3.5 js -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
-
 
 
 <!-- Select2 js -->  
@@ -125,7 +127,6 @@ ARCHIVOS JS
 <!--  tippy js -->
 <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.cjs.min.js"></script>
 
-
  
 <!-- DataTable js -->
 <script src='https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js'  defer ></script>
@@ -146,6 +147,7 @@ ARCHIVOS JS
 <script src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js' defer></script>
 
 
+
 <!-- Tribute js -->
 <script src="https://cdn.jsdelivr.net/npm/tributejs@5.1.3/dist/tribute.min.js"></script> 
 
@@ -157,8 +159,12 @@ ARCHIVOS JS
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/additional-methods.min.js"></script>
 
-<!-- bootstrap buttom-toggle 2.2 -->
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> 
+
+<!-- bootstrap buttom-toggle 3.6 --> 
+ <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> 
+<!-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" defer></script> -->
+
+
 
 <!--If Print button or buttons:true, this is required for any Buttons or Dom items to appear -->
 <!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js" defer></script> -->

@@ -15,4 +15,6 @@ class registrar_tratamientos extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    
 }

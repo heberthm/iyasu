@@ -56,7 +56,7 @@ Route::get('editar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController:
 
 Route::post('actualizar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update']);
 
-Route::get('/status/update', [ProductController::class, 'updateStatus'])->name('update.status');
+Route::delete('eliminar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'destroy']);
 
 
 Route::get('search', [App\Http\Controllers\Select2SearchController::class,'index']);
@@ -68,6 +68,9 @@ Route::get('ajax-autocomplete-search', [App\Http\Controllers\Select2SearchContro
 
 Route::post('clientes',[App\Http\Controllers\ClientesController::class, 'store'])->name('clientes');
 Route::post('crear_clientes',[App\Http\Controllers\ClientesController::class, 'create'])->name('crear_clientes');
+
+Route::get('actualizar_cliente', [App\Http\Controllers\HomeController::class, 'updateStatus']);
+
 
 //Route::get('/mostrar_clientes/{id_clientes}',[App\Http\Controllers\ClientesController::class, 'mostrarCliente']);
 Route::post('verificar_cliente', [App\Http\Controllers\ClientesController::class,'verificarCliente'])->name('verificar_cliente');

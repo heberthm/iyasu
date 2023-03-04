@@ -804,13 +804,13 @@ let btn = $('#editar_usuario')
 
 // =========================================
 
-/// ELIMINAR REGISTROS DE ABONOS DE CLIENTES
+/// ELIMINAR USUARIO
 
 // =========================================   
 
 
   
-$(document).on('click', '.eliminarAbono', function (event) {
+$(document).on('click', '.eliminarUsuario', function (event) {
      
   event.preventDefault();
      let id = $(this).data('id');
@@ -830,7 +830,7 @@ $(document).on('click', '.eliminarAbono', function (event) {
 
                 $.ajax({
                     type: 'delete',
-                    url: '/eliminar_abono/'+id,
+                    url: '/eliminar_usuario/'+id,
                     data: {id:id},
                     dataType: 'JSON',
                     success: function (data) {

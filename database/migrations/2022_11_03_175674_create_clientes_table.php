@@ -25,7 +25,7 @@ class CreateClientesTable extends Migration
             $table->string('municipio',60)->nullable();
             $table->string('celular',30)->nullable();
             $table->string('email',60)->nullable();
-            $table->string('estado',14)->nullable();
+            $table->boolean('estado')->default(0);
                                                 
             $table->timestamps();
 

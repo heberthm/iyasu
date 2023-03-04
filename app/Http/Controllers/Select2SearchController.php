@@ -32,9 +32,10 @@ class Select2SearchController extends Controller
         if($request->has('q')){
             $search = $request->q;
           
-            $cliente =Cliente::select("user_id", "id_cliente", "cedula", "nombre", "celular")
+            $cliente =Cliente::select("user_id", "id_cliente", "cedula", "nombre", "celular", "estado")
                    
             		->where('nombre',  'LIKE', "%${search}%" )
+                ->where('estado', 1)
                    // ->orWhere('cedula', 'LIKE', "%{$search}%") 
             		->get();
         }
@@ -48,7 +49,7 @@ class Select2SearchController extends Controller
 
     $id_clientes = Cliente::leftjoin('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
     ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.id_cliente', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 
-    'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'municipio',
+    'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'clientes.municipio','clientes.estado',
     'historias_clinicas.id', 'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 
     'historias_clinicas.abd_inicial', 'historias_clinicas.agua_inicial', 'historias_clinicas.grasa_inicial', 'historias_clinicas.imc', 
     'historias_clinicas.grasa_viseral', 'historias_clinicas.edad_metabolica', 'historias_clinicas.terapias', 'historias_clinicas.terapias_adicionales',
@@ -56,7 +57,7 @@ class Select2SearchController extends Controller
       'historias_clinicas.profesional', 'historias_clinicas.observaciones','historias_clinicas.created_at')
 
     ->where('clientes.id_cliente',  $id_clientes)
-   // ->where('clientes.user_id', Auth::user()->id)
+   
     ->get();
 
 
