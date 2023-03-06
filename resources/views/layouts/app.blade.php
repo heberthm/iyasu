@@ -147,6 +147,14 @@ ARCHIVOS JS
 <script src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js' defer></script>
 
 
+<!-- highcharts js -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 
 <!-- Tribute js -->
 <script src="https://cdn.jsdelivr.net/npm/tributejs@5.1.3/dist/tribute.min.js"></script> 

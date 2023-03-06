@@ -28,8 +28,8 @@ class historiasClinicasController extends Controller
               //  $id = $request->id_cliente;
     
               $id = Cliente::join('historias_clinicas', 'historias_clinicas.id_cliente', '=', 'clientes.id_cliente')
-              ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 
-              'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'municipio',
+              ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.cedula', 'clientes.nombre',  'clientes.celular', 'clientes.estado',
+              'clientes.direccion', 'clientes.barrio', 'clientes.email', 'clientes.edad', 'clientes.fecha_nacimiento', 'clientes.municipio',
               'historias_clinicas.id', 'historias_clinicas.estatura', 'historias_clinicas.peso_inicial', 
               'historias_clinicas.abd_inicial', 'historias_clinicas.agua_inicial', 'historias_clinicas.grasa_inicial', 'historias_clinicas.imc', 
               'historias_clinicas.grasa_viseral', 'historias_clinicas.edad_metabolica', 'historias_clinicas.terapias', 'historias_clinicas.terapias_adicionales',

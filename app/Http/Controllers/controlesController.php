@@ -25,7 +25,7 @@ class controlesController extends Controller
           //  $id = $request->id_cliente;
 
           $id = cliente::join('controles', 'controles.id_cliente', '=', 'clientes.id_cliente')
-          ->select('clientes.id_cliente',  'controles.id', 'controles.id_cliente', 'controles.user_id',  
+          ->select('clientes.id_cliente', 'clientes.estado',  'controles.id', 'controles.id_cliente', 'controles.user_id',  
           'controles.num_control', 'controles.peso', 'controles.abd', 'controles.grasa', 'controles.grasa',
            'controles.agua', 'controles.created_at')
 

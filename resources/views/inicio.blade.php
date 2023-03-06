@@ -1656,7 +1656,7 @@ MODAL DATATABLE LISTADO DE CLIENTES
                  
             <tbody>
 
-                  <tr>
+                 
                         
                 @foreach($clientes as $cliente)
                   <tr>
@@ -1666,10 +1666,11 @@ MODAL DATATABLE LISTADO DE CLIENTES
                      <td>{{ $cliente->direccion }}</td>
                      <td>{{ $cliente->barrio }}</td>
                      <td>{{ $cliente->municipio }}</td>
-                     <td>{{ $cliente->fecha_nacimiento }}</td>
-                     <td>{{ $cliente->created_at }}</td>
-                     <td</td>
-                     <td>
+                     <td>{{date('d-m-Y', strtotime($cliente->fecha_nacimiento))}} </td>
+                     <td>{{ $cliente->created_at->format('d-m-Y') }}</td>
+                    
+                    
+                     <td align="center">
                         <input data-id="{{$cliente->id_cliente}}" class="switch" type="checkbox" data-size="xs"  {{ $cliente->estado ? 'checked' : '' }}>
                      </td>
                   </tr>
@@ -2356,43 +2357,14 @@ DATATABLE MOSTRAR LISTADO DE CLIENTES
  
 
     let table =  $('#Table_listado_clientes').DataTable({
-  
            
-           paging: true,
-           info: true,
-           filter: true,
-           responsive: true,
-           autoWidth: false,
+          
               
-             
-   
-           /*      
-           columns: [
-                   
-                  
-                    { data: 'nombre', name: 'nombre' },         
-                    { data: 'email', name: 'email' },     
-                    { data: 'celular', name: 'celular' },
-                    { data: 'direccion', name: 'direccion' },
-                    { data: 'barrio', name: 'barrio' },
-                    { data: 'municipio', name: 'municipio' },
-                    { data: 'fecha_nacimiento', name: 'fecha_nacimiento' },
-                    { data: 'created_at', name: 'created_at' },
-                   
-                 ],
-
-                
-                       
-                   order: [[0, 'desc']],
-
-              */
                     
-             "language": {
+        "language": {
                 
               /*  "processing": '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading..n.</span> ',  */
-                        
-
-            
+                   
         
         "emptyTable": "No hay clientes registrados.",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",

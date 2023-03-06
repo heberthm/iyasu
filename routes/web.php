@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\RegisterController;
  use App\Http\Controllers\terapias_adicionalesController;
  use App\Http\Controllers\profesionalesController;
  use App\Http\Controllers\lavadosController;
+ use App\Http\Controllers\ChartJSController;
 
 
 
@@ -218,6 +219,12 @@ Route::post('crear_registro_diario', [App\Http\Controllers\LibroDiarioController
 
 
 
+Route::get('estadisticas', [App\Http\Controllers\ChartJSController::class, 'index']);
+
+
+
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');
 
 //Route::delete('eliminar_cita/{id}', [App\Http\Controllers\ListadoCitaMedicaController::class, 'destroy'])->name('eliminar_cita');
+
+

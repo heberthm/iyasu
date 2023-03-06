@@ -139,7 +139,20 @@
         </ul>
       </li>
      
-        
+      
+      <li class="nav-item">
+          <a href="{{ url('estadisticas') }}" class="nav-link {{ request()->is('estadisticas') ? 'Active' : '' }}">
+
+              <i class="nav-icon fas fa-bar-chart green"></i>
+              <p>
+                Estadísticas
+              </p>
+          </a> 
+
+          </li>
+     
+
+
 
       <li class="nav-item">
           <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'Active' : '' }}">

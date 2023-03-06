@@ -1807,6 +1807,7 @@ DATATABLE MASCOTAS
                 
                  <input type="hidden" name="id_historia" class="form-control" id="id_historia"  readonly>  
 
+                 <input type="hidden" name="id_control" class="form-control" id="id_control"  readonly>  
 
                  
                   <!--     
@@ -1900,6 +1901,7 @@ MODAL DATATABLE CONTROLES MEDICOS
               </table>
 
 
+              
 
            </div>       
       </div>
@@ -2765,8 +2767,9 @@ $('body').on('click', '.editarControl', function (e) {
          
           
            $('#modalEditarControl').modal('show');
-           $('#modalEditarControl input[name="id_control"]').val(data.id)
-           $('#modalEditarControl input[name="id_historia"]').val(data.id_historia)
+           $('#modalEditarControl input[name="id_control"]').val(data.id);
+           $('#modalEditarControl input[name="user_id"]').val(data.userId);
+           $('#modalEditarControl input[name="id_historia"]').val(data.id_historia);
            $('#modalEditarControl input[name="id_cliente"]').val(data.id_cliente);
            $('#modalEditarControl input[name="num_control"]').val(data.num_control);
            $('#modalEditarControl input[name="peso"]').val(data.peso);
