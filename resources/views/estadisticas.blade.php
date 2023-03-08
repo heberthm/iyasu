@@ -88,9 +88,9 @@
   <div class="small-box bg-info">
     <div class="inner">
          
-      <h5>{{ number_format($clientes,  0, ",", "." ) }}</h5>
+    <h5>$ {{ number_format($suma_tratamientos,  0, ",", "." ) }}</h5>
 
-      <p>Total pacientes atendidos</p>
+      <p>Total valor tratamientos</p>
     </div>
     <div class="icon">
       <i class="ion ion-bag"></i>
@@ -104,9 +104,9 @@
   <div class="small-box bg-success">
     <div class="inner">
 
-      <h5>{{ number_format($suma_tratamientos,  0, ",", "." ) }}</h5>
+      <h5>$ {{ number_format($tratamientos_hoy,  0, ",", "." ) }}</h5>
 
-      <p>Total Ingresos</p>
+      <p>Valor tratamientos hoy</p>
     </div>
     <div class="icon">
       <i class="ion ion-stats-bars"></i>
@@ -120,9 +120,9 @@
   <div class="small-box bg-warning">
     <div class="inner">
 
-      <h5>{{ number_format($ingresos_hoy,  0, ",", "." ) }}</h5>
+      <h5> $ {{ number_format($total_abonos,  0, ",", "." ) }}</h5>
 
-      <p>Total ingresos hoy</p>
+      <p>Total valor abonos</p>
     </div>
     <div class="icon">
       <i class="ion ion-person-add"></i>
@@ -136,9 +136,9 @@
   <div class="small-box bg-danger">
     <div class="inner">
 
-      <h5>{{ number_format($clientes_hoy,  0, ",", "." ) }}</h5>
+      <h5> $ {{ number_format($abonos_hoy,  0, ",", "." ) }}</h5>
 
-      <p>Total pacientes atendidos hoy</p>
+      <p>Valor abonos hoy</p>
     </div>
     <div class="icon">
       <i class="ion ion-pie-graph"></i>
@@ -213,21 +213,21 @@ GENRAR GRAFICO
    Highcharts.chart('container', {
 
         chart: {
-          type: 'column'
+          type: 'pie'
         },
 
        title: {
-           text: 'New User Growth, 2019'
+           text: 'Gráfico de tratamientos realizados por mes'
        },
        subtitle: {
-           text: 'fuente: centro olístico iyasu.'
+           text: 'fuente: centro holístico iyasu.'
        },
         xAxis: {
            categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
        },
        yAxis: {
            title: {
-               text: 'Number of New Users'
+               text: 'Numero de tratamientos'
            }
        },
        legend: {
@@ -241,8 +241,14 @@ GENRAR GRAFICO
            }
        },
        series: [{
-           name: 'New Users',
-           data: users
+           name: 'Tratamientos',
+           data: users,
+           backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
        }],
        responsive: {
            rules: [{

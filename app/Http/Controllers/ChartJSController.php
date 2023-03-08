@@ -8,6 +8,8 @@ use App\Models\registrar_tratamientos;
 
 use App\Models\Cliente;
 
+use App\Models\abonos_clientes;
+
 use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
@@ -30,17 +32,22 @@ class ChartJSController extends Controller
 
 
 
-        $clientes = Cliente::count();
+       // $clientes = Cliente::count();
 
         $suma_tratamientos = registrar_tratamientos::sum('valor_tratamiento');
+
+        $tratamientos_hoy = registrar_tratamientos::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))
+        ->sum('valor_tratamiento');
+
+        $total_abonos = abonos_clientes::sum('valor_abono');
 
         $ingresos_hoy = registrar_tratamientos::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))
             ->sum('valor_tratamiento');
 
-        $clientes_hoy = registrar_tratamientos::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))
-            ->count();
+        $abonos_hoy = abonos_clientes::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))
+            ->sum('valor_abono');
 
 
-        return view('estadisticas', compact('registros', 'clientes', 'suma_tratamientos', 'ingresos_hoy', 'clientes_hoy'));
+        return view('estadisticas', compact('registros', 'suma_tratamientos', 'ingresos_hoy', 'total_abonos', 'tratamientos_hoy', 'abonos_hoy'));
     }
 }
