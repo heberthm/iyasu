@@ -1644,7 +1644,6 @@ MODAL DATATABLE LISTADO DE CLIENTES
               <tbody>
 
 
-
                 @foreach($clientes as $cliente)
                 <tr>
                   <td>{{ $cliente->nombre }}</td>
