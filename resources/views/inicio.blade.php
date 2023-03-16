@@ -1418,7 +1418,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
           <div class="modal-footer">
 
-            <button type="submit" id="agregar_cliente2" name="agregar_cliente2" class="btn btn-primary loader">Guardar</button>
+            <button type="submit" id="agregar_cliente2" name="agregar_cliente2"  class="btn btn-primary loader">Guardar</button>
             <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
           </div>
@@ -2213,18 +2213,22 @@ DESHABILITAR CLICK DERECHO
  // $('#modalAgregarCliente2').on('hidden.bs.modal', function () {
   
 
- $(".agregar_cliente2").click(function (){
+//$(".agregar_cliente2").click(function (){
 
-    
+  $('.agregar_cliente2').off('click').on('click', function() {
 
-    let valor1 = $('#livesearch2').val();
-    let valor2 = $('#celular_cliente').val();
+  // let valor1 =  $('#nombre_cliente').val();
 
+  // let valor2 =  $('#celular_cliente').val();
+  
+
+   var valor1 = $('#modalAgregarCliente2').find('input[name="nombre_cliente"]').val();
+   var valor2 = $('#modalAgregarCliente2').find('input[name="celular_cliente"]').val();
 
    // $('#modalAdd input[name="nombre_cliente"]').val(valor1);
   // $('#modalAdd input[name="celular_cliente"]').val(valor2);
 
-     $('#ModalAdd').find('input[name="nobre_cliente"]').val(valor1);
+     $('#ModalAdd').find('input[name="livesearch2"]').val(valor1);
      $('#ModalAdd').find('input[name="celular_cliente"]').val(valor2);
       
     });

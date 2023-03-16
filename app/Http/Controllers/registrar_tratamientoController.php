@@ -31,7 +31,7 @@ class registrar_tratamientoController extends Controller
             $id = Cliente::join('registrar_tratamientos', 'registrar_tratamientos.id_cliente', '=', 'clientes.id_cliente')
             ->select('clientes.id_cliente', 'clientes.nombre',  'clientes.user_id', 'clientes.celular',  'registrar_tratamientos.id', 'registrar_tratamientos.id_cliente',
              'registrar_tratamientos.user_id', 'registrar_tratamientos.tratamiento', 'registrar_tratamientos.valor_tratamiento', 'registrar_tratamientos.responsable', 
-             'registrar_tratamientos.created_at')->get();
+             'registrar_tratamientos.created_at',  'registrar_tratamientos.saldo', 'registrar_tratamientos.estado')->get();
   
             
   

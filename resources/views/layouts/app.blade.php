@@ -132,12 +132,6 @@ ARCHIVOS JS
 <script src='https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js'  defer ></script>
 
 
- 
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.js" defer></script>
-
-<script src="{{asset('js/dataTables.buttons1.2.4.js')}}" defer></script>
-
-<script src="{{asset('js/buttons.print1.2.4.js')}}" defer></script>
 
 
 <script src='https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js'  defer ></script>
@@ -145,6 +139,15 @@ ARCHIVOS JS
 <script src='https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js'  defer ></script>
 
 <script src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js' defer></script>
+
+
+
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.js" defer></script>
+
+<script src="{{asset('js/dataTables.buttons1.2.4.js')}}" defer></script>
+
+<script src="{{asset('js/buttons.print1.2.4.js')}}" defer></script>
 
 
 <!-- highcharts js -->

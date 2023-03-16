@@ -61,6 +61,15 @@
   pointer-events:none;
 }
 
+.negative {
+color:rgba(255,0,0,1.00);
+}
+.positive {
+color:rgba(0,255,0,1.00);
+}
+
+
+
 </style>
 
 
@@ -147,10 +156,12 @@ DATATABLE LISTA DE ESPERA
                    <thead>
                       <tr>
                                         
-                        <th>Paciente</th>
+                         <th>Paciente</th>
                          <th>Tratamiento</th>
                          <th>Valor</th>
                          <th>Fecha</th>
+                         <th>Estado</th>
+                         <th>Saldo</th>
                          <th ></th>
                      
                      </tr>
@@ -1038,8 +1049,12 @@ $('#livesearch').on('select2:select', function(evt){
     let table =  $('#table_registros_contables').DataTable({
 
   
-           processing: true,
-           serverSide: true,
+        processing: true,
+        serverSide: true,
+        paging: true,
+        info: true,
+        filter: true,
+        responsive: true,
                                            
            type: "GET",
            ajax: 'registrar_tratamientos',
@@ -1073,16 +1088,28 @@ $('#livesearch').on('select2:select', function(evt){
            columns: [
 
 
-                     { data: 'nombre', name: 'nombre' },                  
+
+                    { data: 'nombre', name: 'nombre' },                  
                     { data: 'tratamiento', name: 'tratamiento' },  
                     { data: 'valor_tratamiento', name: 'valor_tratamiento' },
                     { data: 'created_at', name: 'created_at' },  
-                        
-                   
+                    { data: 'estado', name: 'estado' },  
+                    { data: 'saldo', name: 'saldo' },  
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                    
+
                 
                  ],
+
+                 "createdRow": function (row, data, index) {
+                          if (data.saldo == 0) {
+                         
+                            $('td', row).eq(4).addClass('text-primary').text('Pagado');
+                              } else {
+                                $('td', row).eq(4).addClass('text-second').text('Pendiente');
+                              }
+                         },
+
         
                    order: [3, 'DESC'],
 
@@ -1091,7 +1118,9 @@ $('#livesearch').on('select2:select', function(evt){
                           "render": $.fn.dataTable.render.number( '.' ),
                           "targets":[2],
                           className: 'dt-body-left',
-                        }
+                        },
+
+                        
                    ],
           
           
