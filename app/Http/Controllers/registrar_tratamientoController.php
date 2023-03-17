@@ -86,7 +86,7 @@ class registrar_tratamientoController extends Controller
             $id =registrar_tratamientos::select('id as id_tratamiento', "id_cliente", "nombre", "celular", "saldo", "tratamiento", "valor_tratamiento", "estado")
                    
             		->where('nombre',  'LIKE', "%${search}%" )
-                    ->where('estado',  'Pendiente')
+                    ->where('saldo', '!=', 0)
                   
                    // ->orWhere('cedula', 'LIKE', "%{$search}%") 
             		->get();

@@ -1070,14 +1070,14 @@ $('#livesearch').on('select2:select', function(evt){
                    { extend: 'excelHtml5', footer: true, text: 'Excel', title: 'Listado tratamientos de clientes',
                   
                     exportOptions: {
-                    columns: [ 0, 1, 2, 3]
+                    columns: [ 0, 1, 2, 3, 5]
                     
                   }},
 
                    { extend: 'pdfHtml5', footer: true, text: 'PDF', title: 'Listado tratamientos de clientes',
                   
                     exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: [0, 1, 2, 3, 5]
                     
                   }}, 
             
@@ -1102,13 +1102,14 @@ $('#livesearch').on('select2:select', function(evt){
                  ],
 
                  "createdRow": function (row, data, index) {
-                          if (data.saldo == 0) {
-                         
-                            $('td', row).eq(4).addClass('text-primary').text('Pagado');
-                              } else {
-                                $('td', row).eq(4).addClass('text-second').text('Pendiente');
-                              }
-                         },
+                      if (data.saldo == 0) {
+                      
+                        $('td', row).eq(4).addClass('text-primary').text('Pagado');
+                        
+                          } else {
+                            $('td', row).eq(4).addClass('text-second').text('Pendiente');
+                          }
+                  },
 
         
                    order: [3, 'DESC'],
@@ -1120,6 +1121,11 @@ $('#livesearch').on('select2:select', function(evt){
                           className: 'dt-body-left',
                         },
 
+                        { "orderable": false,
+                          "render": $.fn.dataTable.render.number( '.' ),
+                          "targets":[5],
+                          className: 'dt-body-left',
+                        },
                         
                    ],
           

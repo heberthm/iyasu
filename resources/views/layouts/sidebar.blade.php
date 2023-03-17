@@ -84,7 +84,7 @@
 
 
         <li class="nav-item">
-          <a href="{{ url('libro_diario') }}" class="nav-link {{ request()->is('libro_diario') ? 'Active' : '' }}">
+          <a href="{{ url('libro_diario') }}" class="nav-link {{ request()->is('libro_diario') ? 'active' : '' }}">
 
               <i class="nav-icon fas fa-book green"></i>
               <p>
@@ -95,7 +95,7 @@
 
 
         <li class="nav-item">
-          <a href="{{ url('profesionales') }}" class="nav-link {{ request()->is('profesionales') ? 'Active' : '' }}">
+          <a href="{{ url('profesionales') }}" class="nav-link {{ request()->is('profesionales') ? 'active' : '' }}">
 
               <i class="nav-icon fas fa-user-md green"></i>
               <p>
@@ -106,7 +106,7 @@
 
 
          <li class="nav-item">
-          <a href="{{ url('terapias') }}" class="nav-link {{ request()->is('terapias') ? 'Active' : '' }}">
+          <a href="{{ url('terapias') }}" class="nav-link {{ request()->is('terapias') ? 'active' : '' }}">
 
               <i class="nav-icon fas fa-list-ol green"></i>
               <p>
@@ -117,7 +117,7 @@
 
 
           <li class="nav-item">
-          <a href="{{ url('terapias_adicionales') }}" class="nav-link {{ request()->is('terapias_adicionales') ? 'Active' : '' }}">
+          <a href="{{ url('terapias_adicionales') }}" class="nav-link {{ request()->is('terapias_adicionales') ? 'active' : '' }}">
 
               <i class="nav-icon fas fa-tags green"></i>
               <p>
@@ -128,7 +128,7 @@
           </li>
           
             <li class="nav-item">
-            <a href="{{ url('lavados') }}" class="nav-link {{ request()->is('lavados') ? 'Active' : '' }}">
+            <a href="{{ url('lavados') }}" class="nav-link {{ request()->is('lavados') ? 'active' : '' }}">
 
                   <i class="nav-icon fas fa-cogs white"></i>
                   <p>
@@ -141,8 +141,9 @@
      
       
       <li class="nav-item">
-          <a href="{{ url('estadisticas') }}" class="nav-link {{ request()->is('estadisticas') ? 'Active' : '' }}">
+          <a href="{{ url('estadisticas') }}" class="nav-link {{ request()->is('estadisticas') ? 'active' : '' }}">
 
+        
               <i class="nav-icon fas fa-bar-chart green"></i>
               <p>
                 Estadísticas
@@ -155,7 +156,7 @@
 
 
       <li class="nav-item">
-          <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'Active' : '' }}">
+          <a href="{{ url('register') }}" class="nav-link {{ request()->is('register') ? 'active' : '' }}">
 
               <i class="nav-icon fas fa-user green"></i>
               <p>

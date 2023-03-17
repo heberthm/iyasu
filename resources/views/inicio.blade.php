@@ -1059,7 +1059,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <select class="form-control" name="municipio" id="municipio" onkeypress="return handleEnter(this, event)" required>
 
-                  <option value="" selected="selected"></option>
+                  <option value="" selected="selected">Seleccionar municipio</option>
 
                   <option value=" Alcala">Alcala</option>
                   <option value=" Andalucía">Andalucía</option>
@@ -1085,6 +1085,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                   <option value="Guacarí">Guacarí</option>
                   <option value="Jamundi">Jamundi</option>
                   <option value="La unión">La unión</option>
+                  <option value="La paila">La paila</option>
                   <option value="La victoria">La victoria</option>
                   <option value="Obando">Obando</option>
                   <option value="Restrepo">Restrepo</option>
@@ -1175,7 +1176,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
 ======================================-->
 
-<div class="modal fade" id="modalAgregarCliente2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAgregarCliente2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  data-id="1">
 
 
 
@@ -1326,7 +1327,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
                 <select class="form-control" name="municipio" id="municipio" onkeypress="return handleEnter(this, event)" required>
 
-                  <option value="" selected="selected"></option>
+                  <option value="" selected="selected">Seleccionar municipio</option>
 
                   <option value=" Alcala">Alcala</option>
                   <option value=" Andalucía">Andalucía</option>
@@ -1351,6 +1352,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
                   <option value="Ginebra">Ginebra</option>
                   <option value="Guacarí">Guacarí</option>
                   <option value="Jamundi">Jamundi</option>
+                  <option value="La paila">La paila</option>
                   <option value="La unión">La unión</option>
                   <option value="La victoria">La victoria</option>
                   <option value="Obando">Obando</option>
@@ -2210,26 +2212,27 @@ DESHABILITAR CLICK DERECHO
   
   $(document).ready(function() {
 
- // $('#modalAgregarCliente2').on('hidden.bs.modal', function () {
+ $('#modalAgregarCliente2').on('hidden.bs.modal', function () {
   
 
 //$(".agregar_cliente2").click(function (){
 
-  $('.agregar_cliente2').off('click').on('click', function() {
+//  $('.agregar_cliente2').off('click').on('click', function() {
 
   // let valor1 =  $('#nombre_cliente').val();
 
   // let valor2 =  $('#celular_cliente').val();
   
+        let id = $(this).val();
+        let valor1 = $('#nombre_cliente' + id).val();
+        let valor2 = $('#celular_cliente' + id).val();
 
-   var valor1 = $('#modalAgregarCliente2').find('input[name="nombre_cliente"]').val();
-   var valor2 = $('#modalAgregarCliente2').find('input[name="celular_cliente"]').val();
+       
+        $('#ModalAdd').find('input[name="livesearch2"]').val(valor1);
+        $('#ModalAdd').find('input[name="celular_cliente"]').val(valor2);
+     
 
-   // $('#modalAdd input[name="nombre_cliente"]').val(valor1);
-  // $('#modalAdd input[name="celular_cliente"]').val(valor2);
-
-     $('#ModalAdd').find('input[name="livesearch2"]').val(valor1);
-     $('#ModalAdd').find('input[name="celular_cliente"]').val(valor2);
+   
       
     });
   });

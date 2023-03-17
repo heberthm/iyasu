@@ -81,73 +81,73 @@
     <div class="card-body">
 
 
-    <div class="row">
+      <div class="row">
 
-<div class="col-lg-3 col-6">
+        <div class="col-lg-3 col-6">
 
-  <div class="small-box bg-info">
-    <div class="inner">
-         
-    <h5>$ {{ number_format($suma_tratamientos,  0, ",", "." ) }}</h5>
+          <div class="small-box bg-info">
+            <div class="inner">
 
-      <p>Total valor tratamientos</p>
-    </div>
-    <div class="icon">
-      <i class="ion ion-bag"></i>
-    </div>
-  <!--  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
-  </div>
-</div>
+              <h5>$ {{ number_format($suma_tratamientos,  0, ",", "." ) }}</h5>
 
-<div class="col-lg-3 col-6">
+              <p>Total valor tratamientos</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <!--  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+          </div>
+        </div>
 
-  <div class="small-box bg-success">
-    <div class="inner">
+        <div class="col-lg-3 col-6">
 
-      <h5>$ {{ number_format($tratamientos_hoy,  0, ",", "." ) }}</h5>
+          <div class="small-box bg-success">
+            <div class="inner">
 
-      <p>Valor tratamientos hoy</p>
-    </div>
-    <div class="icon">
-      <i class="ion ion-stats-bars"></i>
-    </div>
-   <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
-  </div>
-</div>
+              <h5>$ {{ number_format($tratamientos_hoy,  0, ",", "." ) }}</h5>
 
-<div class="col-lg-3 col-6">
+              <p>Valor tratamientos hoy</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+          </div>
+        </div>
 
-  <div class="small-box bg-warning">
-    <div class="inner">
+        <div class="col-lg-3 col-6">
 
-      <h5> $ {{ number_format($total_abonos,  0, ",", "." ) }}</h5>
+          <div class="small-box bg-warning">
+            <div class="inner">
 
-      <p>Total valor abonos</p>
-    </div>
-    <div class="icon">
-      <i class="ion ion-person-add"></i>
-    </div>
-  <!--  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
-  </div>
-</div>
+              <h5> $ {{ number_format($total_abonos,  0, ",", "." ) }}</h5>
 
-<div class="col-lg-3 col-6">
+              <p>Total valor abonos</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <!--  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+          </div>
+        </div>
 
-  <div class="small-box bg-danger">
-    <div class="inner">
+        <div class="col-lg-3 col-6">
 
-      <h5> $ {{ number_format($abonos_hoy,  0, ",", "." ) }}</h5>
+          <div class="small-box bg-danger">
+            <div class="inner">
 
-      <p>Valor abonos hoy</p>
-    </div>
-    <div class="icon">
-      <i class="ion ion-pie-graph"></i>
-    </div>
- <!--   <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
-  </div>
-</div>
+              <h5> $ {{ number_format($abonos_hoy,  0, ",", "." ) }}</h5>
 
-</div>
+              <p>Valor abonos hoy</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <!--   <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+          </div>
+        </div>
+
+      </div>
 
 
 
@@ -156,13 +156,13 @@
       <div class="card card-second">
         <div class="card-header">
           <h3 class="card-title">Gráfico de tratamientos realizados por mes</h3>
-          
+
         </div>
         <div class="card-body">
 
           <div id="container"></div>
 
-         </div>
+        </div>
 
       </div>
 
@@ -207,68 +207,64 @@ GENRAR GRAFICO
 
 
 <script type="text/javascript">
- 
- var users =  <?php echo json_encode($registros) ?>;
-   
-   Highcharts.chart('container', {
+  var users = <?php echo json_encode($registros) ?>;
 
-        chart: {
-          type: 'pie'
+  Highcharts.chart('container', {
+
+    chart: {
+      type: 'pie'
+    },
+
+    title: {
+      text: 'Gráfico de tratamientos realizados por mes'
+    },
+    subtitle: {
+      text: 'fuente: centro holístico iyasu.'
+    },
+    xAxis: {
+      categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+    },
+    yAxis: {
+      title: {
+        text: 'Numero de tratamientos'
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle'
+    },
+    plotOptions: {
+      series: {
+        allowPointSelect: true
+      }
+    },
+    series: [{
+      name: 'Tratamientos',
+      data: users,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+      ],
+    }],
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
         },
-
-       title: {
-           text: 'Gráfico de tratamientos realizados por mes'
-       },
-       subtitle: {
-           text: 'fuente: centro holístico iyasu.'
-       },
-        xAxis: {
-           categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-       },
-       yAxis: {
-           title: {
-               text: 'Numero de tratamientos'
-           }
-       },
-       legend: {
-           layout: 'vertical',
-           align: 'right',
-           verticalAlign: 'middle'
-       },
-       plotOptions: {
-           series: {
-               allowPointSelect: true
-           }
-       },
-       series: [{
-           name: 'Tratamientos',
-           data: users,
-           backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
-       }],
-       responsive: {
-           rules: [{
-               condition: {
-                   maxWidth: 500
-               },
-               chartOptions: {
-                   legend: {
-                       layout: 'horizontal',
-                       align: 'center',
-                       verticalAlign: 'bottom'
-                   }
-               }
-           }]
-       }
-});
-
+        chartOptions: {
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom'
+          }
+        }
+      }]
+    }
+  });
 </script>
-
-
 
 
 @endsection
