@@ -34,7 +34,7 @@ class LibroDiarioController extends Controller
   
 
   
-                  $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerLibroDiario"  title="Ver datos del abono" class="fa fa-eye verLibroDiario"></a> 
+                  $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerRegistro"  title="Ver datos del abono" class="fa fa-eye verLibroDiario"></a> 
                  
                   <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarLibroDiario" title="Editar libro diario"   class="fa fa-edit editarLibroDiario"></a>   
                   
@@ -113,48 +113,68 @@ class LibroDiarioController extends Controller
       }
  
 
+  
+      
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\libro_diario  $libro_diario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(libro_diarios $libro_diario)
+    public function show($id)
     {
-        //
+        $id_diario  = libro_diarios::find($id);
+        return response()->json($id_diario);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\libro_diario  $libro_diario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(libro_diarios $libro_diario)
+    public function edit($id)
     {
-        //
+        $id_diario  = libro_diarios::find($id);
+        return response()->json($id_diario);
     }
 
-    /**
+ /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\libro_diario  $libro_diario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, libro_diarios $libro_diario)
+    public function update(Request $request, $id)
     {
-        //
+        $id_diario = $request->input('id_diario');
+
+        $data = libro_diarios::find($id_diario);
+          
+       
+        $data->descripcion      = $request->descripcion;
+        $data->valor            = $request->valor;
+        $data->responsable      = $request->responsable;
+       
+               
+
+        $data->save();
+     
+        return response()->json(['success'=>'update successfully.']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\libro_diario  $libro_diario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(libro_diarios $libro_diario)
+    public function destroy($id)
     {
-        //
+        libro_diarios::find($id)->delete();
+     
+        return response()->json(['success'=>'deleted successfully.']);
     }
 }
+

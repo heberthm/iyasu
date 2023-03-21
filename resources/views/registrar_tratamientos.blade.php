@@ -1059,25 +1059,24 @@ $('#livesearch').on('select2:select', function(evt){
            type: "GET",
            ajax: 'registrar_tratamientos',
 
-
-
+               
+           dom: '<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"<"dt-buttons btn-group flex-wrap"B>><"col-sm-12 col-md-4"f>>t<"row"<"col-sm-12 col-md-6"i>r<"col-sm-12 col-md-6"p>>',
            
-           dom: '<"row"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"<"dt-buttons btn-group flex-wrap"B>><"col-sm-12 col-md-4"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-
            
           buttons: [ 
                     
-                   { extend: 'excelHtml5', footer: true, text: 'Excel', title: 'Listado tratamientos de clientes',
+                   { extend: 'excelHtml5',  text: 'Excel', title: 'Listado tratamientos de clientes',
                   
                     exportOptions: {
                     columns: [ 0, 1, 2, 3, 5]
                     
                   }},
 
-                   { extend: 'pdfHtml5', footer: true, text: 'PDF', title: 'Listado tratamientos de clientes',
+                   { extend: 'pdfHtml5',  text: 'PDF', title: 'Listado tratamientos de clientes',
                   
                     exportOptions: {
-                    columns: [0, 1, 2, 3, 5]
+                    columns: [0, 1, 2, 3, 5],
+                    alignment: 'center',
                     
                   }}, 
             

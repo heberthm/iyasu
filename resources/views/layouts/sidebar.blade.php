@@ -52,7 +52,7 @@
            <!-- <i class="nav-icon fas fa-list green"></i> -->
             <i class="nav-icon fas  fa-usd"></i>
             <p>
-              pagos a profesionales
+              Pagos a profesionales
             </p>
           </a>
         </li>

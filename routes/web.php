@@ -217,6 +217,15 @@ Route::get('libro_diario', [App\Http\Controllers\LibroDiarioController::class, '
 
 Route::post('crear_registro_diario', [App\Http\Controllers\LibroDiarioController::class, 'store']);
 
+Route::get('ver_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'show']);
+
+Route::get('editar_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'edit']);
+
+Route::post('actualizar_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'update']);
+
+Route::delete('eliminar_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'destroy']);
+
+
 
 
 Route::get('estadisticas', [App\Http\Controllers\ChartJSController::class, 'index']);

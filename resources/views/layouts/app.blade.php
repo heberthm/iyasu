@@ -178,19 +178,17 @@ ARCHIVOS JS
 
 
 <!--If Print button or buttons:true, this is required for any Buttons or Dom items to appear -->
-<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js" defer></script> -->
-
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js" defer></script> 
 <script src="{{asset('js/buttons.print1.2.4.js')}}"  ></script>
 
 
 <!--Required for Excel button to appear-->
- <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js" defer ></script> ---->
-
- <script src="{{asset('js/jszip2.5.0.js')}}" ></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js" defer ></script> 
+  <script src="{{asset('js/jszip2.5.0.js')}}" ></script>
 
 
 <!--Required for PDF button to appear-->
-<!-- <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.js"></script> -->
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.js"></script> 
 
 <script src="{{asset('js/pdfmake0.1.18.js')}}" ></script>
 
