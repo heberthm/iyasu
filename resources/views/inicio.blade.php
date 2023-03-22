@@ -2569,7 +2569,7 @@ SELECTBUSCARCLIENTE - LISTA DE ESPERA
   <script type="text/javascript">
     $('.selectBuscarCliente').select2({
       //  allowClear: true,
-      placeholder: 'Buscar cliente...',
+      placeholder: 'Buscar cliente por nombre...',
       language: "es",
       minimumInputLength: 3,
 

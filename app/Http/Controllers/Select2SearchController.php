@@ -35,6 +35,7 @@ class Select2SearchController extends Controller
             $cliente =Cliente::select("user_id", "id_cliente", "cedula", "nombre", "celular", "estado")
                    
             		->where('nombre',  'LIKE', "%${search}%" )
+              //  ->orwhere('cedula', 'LIKE', "%$search%")
                 ->where('estado', 1)
                    // ->orWhere('cedula', 'LIKE', "%{$search}%") 
             		->get();

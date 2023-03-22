@@ -754,8 +754,7 @@ DATATABLE LISTA DE ESPERA
 </div>
 
 </form> 
-</div>
-</div>
+
 
 
 
@@ -878,6 +877,56 @@ $(document).ready(function(){
 
 
 
+  <!-- ==============================
+
+// VERIFICAR SI EXISTE CLIENTE
+
+===================================  -->
+
+<script>
+    $(document).ready(function() {
+
+      $('#cedula').blur(function() {
+        var error_cedula = '';
+        var cedula = $('#cedula').val();
+        var _token = $('input[name="_token"]').val();
+        var filter = /([0-9])/;
+        if (!filter.test(cedula)) {
+          $('#error_cedula').html('<label class="text-danger">Debe escribir número de cédula.</label>');
+          $('#cedula').addClass('has-error');
+          $('#agregar_cliente').attr('disabled', 'disabled');
+        } else {
+          $.ajax({
+            url: 'verificar_cliente',
+            method: "POST",
+            data: {
+              cedula: cedula
+            },
+            success: function(result) {
+              if (result == 'unique') {
+
+                $('#error_cedula').html('<label class="text-danger">El cliente ya existe.</label>');
+                $('#cedula').addClass('has-error');
+                $('#agregar_cliente').attr('disabled', 'disabled');
+
+              } else {
+
+                $('#error_cedula').html('<label class="text-success">Disponible.</label>');
+                $('#cedula').removeClass('has-error');
+                $('#agregar_cliente').attr('disabled', false);
+
+
+              }
+            }
+          })
+        }
+      });
+
+    });
+  </script>
+
+
+
 
 
 <!-- =======================================
@@ -909,6 +958,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
               text: item.nombre,
               id: item.id_cliente,
               celular: item.celular,
+              
             }
 
             // location.href = '/clientes/' + id

@@ -10,6 +10,7 @@ use App\Models\Cliente;
 
 use App\Models\terapias;
 
+use Illuminate\Support\Facades\DB;
 
 use App\Models\registrar_tratamientos;
 
@@ -94,6 +95,30 @@ class registrar_tratamientoController extends Controller
         return response()->json($id);
         
     }
+
+
+
+
+    public function verificarCliente(Request $request)
+    {
+      if($request->get('saldo'))
+      {
+       $saldo = $request->get('saldo');
+       $data = DB::table("registrar_clientes")
+        ->where('saldo', $saldo)
+       
+        ->count();
+       if($data > 0)
+       {
+        echo 'unique';
+       }
+       else
+       {
+        echo 'not_unique';
+       }
+      }
+    } 
+ 
 
     
 
