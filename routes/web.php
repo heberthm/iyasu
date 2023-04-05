@@ -8,13 +8,16 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
- use App\Http\Controllers\historiasClinicasController;
- use App\Http\Controllers\abonosClientesController;
- use App\Http\Controllers\terapiasController;
- use App\Http\Controllers\terapias_adicionalesController;
- use App\Http\Controllers\profesionalesController;
- use App\Http\Controllers\lavadosController;
- use App\Http\Controllers\ChartJSController;
+use App\Http\Controllers\historiasClinicasController;
+use App\Http\Controllers\abonosClientesController;
+use App\Http\Controllers\terapiasController;
+use App\Http\Controllers\terapias_adicionalesController;
+use App\Http\Controllers\profesionalesController;
+use App\Http\Controllers\DeudoresController;
+use App\Http\Controllers\lavadosController;
+use App\Http\Controllers\ChartJSController;
+use  App\Http\Controllers\Registros_contableController;
+
 
 
 
@@ -144,6 +147,10 @@ Route::get('ver_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoCo
 
 Route::delete('/eliminar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'destroy']);
 
+Route::post('mensaje_pago_deuda', [App\Http\Controllers\registrar_tratamientoController::class, 'mensajePagoDeuda']);
+
+Route::get('deudores', [App\Http\Controllers\DeudoresController::class, 'index']);
+
 
 
 Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index']);
@@ -213,17 +220,22 @@ Route::delete('eliminar_honorario/{id}', [App\Http\Controllers\HonorariosProfesi
 
 
 
-Route::get('libro_diario', [App\Http\Controllers\LibroDiarioController::class, 'index']);
 
-Route::post('crear_registro_diario', [App\Http\Controllers\LibroDiarioController::class, 'store']);
+Route::post('/guardar_saldo',[App\Http\Controllers\Registros_contableController::class,'store']);
 
-Route::get('ver_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'show']);
+Route::post('/guardar_ingreso',[App\Http\Controllers\Registros_contableController::class,'guardar_ingreso'])->name('guardar_ingreso');
 
-Route::get('editar_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'edit']);
+Route::post('/guardar_egreso',[App\Http\Controllers\Registros_contableController::class,'guardar_egreso'])->name('guardar_egreso');
 
-Route::post('actualizar_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'update']);
+Route::get('mostrarRegistros/{registros}', [App\Http\Controllers\Registros_contableController::class, 'mostrarRegistros']);
 
-Route::delete('eliminar_libro_diario/{id}', [App\Http\Controllers\LibroDiarioController::class, 'destroy']);
+
+Route::get('registros_contables', [App\Http\Controllers\Registros_contableController::class,'index']);
+
+Route::post('/editar_registro', [App\Http\Controllers\Registros_contableController::class, 'update']);
+
+Route::post('/eliminar_registro/{id}', [App\Http\Controllers\Registros_contableController::class, 'destroy']);
+
 
 
 

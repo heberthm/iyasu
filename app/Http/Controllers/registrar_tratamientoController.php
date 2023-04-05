@@ -98,29 +98,24 @@ class registrar_tratamientoController extends Controller
 
 
 
-
-    public function verificarCliente(Request $request)
+    public function mensajePagoDeuda(Request $request)
     {
-      if($request->get('saldo'))
-      {
-       $saldo = $request->get('saldo');
-       $data = DB::table("registrar_clientes")
-        ->where('saldo', $saldo)
+    	
+                
+            $id =registrar_tratamientos::select('id',  "saldo", "created_at")
+                   
+                ->whereDate('created_at', '=', now()->subDays(30))->get()
+                ->get();
        
-        ->count();
-       if($data > 0)
-       {
-        echo 'unique';
-       }
-       else
-       {
-        echo 'not_unique';
-       }
-      }
-    } 
- 
+     return response()->json($id);
+        
+    }
 
-    
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.

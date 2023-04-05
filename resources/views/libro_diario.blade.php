@@ -77,19 +77,83 @@ REGISTRO DE LIBRO DIARIO
 
 
 
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12">
+      <!-- Custom tabs (Charts with tabs)-->
+      <div class="card card-light">
+        <div class="card-header">
+
+          <h3 class="card-title"><span style="color: #28a745;" class="fas fa-database mr-3"></span>Registros contables</h3>
+
+        </div>
+
+
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-lg-6">
+
+
+
+
+              <button class="btn btn-outline-success ml-2" data-toggle="modal" data-target="#modalAgregarSaldoInicial" style="text-align:left"><span class="fas fa-tags mr-2" tabindex="3"></span> Saldo inicial</button>
+              <button class="btn btn-outline-info ml-2" data-toggle="modal" data-target="#modalAgregarIngreso" style="text-align:left"><span class="fas fa-plus mr-2" tabindex="3"></span> Ingresos</button>
+              <button class="btn btn-outline-danger ml-2" data-toggle="modal" data-target="#modalAgregarEgreso" style="text-align:left"><span class="fas fa-minus mr-2" tabindex="3"></span> Egresos</button>
+
+
+            </div>
+
+
+
+            <span>
+              <h5 style="text-align:right"> </h5>
+            </span> &nbsp;
+
+            <p> <span>
+                <h5 style="text-align:right"> </h5>
+              </span> </p>
+
+
+
+
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+  <!-- /.card-body -->
+
+
+
+  <!-- ====================================
+
+FORMULARIO RECEPCION DE PACIENTES
+
+=========================================  -->
+
 
   <div class="card card-light">
 
     <div class="card-header">
 
-      <h3 class="card-title"><span style="color: #28a745;" class="fas fa-book mr-3"></span>Registro de libro diario</h3>
+      <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de transacciones contables</h3>
 
-      <div class="pull-right">
-        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalAgregarRegistroLibroDiario">
-          <span class="fa fa-book fa-fw"></span>
-          Crear registro diario
-        </button> &nbsp;
-      </div>
+      <span class="btn-group float-right" id="btn_historialIngresos">
+
+
+        <a href="#" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fa fa-list"></span><span style="color:#212529;"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="javascript:historial_registros();">Historial de registros realizados</a>
+          <a class="dropdown-item" href="javascript:historial_ingresos();">Historial de pacientes en lista de espera</a>
+        </div>
+      </span>
+
 
 
     </div>
@@ -99,9 +163,33 @@ REGISTRO DE LIBRO DIARIO
 
 
 
-      <!-- ==================================
 
-DATATABLE REGISTRO LIBRO DIARIO
+      <!-- ===================================
+DATAPICKER BOOTSTRAP
+========================================  -->
+
+      <!--
+
+<div class="row input-daterange">
+      <div class="col-md-3">
+          <input type="text" name="from_date" id="from_date" class="form-control" placeholder="Fecha inicial" readonly />
+      </div>
+      <div class="col-md-3">
+          <input type="text" name="to_date" id="to_date" class="form-control" placeholder="Fecha final" readonly />
+      </div>
+      <div class="col-md-3">
+          <button type="button" name="filter" id="filter" class="btn btn-primary">Filtrar</button>
+          <button type="button" name="refresh" id="refresh" class="btn btn-default">Refrescar</button>
+      </div>
+  </div>
+  <br />
+
+-->
+
+
+<!-- ==================================
+
+DATATABLE REGISTROS CONTABLES
 
 ====================================== -->
 
@@ -109,21 +197,34 @@ DATATABLE REGISTRO LIBRO DIARIO
       <div class="row">
         <div class="col-lg-12">
 
-          <table id="table_registros_contables" class="table dt-responsive table-hover" style="width:100%">
+          <table id="table_registros_contables" class="display" style="width:100%">
             <thead>
               <tr>
 
-                <th>Descripción</th>
-                <th>Responsable</th>
-                <th>Valor</th>
-                <th>Fecha</th>
-
+                <th>ID</th>
+                <th width="auto">Responsable</th>
+                <th width="auto">Descripción</th>
+                <th>Saldo</th>
+                <th style="color:darkcyan">Ingresos</th>
+                <th style="color:crimson">Egresos</th>
+                <th width="auto">fecha</th>
                 <th></th>
 
               </tr>
             </thead>
 
-         
+            <tfoot>
+              <tr>
+                <th colspan="3" style="text-align:right;"></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+              </tr>
+            </tfoot>
+
           </table>
 
 
@@ -134,6 +235,7 @@ DATATABLE REGISTRO LIBRO DIARIO
     <!-- /.box -->
   </div>
   <!-- /.col -->
+
 
   <!-- /.card -->
   </section>
@@ -663,11 +765,6 @@ DESHABILITAR CLICK DERECHO
         },
 
       ],
-
-
-
-
-
 
 
       columns: [

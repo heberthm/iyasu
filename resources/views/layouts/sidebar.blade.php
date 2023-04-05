@@ -46,6 +46,16 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="{{ url('deudores') }}" class="nav-link {{ request()->is('deudores') ? 'active' : '' }}">
+           <!-- <i class="nav-icon fas fa-list green"></i> -->
+            <i class="nav-icon fas  fa-tags"></i>
+            <p>
+              Deudores
+            </p>
+          </a>
+        </li>
+
 
         <li class="nav-item">
           <a href="{{ url('pago_honorarios') }}" class="nav-link {{ request()->is('pago_honorarios') ? 'active' : '' }}">
@@ -84,11 +94,11 @@
 
 
         <li class="nav-item">
-          <a href="{{ url('libro_diario') }}" class="nav-link {{ request()->is('libro_diario') ? 'active' : '' }}">
+          <a href="{{ url('registros_contables') }}" class="nav-link {{ request()->is('registros_contables') ? 'active' : '' }}">
 
               <i class="nav-icon fas fa-book green"></i>
               <p>
-               Libro diario
+              Registros contales
               </p>
            </a>   
           </li>

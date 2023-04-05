@@ -2199,9 +2199,9 @@ DATATABLE MOSTRAR DATOS HISTÓRIA CLINICA
             dataType: "json",
             success: function(data) {
 
-              //  table.ajax.reload();
+              table.ajax.reload();
 
-              location.reload(true);
+             // location.reload(true);
 
 
               $('#form_crear_historia_clinica')[0].reset();

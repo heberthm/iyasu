@@ -212,7 +212,7 @@ GENRAR GRAFICO
   Highcharts.chart('container', {
 
     chart: {
-      type: 'pie'
+      type: 'column'
     },
 
     title: {

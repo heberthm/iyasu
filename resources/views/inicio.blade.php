@@ -1710,14 +1710,7 @@ MODAL DATATABLE LISTADO DE CLIENTES
   </div>
 
 
-
-
-
-
-
-
-
-  <!-- ========================================
+<!-- ========================================
 
 MOSTRAR SPINNER AL CARGAR PAGINA
 
@@ -1732,6 +1725,8 @@ MOSTRAR SPINNER AL CARGAR PAGINA
           opacity: "0"
         })
       }, 1000);
+
+      
 
     });
   </script>
@@ -2212,29 +2207,14 @@ DESHABILITAR CLICK DERECHO
   
   $(document).ready(function() {
 
- $('#modalAgregarCliente2').on('hidden.bs.modal', function () {
-  
-
-//$(".agregar_cliente2").click(function (){
-
-//  $('.agregar_cliente2').off('click').on('click', function() {
-
-  // let valor1 =  $('#nombre_cliente').val();
-
-  // let valor2 =  $('#celular_cliente').val();
-  
-        let id = $(this).val();
-        let valor1 = $('#nombre_cliente' + id).val();
-        let valor2 = $('#celular_cliente' + id).val();
-
-       
-        $('#ModalAdd').find('input[name="livesearch2"]').val(valor1);
-        $('#ModalAdd').find('input[name="celular_cliente"]').val(valor2);
-     
-
+    $('#modalAgregarCliente').on('hide.bs.modal', function() {
+            let valor1 = $('.nombre_cliente').val();
+            let valor2 = $('.celular_cliente').val();
+            $('#ModalAdd').find('input[id="livesearch2"]').val(valor1);
+            $('#ModalAdd').find('input[id="celular_cliente"]').val(valor2);
+        });
+        
    
-      
-    });
   });
 
   </script>
@@ -3442,7 +3422,7 @@ INSERTAR DATOS A FULLCALENDAR
 
 
 
-  <!-- =========================================
+<!-- =========================================
 
 EDITAR DATOS DE FULLCALENDAR
 

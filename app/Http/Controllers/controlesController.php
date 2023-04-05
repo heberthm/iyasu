@@ -29,7 +29,7 @@ class controlesController extends Controller
           'controles.num_control', 'controles.peso', 'controles.abd', 'controles.grasa', 'controles.grasa',
            'controles.agua', 'controles.created_at')
 
-          ->where('clientes.id_cliente',  $id);
+          ->where('controles.id_cliente',  $id);
 
            return datatables()->of($id)
 

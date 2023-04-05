@@ -53,8 +53,7 @@ class historiasClinicasController extends Controller
                     $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalMostrarHistoriaClinica"  title="Ver datos história clínica" class="fa fa-eye mostrar_historia"></a> 
                    
                     <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarHistoriaClinica"  title="Editar datos de história clínica" class="fa fa-edit editarHistoria"></a>
-    
-                    <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerControlesMedicos"  title="Control médico" class="fa fa-street-view verControl"></a>
+   
 
                     <a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" title="Eliminar abono" class="fa fa-trash eliminarHistoria"></a>';
 

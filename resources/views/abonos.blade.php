@@ -757,6 +757,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
     allowClear: true,
     minimumInputLength: 3,
     ajax: {
+      
 
       url: 'buscar_tratamiento',
 
