@@ -204,6 +204,7 @@ ARCHIVOS JS
         
     <!-- x-editable-bs4 js -->
     <script src="{{asset('js/bootstrap-editable.min.js')}}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js" ></script>
 
 
     <!-- Font-awesome js -->

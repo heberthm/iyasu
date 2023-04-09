@@ -215,43 +215,25 @@ class ClientesController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-     
-    public function update(Request $request, $id_cliente)
-    { 
-      
-      try{
-        $id = array('id_cliente' => $request->id_cliente);
-        $updateArray = [
-                        'cedula' => $request->cedula,
-                        'fecha_nacimiento' => $request->fecha_nacimiento,
-                        'edad' => $request->edad1,
-                        'nombre' => $request->nombre,
-                        'celular' => $request->celular,
-                        'direccion' => $request->direccion,
-                        'barrio' => $request->barrio,
-                        'municipio' => $request->municipio,
-                        'email' => $request->email,
-                       
-                       ];
-          
-          $id_cliente  = Cliente::where($id)->update($updateArray);
- 
-        } catch (\Exception  $exception) {
-            return back()->withError($exception->getMessage())->withInput();
+     /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function update(Request $request)
+    {
+        if ($request->ajax()) {
+            
+            Cliente::find($request->pk)
+              
+            ->update([$request->name => $request->value]);
+
+            return response()->json(['success'=>'Successfully']);
         }
+    }
 
-          return response()->json(['success'=>'Successfully']);
-     
-         /*
-        $cliente = Cliente::findOrFail($id_cliente);
-        $name = $request->get('name');
-        $value = $request->get('value');
-        $cliente->$name = $value;
-        return $cliente->data();
-       */
 
-    } 
- 
+
 
     /**
      * Remove the specified resource from storage.

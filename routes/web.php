@@ -87,7 +87,7 @@ Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'up
 
 Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');
 
-Route::post('/actualizar/{id_cliente}',[App\Http\Controllers\ClientesController::class ,'update'])->name('editarCliente');
+Route::post('/editarCliente',[App\Http\Controllers\ClientesController::class , 'update'])->name('editarCliente');
 
 Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
 

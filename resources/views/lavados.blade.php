@@ -106,7 +106,7 @@ DATATABLE LAVADOS
        <div class="row">
          <div class="col-lg-12">
                                              
-               <table id="table_lavados" class="table dt-responsive table-hover" style="width:100%">
+               <table id="table_lavados" class="table dt-responsive table-hover" style="width:100%;font-size:12.5px;">
                    <thead>
                       <tr>
                                         

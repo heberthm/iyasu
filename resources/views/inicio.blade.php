@@ -228,7 +228,7 @@ FORMULARIO RECEPCION DE PACIENTES
 
 
 
-            <!-- ==================================
+<!-- ==================================
 
 DATATABLE CLIENTES QUE CUMPLEN AÑOS
 
@@ -239,12 +239,12 @@ DATATABLE CLIENTES QUE CUMPLEN AÑOS
               <div class="col-lg-12">
                 <div class="listado_citas">
                   <div class="form-group">
-                    <table id="Table_listado_espera" class="table dt-responsive table-hover" style="width:100%">
+                    <table id="Table_listado_cumpleaños" class="table dt-responsive table-hover" style="width:100%;font-size:12.5px;">
                       <thead>
                         <tr>
 
                           <th>Paciente</th>
-                          <th>Celular</th>
+                          <th>Tel / Cel</th>
                           <th>Fecha nacimiento</th>
 
                           <th></th>
@@ -3809,7 +3809,7 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
       });
 
 
-      let table = $('#Table_listado_espera').DataTable({
+      let table = $('#Table_listado_cumpleaños').DataTable({
 
 
         processing: true,

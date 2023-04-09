@@ -4,28 +4,31 @@
 @section('content')
 
 <style>
-  a.editable-click {
-    color: green;
-    border-color: green;
-  }
-
-  a.editable-click.editable-disabled {
-    color: black;
-    border-bottom: none;
-  }
-
-  a.editable-empty {
-    color: gray;
-    font-style: italic;
-  }
-
-
+ 
   .select2-multpie {
     background-color: #f5f5f5 !important;
   }
 
+  
+  a.editable-click {
+        color: #007bff;
+        border-color: #007bff;
+        text-decoration: none;
+    }
 
+    a.editable-click.editable-disabled {
+        color: black;
+        border-bottom: none;
+        text-decoration: none;
+    }
 
+    a.editable-empty {
+        color: gray;
+        font-style: italic;
+    }
+
+  
+    
   /*
 
 thead {
@@ -108,17 +111,17 @@ DATATABLE MASCOTAS
             <div class="col-lg-12">
 
 
-              <table id="Table_historia_clinica" class="table dt-responsive table-hover" style="width:100%">
+              <table id="Table_historia_clinica" class="table dt-responsive table-hover" style="width:100%;font-size:12.5px;">
                 <thead>
                   <tr>
 
 
-                    <th>Estatura</th>
-                    <th>Peso</th>
-                    <th>IMC</th>
-                    <th>ABD inicial</th>
-                    <th>Fecha</th>
-                    <th></th>
+                    <th class="desktop">Estatura</th>
+                    <th class="desktop">Peso</th>
+                    <th class="desktop">IMC</th>
+                    <th class="desktop">ABD inicial</th>
+                    <th class="desktop">Fecha</th>
+                    <th class="desktop"></th>
                   </tr>
 
                 </thead>
@@ -185,7 +188,7 @@ DATATABLE MASCOTAS
         <div class="card-body">
           <!-- Date -->
           <div class="form-group">
-            <table class="table" id="table_clientes">
+            <table class="table" id="table_clientes" style="width:100%;font-size:16 px;">
               <tbody style="font-size:95%;">
 
 
@@ -194,6 +197,7 @@ DATATABLE MASCOTAS
                   <td>
                     <div class="control-label">Id_cliente</div>
                     <a href="#" id="id_cliente">{{ $id_cliente->id_cliente }}</a>
+
                   </td>
                 </tr>
 
@@ -201,44 +205,46 @@ DATATABLE MASCOTAS
 
                   <td>
                     <div class="control-label">Cédula</div>
-                    <a href="#" id="cedula"">{{ $id_cliente->cedula }}</a></td>
+                    <a href="#" id="cedula">{{ $id_cliente->cedula }}</a></td>
                     </tr>
                     <span id=" navbar_estado"></span>
                 <tr>
                   <td>
+
                     <div class="control-label">Nombre</div>
-                    <a href="#" class="xedit" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="nombre">
-                      {{$id_cliente->nombre}}</a>
-                    <a class=" ml-3 allign-middle" id="nombre" href=""></a>
+
+                    <a href="#" id="nombre" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="nombre" >{{ $id_cliente->nombre }}</a>
+
+
                   </td>
                 </tr>
 
                 <tr>
                   <td>
                     <div class="control-label">Edad</div>
-                    <a href="#" class="xedit" data-type="text" data-pk="{{$id_cliente->edad}}" data-name="edad" id="edad">{{ $id_cliente->edad }}</a>
-                    <a class=" ml-3 allign-middle" id="edad" href=""></a>
+                    <a href="#" id="edad" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="edad">{{ $id_cliente->edad }}</a>
+                   
                   </td>
                 </tr>
 
                 <tr>
                   <td>
                     <div class="control-label">Celular</div>
-                    <a href="#" class="xedit" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="celular">{{ $id_cliente->celular }}</a>
-                    <a class=" ml-3 allign-middle" id="celular" href=""></a>
+                    <a href="#" id="celular" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="celular">{{ $id_cliente->celular }}</a>
+                    
                 </tr>
                 <tr>
                   <td>
                     <div class="control-label">Email</div>
-                    <a href="#" class="xedit" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="email">{{ $id_cliente->email }}</a>
-                    <a class=" ml-3 allign-middle" id="email" href=""></a>
+                    <a href="#" id="email" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="email">{{ $id_cliente->email }}</a>
+                    
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <div class="control-label">Dirección</div>
-                    <a href="#" class="xedit" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="direccion">{{ $id_cliente->direccion }}</a>
-                    <a class=" ml-3 allign-middle" id="direccion" href=""></a>
+                    <a href="#" id="direccion" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="direccion">{{ $id_cliente->direccion }}</a>
+                    
                 </tr>
 
                 <tr>
@@ -1143,7 +1149,7 @@ DATATABLE MASCOTAS
             </div>
 
 
-          </div>
+         
 
 
           <div class="col-md-4">
@@ -1188,7 +1194,7 @@ DATATABLE MASCOTAS
 
           </div>
 
-
+        </div>
 
 
 
@@ -1870,7 +1876,7 @@ MODAL DATATABLE CONTROLES MEDICOS
           <div class="col-lg-12">
 
 
-            <table id="Table_control_medico" class="table table-hover" width="100%">
+            <table id="Table_control_medico"  class="table dt-responsive  table-hover" style="width:100%;font-size:12.5px;">>
               <thead>
                 <tr>
 
@@ -3085,21 +3091,92 @@ RESET SELECT2: selectBuscarCliente
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+ 
+
+    $.fn.editableform.buttons =
+        '<button type="submit" class="btn btn-primary btn-sm editable-submit">' +
+        '<i class="fa fa-fw fa-check"></i>' +
+        '</button>' +
+        '<button type="button" class="btn btn-warning btn-sm editable-cancel">' +
+        '<i class="fa fa-fw fa-times"></i>' +
+        '</button>';
 
 
+   $('#nombre').editable({
 
-    $.fn.editable.defaults.mode = 'inline';
+        mode: 'inline',
+        container: 'body',
+       // selector: '.nombre',
+        url: '/editarCliente',
+        pk: 1,
+        title: 'Nombre',
+        type: 'POST',
 
-    $('.nombre').editable({
-      url: 'editarCliente/' + id_cliente,
-      pk: id,
-      type: "text",
-      validate: function(value) {
-        if ($.trim(value) === '') {
-          return 'This field is required';
+        validate: function(value) {
+            if ($.trim(value) == '') {
+                return 'El campo no debe estar vacio'
+            }
         }
-      }
+   });
+
+
+   $('#celular').editable({
+
+        mode: 'inline',
+        container: 'body',
+       // selector: '.celular',
+        url: '/editarCliente',
+        pk: 1,
+        title: 'Celular',
+        type: 'POST',
+
+        validate: function(value) {
+            if ($.trim(value) == '') {
+                return 'El campo no debe estar vacio'
+            }
+        }
     });
+
+
+    
+   $('#email').editable({
+
+        mode: 'inline',
+        container: 'body',
+       // selector: '.email',
+        url: '/editarCliente',
+        pk: 1,
+        title: 'Email',
+        type: 'POST',
+
+        validate: function(value) {
+            if ($.trim(value) == '') {
+                return 'El campo no debe estar vacio'
+            }
+        }
+    });
+
+
+ 
+    $('#direccion').editable({
+
+        mode: 'inline',
+        container: 'body',
+       // selector: '.direccion',
+        url: '/editarCliente',
+        pk: 1,
+        title: 'Dirección',
+        type: 'POST',
+
+        validate: function(value) {
+            if ($.trim(value) == '') {
+                return 'El campo no debe estar vacio'
+            }
+        }
+     });
+
+
+
   </script>
 
 
