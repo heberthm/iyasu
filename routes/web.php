@@ -71,7 +71,17 @@ Route::get('ajax-autocomplete-search', [App\Http\Controllers\Select2SearchContro
 //Route::post('fullcalenderAjax', [CalendarController::class, 'ajax']);
 
 Route::post('clientes',[App\Http\Controllers\ClientesController::class, 'store'])->name('clientes');
+
 Route::post('crear_clientes',[App\Http\Controllers\ClientesController::class, 'create'])->name('crear_clientes');
+
+Route::post('/actualizar/{id}', [App\Http\Controllers\ClientesController::class, 'actulizarCliente']);
+
+Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');
+
+Route::post('/editarCliente',[App\Http\Controllers\ClientesController::class , 'update'])->name('editarCliente');
+
+Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
+
 
 Route::get('actualizar_cliente', [App\Http\Controllers\HomeController::class, 'updateStatus']);
 
@@ -84,13 +94,6 @@ Route::post('fullcalendareventmaster/create',[CalendarController::class,'create'
 Route::post('fullcalendareventmaster/update',[CalendarController::class,'update']);
 Route::delete('fullcalendareventmaster/delete/{id}',[CalendarController::class,'destroy']);
 Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'update_event']);
-
-Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');
-
-Route::post('/editarCliente',[App\Http\Controllers\ClientesController::class , 'update'])->name('editarCliente');
-
-Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
-
 
 
 Route::get('historia_clinica/{id}', [App\Http\Controllers\historiasClinicasController::class, 'index']);

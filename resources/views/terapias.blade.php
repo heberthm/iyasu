@@ -528,6 +528,8 @@ $(document).ready(function () {
   
            processing: true,
            serverSide: true,
+           rendering: true,
+           retrive: true,
            paging: true,
            info: true,
            filter: true,

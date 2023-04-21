@@ -188,7 +188,7 @@ DATATABLE MASCOTAS
         <div class="card-body">
           <!-- Date -->
           <div class="form-group">
-            <table class="table" id="table_clientes" style="width:100%;font-size:16 px;">
+            <table class="table" id="table_clientes" style="width:100%;font-size:12.5 px;">
               <tbody style="font-size:95%;">
 
 
@@ -213,7 +213,7 @@ DATATABLE MASCOTAS
 
                     <div class="control-label">Nombre</div>
 
-                    <a href="#" id="nombre" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="nombre" >{{ $id_cliente->nombre }}</a>
+                    <a href="#" id="nombre" data-type="text" data-pk="{{$id_cliente->id_cliente}}" class="text-capitalize"  data-name="nombre" >{{ $id_cliente->nombre }}</a>
 
 
                   </td>
@@ -1286,7 +1286,7 @@ DATATABLE MASCOTAS
       <div class="modal-body">
 
 
-        <form method="POST" id="form_editar_cliente" action="{{ url('editarCliente/id_cliente') }}">
+        <form method="POST" id="form_editar_cliente" action="{{ url('actualizar/id') }}">
 
           <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
@@ -1876,7 +1876,7 @@ MODAL DATATABLE CONTROLES MEDICOS
           <div class="col-lg-12">
 
 
-            <table id="Table_control_medico"  class="table dt-responsive  table-hover" style="width:100%;font-size:12.5px;">>
+            <table id="Table_control_medico"  class="table dt-responsive  table-hover" style="width:100%;font-size:12.5px;">
               <thead>
                 <tr>
 
@@ -2055,6 +2055,8 @@ DATATABLE MOSTRAR DATOS HISTÓRIA CLINICA
 
         processing: true,
         serverSide: true,
+        rendering: true,
+        retrive: true,
         paging: true,
         info: true,
         filter: true,
@@ -2101,7 +2103,7 @@ DATATABLE MOSTRAR DATOS HISTÓRIA CLINICA
         ],
 
         order: [
-          [0, 'desc']
+          [4, 'asc']
         ],
 
         "language": {
@@ -2469,7 +2471,7 @@ DATATABLE MOSTRAR DATOS HISTÓRIA CLINICA
 
   <!-- =========================================
 
-EDITAR DATOS DEL PACIENTE
+EDITAR DATOS DEL CLIENTE
 
 ==============================================  -->
 

@@ -135,22 +135,23 @@ class registrar_tratamientoController extends Controller
      */
     public function store(Request $request)
     {
+
        
           try {
           $data = new registrar_tratamientos();
    
-          /*
+         
           $gettratamientos = $request->tratamientos;
           $tratam = implode(',', $gettratamientos);
-           */
+     
 
           $data->user_id             = $request->userId;
           $data ->id_cliente         = $request->livesearch;   
-          $data ->tratamiento        = $request->tratamiento;  
+          $data ->tratamiento        = $tratam;  
           $data ->nombre             = $request->nombreCliente;  
           $data ->celular            = $request->celular;           
           $data->valor_tratamiento   = $request->valor_tratamiento;
-          $data->saldo              = $request->saldo;
+          $data->saldo               = $request->saldo;
           $data->responsable         = $request->responsable;
           $data->estado              = $request->estado;
          

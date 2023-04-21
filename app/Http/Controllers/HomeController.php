@@ -88,6 +88,11 @@ class HomeController extends Controller
     }
 
 
+/* ================================
+
+ ACTUALIZAR ESTADO DEL CLIENTE
+ 
+ ==================================== */ 
      
     public function updateStatus(Request $request)
     {

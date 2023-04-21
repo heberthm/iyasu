@@ -26,12 +26,9 @@ class DeudoresController extends Controller
         
             $id = abonos_clientes::select('id', 'nombre', 'celular', 'id_tratamiento', 'valor_tratamiento', 'saldo', 'valor_abono', 'created_at' )
             
-    
-         
-          // ->whereDate('created_at', $date)
-
+          
            
-           ->whereDate('created_at', '<=', today()->subDays(30)->format('Y-m-d h:i a'))
+           ->whereDate('created_at', '<', now()->subDays(30)->format('Y-m-d h:i a'))
            ->where('saldo', '>', 0)
            ->OrderBy('id', 'desc')->limit(1)
            ->groupBy('nombre')

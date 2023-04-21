@@ -1627,7 +1627,7 @@ MODAL DATATABLE LISTADO DE CLIENTES
           <div class="col-lg-12">
 
 
-            <table id="Table_listado_clientes" class="table table-hover" width="100%">
+            <table id="Table_listado_clientes" class="table table-hover" width="100%" style="width:100%;font-size:12.5px;">
 
               <thead>
                 <tr>
@@ -2341,6 +2341,8 @@ DATATABLE MOSTRAR LISTADO DE CLIENTES
 
         processing: true,
         serverSide: false,
+        rendering: true,
+        retrive: true,
         paging: true,
         info: true,
         filter: true,
@@ -3814,6 +3816,8 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
 
         processing: true,
         serverSide: true,
+        rendering: true,
+        retrive: true,
         paging: false,
         info: false,
         filter: false,

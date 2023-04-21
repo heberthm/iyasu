@@ -1023,7 +1023,7 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
       ],
 
-      order: [2, 'ASC'],
+      order: [2, 'desc'],
 
       "columnDefs": [{
         "orderable": false,

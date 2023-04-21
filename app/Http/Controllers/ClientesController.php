@@ -233,6 +233,46 @@ class ClientesController extends Controller
     }
 
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+  
+     
+    public function actulizarCliente(Request $request, $id_cliente)
+    { 
+      
+      try{
+        $id = array('id_cliente' => $request->id_cliente);
+        $updateArray = [
+                        'cedula' => $request->cedula,
+                        'fecha_nacimiento' => $request->fecha_nacimiento,
+                        'edad' => $request->edad1,
+                        'nombre' => $request->nombre,
+                        'celular' => $request->celular,
+                        'direccion' => $request->direccion,
+                        'barrio' => $request->barrio,
+                        'municipio' => $request->municipio,
+                        'email' => $request->email,
+                       
+                       ];
+          
+          $id_cliente  = Cliente::where($id)->update($updateArray);
+ 
+        } catch (\Exception  $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
+
+          return response()->json(['success'=>'Successfully']);
+     
+       
+    } 
+ 
+
+
 
 
     /**
