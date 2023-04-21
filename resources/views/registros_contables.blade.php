@@ -106,11 +106,11 @@ REGISTRO DE INGRESOS O EGRSOS
 
 
                         <span>
-                            <h5 style="text-align:right"> </h5>
+                            <h5 style="text-align:right" > </h5>
                         </span> &nbsp;
 
                         <p> <span>
-                                <h5 style="text-align:right"> </h5>
+                                <h5 style="text-align:right" > </h5>
                             </span> </p>
 
 
