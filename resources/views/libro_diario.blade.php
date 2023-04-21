@@ -786,8 +786,6 @@ DESHABILITAR CLICK DERECHO
           name: 'created_at'
         },
 
-
-
         {
           data: 'action',
           name: 'action',
