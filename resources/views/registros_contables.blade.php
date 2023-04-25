@@ -106,11 +106,11 @@ REGISTRO DE INGRESOS O EGRSOS
 
 
                         <span>
-                            <h5 style="text-align:right" > </h5>
+                            <h5 style="text-align:right"> </h5>
                         </span> &nbsp;
 
                         <p> <span>
-                                <h5 style="text-align:right" > </h5>
+                                <h5 style="text-align:right"> </h5>
                             </span> </p>
 
 
@@ -147,9 +147,9 @@ FORMULARIO RECEPCION DE PACIENTES
 
 
 
-  
 
-<!-- ==================================
+
+            <!-- ==================================
 
 DATATABLE REGISTROS CONTABLES
 
@@ -168,8 +168,8 @@ DATATABLE REGISTROS CONTABLES
                                 <th width="auto">Responsable</th>
                                 <th width="auto">Descripción</th>
                                 <th width="auto">fecha</th>
-                                <th width= "auto" style="color:darkcyan">Ingresos</th>
-                                <th width= "auto" style="color:crimson">Egresos</th>
+                                <th width="auto" style="color:darkcyan">Ingresos</th>
+                                <th width="auto" style="color:crimson">Egresos</th>
                                 <th></th>
 
                             </tr>
@@ -669,7 +669,7 @@ MOSTRAR SPINNER AL CARGAR PAGINA
 
 <!-- ===================================================
 
-GUARDAR DATOS Y CARGAR DATATABLE JQUERY LISTA DE ESPERA
+GUARDAR DATOS Y CARGAR DATATABLE REGISTROS CONTABLES
 
 ======================================================= --->
 
@@ -689,6 +689,7 @@ GUARDAR DATOS Y CARGAR DATATABLE JQUERY LISTA DE ESPERA
 
             processing: true,
             serverSide: true,
+
             // pageLength: 5,
 
             type: "GET",
@@ -714,27 +715,82 @@ GUARDAR DATOS Y CARGAR DATATABLE JQUERY LISTA DE ESPERA
 
                 {
                     extend: 'pdfHtml5',
-                   // download: 'open',
+                    // download: 'open',
                     footer: true,
                     text: 'PDF',
                     title: 'Resgistros contables',
-                   
-                   
 
-                    customize: function (doc) {
-                          
-                           doc.content[1].table.widths = [ '25%',  '35%', '18%', '10%', '10%'];
-                       },
+
+
+                    customize: function(doc) {
+
+                        doc.content[1].table.widths = ['25%', '35%', '18%', '10%', '10%'];
+                    },
 
                     exportOptions: {
                         columns: [1, 2, 3, 4, 5],
-                         
-                       
+
+
 
                     }
                 },
 
             ],
+
+
+            columns: [
+
+                {
+                    data: 'id',
+                    name: 'id',
+                    visible: false
+                },
+                {
+                    data: 'responsable',
+                    name: 'responsable',
+
+                },
+                {
+                    data: 'descripcion',
+                    name: 'descripcion',
+
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                    orderable: true,
+                    searchable: true
+                },
+
+                {
+                    data: 'ingreso',
+                    name: 'ingreso',
+
+                },
+                {
+                    data: 'egreso',
+                    name: 'egreso',
+
+                },
+
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+
+
+            order: [3, 'desc'],
+
+            columnDefs: [{
+                "orderable": false,
+                "render": $.fn.dataTable.render.number('.'),
+                "targets": [4, 5],
+                className: 'dt-body-left',
+            }],
+
 
 
 
@@ -782,76 +838,7 @@ GUARDAR DATOS Y CARGAR DATATABLE JQUERY LISTA DE ESPERA
             },
 
 
-            columns: [
-
-                {
-                    data: 'id',
-                    name: 'id',
-                    orderable: true,
-                    searchable: true,
-                    visible: false
-                },
-                {
-                    data: 'responsable',
-                    name: 'responsable',
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: 'descripcion',
-                    name: 'descripcion',
-                    orderable: false,
-                    searchable: true
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at',
-                    orderable: true,
-                    searchable: true
-                },
-
-                {
-                    data: 'ingreso',
-                    name: 'ingreso',
-                    orderable: false,
-                    searchable: true
-                },
-                {
-                    data: 'egreso',
-                    name: 'egreso',
-                    orderable: false,
-                    searchable: true
-                },
-                
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ],
-
-            order: [
-                [0, 'DESC']
-            ],
-
-            "columnDefs": [{
-                "orderable": false,
-                "render": $.fn.dataTable.render.number('.'),
-                "targets": [4, 5],
-                className: 'dt-body-left',
-            }],
-
-
-
-
-
-            "language": {
-
-
-
-
-
+            language: {
                 "decimal": ",",
                 "emptyTable": "No hay datos para mostrar.",
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
@@ -886,7 +873,7 @@ GUARDAR DATOS Y CARGAR DATATABLE JQUERY LISTA DE ESPERA
                 var api = this.api(),
                     data;
 
-               var numFormat = $.fn.dataTable.render.number( '\.', ',', 0, '$' ).display;
+                var numFormat = $.fn.dataTable.render.number('\.', ',', 0, '$').display;
 
 
                 // Remove the formatting to get integer data for summation
@@ -933,7 +920,7 @@ GUARDAR DATOS Y CARGAR DATATABLE JQUERY LISTA DE ESPERA
                     numFormat(pageTotal2)
                 );
 
-                
+
                 // ==================================
 
                 // SUMA DE EGRSOS

@@ -67,7 +67,7 @@ class registrar_tratamientoController extends Controller
   
     
           $terapias = terapias::select('id','terapia', 'valor_terapia')->get();
-
+         /* $tratamientos = registrar_tratamientos::select('id')->OrderBy('id', 'desc')->limit(1)->get(); */
 
         return view('registrar_tratamientos', compact('terapias'));
 

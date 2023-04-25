@@ -66,6 +66,14 @@
   .positive {
     color: rgba(0, 255, 0, 1.00);
   }
+
+  #summation {
+  font-size: 20px;
+ 
+  color:#174C68;
+}
+
+
 </style>
 
 
@@ -112,15 +120,13 @@ FORMULARIO CREAR TRATAMIENTO
 
 
 
-
-
-      <!-- ===================================
+ <!-- ===================================
 
 DATAPICKER BOOTSTRAP
 
 ========================================  -->
 
-      <!--
+   
 
 <div class="row input-daterange">
       <div class="col-md-3">
@@ -136,12 +142,12 @@ DATAPICKER BOOTSTRAP
   </div>
   <br />
 
--->
 
 
 
-      <!-- ==================================
-DATATABLE LISTA DE ESPERA
+
+<!-- ==================================
+DATATABLE REGISTRO DE TRATAMIENTOS
 ====================================== -->
 
 
@@ -205,6 +211,18 @@ DATATABLE LISTA DE ESPERA
           <div class="modal-header">
 
             <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Agregar tratamiento</h5>
+
+            <div class="col-md-6 text-right" >
+           
+      <!--
+          
+
+                  <h6><a class=" mx-1 Recibo" style="color:coral">Recibo No: </a></h5>
+       -->             
+
+           
+          </div>
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
               <span aria-hidden="true">&times;</span>
@@ -262,93 +280,115 @@ DATATABLE LISTA DE ESPERA
                 </div>
 
 
-                <div class="col-md-12">
+                <div class="col-md-6">
 
                   <div class="form-group">
 
 
-                  <table id="addTanquePesaje" style="width:100%">
+
+                    <form>
+                      <select name="tratamientos" class="form-control" id="tratamientos" required placeholder="Seleccione profesional">
+                        <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
+                        @foreach($terapias as $terap)
+                        <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
+                        @endforeach
+                      </select>
+                     
+                     
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+
+                  <div class="form-group">
+
+
+                    <input type="number" id="valor_tratamiento" name="valor" class="form-control">
+
+                 </div>
+
+               </div>
+
+               <div class="col-md-3">
+
+                 <div class="form-group">
+
+                    <button type="button" class="btn btn-success btn-xs add-row"><i class="fa fa-plus"></i> Agregar</button>
+
+                 
+                  </div>
+                </div>
+
+            </form>
+
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+
+                <table id="table_registros_tratamientos" class="table dt-responsive table-hover" style="width:100%">
+
+                  <thead>
                     <tr>
-                      <td width = "60%">
-                      <select name="tratamientos[]" class="form-control"  id="tratamientos"  required placeholder="Seleccione profesional">
-                          <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
-                                @foreach($terapias as $terap) 
-                                <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
-                                @endforeach
-                          </select>
-                      </td>
-                      <td><input type="number" class="form-control" name="valor[]" id="valor_tratamiento"   onchange="CalcularTanque()"></td>
-                    <td><button type="button"  class="btn btn-danger btn-xs remove-tr">Eliminar</button>
- 
+                      <th>Select</th>
+                      <th>Tratamiento</th>
+                      <th>Valor</th>
                     </tr>
-                  </table>
-                 
-                  <button type="button" name="adicionarPesaje" id="adicionarPesaje" class="btn btn-success btn-xs">Agregar</button>
+                  </thead>
+                  <tbody>
+                                      
+                  </tbody>
 
+                   <tfoot>
 
+                    <tr id="summation">
+                      <td>&nbsp;</td>
+                      <td align="right">Total :</td>
+                      <td align="left"><span class="badge badge-warning" id="sum1"></span></td>
+                    </tr>
 
-           <!--
+                   </tfoot>
 
-                    <table class="table table-bordered" id="dynamicAddRemove" style="width:100%"">  
-                  <tr>
-                  <th>Tratamiento</th>
-                  <th>Valor</th>
-                  </tr>
-                  <tr>  
-                  <td>
-
-                  <select name="tratamientos" class="form-control"  id="moreFields[0][tratamientos]"  required placeholder="Seleccione profesional">
-                 <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
-                      @foreach($terapias as $terap) 
-                      <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
-                      @endforeach
-                </select>
-
-                  </td> 
                   
-                  <td><input type="text" name=valor" id="moreFields[0][valor_tratamiento]" class="form-control" /></td>   
-                
-                  <td><button type="button" name="add" id="add-btn" class="btn btn-success btn-xs">Agregar</button></td>  
-                  </tr>  
-                  </table> 
+                </table>
 
-                  -->
-                 
-                  </form>
-                  </div>
-                  </div>
-                  </div>
-
+                <button type="button" class="btn btn-danger btn-xs delete-row"><i class="fa fa-minus"></i> Eliminar</button>
+               
 
               </div>
-
-
-              <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
-
-              <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>
-
-              <input type="hidden" name="id_tratamiento" class="form-control" id="id_tratamiento" readonly>
-
-              <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" readonly>
-
-              <input type="text" name="saldo" class="form-control" id="saldo">
-
-              <input type="hidden" name="tratamiento" class="form-control" id="tratamiento">
-
-
-              <div class="modal-footer">
-
-                <button type="submit" id="agregar_tratamiento" name="agregar_tratamiento" class="btn btn-primary loader">Guardar</button>
-                <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-              </div>
-
+            </div>
+            </form>
           </div>
-        </div>
-      </div>
 
-      </form>
+         
+
+
+        <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+
+        <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>
+
+        <input type="hidden" name="id_tratamiento" class="form-control" id="id_tratamiento" readonly>
+
+        <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" readonly>
+
+        <input type="hidden" name="saldo" class="form-control" id="saldo">
+
+         <input type="hidden" id="tratamiento" name="tratamiento" class="form-control">
+       
+
+        <div class="modal-footer">
+
+          <button type="submit" id="agregar_tratamiento" name="agregar_tratamiento" class="btn btn-primary loader">Guardar</button>
+          <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+        </div>
+
+      </div>
     </div>
+</div>
+
+</form>
+</div>
 
 
 </div>
@@ -687,39 +727,73 @@ DESHABILITAR CLICK DERECHO
 
 
   <script>
+    $(document).ready(function() {
+      $('.tratamientos').select2();
 
-   $(document).ready(function() {
-            $('.tratamientos').select2();
-
-        });
-    
+    });
   </script>
 
 
 
 
-<script type="text/javascript">
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".add-row").click(function() {
+        let tratamiento = $("#tratamiento").val();
+        let valor = $("#valor_tratamiento").val();
+        let markup = "<tr><td><input type='checkbox' name='record'></td><td>" + tratamiento + "</td><td>" + valor + "</td></tr>";
+        $("table tbody").append(markup);
 
-$("#adicionarPesaje").on('click', function(){
-     $("#addTanquePesaje tbody tr:eq(0)").clone(true, true).appendTo('#addTanquePesaje').find('input[type="number"]').val("");
-                
-});
 
-function CalcularTanque() {
-    $('#addTanquePesaje tr').each(function(){
-        var cantidad = $(this).find('input[name^="txtCantidad"]').val();
-        var tanque = $(this).find('select').val()
-        var total = tanque * cantidad;
-        $(this).find('input[name^="txtTotal"]').val(total);
+        
+
+        var total = 0;
+        $( "#table_registros_tratamientos tbody tr ").each( function( ) {
+          total += $( this ).children().eq( 2 ).text() * 1;
+        });
+
+    $( "#sum1" ).text( total );
+  });
+ 
+
+     
+
+      // Find and remove selected table rows
+      $(".delete-row").click(function() {
+        $("table tbody").find('input[name="record"]').each(function() {
+          if ($(this).is(":checked")) {
+            $(this).parents("tr").remove();
+            total -= $( this ).children().eq( 2 ).text() * 1;
+            $( "#sum1" ).text( total );
+          }
+        });
+      });
     });
-};
-
-$(document).on('click', '.remove-tr', function(){  
-         $(this).parents('tr').remove();
-    });  
 
 
-</script>
+
+    /*
+
+    $("#adicionarPesaje").on('click', function(){
+         $("#addTanquePesaje tbody tr:eq(0)").clone(true, true).appendTo('#addTanquePesaje').find('input[type="number"]').val("");
+                    
+    });
+
+    function CalcularTanque() {
+        $('#addTanquePesaje tr').each(function(){
+            var cantidad = $(this).find('input[name^="txtCantidad"]').val();
+            var tanque = $(this).find('select').val()
+            var total = tanque * cantidad;
+            $(this).find('input[name^="txtTotal"]').val(total);
+        });
+    };
+
+    $(document).on('click', '.remove-tr', function(){  
+             $(this).parents('tr').remove();
+        });  
+
+      */
+  </script>
 
 
 
@@ -733,11 +807,10 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO
 ============================================== -->
 
   <script>
-              
-        $(document).ready(function(){
+    $(document).ready(function() {
 
 
-        $("#tratamientos").change(function(){
+      $("#tratamientos").change(function() {
 
 
         let select = document.getElementById('tratamientos');
@@ -748,11 +821,9 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO
         document.getElementById('tratamiento').value = option.text;
 
 
-        });   
+      });
 
-        });  
-
-
+    });
   </script>
 
 
