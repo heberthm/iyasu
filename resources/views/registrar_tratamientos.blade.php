@@ -67,10 +67,9 @@
     color: rgba(0, 255, 0, 1.00);
   }
 
-  #summation {
+  #total {
   font-size: 20px;
- 
-  color:#174C68;
+   color:black;
 }
 
 
@@ -341,7 +340,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
                    <tfoot>
 
-                    <tr id="summation">
+                    <tr id="total">
                       <td>&nbsp;</td>
                       <td align="right">Total :</td>
                       <td align="left"><span class="badge badge-warning" id="sum1"></span></td>
@@ -744,7 +743,6 @@ DESHABILITAR CLICK DERECHO
         let markup = "<tr><td><input type='checkbox' name='record'></td><td>" + tratamiento + "</td><td>" + valor + "</td></tr>";
         $("table tbody").append(markup);
 
-
         
 
         var total = 0;
@@ -755,6 +753,22 @@ DESHABILITAR CLICK DERECHO
     $( "#sum1" ).text( total );
   });
  
+ 
+  function calculateTotal(){
+  // Total Sum
+  var td = document.querySelectorAll(
+    "#table_registros_tratamientos > tbody > tr > td:last-child"
+  );
+
+  var total = 0;  //colpartssum;
+
+  for (var i = 0; i < td.length; i++) {
+    total += parseInt(td[i].innerText);
+  }
+
+  document.getElementById("sum1").innerText = total;
+  console.log(total);
+}
 
      
 
@@ -762,9 +776,8 @@ DESHABILITAR CLICK DERECHO
       $(".delete-row").click(function() {
         $("table tbody").find('input[name="record"]').each(function() {
           if ($(this).is(":checked")) {
-            $(this).parents("tr").remove();
-            total -= $( this ).children().eq( 2 ).text() * 1;
-            $( "#sum1" ).text( total );
+            $(this).parent().parent().remove();
+            calculateTotal();
           }
         });
       });
