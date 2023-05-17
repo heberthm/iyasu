@@ -140,22 +140,24 @@ class registrar_tratamientoController extends Controller
           try {
           $data = new registrar_tratamientos();
    
-         
-          $gettratamientos = $request->tratamientos;
-          $tratam = implode(',', $gettratamientos);
-     
 
-          $data->user_id             = $request->userId;
-          $data ->id_cliente         = $request->livesearch;   
-          $data ->tratamiento        = $tratam;  
-          $data ->nombre             = $request->nombreCliente;  
-          $data ->celular            = $request->celular;           
-          $data->valor_tratamiento   = $request->valor_tratamiento;
-          $data->saldo               = $request->saldo;
-          $data->responsable         = $request->responsable;
-          $data->estado              = $request->estado;
-         
-
+          foreach ($request->txt_tratamientos as $key){
+          
+           
+            $data->user_id             = $request->userId;
+            $data->id_cliente          = $request->livesearch;   
+            $data->tratamiento         = $request->txt_tratamientos[$key];
+            $data->nombre              = $request->nombreCliente;  
+            $data->celular             = $request->celular;           
+            $data->valor_tratamiento   = $request->txt_tratamientos[$key];
+            $data->saldo               = $request->saldo;
+            $data->responsable         = $request->responsable;
+            $data->estado              = $request->estado;
+       
+          }
+        
+          
+        
                
        
               

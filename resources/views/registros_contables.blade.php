@@ -96,37 +96,43 @@ REGISTRO DE INGRESOS O EGRSOS
 
                         <div class="col-lg-6">
 
-
                             <button class="btn btn-outline-info ml-2" data-toggle="modal" data-target="#modalAgregarIngreso" style="text-align:left"><span class="fas fa-plus mr-2" tabindex="3"></span> Ingresos</button>
                             <button class="btn btn-outline-danger ml-2" data-toggle="modal" data-target="#modalAgregarEgreso" style="text-align:left"><span class="fas fa-minus mr-2" tabindex="3"></span> Egresos</button>
 
-
                         </div>
 
+                  
+<!-- ===================================
+
+DATAPICKER BOOTSTRAP
+
+========================================  -->
 
 
-                        <span>
-                            <h5 style="text-align:right"> </h5>
-                        </span> &nbsp;
-
-                        <p> <span>
-                                <h5 style="text-align:right"> </h5>
-                            </span> </p>
-
-
-
-
+                    <div class="row input-daterange">
+                        <div class="col-lg-4 text-right">
+                            <input type="date" name="fecha_inicial" id="fecha_inicial" class="form-control" />
+                        </div>
+                        <div class="col-lg-4 text-right">
+                            <input type="date" name="fecha_final" id="fecha_final" class="form-control" />
+                        </div>
+                        <div class="col-jlg-4 text-right">
+                            <button type="button" name="filter" id="filter" class="btn btn-primary">Filtrar</button>
+                            <button type="button" name="refresh" id="refresh" class="btn btn-default">Refrescar</button>
+                        </div>
                     </div>
 
                 </div>
             </div>
+
+         </div>
 
     </div>
     <!-- /.card-body -->
 
 
 
-    <!-- ====================================
+<!-- ====================================
 
 FORMULARIO RECEPCION DE PACIENTES
 
@@ -149,7 +155,7 @@ FORMULARIO RECEPCION DE PACIENTES
 
 
 
-            <!-- ==================================
+<!-- ==================================
 
 DATATABLE REGISTROS CONTABLES
 
@@ -207,7 +213,7 @@ DATATABLE REGISTROS CONTABLES
 
 
 
-        <!--=====================================
+<!--=====================================
 
     MODAL AGREGAR SALDO
 
@@ -527,8 +533,6 @@ DATATABLE REGISTROS CONTABLES
 
 
 </div>
-
-
 
 
 

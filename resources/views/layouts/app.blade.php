@@ -109,6 +109,8 @@ ARCHIVOS JS
     <!-- Jquery 3.5 js -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
 
+    <!-- Jquery JSON 2.6 -->
+    <script src= 'https://cdnjs.cloudflare.com/ajax/libs/jquery-json/2.6.0/jquery.json.min.js'></script>
 
     <!-- Select2 js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.js"></script>

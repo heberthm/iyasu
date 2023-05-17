@@ -434,7 +434,7 @@ CALENDAR - AGENDAR   MEDICA
 
 
                   <span class="btn-group float-right" id="btn_historialIngresos">
-                    <a href="#" class="mr-3" data-toggle="modal" data-target="#modalAgregarCliente2"><i class="fas fa-plus" style="color: #1566EB;" title="Agregar nuevo cliente"></i></a>
+                    <a href="#" class="mr-3" data-toggle="modal" data-target="#modalAgregarCliente2"><i class="fas fa-user-plus" style="color: #1566EB;" title="Agregar nuevo cliente"></i></a>
                   </span>
 
                 </label>
@@ -2181,7 +2181,7 @@ DESHABILITAR CLICK DERECHO
 
 
 
-           // $('#form_crear_cliente2')[0].reset();
+           $('#form_crear_cliente2')[0].reset();
             $('#modalAgregarCliente2').modal('hide');
 
 
@@ -3465,7 +3465,6 @@ EDITAR DATOS DE FULLCALENDAR
 
             $('#id').val(data.id);
 
-
             $('#cliente').val(data.cliente);
             $('#medico').val(data.medico);
             $('#especie').html(data.especie);
@@ -3477,7 +3476,8 @@ EDITAR DATOS DE FULLCALENDAR
             $('#ModalEdit #color2').val(data.color);
 
             $('#calendar').fullCalendar('refetchEvents');
-            $('#fullCalModal').fullCalendar('refetchEvents');
+            $('#calendar2').fullCalendar('refetchEvents');
+          
 
             // $('#agregar').attr('disabled', true);
             $('#editar_calendario')[0].reset();
