@@ -197,8 +197,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-
-        <!--=====================================
+<!--=====================================
 
     MODAL AGREGAR TRATAMIENTO
 
@@ -337,6 +336,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                             <th>Select</th>
                             <th>Tratamiento</th>
                             <th>Valor</th>
+                           
                           </tr>
                         </thead>
 
@@ -751,7 +751,13 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
           $(".add-row").click(function() {
 
-            let nombreCliente = $('#nombreCliente').val();
+            let cliente = $('#nombreCliente').val();
+
+            let responsable = $('#responsable').val();
+
+            let user_id = $('#userId').val();
+
+            let id_cliente = $('#id_cliente').val();
 
             let celular = $('#celular').val();
 
@@ -759,15 +765,18 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
             let valor = $("#valor_tratamiento").val();
 
+            let estado = 'Pendiente';
+           
+          
 
-            let record = "<tr><td><input type='checkbox' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamientos' value='" + tratamiento + "' style='background-color:white;'></td><td> <input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td> </tr>";
+            let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamientos' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre[]' disabled='disabled'  id='nombre' value='" + cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular[]' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable[]' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id[]' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente[]' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado[]' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>";
 
             $("#table_registros_tratamientos tbody").append(record);
 
             calculateTotal();
 
 
-            /* ==================================
+  /* ==================================
 
 TOTALIZAR VALORES DE COLUMNA
 
@@ -790,7 +799,7 @@ TOTALIZAR VALORES DE COLUMNA
 
 
 
-            /* ==================================
+/* ==================================
 
 ELIMNAR FILA Y RECALCULAR VALOR TOTAL
 
@@ -871,8 +880,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
 
 
-
-      <!-- ==============================
+ <!-- ==============================
 
 // VERIFICAR SI EXISTE CLIENTE
 
@@ -923,8 +931,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
 
 
-
-      <!-- =======================================
+ <!-- =======================================
 
 SELECT2 - BUSQUEDAD DE CLIENTES
 
@@ -1035,6 +1042,8 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
           $('.livesearch').html('');
           $('.celular').val('');
+          $('input[name="record"]').parent().parent().remove();
+          $('#sum1').val('');
 
         });
       </script>
@@ -1057,6 +1066,13 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
           var opt = "<option value='" + celular + "' selected ='selected'> </option>";
           $("#celular").html(opt);
           $("#celular").val(celular).trigger("change");
+
+          let id_cliente = evt.params.data.id;
+
+          var opt = "<option value='" + id_cliente + "' selected ='selected'> </option>";
+          $("#id_cliente").html(opt);
+          $("#id_cliente").val(id_cliente).trigger("change");
+
         });
       </script>
 
@@ -1230,11 +1246,11 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
 
-          // ==================================================
+// ==================================================
 
-          /// GUARDAR REGISTROS DE TRATAMIENTOS DEL CLIENTE
+/// GUARDAR REGISTROS DE TRATAMIENTOS DEL CLIENTE
 
-          // ===================================================
+// ===================================================
 
 
           $('#form_agregar_tratamiento').off('submit').on('submit', function(e) {
@@ -1245,28 +1261,29 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
               }
             });
 
+ 
+         
+          
+             let datos = [];
 
-            e.preventDefault();
+          // Collect data from each row
+          $('#table_registros_tratamientos tbody tr').each(function() {
+              var row = {};
+              row.user_id = $(this).find('input[name="user_id[]"]').val();
+              row.id_cliente = $(this).find('input[name="id_cliente[]"]').val();
+              row.nombre = $(this).find('input[name="nombre[]"]').val();
+              row.celular = $(this).find('input[name="celular[]"]').val();
+              row.responsable = $(this).find('input[name="responsable[]"]').val();
+              row.tratamiento = $(this).find('input[name="tratamiento[]"]').val();
+              row.valor_tratamiento = $(this).find('input[name="valor_tratamiento[]"]').val();
+              row.estado = $(this).find('input[name="estado[]"]').val();
+              datos.push(row);
+          });
 
-            /*
+           
 
-                 let datosTablaHTML = [];
-                 
-                  $("table#table_registros_tratamientos tr").each(function() {
-                      let rowDataArray = [];
-                      let actualData = $(this).find('td');
-                      if (actualData.length > 0) {
-                        actualData.each(function() {
-                            rowDataArray.push($(this).text());
-                        });
-                        datosTablaHTML.push(rowDataArray);
-                      }
-                  });
-
-                  */
-
-            //  alert(convertedIntoArray);
-
+         // var formData = $(this).serializeArray();
+  
 
             /* Configurar botón submit con spinner */
             let btn = $('#agregar_tratamiento')
@@ -1277,13 +1294,21 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
               $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
             }, 5000) //5 seconds
             $('#agregar_tratamiento').attr('disabled', true);
-            event.preventDefault();
+
+            e.preventDefault();
+
             try {
               $.ajax({
                 url: "crear_tratamiento",
                 method: "POST",
-                data: JSON.stringify(datosTablaHTML),
                 dataType: "json",
+                data: {
+                  
+                  datos: datos
+               },
+
+
+               
                 success: function(data) {
                   table.ajax.reload();
                   $('#agregar_tratamiento').prop("required", true);

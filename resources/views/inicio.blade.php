@@ -2150,7 +2150,7 @@ DESHABILITAR CLICK DERECHO
 
       /* Configurar botón submit con spinner */
 
-      let btn = $('#agregar_cliente2')
+      let btn = $('.agregar_cliente2')
       let existingHTML = btn.html() //store exiting button HTML
       //Add loading message and spinner
       $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
@@ -2159,7 +2159,7 @@ DESHABILITAR CLICK DERECHO
         $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
       }, 5000) //5 seconds
 
-      $('#agregar_cliente2').attr('disabled', true);
+      $('.agregar_cliente2').attr('disabled', true);
 
 
 

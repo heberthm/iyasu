@@ -111,12 +111,6 @@ class registrar_tratamientoController extends Controller
         
     }
 
-
-
-
-
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -136,13 +130,46 @@ class registrar_tratamientoController extends Controller
     public function store(Request $request)
     {
 
+        
+      
        
-          try {
-          $data = new registrar_tratamientos();
+       //   try {
+         // $data = new registrar_tratamientos();
    
 
-          foreach ($request->txt_tratamientos as $key){
+        //  foreach ($request->txt_tratamientos as $key){
+        
           
+            
+            $registros = $request->input('datos');
+
+                foreach ($registros as $registro) {
+                    // Crea una instancia de tu modelo y asigna los valores
+                    $nuevoRegistro = new registrar_tratamientos();
+                    $nuevoRegistro->tratamiento = $registro['tratamiento'];
+                    $nuevoRegistro->valor_tratamiento = $registro['valor_tratamiento'];
+                   
+
+                    $nuevoRegistro->user_id             = $registro['user_id'];
+                    $nuevoRegistro->id_cliente          = $registro['id_cliente'];   
+                   
+                    $nuevoRegistro->nombre              = $registro['nombre'];  
+                    $nuevoRegistro->celular             = $registro['celular'];           
+                   
+                  
+                    $nuevoRegistro->responsable         = $registro['responsable'];
+                    $nuevoRegistro->estado              = $registro['estado'];
+               
+
+                  
+
+                    $nuevoRegistro->save();
+                }
+
+                return response()->json(['success'=>'Successfully']);
+
+
+            /*
            
             $data->user_id             = $request->userId;
             $data->id_cliente          = $request->livesearch;   
@@ -154,23 +181,25 @@ class registrar_tratamientoController extends Controller
             $data->responsable         = $request->responsable;
             $data->estado              = $request->estado;
        
+           
+
           }
         
-          
+           */
         
                
        
-              
-          } catch (\Exception  $exception) {
+       /*       
+        } catch (\Exception  $exception) {
               return back()->withError($exception->getMessage())->withInput();
-          }
-                
-   
-          $data->save();
+            }
+       */         
+ 
+
   
          // $id =$data->id;
        
-         return response()->json(['success'=>'Successfully']);
+       //  return response()->json(['success'=>'Successfully']);
        
     }
 
@@ -224,7 +253,7 @@ class registrar_tratamientoController extends Controller
         $data->valor_tratamiento   = $request->valor_tratamiento2;
         $data->responsable         = $request->responsable;
        
-         
+      
 
         $data->save();
      
