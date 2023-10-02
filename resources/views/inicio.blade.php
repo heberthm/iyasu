@@ -3107,7 +3107,6 @@ RESET SELECT2: selectBuscarCliente
             placement: 'left',
             trigger: 'hover',
             container: 'body',
-            trigger: 'hover',
             html: true,
 
             title: event.cliente,

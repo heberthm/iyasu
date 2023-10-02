@@ -92,6 +92,8 @@ class ClientesController extends Controller
       $data->email               = $request->email;
       $data->estado              = $request->estado;
       
+
+     
    
       /*    
       } catch (\Exception  $exception) {

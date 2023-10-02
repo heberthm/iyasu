@@ -15,6 +15,21 @@ class Events extends Model
      * @var array
      */
     protected $fillable = ['title','start','end','cliente','telefono','email','descripcion','medico','color'];
+
+
+
+    public function setClienteAttribute($value)
+    {
+        $this->attributes['cliente'] = strtolower($value);
+    }
+ 
+    public function getClienteAttribute($value)
+     {
+         return ucwords($value);
+     }
+
+
+
 }
 
 

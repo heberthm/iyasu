@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Cliente extends Model
 {
     
@@ -34,10 +35,22 @@ class Cliente extends Model
     public function registrar_tratamiento(){
         return $this->hasMany(registrar_tratamiento::class);
     }
-
-
-
     
     use SoftDeletes;
    // use HasFactory;
+
+
+   public function setNombreAttribute($value)
+   {
+       $this->attributes['nombre'] = strtolower($value);
+   }
+
+   public function getNombreAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+   
+
+
 }

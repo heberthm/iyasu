@@ -139,7 +139,7 @@ class registrar_tratamientoController extends Controller
 
         //  foreach ($request->txt_tratamientos as $key){
         
-          
+          /*
             
             $registros = $request->input('datos');
 
@@ -168,25 +168,30 @@ class registrar_tratamientoController extends Controller
 
                 return response()->json(['success'=>'Successfully']);
 
+                */
 
-            /*
+
+
+            $data = new registrar_tratamientos();
            
             $data->user_id             = $request->userId;
             $data->id_cliente          = $request->livesearch;   
-            $data->tratamiento         = $request->txt_tratamientos[$key];
+           
             $data->nombre              = $request->nombreCliente;  
             $data->celular             = $request->celular;           
-            $data->valor_tratamiento   = $request->txt_tratamientos[$key];
-            $data->saldo               = $request->saldo;
+            $data->saldo               = $request->sum1;
+            $data->saldo               = $request->sum1;
+            $data->tratamiento          = json_encode(['tratamiento'=>$request->tratamiento,'valor_tratamiento'=>$request->valor_tratamiento]);
             $data->responsable         = $request->responsable;
             $data->estado              = $request->estado;
-       
-           
 
-          }
-        
-           */
-        
+             $data->save();  
+
+            return response()->json(['success'=>'Successfully']);
+
+         
+            
+                   
                
        
        /*       

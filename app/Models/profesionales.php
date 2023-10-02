@@ -19,4 +19,17 @@ class profesionales extends Model
 
     
 
+
+        public function setNombreAttribute($value)
+        {
+            $this->attributes['nombre'] = strtolower($value);
+        }
+     
+        public function getNombreAttribute($value)
+         {
+             return ucwords($value);
+         }
+
+
+
 }

@@ -42,4 +42,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+/* MUtador */
+
+
+public function setNameAttribute($value)
+{
+    $this->attributes['name'] = strtolower($value);
+}
+
+public function getNameAttribute($value)
+ {
+     return ucwords($value);
+ }
+
+
 }

@@ -259,7 +259,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                         </div>
 
 
-                        <input type="hidden" name="nombreCliente" class="form-control " id="nombreCliente" required autocomplete="off">
+                        <input type="hidden" name="nombreCliente" class="form-control nombreCliente " id="nombreCliente" required autocomplete="off">
 
                         <div class="alert-message" id="livesearchError"></div>
 
@@ -275,7 +275,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
                         <label for="Celular" class="control-label">Tel/Cel</label>
 
-                        <input type="text" name="celular" class="form-control " id="celular" required autocomplete="off">
+                        <input type="text" name="celular" class="form-control celular" id="celular" required autocomplete="off">
 
                         <div class="alert-message" id="celularError"></div>
 
@@ -290,7 +290,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-                        <select name="tratamientos" class="form-control" id="tratamientos" required placeholder="Seleccione profesional">
+                        <select name="tratamientos" class="form-control tratamientos" id="tratamientos" required placeholder="Seleccione profesional">
                           <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
                           @foreach($terapias as $terap)
                           <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
@@ -306,7 +306,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                       <div class="form-group">
 
 
-                        <input type="number" id="valor_tratamiento" name="valor" class="form-control">
+                        <input type="number" id="valor_tratamiento" name="valor" class="form-control valor_tratamiento">
 
                       </div>
 
@@ -349,7 +349,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                           <tr id="total">
                             <td>&nbsp;</td>
                             <td align="right">Total :</td>
-                            <td align="left"><input type='text' class='form-control  border-0' name='sum1' id='sum1' disabled="disabled" style="font:bold; background-color:khaki; color:black;"></td>
+                            <td align="left"><input type='text' class='form-control sum1 border-0' name='sum1' id='sum1' disabled="disabled" style="font:bold; background-color:khaki; color:black;"></td>
                           </tr>
 
                         </tfoot>
@@ -368,17 +368,17 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-              <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
+              <input type="hidden" name="responsable" class="form-control responsable" id="responsable" value="{{ Auth::user()->name }}">
 
-              <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>
+              <input type="hidden" name="userId" class="form-control userId" id="userId" value="{{ Auth::user()->id }}" readonly>
 
-              <input type="hidden" name="id_tratamiento" class="form-control" id="id_tratamiento" readonly>
+              <input type="hidden" name="id_tratamiento" class="form-control " id="id_tratamiento" readonly>
 
-              <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" readonly>
+              <input type="hidden" name="id_cliente" class="form-control id_cliente" id="id_cliente" readonly>
 
-              <input type="hidden" name="saldo" class="form-control" id="saldo">
+              <input type="hidden" name="saldo" class="form-control saldo" id="saldo">
 
-              <input type="hidden" id="tratamiento" name="tratamiento" class="form-control">
+              <input type="hidden" id="tratamiento" name="tratamiento" class="form-control tratamiento">
 
 
               <div class="modal-footer">
@@ -769,7 +769,7 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
            
           
 
-            let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamientos' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre[]' disabled='disabled'  id='nombre' value='" + cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular[]' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable[]' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id[]' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente[]' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado[]' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>";
+            let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamiento' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre' disabled='disabled'  id='nombre' value='" + cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>";
 
             $("#table_registros_tratamientos tbody").append(record);
 
@@ -1262,28 +1262,31 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
             });
 
  
-         
+         /*
           
              let datos = [];
 
           // Collect data from each row
           $('#table_registros_tratamientos tbody tr').each(function() {
               var row = {};
-              row.user_id = $(this).find('input[name="user_id[]"]').val();
-              row.id_cliente = $(this).find('input[name="id_cliente[]"]').val();
-              row.nombre = $(this).find('input[name="nombre[]"]').val();
-              row.celular = $(this).find('input[name="celular[]"]').val();
-              row.responsable = $(this).find('input[name="responsable[]"]').val();
+              row.user_id = $(this).find('input[name="user_id"]').val();
+              row.id_cliente = $(this).find('input[name="id_cliente"]').val();
+              row.nombre = $(this).find('input[name="nombre"]').val();
+              row.celular = $(this).find('input[name="celular"]').val();
+              row.responsable = $(this).find('input[name="responsable"]').val();
               row.tratamiento = $(this).find('input[name="tratamiento[]"]').val();
               row.valor_tratamiento = $(this).find('input[name="valor_tratamiento[]"]').val();
-              row.estado = $(this).find('input[name="estado[]"]').val();
+              row.estado = $(this).find('input[name="estado"]').val();
               datos.push(row);
           });
 
+
+          */
            
 
          // var formData = $(this).serializeArray();
-  
+         
+            var registros = $(this).val();
 
             /* Configurar botón submit con spinner */
             let btn = $('#agregar_tratamiento')
@@ -1297,19 +1300,33 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
             e.preventDefault();
 
+
+            let datos = new FormData();
+            datos.append('#table_registros_tratamientos', registros);
+
+
             try {
               $.ajax({
                 url: "crear_tratamiento",
                 method: "POST",
                 dataType: "json",
-                data: {
-                  
-                  datos: datos
-               },
-
-
+                data: datos,
                
-                success: function(data) {
+                
+                success: function(respuesta) {
+
+                  $(user_id).val(respuesta["user_id"]);
+                  $(id_cliente).val(respuesta["id_cliente"]);
+                  $(nombre).val(respuesta["nombre"]);
+                  $(celular).val(respuesta["celular"]);
+                  $(responsable).val(respuesta["responsable"]);
+                  $(estado).val(respuesta["estado"]);
+
+                 listarProductos();
+
+                 console.log(data);
+
+
                   table.ajax.reload();
                   $('#agregar_tratamiento').prop("required", true);
                   // $('#selectBuscarCliente').html("");
@@ -1321,14 +1338,44 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
                   //   location.reload(true);
                   toastr["success"]("Tratamiento registrado correctamente.");
 
-                  console.log(datosTablaHTML);
-
+                  
                 }
               });
             } catch (e) {
               toastr["danger"]("Se ha presentado un error.", "Información");
             }
           });
+
+
+
+
+
+/*=============================================
+
+LISTAR TODOS LOS PRODUCTOS
+
+=============================================*/
+
+function listarProductos(){
+
+    let listaProductos = [];
+
+    let descripcion = $(".tratamiento");
+
+    let valor_tratamiento = $(".valor_tratamiento");
+
+   
+    for(let i = 0; i < descripcion.length; i++){
+
+      listaProductos.push({ "tratamiento" : $(descripcion[i]).val(), 
+                            "valor_tratamiento" : $(descripcion[i]).val()})
+
+    }
+
+    $("#tratamiento").val(JSON.stringify(listaProductos)); 
+
+ }
+
 
 
 
