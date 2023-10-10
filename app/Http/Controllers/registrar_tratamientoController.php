@@ -168,6 +168,8 @@ class registrar_tratamientoController extends Controller
                   
                     $nuevoRegistro->responsable         = $registro['responsable'];
                     $nuevoRegistro->estado              = $registro['estado'];
+                    $nuevoRegistro->saldo              = $registro['saldo'];
+
                
                  
 
