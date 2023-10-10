@@ -197,7 +197,8 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-<!--=====================================
+
+        <!--=====================================
 
     MODAL AGREGAR TRATAMIENTO
 
@@ -259,7 +260,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                         </div>
 
 
-                        <input type="hidden" name="nombreCliente" class="form-control nombreCliente " id="nombreCliente" required autocomplete="off">
+                        <input type="hidden" name="nombreCliente" class="form-control " id="nombreCliente" required autocomplete="off">
 
                         <div class="alert-message" id="livesearchError"></div>
 
@@ -275,7 +276,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
                         <label for="Celular" class="control-label">Tel/Cel</label>
 
-                        <input type="text" name="celular" class="form-control celular" id="celular" required autocomplete="off">
+                        <input type="text" name="celular" class="form-control " id="celular" required autocomplete="off">
 
                         <div class="alert-message" id="celularError"></div>
 
@@ -290,7 +291,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-                        <select name="tratamientos" class="form-control tratamientos" id="tratamientos" required placeholder="Seleccione profesional">
+                        <select name="tratamientos" class="form-control" id="tratamientos" required placeholder="Seleccione profesional">
                           <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
                           @foreach($terapias as $terap)
                           <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
@@ -306,7 +307,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                       <div class="form-group">
 
 
-                        <input type="number" id="valor_tratamiento" name="valor" class="form-control valor_tratamiento">
+                        <input type="number" id="valor_tratamiento" name="valor" class="form-control">
 
                       </div>
 
@@ -336,7 +337,6 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                             <th>Select</th>
                             <th>Tratamiento</th>
                             <th>Valor</th>
-                           
                           </tr>
                         </thead>
 
@@ -349,7 +349,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                           <tr id="total">
                             <td>&nbsp;</td>
                             <td align="right">Total :</td>
-                            <td align="left"><input type='text' class='form-control sum1 border-0' name='sum1' id='sum1' disabled="disabled" style="font:bold; background-color:khaki; color:black;"></td>
+                            <td align="left"><input type='text' class='form-control  border-0' name='sum1' id='sum1' disabled="disabled" style="font:bold; background-color:khaki; color:black;"></td>
                           </tr>
 
                         </tfoot>
@@ -368,17 +368,17 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-              <input type="hidden" name="responsable" class="form-control responsable" id="responsable" value="{{ Auth::user()->name }}">
+              <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
 
-              <input type="hidden" name="userId" class="form-control userId" id="userId" value="{{ Auth::user()->id }}" readonly>
+              <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>
 
-              <input type="hidden" name="id_tratamiento" class="form-control " id="id_tratamiento" readonly>
+              <input type="hidden" name="id_tratamiento" class="form-control" id="id_tratamiento" readonly>
 
-              <input type="hidden" name="id_cliente" class="form-control id_cliente" id="id_cliente" readonly>
+              <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" readonly>
 
-              <input type="hidden" name="saldo" class="form-control saldo" id="saldo">
+              <input type="hidden" name="saldo" class="form-control" id="saldo">
 
-              <input type="hidden" id="tratamiento" name="tratamiento" class="form-control tratamiento">
+              <input type="hidden" id="tratamiento" name="tratamiento" class="form-control">
 
 
               <div class="modal-footer">
@@ -739,7 +739,7 @@ DESHABILITAR CLICK DERECHO
       </script>
 
 
-      <!-- ==================================
+<!-- ==================================
 
 AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
@@ -751,9 +751,7 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
           $(".add-row").click(function() {
 
-            let cliente = $('#nombreCliente').val();
-
-            let responsable = $('#responsable').val();
+            let nombre = $('#nombreCliente').val();
 
             let user_id = $('#userId').val();
 
@@ -761,22 +759,25 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
             let celular = $('#celular').val();
 
+            let estado = 'Pendiente';
+
+            let responsable = $('#responsable').val();
+
             let tratamiento = $("#tratamiento").val();
 
             let valor = $("#valor_tratamiento").val();
 
-            let estado = 'Pendiente';
-           
-          
+            let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamientos' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td><td style='display:block'><input type='text' class='form-control  border-0' name='nombre' disabled='disabled'  id='nombre' value='" + nombre + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>";
 
-            let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamiento' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre' disabled='disabled'  id='nombre' value='" + cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>";
+
+           // let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamiento' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre' disabled='disabled'  id='nombre' value='" + cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>"
 
             $("#table_registros_tratamientos tbody").append(record);
 
             calculateTotal();
 
 
-  /* ==================================
+/* ==================================
 
 TOTALIZAR VALORES DE COLUMNA
 
@@ -793,13 +794,14 @@ TOTALIZAR VALORES DE COLUMNA
               });
 
               $('#sum1').val(sum);
+              $('#valor_tratamiento').val(sum);
 
               console.log(sum);
             }
 
 
 
-/* ==================================
+ /* ==================================
 
 ELIMNAR FILA Y RECALCULAR VALOR TOTAL
 
@@ -822,7 +824,7 @@ ELIMNAR FILA Y RECALCULAR VALOR TOTAL
 
 
 
-      <!-- ========================================
+ <!-- ========================================
 
 ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO
 
@@ -852,7 +854,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO
 
 
 
-      <!-- ========================================
+<!-- ========================================
 
 ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
@@ -880,7 +882,8 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
 
 
- <!-- ==============================
+
+<!-- ==============================
 
 // VERIFICAR SI EXISTE CLIENTE
 
@@ -890,32 +893,53 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
         $(document).ready(function() {
 
           $('#cedula').blur(function() {
+
             var error_cedula = '';
+
             var cedula = $('#cedula').val();
+
             var _token = $('input[name="_token"]').val();
+
             var filter = /([0-9])/;
+
             if (!filter.test(cedula)) {
+
               $('#error_cedula').html('<label class="text-danger">Debe escribir número de cédula.</label>');
+
               $('#cedula').addClass('has-error');
+
               $('#agregar_cliente').attr('disabled', 'disabled');
+
             } else {
+
               $.ajax({
+
                 url: 'verificar_cliente',
+
                 method: "POST",
+
                 data: {
+
                   cedula: cedula
+
                 },
+
                 success: function(result) {
+
                   if (result == 'unique') {
 
                     $('#error_cedula').html('<label class="text-danger">El cliente ya existe.</label>');
+
                     $('#cedula').addClass('has-error');
+
                     $('#agregar_cliente').attr('disabled', 'disabled');
 
                   } else {
 
                     $('#error_cedula').html('<label class="text-success">Disponible.</label>');
+
                     $('#cedula').removeClass('has-error');
+
                     $('#agregar_cliente').attr('disabled', false);
 
 
@@ -931,6 +955,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
 
 
+
  <!-- =======================================
 
 SELECT2 - BUSQUEDAD DE CLIENTES
@@ -938,27 +963,39 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 ============================================ -->
 
       <script type="text/javascript">
+
         $('.livesearch').select2({
 
           placeholder: 'Buscar cliente por nombre...',
+
           language: "es",
+
           allowClear: true,
+
           minimumInputLength: 3,
+
           ajax: {
             // url: '/ajax-autocomplete-search',
 
             url: '{{ url("/ajax-autocomplete-search") }}',
 
             dataType: 'json',
+
             delay: 250,
+
             processResults: function(data) {
 
 
               return {
+
                 results: $.map(data, function(item) {
+
                   return {
+
                     text: item.nombre,
+
                     id: item.id_cliente,
+
                     celular: item.celular,
 
                   }
@@ -981,16 +1018,18 @@ SELECT2 - BUSQUEDAD DE CLIENTES
         });
 
 
-        //================================================
+//================================================
 
-        // SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
+// SELECT2 - PASAR VALORES A VIEW BLADE - CLIENTE
 
-        //================================================
+//================================================
 
         $('#livesearch').off('change').on('change', function() {
 
           $.ajaxSetup({
+
             headers: {
+
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
@@ -1003,8 +1042,11 @@ SELECT2 - BUSQUEDAD DE CLIENTES
             url: '/cliente/' + id,
 
             method: "GET",
+
             data: $(this).serialize(),
+
             dataType: "json",
+
             success: function(data) {
 
 
@@ -1029,7 +1071,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
       </script>
 
 
-      <!-- ===============================================
+<!-- ===============================================
 
  BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
  
@@ -1041,9 +1083,8 @@ SELECT2 - BUSQUEDAD DE CLIENTES
         $('.livesearch').on('select2:opening', function(e) {
 
           $('.livesearch').html('');
+
           $('.celular').val('');
-          $('input[name="record"]').parent().parent().remove();
-          $('#sum1').val('');
 
         });
       </script>
@@ -1051,7 +1092,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
 
 
-      <!-- =======================================================
+<!-- =======================================================
 
 PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
@@ -1061,19 +1102,26 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
       <script>
         $('#livesearch').on('select2:select', function(evt) {
 
+
           let celular = evt.params.data.celular;
 
           var opt = "<option value='" + celular + "' selected ='selected'> </option>";
+
           $("#celular").html(opt);
+
           $("#celular").val(celular).trigger("change");
+
 
           let id_cliente = evt.params.data.id;
 
-          var opt = "<option value='" + id_cliente + "' selected ='selected'> </option>";
-          $("#id_cliente").html(opt);
-          $("#id_cliente").val(id_cliente).trigger("change");
+            var opt = "<option value='" + id_cliente + "' selected ='selected'> </option>";
+
+            $("#id_cliente").html(opt);
+
+            $("#id_cliente").val(id_cliente).trigger("change");
 
         });
+
       </script>
 
 
@@ -1081,7 +1129,7 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
 
-      <!-- ===================================================
+<!-- ===================================================
 
  DATATABLE TRATAMIENTO CLIENTES
 
@@ -1089,13 +1137,17 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
       <script type="text/javascript">
+
         $(document).ready(function() {
 
 
           $.ajaxSetup({
+
             headers: {
+
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+
           });
 
 
@@ -1103,15 +1155,23 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
             processing: true,
+
             serverSide: true,
+
             rendering: true,
+
             retrive: true,
+
             paging: true,
+
             info: true,
+
             filter: true,
+
             responsive: true,
 
             type: "GET",
+
             ajax: 'registrar_tratamientos',
 
 
@@ -1122,22 +1182,30 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
               {
                 extend: 'excelHtml5',
+
                 text: 'Excel',
+
                 title: 'Listado tratamientos de clientes',
 
                 exportOptions: {
+
                   columns: [0, 1, 2, 3, 5]
 
                 }
+
               },
 
               {
                 extend: 'pdfHtml5',
+
                 text: 'PDF',
+
                 title: 'Listado tratamientos de clientes',
 
                 exportOptions: {
+
                   columns: [0, 1, 2, 3, 5],
+
                   alignment: 'center',
 
                 }
@@ -1153,32 +1221,41 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
               {
                 data: 'nombre',
+
                 name: 'nombre'
               },
               {
                 data: 'tratamiento',
+
                 name: 'tratamiento'
               },
               {
                 data: 'valor_tratamiento',
+
                 name: 'valor_tratamiento'
               },
               {
                 data: 'created_at',
+
                 name: 'created_at'
               },
               {
                 data: 'estado',
+
                 name: 'estado'
               },
               {
                 data: 'saldo',
+
                 name: 'saldo'
               },
               {
                 data: 'action',
+
                 name: 'action',
+
                 orderable: false,
+
                 searchable: false
               },
 
@@ -1187,11 +1264,13 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
             ],
 
             "createdRow": function(row, data, index) {
+
               if (data.saldo == 0) {
 
                 $('td', row).eq(4).addClass('text-primary').text('Pagado');
 
               } else {
+
                 $('td', row).eq(4).addClass('text-second').text('Pendiente');
               }
             },
@@ -1200,16 +1279,23 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
             order: [3, 'DESC'],
 
             "columnDefs": [{
+
                 "orderable": false,
+
                 "render": $.fn.dataTable.render.number('.'),
+
                 "targets": [2],
+
                 className: 'dt-body-left',
               },
 
               {
                 "orderable": false,
+
                 "render": $.fn.dataTable.render.number('.'),
+
                 "targets": [5],
+
                 className: 'dt-body-left',
               },
 
@@ -1256,135 +1342,123 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
           $('#form_agregar_tratamiento').off('submit').on('submit', function(e) {
 
             $.ajaxSetup({
+
               headers: {
+
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
               }
+              
             });
 
- 
-         /*
-          
-             let datos = [];
-
-          // Collect data from each row
-          $('#table_registros_tratamientos tbody tr').each(function() {
-              var row = {};
-              row.user_id = $(this).find('input[name="user_id"]').val();
-              row.id_cliente = $(this).find('input[name="id_cliente"]').val();
-              row.nombre = $(this).find('input[name="nombre"]').val();
-              row.celular = $(this).find('input[name="celular"]').val();
-              row.responsable = $(this).find('input[name="responsable"]').val();
-              row.tratamiento = $(this).find('input[name="tratamiento[]"]').val();
-              row.valor_tratamiento = $(this).find('input[name="valor_tratamiento[]"]').val();
-              row.estado = $(this).find('input[name="estado"]').val();
-              datos.push(row);
-          });
-
-
-          */
-           
-
-         // var formData = $(this).serializeArray();
-         
-            var registros = $(this).val();
-
-            /* Configurar botón submit con spinner */
-            let btn = $('#agregar_tratamiento')
-            let existingHTML = btn.html() //store exiting button HTML
-            //Add loading message and spinner
-            $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
-            setTimeout(function() {
-              $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
-            }, 5000) //5 seconds
-            $('#agregar_tratamiento').attr('disabled', true);
 
             e.preventDefault();
 
+            
+            let datos = [];
 
-            let datos = new FormData();
-            datos.append('#table_registros_tratamientos', registros);
+            // Collect data from each row
+            $('#table_registros_tratamientos tbody tr').each(function() {
+                let row = {};
+                row.user_id = $(this).find('input[name="user_id"]').val();
+
+                row.id_cliente = $(this).find('input[name="id_cliente"]').val();
+
+                row.nombre = $(this).find('input[name="nombre"]').val();
+
+                row.celular = $(this).find('input[name="celular"]').val();
+
+                row.responsable = $(this).find('input[name="responsable"]').val();
+
+                row.tratamiento = $(this).find('input[name="tratamiento[]"]').val();
+
+                row.valor_tratamiento = $(this).find('input[name="valor_tratamiento[]"]').val();
+
+                row.estado = $(this).find('input[name="estado"]').val();
+
+                datos.push(row);
+            });
 
 
-            try {
+           // let formData = $('form_agregar_tratamiento').serializeArray();
+          //  let jsonStr = JSON.stringify(formData);
+
+            //  alert(convertedIntoArray);
+
+
+            /* Configurar botón submit con spinner */
+            let btn = $('#agregar_tratamiento')
+
+            let existingHTML = btn.html() //store exiting button HTML
+            
+            //Add loading message and spinner
+            $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
+            setTimeout(function() {
+
+              $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+
+            }, 5000) //5 seconds
+
+            $('#agregar_tratamiento').attr('disabled', true);
+            
+            
+            event.preventDefault();
+
+           // let formData = new FormData(this);
+           
+           try {
+
               $.ajax({
+
                 url: "crear_tratamiento",
+
                 method: "POST",
-                dataType: "json",
-                data: datos,
-               
-                
-                success: function(respuesta) {
 
-                  $(user_id).val(respuesta["user_id"]);
-                  $(id_cliente).val(respuesta["id_cliente"]);
-                  $(nombre).val(respuesta["nombre"]);
-                  $(celular).val(respuesta["celular"]);
-                  $(responsable).val(respuesta["responsable"]);
-                  $(estado).val(respuesta["estado"]);
+              //  dataType: "json",
 
-                 listarProductos();
+               // data: JSON.stringify(datosTablaHTML),
+            //   data: $('form_agregar_tratamiento').serialize(), //cambia esto
 
-                 console.log(data);
+                data: {data:datos},
 
+             
+
+                success: function(data) {
 
                   table.ajax.reload();
+                  
                   $('#agregar_tratamiento').prop("required", true);
                   // $('#selectBuscarCliente').html("");
 
                   $('#form_agregar_tratamiento')[0].reset();
+
                   $('#modalACrearTratamiento').modal('hide');
 
                   //   table.ajax.reload();
                   //   location.reload(true);
                   toastr["success"]("Tratamiento registrado correctamente.");
 
-                  
+                  console.log(data);
+
                 }
               });
             } catch (e) {
+
               toastr["danger"]("Se ha presentado un error.", "Información");
+
             }
+            
           });
 
 
 
 
+  // =========================================
 
-/*=============================================
+  /// VER REGISTROS DE TRATAMIENTO DE CLIENTES
 
-LISTAR TODOS LOS PRODUCTOS
-
-=============================================*/
-
-function listarProductos(){
-
-    let listaProductos = [];
-
-    let descripcion = $(".tratamiento");
-
-    let valor_tratamiento = $(".valor_tratamiento");
-
-   
-    for(let i = 0; i < descripcion.length; i++){
-
-      listaProductos.push({ "tratamiento" : $(descripcion[i]).val(), 
-                            "valor_tratamiento" : $(descripcion[i]).val()})
-
-    }
-
-    $("#tratamiento").val(JSON.stringify(listaProductos)); 
-
- }
-
-
-
-
-
-          // =========================================
-
-          /// VER REGISTROS DE TRATAMIENTO DE CLIENTES
-
-          // =========================================
+  // =========================================
 
           $('body').on('click', '.verTratamiento', function(e) {
 
@@ -1411,13 +1485,20 @@ function listarProductos(){
 
                 $('#modalVerTratamiento').modal('show');
 
-                $('#modalVerTratamiento input[name="id_abono"]').val(data.id)
+                $('#modalVerTratamiento input[name="id_abono"]').val(data.id);
+
                 $('#modalVerTratamiento input[name="id_cliente"]').val(data.id_cliente);
+
                 $('#modalVerTratamiento input[name="nombreCliente"]').val(data.nombre);
+
                 $('#modalVerTratamiento input[name="celular"]').val(data.celular);
+
                 $('#modalVerTratamiento input[name="tratamiento"]').val(data.tratamiento);
+
                 $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+
                 $('#modalVerTratamiento input[name="responsable"]').val(data.responsable);
+
                 //  $('#modalVerTratamiento input[name="fecha"]').val(date('d-m-Y  h:i A', strtotime(data.created_at)));
 
 
@@ -1442,13 +1523,18 @@ function listarProductos(){
             e.preventDefault();
 
             $('#form_editar_tratamiento')[0].reset();
+
             let id = $(this).data('id');
 
             $.ajax({
               url: '/editar_tratamientos/' + id,
+
               method: 'GET',
+
               data: {
+
                 id: id
+
               },
 
 
@@ -1456,45 +1542,64 @@ function listarProductos(){
 
 
                 $('#modalEditarTratamiento').modal('show');
-                $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id)
+
+                $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id);
+
                 $('#modalEditarTratamiento input[name="id_cliente"]').val(data.id_cliente);
+
                 $('#modalEditarTratamiento input[name="nombreCliente"]').val(data.nombre);
+
                 $('#modalEditarTratamiento input[name="celular"]').val(data.celular);
+
                 $('#modalEditarTratamiento input[name="tratamiento2"]').val(data.tratamiento);
+
                 $('#modalEditarTratamiento input[name="saldo2"]').val(data.valor_tratamiento);
+
                 $('#modalEditarTratamiento input[name="valor_tratamiento2"]').val(data.valor_tratamiento);
+
                 $('#modalEditarTratamiento input[name="responsable"]').val(data.responsable);
 
               }
+
             });
+
           });
 
 
 
 
-          // =========================================
+// =========================================
 
-          // ACTUALIZAR DATOS DE ABONO
+// ACTUALIZAR DATOS DE ABONO
 
-          // =========================================
+// =========================================
 
 
           $('#form_editar_tratamiento').off('submit').on('submit', function(event) {
 
             $.ajaxSetup({
+
               headers: {
+
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
             });
             /* Configurar botón submit con spinner */
             let btn = $('#editar_tratamiento')
+
             let existingHTML = btn.html() //store exiting button HTML
+
             //Add loading message and spinner
             $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
             setTimeout(function() {
+
               $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+
             }, 5000) //5 seconds
+
             $('#editar_tratamiento').attr('disabled', true);
+
             event.preventDefault();
             try {
 
@@ -1503,15 +1608,20 @@ function listarProductos(){
               $.ajax({
 
                 url: 'actualizar_tratamiento/' + id,
+
                 method: "POST",
+
                 data: $(this).serialize(),
+
                 dataType: "json",
+
                 success: function(data) {
 
                   $('#editar_tratamiento').prop("required", true);
                   // $('#selectBuscarCliente').html("");
 
                   $('#form_editar_tratamiento')[0].reset();
+
                   $('#modalEditarTratamiento').modal('hide');
 
                   table.ajax.reload();
@@ -1521,6 +1631,7 @@ function listarProductos(){
                 }
               });
             } catch (e) {
+
               toastr["danger"]("Se ha presentado un error.", "Información");
             }
           });
@@ -1529,39 +1640,55 @@ function listarProductos(){
 
 
 
-          // =========================================
+// =========================================
 
-          /// ELIMINAR REGISTROS DE ABONOS DE CLIENTES
+/// ELIMINAR REGISTROS DE ABONOS DE CLIENTES
 
-          // =========================================   
+// =========================================   
 
 
 
           $(document).on('click', '.eliminarTratamiento', function(event) {
 
             event.preventDefault();
+
             let id = $(this).data('id');
+
             swal({
+
               title: "Esta seguro de eliminar?",
+
               text: "La acción es permanente!",
+
               type: "warning",
+
               showCancelButton: !0,
+
               confirmButtonText: "Si, Eliminar",
+
               cancelButtonText: "No, cancelar",
+
               reverseButtons: !0
 
             }).then(function(e) {
 
               if (e.value === true) {
+
                 let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
                 $.ajax({
+
                   type: 'delete',
+
                   url: '/eliminar_tratamiento/' + id,
+
                   data: {
+
                     id: id
                   },
+
                   dataType: 'JSON',
+
                   success: function(data) {
 
                     //   if (data.success === true) {
@@ -1576,20 +1703,27 @@ function listarProductos(){
                     //       swal("Error!", data.message, "error");
                     //   }
                   }
+
                 });
 
               } else {
+
                 e.dismiss;
+
               }
 
             }, function(dismiss) {
+
               return false;
+
             })
+
           });
 
 
 
         });
+        
       </script>
 
 

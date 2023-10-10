@@ -130,8 +130,16 @@ class registrar_tratamientoController extends Controller
     public function store(Request $request)
     {
 
+   /*
+
+        $data = $request->input('datos'); // Assuming you're sending data as an array
+
+        // Loop through the data and insert each row into the database
+        foreach ($data as $row) {
+            registrar_tratamientos::create($row);
+        }
         
-      
+    */  
        
        //   try {
          // $data = new registrar_tratamientos();
@@ -139,9 +147,10 @@ class registrar_tratamientoController extends Controller
 
         //  foreach ($request->txt_tratamientos as $key){
         
-          /*
+         
+        
             
-            $registros = $request->input('datos');
+            $registros = $request->input('data');
 
                 foreach ($registros as $registro) {
                     // Crea una instancia de tu modelo y asigna los valores
@@ -160,17 +169,17 @@ class registrar_tratamientoController extends Controller
                     $nuevoRegistro->responsable         = $registro['responsable'];
                     $nuevoRegistro->estado              = $registro['estado'];
                
-
-                  
+                 
 
                     $nuevoRegistro->save();
                 }
 
                 return response()->json(['success'=>'Successfully']);
 
-                */
+              
 
 
+          /*
 
             $data = new registrar_tratamientos();
            
@@ -185,11 +194,14 @@ class registrar_tratamientoController extends Controller
             $data->responsable         = $request->responsable;
             $data->estado              = $request->estado;
 
+           
+
+
              $data->save();  
 
             return response()->json(['success'=>'Successfully']);
 
-         
+         */
             
                    
                
