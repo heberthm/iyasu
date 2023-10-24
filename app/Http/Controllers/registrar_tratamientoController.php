@@ -130,69 +130,27 @@ class registrar_tratamientoController extends Controller
     public function store(Request $request)
     {
 
-   /*
-
-        $data = $request->input('datos'); // Assuming you're sending data as an array
-
-        // Loop through the data and insert each row into the database
-        foreach ($data as $row) {
-            registrar_tratamientos::create($row);
-        }
-        
-    */  
-       
+ 
        //   try {
-         // $data = new registrar_tratamientos();
-   
-
-        //  foreach ($request->txt_tratamientos as $key){
+       
         
          
         
-            
-            $registros = $request->input('data');
-
-                foreach ($registros as $registro) {
-                    // Crea una instancia de tu modelo y asigna los valores
-                    $nuevoRegistro = new registrar_tratamientos();
-                    $nuevoRegistro->tratamiento = $registro['tratamiento'];
-                    $nuevoRegistro->valor_tratamiento = $registro['valor_tratamiento'];
-                   
-
-                    $nuevoRegistro->user_id             = $registro['user_id'];
-                    $nuevoRegistro->id_cliente          = $registro['id_cliente'];   
-                   
-                    $nuevoRegistro->nombre              = $registro['nombre'];  
-                    $nuevoRegistro->celular             = $registro['celular'];           
-                   
-                  
-                    $nuevoRegistro->responsable         = $registro['responsable'];
-                    $nuevoRegistro->estado              = $registro['estado'];
-                    $nuevoRegistro->saldo              = $registro['saldo'];
 
                
-                 
 
-                    $nuevoRegistro->save();
-                }
-
-                return response()->json(['success'=>'Successfully']);
-
-              
-
-
-          /*
+        
 
             $data = new registrar_tratamientos();
            
             $data->user_id             = $request->userId;
             $data->id_cliente          = $request->livesearch;   
-           
+         
             $data->nombre              = $request->nombreCliente;  
             $data->celular             = $request->celular;           
-            $data->saldo               = $request->sum1;
-            $data->saldo               = $request->sum1;
-            $data->tratamiento          = json_encode(['tratamiento'=>$request->tratamiento,'valor_tratamiento'=>$request->valor_tratamiento]);
+            $data->saldo               = $request->valor;
+            $data->valor_tratamiento   = $request->valor;
+            $data->tratamiento         = $request->tratamientos1;
             $data->responsable         = $request->responsable;
             $data->estado              = $request->estado;
 
@@ -203,7 +161,7 @@ class registrar_tratamientoController extends Controller
 
             return response()->json(['success'=>'Successfully']);
 
-         */
+        
             
                    
                

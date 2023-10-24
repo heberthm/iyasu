@@ -195,7 +195,7 @@ BUSCADOR DE CLIENTES - SELECT2
             <select class="livesearch form-control" id="livesearch" name="livesearch"></select>
           </div>
 
-          <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente" style="text-align:left"><span class="fa fa-user fa-fw" tabindex="3"></span> Agregar cliente nuevo</button>
+          <button class="btn btn-primary" data-toggle="modal" id="agregar_cliente_nuevo" data-target="#modalAgregarCliente" style="text-align:left"><span class="fa fa-user fa-fw" tabindex="3"></span> Agregar cliente nuevo</button>
         </div>
       </div>
       <!-- /.card-body -->
@@ -332,16 +332,34 @@ CALENDAR - AGENDAR   MEDICA
 
 
   <div class="modal" tabindex="-1" role="dialog" id="ModalCalendar">
+
     <div class="modal-dialog" role="document">
+
       <div class="modal-content">
+
         <div class="modal-header">
+
           <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-calendar mr-3"></span>Calendario citas</h5>
+
+           <div class="col-6 align-items-center" style="font-size: small;">
+         
+         <div id="tituloMes">
+
+            <h6> <div class="mx-8 titulo-mes" style="color:brown" ></div></h6>
+         
+          </div>
+
+        </div>
 
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
             <span aria-hidden="true">&times;</span>
+
           </button>
+
         </div>
+
         <div class="modal-body">
 
           <div class="row">
@@ -411,12 +429,19 @@ CALENDAR - AGENDAR   MEDICA
 
 
   <div class="modal-dialog modal-lg">
+
     <div class="modal-content">
+
       <div class="modal-header">
+
         <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-edit mr-3"></span>Agendar citas</h5>
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
           <span aria-hidden="true">&times;</span>
+
         </button>
+
       </div>
 
       <div class="modal-body">
@@ -434,7 +459,9 @@ CALENDAR - AGENDAR   MEDICA
 
 
                   <span class="btn-group float-right" id="btn_historialIngresos">
+
                     <a href="#" class="mr-3" data-toggle="modal" data-target="#modalAgregarCliente2"><i class="fas fa-user-plus" style="color: #1566EB;" title="Agregar nuevo cliente"></i></a>
+
                   </span>
 
                 </label>
@@ -442,7 +469,9 @@ CALENDAR - AGENDAR   MEDICA
 
 
                 <div class="form-group">
+
                   <select class="livesearch2 form-control" id="livesearch2" name="nombre_cliente" style="width: 100%;"></select>
+                
                 </div>
 
 
@@ -485,15 +514,21 @@ CALENDAR - AGENDAR   MEDICA
 
 
                 <select name="medico" class="form-control" id="medico" required placeholder="Seleccione profesional">
+
                   <option value="" selected="selected" style='color: #cccccc'>Seleccionar médico</option>
+
                   @foreach($profesionales as $prof)
+
                   <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
+
                   @endforeach
+
                 </select>
 
 
 
               </div>
+
             </div>
 
             <div class="col-lg-6">
@@ -518,6 +553,7 @@ CALENDAR - AGENDAR   MEDICA
                -->
 
               </div>
+
             </div>
 
 
@@ -533,6 +569,7 @@ CALENDAR - AGENDAR   MEDICA
                 <input type="color" id="color" name="color" list="ListadoColores" value="#1560F6" class="form-control" required autocomplete="off">
 
               </div>
+
             </div>
 
 
@@ -563,8 +600,8 @@ CALENDAR - AGENDAR   MEDICA
                 <input type="text" id="start" name="start" class="form-control" required>
 
 
-
               </div>
+
             </div>
 
 
@@ -578,6 +615,7 @@ CALENDAR - AGENDAR   MEDICA
                 <input type="text" name="end" class="form-control" id="end" required>
 
               </div>
+
             </div>
 
 
@@ -1895,7 +1933,8 @@ DESHABILITAR CLICK DERECHO
 
 
       function getlist_calendartipos() {
-        let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
+        let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 
+                    'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
 
         return list
       }
@@ -2150,16 +2189,16 @@ DESHABILITAR CLICK DERECHO
 
       /* Configurar botón submit con spinner */
 
-      let btn = $('.agregar_cliente2')
+      let btn = $('.agregar_cliente')
       let existingHTML = btn.html() //store exiting button HTML
       //Add loading message and spinner
       $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
 
       setTimeout(function() {
         $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
-      }, 5000) //5 seconds
+      }, 15000) //5 seconds
 
-      $('.agregar_cliente2').attr('disabled', true);
+      $('.agregar_cliente').attr('disabled', true);
 
 
 
@@ -2176,7 +2215,7 @@ DESHABILITAR CLICK DERECHO
 
             // table.ajax.reload();
 
-            $('#agregar_cliente2').prop("required", true);
+            $('#agregar_cliente').prop("required", true);
             // $('#selectBuscarCliente').html("");
 
 
@@ -3074,6 +3113,9 @@ RESET SELECT2: selectBuscarCliente
             duration: {
               days: 1
             },
+         
+
+
             buttonText: 'Día'
           },
           defaultView: 'agendaThreeDay'
@@ -3082,7 +3124,12 @@ RESET SELECT2: selectBuscarCliente
 
         // navLinks: true, 
 
-
+      
+       
+        viewRender: function(view) {
+          var title = view.title;
+          $(".titulo-mes").html(title);
+      },
 
 
         events: SITEURL + "/fullcalendareventmaster",

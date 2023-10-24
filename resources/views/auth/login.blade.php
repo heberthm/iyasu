@@ -30,7 +30,7 @@
 
            <p></p>
 
-            <form method="post" action="{{ url('/login') }}">
+            <form method="post" action="{{ url('/login') }}" id="form-login">
                 @csrf
 
                 <div class="input-group mb-3">
@@ -76,8 +76,8 @@
                         </div>
                     </div>
                     -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary btn-md btn-block"> Entrar</button>
                     </div>
 
                 </div>
@@ -99,7 +99,7 @@
 </div>
 <!-- /.login-box -->
 
-<script src="{{ mix('js/app.js') }}" defer></script>
+<script src="{{ mix('js/app.js') }}" ></script>
 
 
 <script>
@@ -119,6 +119,34 @@ function show(a) {
   c.setAttribute("class","fas fa-eye-slash");
   }
 }
+
+
+// =====================================
+
+// CONFIGURAR BOTÓN SUBMIT CON SPINNER
+
+// =====================================
+
+$('#form-login').off('submit').on('submit', function(event) {
+
+        let btn = $('.btn-block')
+
+        let existingHTML = btn.html() //store exiting button HTML
+
+        //Add loading message and spinner
+        $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
+        setTimeout(function() {
+
+        $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+
+        }, 5000) //5 seconds
+
+        $('.btn-block').attr('disabled', true);
+
+});
+
+
 
   </script>
 

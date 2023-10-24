@@ -14,6 +14,6 @@ class descripciones extends Model
 
     public function facturas()
     {
-        return $this->belongsToMany(facturas::class, 'descripciones_facturas', 'id_descripcion','id_factura');
+        return $this->belongsToMany(facturas::class)->withPivot('tratamiento', 'valor_tratamiento', 'saldo');
     }
 }
