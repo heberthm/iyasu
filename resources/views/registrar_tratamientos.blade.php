@@ -160,7 +160,6 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
                 <th>Paciente</th>
                 <th>Tratamiento</th>
-                <th>Valor</th>
                 <th>Fecha</th>
                 <th>Estado</th>
                 <th>Saldo</th>
