@@ -53,7 +53,9 @@ class registrar_tratamientoController extends Controller
                  
                   <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
   
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash eliminarTratamiento"></a>';
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalImprimirTratamiento"  title="Imprimir recibo de tratamiento" class="fa fa-file-pdf-o ImprimirReciboTratamiento" style="color:red"></a>
+               
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash  eliminarTratamiento"></a>';
                   
                    
                   return $actionBtn;
@@ -65,13 +67,14 @@ class registrar_tratamientoController extends Controller
               ->make(true);
           } 
   
-    
+           
           $terapias = terapias::select('id','terapia', 'valor_terapia')->get();
-         /* $tratamientos = registrar_tratamientos::select('id')->OrderBy('id', 'desc')->limit(1)->get(); */
-
-        return view('registrar_tratamientos', compact('terapias'));
-
       
+          $tratamientos = registrar_tratamientos::select('id', 'tratamiento', 'valor_tratamiento')->OrderBy('id', 'desc')->limit(1)->get(); 
+
+          return view('registrar_tratamientos', compact('terapias', 'tratamientos'));
+      
+     
 
     }
 

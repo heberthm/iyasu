@@ -16,5 +16,20 @@ class registrar_tratamientos extends Model
         return $this->belongsTo(Cliente::class);
     }
 
+    protected $casts = [
+        'tratamiento' => 'array',
+    ];
+
+
+    public function setPropertiesAttribute($value)
+{
+    $tratamientos = [];
+
+    
+
+    $this->attributes['tratamiento'] = json_encode($tratamientos);
+}
+
+
     
 }
