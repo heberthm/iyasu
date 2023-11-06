@@ -159,7 +159,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
               <tr>
 
                 <th>Paciente</th>
-                <th>Tratamiento</th>
+                <th> Vr. Tratamiento</th>
                 <th>Fecha</th>
                 <th>Estado</th>
                 <th>Saldo</th>
@@ -570,7 +570,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
           <div class="modal-header">
 
-            <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Ver datos del tratamiento</h5>
+            <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Datos del tratamiento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
               <span aria-hidden="true">&times;</span>
@@ -590,39 +590,30 @@ DATATABLE REGISTRO DE TRATAMIENTOS
               <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
+           <h5>Tratamientos realizados</h5>
 
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-
-                    <th scope="col">tratamiento</th>
-                    <th scope="col">Valor</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-
-                  @foreach($tratamientos as $item)
-                  <tr>
-
-                    @foreach(json_decode($item->tratamiento, false) as $d)
-
-                    <td>{{ $d->tratamiento }}</td>
-                    <td>{{ $d->valor_tratamiento }}</td>
+           <span>
+            <p>
 
 
-                    @endforeach
+            
+                 
 
+                   
 
-                  </tr>
+                    <input type="text"  name="tratamiento"   />  -   
+                  
+                    <input type="text"  name="valor_tratamiento"  />  </br>
+                    
+                   
 
-                  @endforeach
+                   
+                                     
+           </p>
+          </span>
+            
 
-
-                </tbody>
-              </table>
-
-
+            
 
 
 
@@ -1575,19 +1566,19 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
               $('#modalVerTratamiento').modal('show');
 
-              $('#modalVerTratamiento input[name="id_abono"]').val(data.id);
-
-              $('#modalVerTratamiento input[name="id_cliente"]').val(data.id_cliente);
-
-              $('#modalVerTratamiento input[name="nombreCliente"]').val(data.nombre);
-
-              $('#modalVerTratamiento input[name="celular"]').val(data.celular);
-
               $('#modalVerTratamiento input[name="tratamiento"]').val(data.tratamiento);
 
-              $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+              $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.id_cliente);
 
-              $('#modalVerTratamiento input[name="responsable"]').val(data.responsable);
+            //  $('#modalVerTratamiento input[name="nombreCliente"]').val(data.nombre);
+
+            //  $('#modalVerTratamiento input[name="celular"]').val(data.celular);
+
+           //   $('#modalVerTratamiento input[name="tratamiento"]').val(data.tratamiento);
+
+           //   $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+
+           //   $('#modalVerTratamiento input[name="responsable"]').val(data.responsable);
 
               //  $('#modalVerTratamiento input[name="fecha"]').val(date('d-m-Y  h:i A', strtotime(data.created_at)));
 
