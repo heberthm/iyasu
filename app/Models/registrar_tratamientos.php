@@ -9,27 +9,21 @@ class registrar_tratamientos extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','id_cliente', 'nombre', 'celular', 'tratamiento', 'valor_tratamiento','responsable', 'estado'];
+    protected $fillable = ['user_id','id_cliente', 'nombre', 'celular', 'tratamientos', 'valor_tratamiento','responsable', 'estado'];
 
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
     }
 
+    /*
+
     protected $casts = [
-        'tratamiento' => 'array',
+        'tratamientos' => 'array',
     ];
 
+    */
 
-    public function setPropertiesAttribute($value)
-{
-    $tratamientos = [];
-
-    
-
-    $this->attributes['tratamiento'] = json_encode($tratamientos);
-}
-
-
+   
     
 }

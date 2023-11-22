@@ -19,7 +19,7 @@ class CreateRegistrarTratamientosTable extends Migration
             $table->string('user_id')->required();
             $table->string('nombre',60)->nullable();
             $table->string('celular',30)->nullable();
-            $table->json('tratamiento',800)->nullable();
+            $table->string('tratamientos',800)->nullable();
             $table->string('valor_tratamiento',12)->nullable();
             $table->string('saldo',12)->nullable();
             $table->string('responsable',40)->nullable();

@@ -16,103 +16,103 @@ use App\Models\registrar_tratamientos;
 
 class registrar_tratamientoController extends Controller
 {
-  /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
-     public function index()
-     {
-       
-                 
-         if(request()->ajax()) {
-            
-  
-            $id = Cliente::join('registrar_tratamientos', 'registrar_tratamientos.id_cliente', '=', 'clientes.id_cliente')
-            ->select('clientes.id_cliente', 'clientes.nombre',  'clientes.user_id', 'clientes.celular',  'registrar_tratamientos.id', 'registrar_tratamientos.id_cliente',
-             'registrar_tratamientos.user_id', 'registrar_tratamientos.tratamiento', 'registrar_tratamientos.valor_tratamiento', 'registrar_tratamientos.responsable', 
-             'registrar_tratamientos.created_at',  'registrar_tratamientos.saldo', 'registrar_tratamientos.estado')->get();
-  
-            
-  
-             return datatables()->of($id)
+
+    public function index()
+    {
 
 
-             ->addColumn('created_at', function($row)  {  
-              $date = date("d-m-Y h:i a", strtotime($row->created_at));
-                  return $date;
-            })
-                                                                                                         
-              ->addColumn('action', 'atencion')
-              ->rawColumns(['action'])
-              ->addColumn('action', function($data) {
-  
-  
-                  $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerTratamiento"  title="Ver datos del tratamiento" class="fa fa-eye verTratamiento"></a> 
+        if (request()->ajax()) {
+
+
+            $id = registrar_tratamientos::select(
+                'id',
+                'id_cliente',
+                'user_id',
+                'nombre',
+                'tratamientos',
+                'valor_tratamiento',
+                'saldo',
+                'estado',
+                'created_at'
+            )->get();
+
+
+
+            return datatables()->of($id)
+
+
+                ->addColumn('created_at', function ($row) {
+                    $date = date("d-m-Y h:i a", strtotime($row->created_at));
+                    return $date;
+                })
+
+                ->addColumn('action', 'atencion')
+                ->rawColumns(['action'])
+                ->addColumn('action', function ($data) {
+
+
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="' . $data->id . '" data-target="#modalVerTratamiento"  title="Ver datos del tratamiento" class="fa fa-eye verTratamiento"></a> 
                  
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
   
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalImprimirTratamiento"  title="Imprimir recibo de tratamiento" class="fa fa-file-pdf-o ImprimirReciboTratamiento" style="color:red"></a>
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalImprimirTratamiento"  title="Imprimir recibo de tratamiento" class="fa fa-file-pdf-o ImprimirReciboTratamiento" style="color:red"></a>
                
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar tratamiento" class="fa fa-trash  eliminarTratamiento"></a>';
-                  
-                   
-                  return $actionBtn;
-                  
-                 
-              })
-             
-             
-              ->make(true);
-          } 
-  
-           
-          $terapias = terapias::select('id','terapia', 'valor_terapia')->get();
-      
-         
-          $tratamientos = registrar_tratamientos::select('id', 'tratamiento', 'saldo')->OrderBy('id', 'desc')->limit(1)->get(); 
+                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" title="Eliminar tratamiento" class="fa fa-trash  eliminarTratamiento"></a>';
 
-          return view('registrar_tratamientos', compact('terapias', 'tratamientos'));
-      
-     
 
+                    return $actionBtn;
+                })
+
+
+                ->make(true);
+        }
+
+
+        $terapias = terapias::select('id', 'terapia', 'valor_terapia')->get();
+
+
+        $tratamientos = registrar_tratamientos::select('id', 'tratamientos', 'saldo')->OrderBy('id', 'desc')->limit(1)->get();
+
+        return view('registrar_tratamientos', compact('terapias', 'tratamientos'));
     }
 
 
-    
+
     public function selectSearchAbonos(Request $request)
     {
-    	
 
-        if($request->has('q')){
+
+        if ($request->has('q')) {
             $search = $request->q;
-          
-            $id =registrar_tratamientos::select('id as id_tratamiento', "id_cliente", "nombre", "celular", "saldo", "tratamiento", "valor_tratamiento", "estado")
-                   
-            		->where('nombre',  'LIKE', "%${search}%" )
-                    ->where('saldo', '!=', 0)
-                  
-                   // ->orWhere('cedula', 'LIKE', "%{$search}%") 
-            		->get();
+
+            $id = registrar_tratamientos::select('id as id_tratamiento', "id_cliente", "nombre", "celular", "saldo", "tratamientos", "valor_tratamiento", "estado")
+
+                ->where('nombre',  'LIKE', "%${search}%")
+                ->where('saldo', '!=', 0)
+
+                // ->orWhere('cedula', 'LIKE', "%{$search}%") 
+                ->get();
         }
         return response()->json($id);
-        
     }
 
 
 
     public function mensajePagoDeuda(Request $request)
     {
-    	
-                
-            $id =registrar_tratamientos::select('id',  "saldo", "created_at")
-                   
-                ->whereDate('created_at', '=', now()->subDays(30))->get()
-                ->get();
-       
-     return response()->json($id);
-        
+
+
+        $id = registrar_tratamientos::select('id',  "saldo", "created_at")
+
+            ->whereDate('created_at', '=', now()->subDays(30))->get()
+            ->get();
+
+        return response()->json($id);
     }
 
     /**
@@ -134,54 +134,33 @@ class registrar_tratamientoController extends Controller
     public function store(Request $request)
     {
 
- 
-       //   try {
-       
-        
-         
-        
 
-               
+        try {
 
-        
+
 
             $data = new registrar_tratamientos();
-           
+
             $data->user_id             = $request->userId;
-            $data->id_cliente          = $request->livesearch;   
-         
-            $data->nombre              = $request->nombreCliente;  
-            $data->celular             = $request->celular;           
+            $data->id_cliente          = $request->livesearch;
+
+            $data->nombre              = $request->nombreCliente;
+            $data->celular             = $request->celular;
             $data->saldo               = $request->valor;
             $data->valor_tratamiento   = $request->valor;
-            $data->tratamiento         = $request->tratamientos1;
+            $data->tratamientos         = $request->tratamientos1;
             $data->responsable         = $request->responsable;
             $data->estado              = $request->estado;
 
-           
 
 
-             $data->save();  
 
-            return response()->json(['success'=>'Successfully']);
+            $data->save();
 
-        
-            
-                   
-               
-       
-       /*       
+            return response()->json(['success' => 'Successfully']);
         } catch (\Exception  $exception) {
-              return back()->withError($exception->getMessage())->withInput();
-            }
-       */         
- 
-
-  
-         // $id =$data->id;
-       
-       //  return response()->json(['success'=>'Successfully']);
-       
+            return back()->withError($exception->getMessage())->withInput();
+        }
     }
 
     /**
@@ -196,8 +175,11 @@ class registrar_tratamientoController extends Controller
 
         
         return response()->json($id_tratamiento);
-      
     }
+
+
+
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -210,7 +192,6 @@ class registrar_tratamientoController extends Controller
 
         $id_tratamiento  = registrar_tratamientos::find($id);
         return response()->json($id_tratamiento);
-      
     }
 
 
@@ -226,21 +207,21 @@ class registrar_tratamientoController extends Controller
         $id_tratamiento = $request->input('id_tratamiento');
 
         $data = registrar_tratamientos::find($id_tratamiento);
-          
+
         $data->user_id             = $request->userId;
-        $data ->id_cliente         = $request->id_cliente;   
-        $data ->tratamiento        = $request->tratamiento2;  
-        $data ->nombre             = $request->nombreCliente;  
-        $data ->celular            = $request->celular;           
-     /*   $data->tratamiento         = $tratam;  */
+        $data->id_cliente         = $request->id_cliente;
+        $data->tratamientos       = $request->tratamiento2;
+        $data->nombre             = $request->nombreCliente;
+        $data->celular            = $request->celular;
+        /*   $data->tratamiento         = $tratam;  */
         $data->valor_tratamiento   = $request->valor_tratamiento2;
         $data->responsable         = $request->responsable;
-       
-      
+
+
 
         $data->save();
-     
-        return response()->json(['success'=>'update successfully.']);
+
+        return response()->json(['success' => 'update successfully.']);
     }
 
     /**
@@ -252,7 +233,7 @@ class registrar_tratamientoController extends Controller
     public function destroy($id)
     {
         registrar_tratamientos::find($id)->delete();
-     
-        return response()->json(['success'=>'deleted successfully.']);
+
+        return response()->json(['success' => 'deleted successfully.']);
     }
 }

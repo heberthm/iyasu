@@ -385,7 +385,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
               <input type="hidden" name="saldo" class="form-control" id="saldo">
 
-              <input type="text" id="tratamientos1" name="tratamientos1" class="form-control">
+              <input type="hidden" id="tratamientos1" name="tratamientos1" class="form-control">
 
 
               <div class="modal-footer">
@@ -592,25 +592,26 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
            <h5>Tratamientos realizados</h5>
 
-           <span>
-            <p>
+           <div>
+                             
 
+                    <table class="table table-striped">
+                     
+                    <tr class="bg-white">
+                      
+                      <th>Tratamientos</th>
+                      <th>Vr. tratamiento</th>
+                         
+                     </tr>
 
-            
-                 
-
-                   
-
-                    <input type="text"  name="tratamiento"   />  -   
-                  
-                    <input type="text"  name="valor_tratamiento"  />  </br>
-                    
-                   
-
-                   
+                      <tbody id="myTable">
+                          
+                      </tbody>
+                  </table>
+       
                                      
-           </p>
-          </span>
+           
+           </div>
             
 
             
@@ -733,7 +734,6 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
 
           for (let i = 0; i < valor_tratamiento.length; i++) {
-
 
 
             listaProductos.push({
@@ -1556,19 +1556,58 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
           $.ajax({
             url: 'ver_tratamiento/' + id,
             method: 'get',
+
+           dataType: 'json',
+          
             data: {
-              id: id
-            },
+              id: id, 
+           },
 
-            success: function(data) {
+            success: function(response) {
+  
+       
+              
+            let json = JSON.parse(response.tratamientos);
 
 
+          $("#myTable").empty();
+                
+             try {
 
               $('#modalVerTratamiento').modal('show');
 
-              $('#modalVerTratamiento input[name="tratamiento"]').val(data.tratamiento);
 
-              $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.id_cliente);
+             let table = document.getElementById('myTable')
+
+              for (var i = 0; i < json.length; i++){
+                let row = `<tr>
+
+                        <td>${json[i].tratamiento}</td>
+                        <td>${json[i].valor_tratamiento}</td>
+                       
+                      </tr>`
+                table.innerHTML += row
+
+
+              }
+
+           
+                  
+
+            } catch (err) {
+              // ⛔️ SyntaxError: "[object Object]" is not valid JSON
+            //  console.log(err.message);
+            }
+
+          
+        
+            
+           
+
+               // console.log(data[i].tratamiento)
+           //  } 
+
+           //   $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.id_cliente);
 
             //  $('#modalVerTratamiento input[name="nombreCliente"]').val(data.nombre);
 
@@ -1622,6 +1661,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
             success: function(data) {
 
 
+         
               $('#modalEditarTratamiento').modal('show');
 
               $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id);

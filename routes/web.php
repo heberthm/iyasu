@@ -48,6 +48,13 @@ Route::get('/', function () {
 Auth::routes();
 
 
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR USUARIOS
+
+// ======================================================
+
 Route::get('inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
 
 Route::get('listado_usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('listado_usuarios');
@@ -63,12 +70,27 @@ Route::post('actualizar_usuario/{id}', [App\Http\Controllers\Auth\RegisterContro
 Route::delete('eliminar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'destroy']);
 
 
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR BUSQUEDA DE CLIENTES
+
+// ======================================================
+
 Route::get('search', [App\Http\Controllers\Select2SearchController::class,'index']);
+
 Route::get('ajax-autocomplete-search', [App\Http\Controllers\Select2SearchController::class, 'selectSearch']);
 
 
 //Route::get('fullcalender', [CalendarController::class, 'index']);verificarcliente
 //Route::post('fullcalenderAjax', [CalendarController::class, 'ajax']);
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR CLIENTES
+
+// ======================================================
 
 Route::post('clientes',[App\Http\Controllers\ClientesController::class, 'store'])->name('clientes');
 
@@ -82,18 +104,39 @@ Route::post('/editarCliente',[App\Http\Controllers\ClientesController::class , '
 
 Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
 
-
 Route::get('actualizar_cliente', [App\Http\Controllers\HomeController::class, 'updateStatus']);
 
-
-//Route::get('/mostrar_clientes/{id_clientes}',[App\Http\Controllers\ClientesController::class, 'mostrarCliente']);
 Route::post('verificar_cliente', [App\Http\Controllers\ClientesController::class,'verificarCliente'])->name('verificar_cliente');
- 
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR FULLCALENDAR
+
+// ======================================================
+
+
+
 Route::get('fullcalendareventmaster',[CalendarController::class,'index']);
+
 Route::post('fullcalendareventmaster/create',[CalendarController::class,'create']);
+
 Route::post('fullcalendareventmaster/update',[CalendarController::class,'update']);
+
 Route::delete('fullcalendareventmaster/delete/{id}',[CalendarController::class,'destroy']);
+
 Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'update_event']);
+
+
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR HISTÓRIAS CLÍNICAS
+
+// ======================================================
 
 
 Route::get('historia_clinica/{id}', [App\Http\Controllers\historiasClinicasController::class, 'index']);
@@ -106,11 +149,20 @@ Route::get('/editar_historia/{id}', [App\Http\Controllers\historiasClinicasContr
 
 Route::post('/actualizar_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'update']);
 
-
-
 Route::post('/editar_historia/{id_cliente}', [App\Http\Controllers\historiasClinicasController::class, 'update']);
 
 Route::post('/eliminar_historia/{id}', [App\Http\Controllers\historiasClinicasController::class, 'destroy']);
+
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR CONTROLES MÉDICOS
+
+// ======================================================
+
+
 
 Route::get('/listado_controles/{id_controles}', [App\Http\Controllers\controlesController::class, 'index']);
 
@@ -121,6 +173,14 @@ Route::post('/actualizar_control/{id}', [App\Http\Controllers\controlesControlle
 Route::get('/editar_control/{id}', [App\Http\Controllers\controlesController::class, 'edit']);
 
 Route::delete('/eliminar_control/{id}', [App\Http\Controllers\controlesController::class, 'destroy']);
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR ABONOS A SALDO DE TRATAMIENTOS
+
+// ======================================================
 
 
 Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index']);
@@ -137,6 +197,16 @@ Route::post('actualizar_abono/{id}', [App\Http\Controllers\abonosClientesControl
 
 Route::delete('/eliminar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'destroy']);
 
+
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR TRATAMIENTOS
+
+// ======================================================
+
  
 Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
 
@@ -146,7 +216,7 @@ Route::get('editar_tratamientos/{id_tratamiento}', [App\Http\Controllers\registr
 
 Route::post('actualizar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'update']);
 
-Route::get('ver_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'show']);
+Route::get('ver_tratamiento/{data}', [App\Http\Controllers\registrar_tratamientoController::class, 'show']);
 
 Route::delete('/eliminar_tratamiento/{id}', [App\Http\Controllers\registrar_tratamientoController::class, 'destroy']);
 
@@ -154,6 +224,15 @@ Route::post('mensaje_pago_deuda', [App\Http\Controllers\registrar_tratamientoCon
 
 Route::get('deudores', [App\Http\Controllers\DeudoresController::class, 'index']);
 
+
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR TERAPIAS
+
+// ======================================================
 
 
 Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index']);
@@ -167,6 +246,14 @@ Route::post('actualizar_terapia/{id}', [App\Http\Controllers\terapiasController:
 Route::delete('eliminar_terapia/{id}', [App\Http\Controllers\terapiasController::class, 'destroy']);
 
 
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR TERAPIAS ADICIONALES
+
+// ======================================================
+
+
 Route::get('terapias_adicionales', [App\Http\Controllers\terapias_adicionalesController::class, 'index']);
 
 Route::post('crear_terapia_adicional', [App\Http\Controllers\terapias_adicionalesController::class, 'store']);
@@ -176,6 +263,15 @@ Route::get('editar_terapia_adicional/{id}', [App\Http\Controllers\terapias_adici
 Route::post('actualizar_terapia_adicional/{id}', [App\Http\Controllers\terapias_adicionalesController::class, 'update']);
 
 Route::delete('eliminar_terapia_adicional/{id}', [App\Http\Controllers\terapias_adicionalesController::class, 'destroy']);
+
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR LAVADOS
+
+// ======================================================
 
 
 Route::get('lavados', [App\Http\Controllers\lavadosController::class, 'index']);
@@ -191,12 +287,18 @@ Route::delete('eliminar_lavado/{id}', [App\Http\Controllers\lavadosController::c
 
 
 
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR PROFESIONALES
+
+// ======================================================
+
+
 Route::get('profesionales', [App\Http\Controllers\profesionalesController::class, 'index']);
 
 Route::post('crear_profesional', [App\Http\Controllers\profesionalesController::class, 'store']);
 
 Route::post('verificar_profesional', [App\Http\Controllers\profesionalesController::class, 'verificarProfesional']);
-
 
 Route::get('ver_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'show']);
 
@@ -206,6 +308,14 @@ Route::post('actualizar_profesional/{id}', [App\Http\Controllers\profesionalesCo
 
 Route::delete('eliminar_profesional/{id}', [App\Http\Controllers\profesionalesController::class, 'destroy']);
 
+
+
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR PAGO HONORARIOS
+
+// ======================================================
 
 Route::get('pago_honorarios', [App\Http\Controllers\HonorariosProfesionalesController::class, 'index']);
 
@@ -223,6 +333,12 @@ Route::delete('eliminar_honorario/{id}', [App\Http\Controllers\HonorariosProfesi
 
 
 
+
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR REGISTROS CONTABLES
+
+// ======================================================
 
 Route::post('/guardar_saldo',[App\Http\Controllers\Registros_contableController::class,'store']);
 
@@ -242,6 +358,11 @@ Route::post('/eliminar_registro/{id}', [App\Http\Controllers\Registros_contableC
 
 
 
+// ======================================================
+
+//  RUTAS PARA ADMINISTRAR ESTADÍSTICAS
+
+// ======================================================
 
 Route::get('estadisticas', [App\Http\Controllers\ChartJSController::class, 'index']);
 
