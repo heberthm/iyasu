@@ -77,7 +77,7 @@ Route::delete('eliminar_usuario/{id}', [App\Http\Controllers\Auth\RegisterContro
 
 // ======================================================
 
-Route::get('search', [App\Http\Controllers\Select2SearchController::class,'index']);
+Route::get('search', [App\Http\Controllers\Select2SearchController::class, 'index']);
 
 Route::get('ajax-autocomplete-search', [App\Http\Controllers\Select2SearchController::class, 'selectSearch']);
 
@@ -92,21 +92,21 @@ Route::get('ajax-autocomplete-search', [App\Http\Controllers\Select2SearchContro
 
 // ======================================================
 
-Route::post('clientes',[App\Http\Controllers\ClientesController::class, 'store'])->name('clientes');
+Route::post('clientes', [App\Http\Controllers\ClientesController::class, 'store'])->name('clientes');
 
-Route::post('crear_clientes',[App\Http\Controllers\ClientesController::class, 'create'])->name('crear_clientes');
+Route::post('crear_clientes', [App\Http\Controllers\ClientesController::class, 'create'])->name('crear_clientes');
 
 Route::post('/actualizar/{id}', [App\Http\Controllers\ClientesController::class, 'actulizarCliente']);
 
-Route::get('cliente/{id}', [Select2SearchController::class,'mostrarCliente'])->name('cliente');
+Route::get('cliente/{id}', [Select2SearchController::class, 'mostrarCliente'])->name('cliente');
 
-Route::post('/editarCliente',[App\Http\Controllers\ClientesController::class , 'update'])->name('editarCliente');
+Route::post('/editarCliente', [App\Http\Controllers\ClientesController::class, 'update'])->name('editarCliente');
 
 Route::get('/listado_cliente', [App\Http\Controllers\clientesController::class, 'index']);
 
 Route::get('actualizar_cliente', [App\Http\Controllers\HomeController::class, 'updateStatus']);
 
-Route::post('verificar_cliente', [App\Http\Controllers\ClientesController::class,'verificarCliente'])->name('verificar_cliente');
+Route::post('verificar_cliente', [App\Http\Controllers\ClientesController::class, 'verificarCliente'])->name('verificar_cliente');
 
 
 
@@ -118,15 +118,15 @@ Route::post('verificar_cliente', [App\Http\Controllers\ClientesController::class
 
 
 
-Route::get('fullcalendareventmaster',[CalendarController::class,'index']);
+Route::get('fullcalendareventmaster', [CalendarController::class, 'index']);
 
-Route::post('fullcalendareventmaster/create',[CalendarController::class,'create']);
+Route::post('fullcalendareventmaster/create', [CalendarController::class, 'create']);
 
-Route::post('fullcalendareventmaster/update',[CalendarController::class,'update']);
+Route::post('fullcalendareventmaster/update', [CalendarController::class, 'update']);
 
-Route::delete('fullcalendareventmaster/delete/{id}',[CalendarController::class,'destroy']);
+Route::delete('fullcalendareventmaster/delete/{id}', [CalendarController::class, 'destroy']);
 
-Route::get('fullcalendareventmaster/update_event',[CalendarController::class,'update_event']);
+Route::get('fullcalendareventmaster/update_event', [CalendarController::class, 'update_event']);
 
 
 
@@ -207,7 +207,7 @@ Route::delete('/eliminar_abono/{id}', [App\Http\Controllers\abonosClientesContro
 
 // ======================================================
 
- 
+
 Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
 
 Route::post('crear_tratamiento', [App\Http\Controllers\registrar_tratamientoController::class, 'store']);
@@ -340,16 +340,16 @@ Route::delete('eliminar_honorario/{id}', [App\Http\Controllers\HonorariosProfesi
 
 // ======================================================
 
-Route::post('/guardar_saldo',[App\Http\Controllers\Registros_contableController::class,'store']);
+Route::post('/guardar_saldo', [App\Http\Controllers\Registros_contableController::class, 'store']);
 
-Route::post('/guardar_ingreso',[App\Http\Controllers\Registros_contableController::class,'guardar_ingreso'])->name('guardar_ingreso');
+Route::post('/guardar_ingreso', [App\Http\Controllers\Registros_contableController::class, 'guardar_ingreso'])->name('guardar_ingreso');
 
-Route::post('/guardar_egreso',[App\Http\Controllers\Registros_contableController::class,'guardar_egreso'])->name('guardar_egreso');
+Route::post('/guardar_egreso', [App\Http\Controllers\Registros_contableController::class, 'guardar_egreso'])->name('guardar_egreso');
 
 Route::get('mostrarRegistros/{registros}', [App\Http\Controllers\Registros_contableController::class, 'mostrarRegistros']);
 
 
-Route::get('registros_contables', [App\Http\Controllers\Registros_contableController::class,'index']);
+Route::get('registros_contables', [App\Http\Controllers\Registros_contableController::class, 'index']);
 
 Route::post('/editar_registro', [App\Http\Controllers\Registros_contableController::class, 'update']);
 
@@ -371,5 +371,3 @@ Route::get('estadisticas', [App\Http\Controllers\ChartJSController::class, 'inde
 // Route::post('/listado_citas',[App\Http\Controllers\ListadoCitaMedicaController::class, 'store'])->name('listado_citas');
 
 //Route::delete('eliminar_cita/{id}', [App\Http\Controllers\ListadoCitaMedicaController::class, 'destroy'])->name('eliminar_cita');
-
-

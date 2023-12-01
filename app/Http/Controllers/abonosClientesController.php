@@ -50,7 +50,10 @@ class abonosClientesController extends Controller
 
     
                     $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerAbono"  title="Ver datos del abono" class="fa fa-eye verAbono"></a> 
-                   
+                  
+                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalImprimirTratamiento"  title="Imprimir recibo de abono" class="fa fa-print ImprimirRecibo"></a>
+
+
                     <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarAbono" title="Editar abono"   class="fa fa-edit editarAbono"></a>';
                     
                      
@@ -113,7 +116,7 @@ class abonosClientesController extends Controller
           $data ->user_id       = $request->userId;
           $data ->id_cliente    = $request->livesearch;
           $data ->id_tratamiento = $request->id_tratamiento;
-
+          
           $data->nombre            = $request->nombreCliente;
           $data->celular           = $request->celular;
           $data->valor_abono       = $request->valor_abono;

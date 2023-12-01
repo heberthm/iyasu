@@ -506,6 +506,8 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
+                
+
                 <div class="col-md-3">
                   <div class="form-group">
 
@@ -517,6 +519,31 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
                   </div>
                 </div>
+
+
+
+                <div class="col-md-12">
+               
+                    <table class="table table-striped">
+                     
+                    <tr class="bg-white">
+                      
+                      <th>Tratamientos</th>
+                      <th>Valor. tratamiento</th>
+                      <th></th>
+                         
+                     </tr>
+
+                      <tbody id="myTable2">
+                          
+                      </tbody>
+                  </table>
+       
+                                 
+           
+           </div>
+
+
 
                 <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::user()->name }}">
 
@@ -571,6 +598,8 @@ DATATABLE REGISTRO DE TRATAMIENTOS
           <div class="modal-header">
 
             <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Datos del tratamiento</h5>
+
+            
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
               <span aria-hidden="true">&times;</span>
@@ -590,17 +619,17 @@ DATATABLE REGISTRO DE TRATAMIENTOS
               <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
-           <h5>Tratamientos realizados</h5>
+           <h6>Cliente</h6>
 
            <div>
-                             
+                  <input type="text"  name="nombreCliente"  class="form-control  border-0"  readonly>
 
                     <table class="table table-striped">
                      
                     <tr class="bg-white">
                       
                       <th>Tratamientos</th>
-                      <th>Vr. tratamiento</th>
+                      <th>Valor. tratamiento</th>
                          
                      </tr>
 
@@ -609,7 +638,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                       </tbody>
                   </table>
        
-                                     
+                                 
            
            </div>
             
@@ -1609,7 +1638,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
            //   $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.id_cliente);
 
-            //  $('#modalVerTratamiento input[name="nombreCliente"]').val(data.nombre);
+              $('#modalVerTratamiento input[name="nombreCliente"]').val(response.nombre);
 
             //  $('#modalVerTratamiento input[name="celular"]').val(data.celular);
 
@@ -1661,7 +1690,36 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
             success: function(data) {
 
 
-         
+  let json = JSON.parse(data.tratamientos);
+
+
+          $("#myTable2").empty();
+                 
+          
+
+              let table = document.getElementById('myTable2')
+       
+            
+
+              for (var i = 0; i < json.length; i++){
+
+                let row = `<tr>
+
+                        <td>${json[i].tratamiento}</td>
+
+                        <td>${json[i].valor_tratamiento}</td>
+
+                               
+                       
+                      </tr>`
+
+                   //   $('#select').html(option);
+
+                table.innerHTML += row
+
+              }
+
+        
               $('#modalEditarTratamiento').modal('show');
 
               $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id);

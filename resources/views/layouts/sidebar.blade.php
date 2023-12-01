@@ -98,7 +98,7 @@
 
               <i class="nav-icon fas fa-book green"></i>
               <p>
-              Registros contales
+              Registros contables
               </p>
            </a>   
           </li>

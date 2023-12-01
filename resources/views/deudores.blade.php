@@ -108,8 +108,8 @@ DATATABLE LISTADO DE DEUDORES
 
                 <th>Nombre</th>
                 <th>Teléfono</th>
-                <th>Último abono</th>
-                <th>Fecha</th>
+                <th>saldo</th>
+                <th>tiempo trascurrido último abono</th>
               
                 
                
@@ -263,12 +263,12 @@ DESHABILITAR CLICK DERECHO
           name: 'celular'
         },
         {
-          data: 'valor_abono',
-          name: 'valor_abono'
+          data: 'saldo',
+          name: 'saldo'
         },
         {
-          data: 'created_at',
-          name: 'created_at'
+          data: 'updated_at',
+          name: 'updated_at'
         },
 
        

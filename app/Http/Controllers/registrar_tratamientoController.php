@@ -56,7 +56,7 @@ class registrar_tratamientoController extends Controller
                 ->addColumn('action', function ($data) {
 
 
-                    $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="' . $data->id . '" data-target="#modalVerTratamiento"  title="Ver datos del tratamiento" class="fa fa-eye verTratamiento"></a> 
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalVerTratamiento"  title="Ver tratamientos realizados" class="fa fa-eye verTratamiento"></a> 
                  
                   <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
   

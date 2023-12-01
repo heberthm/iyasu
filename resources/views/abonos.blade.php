@@ -701,11 +701,32 @@ MULTIPLICAR INPUTS PARA HALLAR SALDO DE TRATAMIENTO
 
 <script>
   $(document).ready(function() {
+
     $("#valor_abono").on('blur', function() {
+
+      let vr_abono = $("#valor_abono").val();
+      
+      let vr_tratamiento = $("#valor_tratamiento").val();
+
+     if(vr_abono > vr_tratamiento) {
+
+      alert('el valor abonado no puede ser mayor que el valor del tratamiento.')
+
+      $("#valor_abono").val('');
+
+      $("#valor_abono").focus();
+
+      $("saldo").val('');
+
+     }
+
+     else {
 
       $("#saldo").val(parseInt($("#valor_tratamiento").val()) - parseInt($("#valor_abono").val()));
 
       $('#estado').val('');
+
+     }
 
 
     });
