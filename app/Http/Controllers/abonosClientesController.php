@@ -10,6 +10,8 @@ use App\Models\abonos_clientes;
 
 use App\Models\registrar_tratamientos;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -28,13 +30,12 @@ class abonosClientesController extends Controller
     
               //  $id = $request->id_cliente;
     
-              $id = abonos_clientes::join('clientes', 'clientes.id_cliente', '=', 'abonos_clientes.id_cliente')
-               ->select('clientes.id_cliente', 'clientes.user_id', 'clientes.cedula', 'clientes.nombre', 
-                'clientes.celular', 'abonos_clientes.id', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.descripcion', 
+                $id = registrar_tratamientos::join('abonos_clientes', 'abonos_clientes.id_cliente', '=', 'registrar_tratamientos.id_cliente')
+               ->select('registrar_tratamientos.tratamientos', 'abonos_clientes.id', 'abonos_clientes.id_cliente', 'abonos_clientes.user_id', 'abonos_clientes.nombre', 
                'abonos_clientes.responsable', 'abonos_clientes.valor_abono','abonos_clientes.valor_tratamiento',   'abonos_clientes.saldo_actual',  'abonos_clientes.saldo',
                'abonos_clientes.created_at' )->get();
                   
-               
+        
     
                return datatables()->of($id)
 
@@ -51,8 +52,7 @@ class abonosClientesController extends Controller
     
                     $actionBtn = '<a href="javascript:void(0)" data-toggle="modal"  data-id="'.$data->id.'" data-target="#modalVerAbono"  title="Ver datos del abono" class="fa fa-eye verAbono"></a> 
                   
-                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalImprimirTratamiento"  title="Imprimir recibo de abono" class="fa fa-print ImprimirRecibo"></a>
-
+                    <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target=""  title="Imprimir recibo de abono" class="fa fa-print verFactura"></a>
 
                     <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarAbono" title="Editar abono"   class="fa fa-edit editarAbono"></a>';
                     
@@ -106,7 +106,6 @@ class abonosClientesController extends Controller
             'nombre'              =>    'max:60',
             'celular'             =>    'required|max:25',
             'valor_abono'         =>    'required|max:12',
-            'descripcion'         =>    'required|max:120',
             'responsable'         =>    'required|max:40',
           ]);
    
@@ -120,7 +119,6 @@ class abonosClientesController extends Controller
           $data->nombre            = $request->nombreCliente;
           $data->celular           = $request->celular;
           $data->valor_abono       = $request->valor_abono;
-          $data ->descripcion      = $request->descripcion;
           $data ->responsable      = $request->responsable;
           $data ->valor_tratamiento   = $request->valor_tratamiento2;
           $data ->saldo_actual       = $request->valor_tratamiento;
@@ -149,6 +147,21 @@ class abonosClientesController extends Controller
         return response()->json($id_abonos);
       
     }
+
+
+  /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function mostrarAbonos($id)
+    {
+        $id_abonos  = abonos_clientes::find($id);
+        return response()->json($id_abonos);
+      
+    }
+
 
     /**
      * Show the form for editing the specified resource.

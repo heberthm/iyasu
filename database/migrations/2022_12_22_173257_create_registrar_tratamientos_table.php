@@ -24,12 +24,14 @@ class CreateRegistrarTratamientosTable extends Migration
             $table->string('saldo',12)->nullable();
             $table->string('responsable',40)->nullable();
             $table->string('estado',20)->nullable();
-
-           
+       
 
             $table->timestamps();
 
-           // $table->foreign('id')->references('id')->on('abonos_clientes')->onDelete('cascade');
+           // $table->index(['id']);
+
+        //   $table->foreign('id')->references('id')->on('abonos_clientes')->onDelete('cascade');
+           
         });
     }
 

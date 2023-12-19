@@ -162,7 +162,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                 <th> Vr. Tratamiento</th>
                 <th>Fecha</th>
                 <th>Estado</th>
-                <th>Saldo</th>
+                <th>Saldo actual</th>
                 <th></th>
 
               </tr>
@@ -1695,12 +1695,10 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
           $("#myTable2").empty();
                  
-          
+         
 
               let table = document.getElementById('myTable2')
        
-            
-
               for (var i = 0; i < json.length; i++){
 
                 let row = `<tr>
@@ -1708,8 +1706,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
                         <td>${json[i].tratamiento}</td>
 
                         <td>${json[i].valor_tratamiento}</td>
-
-                               
+                             
                        
                       </tr>`
 

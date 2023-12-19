@@ -138,7 +138,6 @@ class registrar_tratamientoController extends Controller
         try {
 
 
-
             $data = new registrar_tratamientos();
 
             $data->user_id             = $request->userId;
@@ -148,7 +147,7 @@ class registrar_tratamientoController extends Controller
             $data->celular             = $request->celular;
             $data->saldo               = $request->valor;
             $data->valor_tratamiento   = $request->valor;
-            $data->tratamientos         = $request->tratamientos1;
+            $data->tratamientos        = $request->tratamientos1;
             $data->responsable         = $request->responsable;
             $data->estado              = $request->estado;
 

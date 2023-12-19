@@ -22,5 +22,6 @@ class abonos_clientes extends Model
     {
         return $this->belongsTo(registrar_tratamientos::class);
     }
+    
 
 }

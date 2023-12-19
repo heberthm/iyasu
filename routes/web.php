@@ -16,7 +16,10 @@ use App\Http\Controllers\profesionalesController;
 use App\Http\Controllers\DeudoresController;
 use App\Http\Controllers\lavadosController;
 use App\Http\Controllers\ChartJSController;
-use  App\Http\Controllers\Registros_contableController;
+use App\Http\Controllers\Registros_contableController;
+use App\Http\Controllers\PDFController;
+
+
 
 
 
@@ -197,6 +200,7 @@ Route::post('actualizar_abono/{id}', [App\Http\Controllers\abonosClientesControl
 
 Route::delete('/eliminar_abono/{id}', [App\Http\Controllers\abonosClientesController::class, 'destroy']);
 
+Route::get('mostrar_abonos/{id}', [App\Http\Controllers\abonosClientesController::class, 'mostrarAbonos']);
 
 
 
@@ -365,6 +369,18 @@ Route::post('/eliminar_registro/{id}', [App\Http\Controllers\Registros_contableC
 // ======================================================
 
 Route::get('estadisticas', [App\Http\Controllers\ChartJSController::class, 'index']);
+
+
+
+
+
+// ======================================================
+
+//  RUTA PARA ADMINISTRAR FACTURA PDF
+
+// ======================================================
+
+Route::get('factura/{id}', [App\Http\Controllers\PDFController::class, 'generarFactura']);
 
 
 

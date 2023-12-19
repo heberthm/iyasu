@@ -25,14 +25,17 @@ class DeudoresController extends Controller
             //  $id = $request->id_cliente;
           //  $date = Carbon::today()->subDays(30);
         
-            $id = registrar_tratamientos::select('id', 'nombre', 'celular',  'valor_tratamiento', 'saldo',  'estado', 'updated_at' )
+            $id = registrar_tratamientos::select('id', 'nombre', 'celular',  'valor_tratamiento', 'saldo',  'estado', 'created_at', 'updated_at' )
             
 
            ->where('saldo', '>', 0);
 
-         
+  
+        
            /*
-           ->whereDate('created_at', '<', now()->subDays(30)->format('Y-m-d h:i a'))
+           ->whereDate('created_at', '<', now()->subDays(30)->format('Y-m-d h:i a'));
+    
+          
            ->where('saldo', '>', 0)
            ->OrderBy('id', 'desc')->limit(1)
            ->groupBy('nombre')

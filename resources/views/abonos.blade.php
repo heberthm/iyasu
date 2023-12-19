@@ -144,7 +144,6 @@ DATATABLE LISTA DE ESPERA
               <tr>
 
                 <th>Paciente</th>
-                <th>Tratamiento</th>
                 <th>Fecha abono</th>
                 <th>Saldo actual</th>
                 <th>Vr. abono</th>
@@ -295,18 +294,7 @@ DATATABLE LISTA DE ESPERA
 
 
 
-                <div class="col-md-12">
 
-                  <div class="form-group">
-
-                    <label for="Descripcion" class="control-label">Tratamiento</label>
-
-                    <input type="text" name="descripcion" class="form-control " id="descripcion" required autocomplete="off">
-
-                    <div class="alert-message" id="descripcionError"></div>
-
-                  </div>
-                </div>
 
 
 
@@ -627,11 +615,6 @@ DATATABLE LISTA DE ESPERA
 
           </div>
 
-
-
-
-
-
           <div class="modal-footer">
 
             <button type="submit" id="editar_abono" name="editar_abono" class="btn btn-primary loader">Guardar</button>
@@ -649,6 +632,173 @@ DATATABLE LISTA DE ESPERA
 
 </div>
 
+
+
+
+
+
+<!--=====================================
+
+    MODAL VER FACTURA ABONO 
+
+======================================-->
+
+<div class="modal fade" id="modalVerFactura" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Ver factura de abono</h5>
+
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          <span aria-hidden="true">&times;</span>
+
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        <form id="form_ver_factura"  method="GET" action="{{ url('factura/{id}') }}">
+
+          <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
+
+          <div class="row">
+      
+
+          <div class="form-group ">
+
+            <label for="Factura">Factura No.</label>
+
+            <div class="col-sm-4">
+
+              <input type="text" readonly class="form-control-plaintext" name="id_abono">
+
+            </div>
+
+          </div>
+
+      
+         
+          <div class="form-group ">
+
+            <label for="Feca">Fecha</label>
+
+            <div class="col-sm-6">
+
+              <input type="text" readonly class="form-control-plaintext" name="fecha">
+
+            </div>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+
+                  <label for="cliente" class="control-label">Cliente</label>
+
+                  <input type="text" name="nombreCliente" class="form-control-plaintext"  required autocomplete="off">
+
+                  
+
+                </div>
+
+              </div>
+
+
+
+              <div class="col-md-4">
+
+              <div class="form-group">
+
+                <label for="valor_abono" class="control-label">Vr. abono</label>
+
+                <input type="number" name="valor_abono" class="form-control-plaintext" required autocomplete="off">
+
+               
+              </div>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="saldo actual" class="control-label">Saldo actual</label>
+
+                <input type="number" name="valor_tratamiento" class="form-control-plaintext"  readonly>
+
+
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+
+              <div class="form-group">
+
+                <label for="saldo" class="control-label">Nuevo saldo</label>
+
+                <input type="number" name="saldo" class="form-control-plaintext"  readonly>
+
+
+              </div>
+
+            </div>
+
+
+
+
+            <input type="hidden" name="responsable" class="form-control" id="responsable" value="{{ Auth::check() ? Auth::user()->name : null}}">
+
+            <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::check() ? Auth::user()->id : null}}" readonly>
+
+            <input type="hidden" name="id_cliente" class="form-control" id="id_cliente" readonly>
+
+            <input type="hidden" name="id_tratamiento" id="id_tratamiento">
+
+            <input type="hidden" name="valor_tratamiento2" id="valor_tratamiento2">
+
+            <input type="hidden" name="estado" id="estado">
+
+
+
+
+          </div>
+
+          
+
+
+          <div class="modal-footer">
+
+            <button type="submit" id="imprimir_factura" formtarget="_blank"  class="btn btn-primary loader ">Imprimir</button>
+            <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  </form>
+</div>
+
+
+</div>
 
 
 
@@ -705,28 +855,26 @@ MULTIPLICAR INPUTS PARA HALLAR SALDO DE TRATAMIENTO
     $("#valor_abono").on('blur', function() {
 
       let vr_abono = $("#valor_abono").val();
-      
+
       let vr_tratamiento = $("#valor_tratamiento").val();
 
-     if(vr_abono > vr_tratamiento) {
+      if (vr_abono > vr_tratamiento) {
 
-      alert('el valor abonado no puede ser mayor que el valor del tratamiento.')
+        alert('el valor abonado no puede ser mayor que el valor del tratamiento.')
 
-      $("#valor_abono").val('');
+        $("#valor_abono").val('');
 
-      $("#valor_abono").focus();
+        $("#valor_abono").focus();
 
-      $("saldo").val('');
+        $("saldo").val('');
 
-     }
+      } else {
 
-     else {
+        $("#saldo").val(parseInt($("#valor_tratamiento").val()) - parseInt($("#valor_abono").val()));
 
-      $("#saldo").val(parseInt($("#valor_tratamiento").val()) - parseInt($("#valor_abono").val()));
+        $('#estado').val('');
 
-      $('#estado').val('');
-
-     }
+      }
 
 
     });
@@ -778,7 +926,7 @@ SELECT2 - BUSQUEDAD DE CLIENTES
     allowClear: true,
     minimumInputLength: 3,
     ajax: {
-      
+
 
       url: 'buscar_tratamiento',
 
@@ -1011,10 +1159,7 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
           data: 'nombre',
           name: 'nombre'
         },
-        {
-          data: 'descripcion',
-          name: 'descripcion'
-        },
+
         {
           data: 'created_at',
           name: 'created_at',
@@ -1049,7 +1194,7 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
       "columnDefs": [{
         "orderable": false,
         "render": $.fn.dataTable.render.number('.'),
-        "targets": [3, 4, 5],
+        "targets": [2, 3, 4],
         className: 'dt-body-left',
       }],
 
@@ -1180,6 +1325,106 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
     });
+
+
+
+
+
+    // =========================================
+
+    /// MOSTRAR FACTURA DE ABONO DE CLIENTES
+
+    // =========================================
+
+
+    $('body').on('click', '.verFactura', function(e) {
+
+      let Fecha = '';
+
+      let id = $(this).data('id');
+      $('#form_ver_factura')[0].reset();
+
+      $.ajax({
+        url: 'mostrar_abonos/' + id,
+        method: 'GET',
+        data: {
+          id: id
+        },
+
+        success: function(data) {
+
+    
+
+          $('#modalVerFactura').modal('show');
+          $('#modalVerFactura input[name="id_abono"]').val(data.id);
+          $('#modalVerFactura input[name="fecha"]').val(data.created_at);
+          $('#modalVerFactura input[name="id_cliente"]').val(data.id_cliente);
+          $('#modalVerFactura input[name="nombreCliente"]').val(data.nombre);
+          $('#modalVerFactura input[name="celular"]').val(data.celular);
+          $('#modalVerFactura input[name="valor_abono"]').val(data.valor_abono);
+          $('#modalVerFactura input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+          $('#modalVerFactura input[name="saldo"]').val(data.saldo);
+          $('#modalVerFactura input[name="descripcion"]').val(data.descripcion);
+          $('#modalVerFactura input[name="responsable"]').val(data.responsable);
+
+
+          }
+
+         
+      });
+
+
+    });
+
+
+
+
+     // =========================================
+
+    /// IMPRIMIR FACTURA DE ABONO DE CLIENTE
+
+    // =========================================
+
+
+ $('#form_ver_factura').on('submit', '#imprimir_factura', function(e) {
+
+
+let id = $(this).data('id');
+
+$.ajax({
+  url: 'factura/' + id,
+  method: 'GET',
+  data: {
+    id: id
+  },
+
+  success: function(data) {
+
+/*
+
+    $('#modalVerAbono').modal('show');
+    $('#modalVerAbono input[name="id_abono"]').val(data.id)
+    $('#modalVerAbono input[name="id_cliente"]').val(data.id_cliente);
+    $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
+    $('#modalVerAbono input[name="celular"]').val(data.celular);
+    $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
+    $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+    $('#modalVerAbono input[name="saldo"]').val(data.saldo);
+    $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
+    $('#modalVerAbono input[name="responsable"]').val(data.responsable);
+
+ */
+
+  }
+
+});
+
+
+});
+
+
+
+
 
 
 
