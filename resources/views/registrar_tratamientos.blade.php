@@ -506,7 +506,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-                
+
 
                 <div class="col-md-3">
                   <div class="form-group">
@@ -523,25 +523,25 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
                 <div class="col-md-12">
-               
-                    <table class="table table-striped">
-                     
+
+                  <table class="table table-striped">
+
                     <tr class="bg-white">
-                      
+
                       <th>Tratamientos</th>
                       <th>Valor. tratamiento</th>
                       <th></th>
-                         
-                     </tr>
 
-                      <tbody id="myTable2">
-                          
-                      </tbody>
+                    </tr>
+
+                    <tbody id="myTable2">
+
+                    </tbody>
                   </table>
-       
-                                 
-           
-           </div>
+
+
+
+                </div>
 
 
 
@@ -599,7 +599,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
             <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Datos del tratamiento</h5>
 
-            
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
               <span aria-hidden="true">&times;</span>
@@ -619,31 +619,31 @@ DATATABLE REGISTRO DE TRATAMIENTOS
               <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
 
-           <h6>Cliente</h6>
+              <h6>Cliente</h6>
 
-           <div>
-                  <input type="text"  name="nombreCliente"  class="form-control  border-0"  readonly>
+              <div>
+                <input type="text" name="nombreCliente" class="form-control  border-0" readonly>
 
-                    <table class="table table-striped">
-                     
-                    <tr class="bg-white">
-                      
-                      <th>Tratamientos</th>
-                      <th>Valor. tratamiento</th>
-                         
-                     </tr>
+                <table class="table table-striped">
 
-                      <tbody id="myTable">
-                          
-                      </tbody>
-                  </table>
-       
-                                 
-           
-           </div>
-            
+                  <tr class="bg-white">
 
-            
+                    <th>Tratamientos</th>
+                    <th>Valor. tratamiento</th>
+
+                  </tr>
+
+                  <tbody id="myTable">
+
+                  </tbody>
+                </table>
+
+
+
+              </div>
+
+
+
 
 
 
@@ -1586,67 +1586,67 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
             url: 'ver_tratamiento/' + id,
             method: 'get',
 
-           dataType: 'json',
-          
+            dataType: 'json',
+
             data: {
-              id: id, 
-           },
+              id: id,
+            },
 
             success: function(response) {
-  
-       
-              
-            let json = JSON.parse(response.tratamientos);
 
 
-          $("#myTable").empty();
-                
-             try {
 
-              $('#modalVerTratamiento').modal('show');
+              let json = JSON.parse(response.tratamientos);
 
 
-             let table = document.getElementById('myTable')
+              $("#myTable").empty();
 
-              for (var i = 0; i < json.length; i++){
-                let row = `<tr>
+              try {
+
+                $('#modalVerTratamiento').modal('show');
+
+
+                let table = document.getElementById('myTable')
+
+                for (var i = 0; i < json.length; i++) {
+                  let row = `<tr>
 
                         <td>${json[i].tratamiento}</td>
                         <td>${json[i].valor_tratamiento}</td>
                        
                       </tr>`
-                table.innerHTML += row
+                  table.innerHTML += row
 
 
+                }
+
+
+
+
+              } catch (err) {
+                // ⛔️ SyntaxError: "[object Object]" is not valid JSON
+                //  console.log(err.message);
               }
 
-           
-                  
 
-            } catch (err) {
-              // ⛔️ SyntaxError: "[object Object]" is not valid JSON
-            //  console.log(err.message);
-            }
 
-          
-        
-            
-           
 
-               // console.log(data[i].tratamiento)
-           //  } 
 
-           //   $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.id_cliente);
+
+              // console.log(data[i].tratamiento)
+              //  } 
+
+              //   $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.id_cliente);
 
               $('#modalVerTratamiento input[name="nombreCliente"]').val(response.nombre);
 
-            //  $('#modalVerTratamiento input[name="celular"]').val(data.celular);
+              //  $('#modalVerTratamiento input[name="celular"]').val(data.celular);
 
-           //   $('#modalVerTratamiento input[name="tratamiento"]').val(data.tratamiento);
+              //   $('#modalVerTratamiento input[name="tratamiento"]').val(data.tratamiento);
 
-           //   $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+              //   $('#modalVerTratamiento input[name="valor_tratamiento"]').val(data.valor_tratamiento);
 
-           //   $('#modalVerTratamiento input[name="responsable"]').val(data.responsable);
+              //   $('#modalVerTratamiento input[name="responsable"]').val(data.responsable);
 
               //  $('#modalVerTratamiento input[name="fecha"]').val(date('d-m-Y  h:i A', strtotime(data.created_at)));
 
@@ -1690,16 +1690,16 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
             success: function(data) {
 
 
-  let json = JSON.parse(data.tratamientos);
+              let json = JSON.parse(data.tratamientos);
 
 
-          $("#myTable2").empty();
-                 
-         
+              $("#myTable2").empty();
+
+
 
               let table = document.getElementById('myTable2')
-       
-              for (var i = 0; i < json.length; i++){
+
+              for (var i = 0; i < json.length; i++) {
 
                 let row = `<tr>
 
@@ -1710,13 +1710,13 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
                        
                       </tr>`
 
-                   //   $('#select').html(option);
+                //   $('#select').html(option);
 
                 table.innerHTML += row
 
               }
 
-        
+
               $('#modalEditarTratamiento').modal('show');
 
               $('#modalEditarTratamiento input[name="id_tratamiento"]').val(data.id);

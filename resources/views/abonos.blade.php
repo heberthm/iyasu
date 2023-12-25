@@ -295,6 +295,17 @@ DATATABLE LISTA DE ESPERA
 
 
 
+                <div class="col-md-10">
+                  <div class="form-group">
+
+                    <label for="tratamientos" class="control-label">Tratamientos</label>
+
+                    <input type="text" name="tratamiento_1" class="form-control" id="tratamiento_1" readonly>
+
+
+                  </div>
+                </div>
+         
 
 
 
@@ -669,36 +680,36 @@ DATATABLE LISTA DE ESPERA
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-        <form id="form_ver_factura"  method="GET" action="{{ url('factura/{id}') }}">
+        <form id="form_ver_factura" method="GET" action="{{ url('factura/{id}') }}">
 
           <!--  <input type="hidden" name="_token" value="{{csrf_token()}}">   -->
 
           <div class="row">
-      
 
-          <div class="form-group ">
 
-            <label for="Factura">Factura No.</label>
+            <div class="form-group ">
 
-            <div class="col-sm-4">
+              <label for="Factura">Factura No.</label>
 
-              <input type="text" readonly class="form-control-plaintext" name="id_abono">
+              <div class="col-sm-4">
 
-            </div>
+                <input type="text" readonly class="form-control-plaintext" name="id_abono">
 
-          </div>
-
-      
-         
-          <div class="form-group ">
-
-            <label for="Feca">Fecha</label>
-
-            <div class="col-sm-6">
-
-              <input type="text" readonly class="form-control-plaintext" name="fecha">
+              </div>
 
             </div>
+
+
+
+            <div class="form-group ">
+
+              <label for="Feca">Fecha</label>
+
+              <div class="col-sm-6">
+
+                <input type="text" readonly class="form-control-plaintext" name="fecha">
+
+              </div>
 
             </div>
 
@@ -706,21 +717,21 @@ DATATABLE LISTA DE ESPERA
 
             <div class="col-md-4">
 
-                <div class="form-group">
+              <div class="form-group">
 
-                  <label for="cliente" class="control-label">Cliente</label>
+                <label for="cliente" class="control-label">Cliente</label>
 
-                  <input type="text" name="nombreCliente" class="form-control-plaintext"  required autocomplete="off">
+                <input type="text" name="nombreCliente" class="form-control-plaintext" required autocomplete="off">
 
-                  
 
-                </div>
 
               </div>
 
+            </div>
 
 
-              <div class="col-md-4">
+
+            <div class="col-md-4">
 
               <div class="form-group">
 
@@ -728,7 +739,7 @@ DATATABLE LISTA DE ESPERA
 
                 <input type="number" name="valor_abono" class="form-control-plaintext" required autocomplete="off">
 
-               
+
               </div>
 
             </div>
@@ -740,7 +751,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="saldo actual" class="control-label">Saldo actual</label>
 
-                <input type="number" name="valor_tratamiento" class="form-control-plaintext"  readonly>
+                <input type="number" name="valor_tratamiento" class="form-control-plaintext" readonly>
 
 
               </div>
@@ -753,7 +764,7 @@ DATATABLE LISTA DE ESPERA
 
                 <label for="saldo" class="control-label">Nuevo saldo</label>
 
-                <input type="number" name="saldo" class="form-control-plaintext"  readonly>
+                <input type="number" name="saldo" class="form-control-plaintext" readonly>
 
 
               </div>
@@ -780,12 +791,12 @@ DATATABLE LISTA DE ESPERA
 
           </div>
 
-          
+
 
 
           <div class="modal-footer">
 
-            <button type="submit" id="imprimir_factura" formtarget="_blank"  class="btn btn-primary loader ">Imprimir</button>
+            <button type="submit" id="imprimir_factura" formtarget="_blank" class="btn btn-primary loader ">Imprimir</button>
             <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
           </div>
@@ -854,9 +865,9 @@ MULTIPLICAR INPUTS PARA HALLAR SALDO DE TRATAMIENTO
 
     $("#valor_abono").on('blur', function() {
 
-      let vr_abono = $("#valor_abono").val();
+      let vr_abono = parseInt($("#valor_abono").val());
 
-      let vr_tratamiento = $("#valor_tratamiento").val();
+      let vr_tratamiento = parseInt($("#valor_tratamiento").val());
 
       if (vr_abono > vr_tratamiento) {
 
@@ -934,13 +945,15 @@ SELECT2 - BUSQUEDAD DE CLIENTES
       delay: 250,
       processResults: function(data) {
 
+
+
         return {
           results: $.map(data, function(item) {
             return {
               text: item.nombre,
               id: item.id_cliente,
               id_tratamiento: item.id_tratamiento,
-              tratamiento: item.tratamiento,
+
               celular: item.celular,
               valor_tratamiento: item.valor_tratamiento,
               saldo: item.saldo,
@@ -950,13 +963,17 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
           })
 
+
+
         };
+
 
       },
 
       cache: true,
 
     }
+
 
 
   });
@@ -1034,6 +1051,7 @@ BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
     $('#descripcion').val('');
     $('#valor_abono').val('');
     $('#saldo').val('');
+ 
 
 
   });
@@ -1353,7 +1371,7 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
         success: function(data) {
 
-    
+
 
           $('#modalVerFactura').modal('show');
           $('#modalVerFactura input[name="id_abono"]').val(data.id);
@@ -1368,9 +1386,9 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
           $('#modalVerFactura input[name="responsable"]').val(data.responsable);
 
 
-          }
+        }
 
-         
+
       });
 
 
@@ -1379,48 +1397,104 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
 
-     // =========================================
+
+
+    // =========================================
+
+    /// MOSTRAR TRATAMIENTOS DE CLIENTES
+
+    // =========================================
+
+
+
+    $('#form_agregar_abono').on('focus', '#valor_abono', function(e) {
+
+
+      e.preventDefault();
+
+
+      let id = $('#id_tratamiento').val();
+
+      $.ajax({
+        url: 'mostrar_tratamiento/' + id,
+        method: 'GET',
+        data: {
+          id: id
+        },
+
+
+        success: function(data) {
+
+
+          let json = JSON.parse(data.tratamientos);
+
+          let itemsArray = [];
+
+          for (let i = 0; i < json.length; i++) {
+
+            let items = json[i].tratamiento;
+
+            itemsArray.push(items);
+
+            let tratamientos = itemsArray.join();
+
+            $('#tratamiento_1').val(tratamientos);
+
+          }
+        
+        }
+
+      });
+
+
+    });
+
+
+
+
+
+    // =========================================
 
     /// IMPRIMIR FACTURA DE ABONO DE CLIENTE
 
     // =========================================
 
 
- $('#form_ver_factura').on('submit', '#imprimir_factura', function(e) {
+    $('#form_ver_factura').on('submit', '#imprimir_factura', function(e) {
 
 
-let id = $(this).data('id');
+      let id = $(this).data('id');
 
-$.ajax({
-  url: 'factura/' + id,
-  method: 'GET',
-  data: {
-    id: id
-  },
+      $.ajax({
+        url: 'factura/' + id,
+        method: 'GET',
+        data: {
+          id: id
+        },
 
-  success: function(data) {
+        success: function(data) {
 
-/*
+          /*
 
-    $('#modalVerAbono').modal('show');
-    $('#modalVerAbono input[name="id_abono"]').val(data.id)
-    $('#modalVerAbono input[name="id_cliente"]').val(data.id_cliente);
-    $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
-    $('#modalVerAbono input[name="celular"]').val(data.celular);
-    $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
-    $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
-    $('#modalVerAbono input[name="saldo"]').val(data.saldo);
-    $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
-    $('#modalVerAbono input[name="responsable"]').val(data.responsable);
+              $('#modalVerAbono').modal('show');
+              $('#modalVerAbono input[name="id_abono"]').val(data.id)
+              $('#modalVerAbono input[name="id_cliente"]').val(data.id_cliente);
+              $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
+              $('#modalVerAbono input[name="celular"]').val(data.celular);
+              $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
+              $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+              $('#modalVerAbono input[name="saldo"]').val(data.saldo);
+              $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
+              $('#modalVerAbono input[name="responsable"]').val(data.responsable);
 
- */
+           */
 
-  }
+        }
 
-});
+      });
 
 
-});
+    });
 
 
 

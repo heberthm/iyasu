@@ -90,7 +90,8 @@ class registrar_tratamientoController extends Controller
         if ($request->has('q')) {
             $search = $request->q;
 
-            $id = registrar_tratamientos::select('id as id_tratamiento', "id_cliente", "nombre", "celular", "saldo", "tratamientos", "valor_tratamiento", "estado")
+            $id = registrar_tratamientos::select('id as id_tratamiento', 'id_cliente', 'nombre', 'celular', 'saldo',
+                                                 'tratamientos', 'valor_tratamiento', 'estado')
 
                 ->where('nombre',  'LIKE', "%${search}%")
                 ->where('saldo', '!=', 0)
@@ -99,6 +100,16 @@ class registrar_tratamientoController extends Controller
                 ->get();
         }
         return response()->json($id);
+    }
+
+
+    public function mostrarTratamiento($id)
+    {
+
+        $id_tratamiento = registrar_tratamientos::find($id);    
+
+
+        return response()->json($id_tratamiento);
     }
 
 

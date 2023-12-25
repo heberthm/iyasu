@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Larave Generate Invoice PDF - Nicesnippest.com</title>
+    <title>Centro holístico iyasu - Factura de abono</title>
 </head>
 <style type="text/css">
     body{
@@ -38,7 +38,7 @@
     .logo img{
         width:45px;
         height:45px;
-        padding-top:30px;
+        padding-top:10px;
     }
     .logo span{
         margin-left:8px;
@@ -98,15 +98,15 @@
 
 @foreach($abonos as $abono)
     
-<div class="head-title">
+<div class="head-title float-right">
 
     <h3 class="text-center "w-50 m-0 p-0">Factura No. &nbsp;<span>{{ $abono->id }}</span></h3>
 
-</div>
+</div>    
 
 <div style="clear: both;"></div>
 
-</br> </br>
+</br>
 
 
 
@@ -118,9 +118,11 @@
        
 
         <tr>
-            <td class="w-50">Cliente: <p><span >{{ $abono->nombre }}</span></p></td>  
+            <td  style="font-size: 12px;">Cliente: <p><span >{{ $abono->nombre }}</span></p></td>  
 
-            <td class="w-50">Tel / Cel: <p><span >{{ $abono->celular }}</span></p></td>  
+            <td  style="font-size: 12px;">Tel / Cel: <p><span >{{ $abono->celular }}</span></p></td>  
+
+            <td  style="font-size: 12px;">Fecha abono: <p><span >{{ \Carbon\Carbon::createFromTimestamp(strtotime($abono->created_at))->format('d-m-Y h:i A')}}</span></p></td>  
             
         </tr>
 
@@ -134,13 +136,13 @@
 
         <tr>
           
-            <th class="w-50">Tratamiento</th>
+            <th style="font-size: 12px;">Tratamiento</th>
 
-            <th class="w-50">valor</th>
+            <th style="font-size: 12px;">valor</th>
 
-            <th class="w-50">Abono</th>
+            <th style="font-size: 12px;">Abono</th>
 
-            <th class="w-50">Saldo</th>
+            <th style="font-size: 12px;">Saldo</th>
             
         </tr>
 
@@ -168,9 +170,9 @@
 
 <div 
             
-       <p style="font:10px"> Impresión hecha por: <span>{{ $abono->responsable }}</span></p> 
+       <p style="font-size: 12px;"> Impresión hecha por: <span>{{ $abono->responsable }}</span></p> 
      
-       <p style="font:10px"> Fecha impresión :   <span> {{\Carbon\Carbon::now("America/bogota")->format('d-m-Y h:m A')}} </span> </p>
+       <p style="font-size: 12px;"> Fecha impresión :   <span> {{\Carbon\Carbon::now("America/bogota")->format('d-m-Y h:i A')}} </span> </p>
 
  
                        
