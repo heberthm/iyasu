@@ -22,6 +22,10 @@
     background-color: #ffff99;
   }
 
+  .table.dataTable {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  }
 
   .alert-message {
     color: red;
@@ -228,7 +232,7 @@ FORMULARIO RECEPCION DE PACIENTES
 
 
 
-<!-- ==================================
+            <!-- ==================================
 
 DATATABLE CLIENTES QUE CUMPLEN AÑOS
 
@@ -290,31 +294,45 @@ CALENDAR - AGENDAR   MEDICA
 ================================== -->
 
       <div class="card" style="height:97%">
+
         <div class="card card-light">
+
           <div class="card-header">
+
             <h3 class="card-title"><span style="color: #28a745;" class="fas fa-calendar mr-3"></span>Agenda de citas</h3>
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#ModalCalendar">
+
               <span class="fa fa-calendar fa-fw" tabindex="3"></span> Agregar cita
+
             </button>
-          </div>
-          <div class="card-body">
-            <div class="container">
-              <div id="calendar"></div>
 
-              <div id="loading" style="display: none;">
-                <img id="loading-image" src="../img/loader.gif" alt="Cargando..." />
-              </div>
-            </div>
           </div>
-          <!-- /.card-body -->
+
+
+         
+
+          <div class="container">
+
+          <div id="calendar"></div>
+
+          <div id="loading" style="display: none;">
+
+            <img id="loading-image" src="../img/loader.gif" alt="Cargando..." />
+
+          </div>
+
+         
+
+         </div>
+
         </div>
-
-
+        <!-- /.card-body -->
 
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
+
     </section>
     <!-- /.content -->
   </div>
@@ -341,15 +359,17 @@ CALENDAR - AGENDAR   MEDICA
 
           <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-calendar mr-3"></span>Calendario citas</h5>
 
-           <div class="col-6 align-items-center" style="font-size: small;">
-         
-         <div id="tituloMes">
+          <div class="col-6 align-items-center" style="font-size: small;">
 
-            <h6> <div class="mx-8 titulo-mes" style="color:brown" ></div></h6>
-         
+            <div id="tituloMes">
+
+              <h6>
+                <div class="mx-8 titulo-mes" style="color:brown"></div>
+              </h6>
+
+            </div>
+
           </div>
-
-        </div>
 
 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -471,7 +491,7 @@ CALENDAR - AGENDAR   MEDICA
                 <div class="form-group">
 
                   <select class="livesearch2 form-control" id="livesearch2" name="nombre_cliente" style="width: 100%;"></select>
-                
+
                 </div>
 
 
@@ -580,7 +600,7 @@ CALENDAR - AGENDAR   MEDICA
 
                 <label for="descripcion" class="control-label">Comentario</label>
 
-                <input type="text" name="descripcion" class="form-control" id="descripcion" autocomplete="off">
+                <input type="text" name="descripcion" class="form-control" id="descripcion" maxlength=150 autocomplete="off">
               </div>
             </div>
 
@@ -1168,10 +1188,10 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
 
           <!-- 
-<div class="form-group">
-<label for="end" class="col-sm-2 control-label">Fecha final</label>
+          <div class="form-group">
+          <label for="end" class="col-sm-2 control-label">Fecha final</label>
 
--->
+          -->
 
 
           <input type="hidden" name="userId" class="form-control" id="userId" value="{{ Auth::user()->id }}" readonly>
@@ -1214,7 +1234,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
 ======================================-->
 
-<div class="modal fade" id="modalAgregarCliente2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  data-id="1">
+<div class="modal fade" id="modalAgregarCliente2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-id="1">
 
 
 
@@ -1458,7 +1478,7 @@ VENTANA MODAL EDITAR DATOS DEL CALENDARIO
 
           <div class="modal-footer">
 
-            <button type="submit" id="agregar_cliente2" name="agregar_cliente2"  class="btn btn-primary loader">Guardar</button>
+            <button type="submit" id="agregar_cliente2" name="agregar_cliente2" class="btn btn-primary loader">Guardar</button>
             <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
           </div>
@@ -1705,7 +1725,7 @@ MODAL DATATABLE LISTADO DE CLIENTES
 
               </tbody>
 
-            
+
 
 
 
@@ -1748,7 +1768,7 @@ MODAL DATATABLE LISTADO DE CLIENTES
   </div>
 
 
-<!-- ========================================
+  <!-- ========================================
 
 MOSTRAR SPINNER AL CARGAR PAGINA
 
@@ -1764,7 +1784,7 @@ MOSTRAR SPINNER AL CARGAR PAGINA
         })
       }, 1000);
 
-      
+
 
     });
   </script>
@@ -1933,8 +1953,9 @@ DESHABILITAR CLICK DERECHO
 
 
       function getlist_calendartipos() {
-        let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje', 
-                    'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'];
+        let list = ['auriculoterapia', 'biomagnetismo', 'colonterapia', 'colonterapia - lodoterapia', 'control', 'drenaje',
+          'lodoterapia', 'masaje', 'terapia con imanes', 'terapia neural'
+        ];
 
         return list
       }
@@ -2220,7 +2241,7 @@ DESHABILITAR CLICK DERECHO
 
 
 
-           $('#form_crear_cliente2')[0].reset();
+            $('#form_crear_cliente2')[0].reset();
             $('#modalAgregarCliente2').modal('hide');
 
 
@@ -2243,19 +2264,17 @@ DESHABILITAR CLICK DERECHO
 
 
   <script>
-  
-  $(document).ready(function() {
+    $(document).ready(function() {
 
-    $('#modalAgregarCliente').on('hide.bs.modal', function() {
-            let valor1 = $('.nombre_cliente').val();
-            let valor2 = $('.celular_cliente').val();
-            $('#ModalAdd').find('input[id="livesearch2"]').val(valor1);
-            $('#ModalAdd').find('input[id="celular_cliente"]').val(valor2);
-        });
-        
-   
-  });
+      $('#modalAgregarCliente').on('hide.bs.modal', function() {
+        let valor1 = $('.nombre_cliente').val();
+        let valor2 = $('.celular_cliente').val();
+        $('#ModalAdd').find('input[id="livesearch2"]').val(valor1);
+        $('#ModalAdd').find('input[id="celular_cliente"]').val(valor2);
+      });
 
+
+    });
   </script>
 
 
@@ -2385,7 +2404,7 @@ DATATABLE MOSTRAR LISTADO DE CLIENTES
         paging: true,
         info: true,
         filter: true,
-       
+
 
 
         "language": {
@@ -2415,13 +2434,11 @@ DATATABLE MOSTRAR LISTADO DE CLIENTES
 
       });
     });
-
-</script>
-
+  </script>
 
 
-<script>
-  
+
+  <script>
     // =========================================
 
     //ACTIVAR / DESACTIVAR CLIENTES - BOOTSTRAP TOGGLE
@@ -2429,43 +2446,39 @@ DATATABLE MOSTRAR LISTADO DE CLIENTES
     // ============================================== 
 
 
-    
-
-      $('.switch').change(function() {
-
-        //  $('body').on('change', '.switch', function(e) {
 
 
-        let estado = $(this).prop('checked') === true ? 1 : 0;
-        let id = $(this).data('id');
+    $('.switch').change(function() {
+
+      //  $('body').on('change', '.switch', function(e) {
 
 
-        $.ajax({
+      let estado = $(this).prop('checked') === true ? 1 : 0;
+      let id = $(this).data('id');
 
-          type: "GET",
-          dataType: "json",
-          url: 'actualizar_cliente',
-          data: {
-            'estado': estado,
-            'id': id
-          },
-          success: function(data) {
-            console.log(data.success)
 
-            if (estado === 1) {
-              toastr["success"]("El cliente se ha habilitado.");
+      $.ajax({
 
-            } else if (estado === 0) {
-              toastr["success"]("El cliente se ha deshabilitado temporalmente.");
-            }
+        type: "GET",
+        dataType: "json",
+        url: 'actualizar_cliente',
+        data: {
+          'estado': estado,
+          'id': id
+        },
+        success: function(data) {
+          console.log(data.success)
+
+          if (estado === 1) {
+            toastr["success"]("El cliente se ha habilitado.");
+
+          } else if (estado === 0) {
+            toastr["success"]("El cliente se ha deshabilitado temporalmente.");
           }
+        }
 
-        })
-      });
-
-
-
-   
+      })
+    });
   </script>
 
 
@@ -2918,25 +2931,40 @@ RESET SELECT2: selectBuscarCliente
       let calendar = $('#calendar').fullCalendar({
 
         loading: function(isLoading, view) {
+
           if (isLoading) {
+
             $('#loading').show();
+
           } else {
+
             $('#loading').hide();
+
           }
+
         },
 
-        locale: "es",
+        locale: 'es',
+
         timezone: 'local',
+
         editable: true,
+
         defaultView: 'listDay',
+
         events: SITEURL + "inicio",
+
+        height: 500,
+
         //displayEventTime: true,
         // themeSystem: 'bootstrap4',
 
         timeFormat: "H:mm a",
 
         slotLabelFormat: [
+
           'H: (mm)a',
+
         ],
 
 
@@ -2950,10 +2978,10 @@ RESET SELECT2: selectBuscarCliente
         events: SITEURL + "/fullcalendareventmaster",
 
         editable: true,
+
         selectable: true,
+
         selectHelper: true,
-
-
 
         eventRender: function(Event) {
 
@@ -2961,8 +2989,11 @@ RESET SELECT2: selectBuscarCliente
           $('.popover').remove();
 
           if (Event.allDay === 'true') {
+
             Event.allDay = true;
+
           } else {
+
             Event.allDay = false;
           }
 
@@ -2977,8 +3008,11 @@ RESET SELECT2: selectBuscarCliente
           element.popover({
 
             placement: 'left',
+
             trigger: 'hover',
+
             container: 'body',
+
             html: true,
 
             title: event.cliente,
@@ -3013,10 +3047,13 @@ RESET SELECT2: selectBuscarCliente
 
 
           $('#ModalEdit #cliente').val(event.cliente);
+
           $('#ModalEdit #telefono').val(event.telefono);
+
           // $('#ModalEdit #email').html(event.email);
 
           $('#ModalEdit #medico').val(event.medico);
+
           $('#ModalEdit #descripcion').val(event.descripcion);
 
           $('#ModalEdit #servicios').val(event.title);
@@ -3025,7 +3062,9 @@ RESET SELECT2: selectBuscarCliente
           $('#ModalEdit #color2').val(event.color);
 
           $('#ModalEdit #hora_ini').val(moment(event.start).format('YYYY-MM-DD HH:mm:ss'));
+
           $('#ModalEdit #hora_fin').val(moment(event.end).format('YYYY-MM-DD HH:mm:ss'));
+
           $('#ModalEdit #fecha_actual').val(moment(event.start).format('DD-MM-YYYY'));
 
 
@@ -3036,12 +3075,15 @@ RESET SELECT2: selectBuscarCliente
         },
 
       });
+
     });
 
 
 
     function displayMessage(message) {
+
       toastr.success(message);
+
     }
   </script>
 
@@ -3055,65 +3097,103 @@ RESET SELECT2: selectBuscarCliente
 
   <script>
     $(document).ready(function() {
+
       let SITEURL = "{{url('/')}}";
 
       $.ajaxSetup({
+
         headers: {
+
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
         }
+
       });
 
       let calendar = $('#calendar2').fullCalendar({
 
 
         loading: function(isLoading, view) {
+
           if (isLoading) {
+
             $('#loading2').show();
+
           } else {
+
             $('#loading2').hide();
+
           }
+
         },
 
 
-
         locale: "es",
+
         timezone: 'local',
+
         editable: true,
+
         defaultView: "agendaDay",
+
         events: SITEURL + "inicio",
+
         displayEventTime: true,
+
         eventLimit: true, // allow "more" link when too many events
+
         minTime: "07:00",
+
         maxTime: "20:00",
+
         nowIndicator: true,
+
         timeFormat: "H:mm a",
+
         slotDuration: '00:30:00',
 
 
         slotLabelFormat: [
+
           'H: (mm)a',
+
         ],
 
         header: {
+
           left: 'prev,next today',
+
           center: 'print',
+
           right: 'agendaDay, agendaThreeDay, agendaWeek, month'
+
         },
 
         views: {
+
           agendaThreeDay: {
+
             type: 'agenda',
+
             duration: {
+
               days: 3
+
             },
+
             buttonText: 'Tres días'
           },
+
           agendaDay: {
+
             type: 'agenda',
+
             duration: {
+
               days: 1
+
             },
-         
+
 
 
             buttonText: 'Día'
@@ -3124,12 +3204,14 @@ RESET SELECT2: selectBuscarCliente
 
         // navLinks: true, 
 
-      
-       
+
         viewRender: function(view) {
+
           var title = view.title;
+
           $(".titulo-mes").html(title);
-      },
+
+        },
 
 
         events: SITEURL + "/fullcalendareventmaster",
@@ -3141,19 +3223,24 @@ RESET SELECT2: selectBuscarCliente
           $('.popover').remove();
 
           if (event.allDay === 'true') {
+
             event.allDay = true;
+
           } else {
+
             event.allDay = false;
+
           }
-
-
 
 
           element.popover({
 
             placement: 'left',
+
             trigger: 'hover',
+
             container: 'body',
+
             html: true,
 
             title: event.cliente,
@@ -3183,10 +3270,12 @@ RESET SELECT2: selectBuscarCliente
         select: function(start, end, allDay) {
 
 
-
           $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm'));
+
           $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm'));
+
           $('#ModalAdd #hora_ini').val(moment(start).format('hh:mm a'));
+
           $('#ModalAdd #hora_fin').val(moment(end).format('hh:mm a'));
 
           $('#ModalAdd #fecha_actual').val(moment(start).format('DD-MM-YYYY'));
@@ -3252,16 +3341,27 @@ RESET SELECT2: selectBuscarCliente
           $('.popover.fade.top').remove();
 
           let start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+
           let end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+
           $.ajax({
+
             url: SITEURL + '/fullcalendareventmaster/update',
+
             data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id=' + event.id,
+
             type: "POST",
+
             success: function(response) {
+
               displayMessage("Evento actualizado correctamente.");
+
               $('#calendar').fullCalendar('refetchEvents');
+
             }
+
           });
+
         },
 
         eventResize: function(event) {
@@ -3269,13 +3369,19 @@ RESET SELECT2: selectBuscarCliente
           $('.popover.fade.top').remove();
 
           var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+
           var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
 
           $.ajax({
+
             url: SITEURL + '/fullcalendareventmaster/update',
+
             data: 'title=' + event.title + '&start=' + start + '&end=' + end + '&id=' + event.id + 'color=' + event.color,
+
             type: "POST",
+
             success: function(response) {
+
               displayMessage("Evento actualizado correctamente.");
 
               $('#calendar').fullCalendar('refetchEvents');
@@ -3292,12 +3398,12 @@ RESET SELECT2: selectBuscarCliente
 
           $('#ModalEdit #id').val(event.id);
 
-
           $('#ModalEdit #cliente').val(event.cliente);
+
           $('#ModalEdit #telefono').val(event.telefono);
-          // $('#ModalEdit #email').html(event.email);
 
           $('#ModalEdit #medico').val(event.medico);
+
           $('#ModalEdit #descripcion').val(event.descripcion);
 
           $('#ModalEdit #servicios').val(event.title);
@@ -3307,9 +3413,10 @@ RESET SELECT2: selectBuscarCliente
           $('#ModalEdit #color2').val(event.color);
 
           $('#ModalEdit #hora_ini').val(moment(event.start).format('YYYY-MM-DD HH:mm:ss'));
-          $('#ModalEdit #hora_fin').val(moment(event.end).format('YYYY-MM-DD HH:mm:ss'));
-          $('#ModalEdit #fecha_actual').val(moment(event.start).format('DD-MM-YYYY'));
 
+          $('#ModalEdit #hora_fin').val(moment(event.end).format('YYYY-MM-DD HH:mm:ss'));
+
+          $('#ModalEdit #fecha_actual').val(moment(event.start).format('DD-MM-YYYY'));
 
           $('#ModalEdit').modal('show');
 
@@ -3363,19 +3470,21 @@ RESET SELECT2: selectBuscarCliente
       $("#filtrar_calendario").on("keyup", function() {
 
         var value = $(this).val().toLowerCase();
+
         $("#filtrar_calendario").filter(function() {
+
           $(this).text().toLowerCase().indexOf(value) > -1
+
         });
 
 
         $('#calendar2').fullCalendar('rerenderEvents');
+
       });
 
 
-
-
-
       $('#ModalCalendar').on('shown.bs.modal', function() {
+
         $("#calendar2").fullCalendar('render');
 
         $("#calendar2").fullCalendar('refetchEvents');
@@ -3385,15 +3494,12 @@ RESET SELECT2: selectBuscarCliente
       });
 
 
-
-
     });
 
-
-
-
     function displayMessage(message) {
+
       toastr.success(message);
+
     }
   </script>
 
@@ -3418,26 +3524,34 @@ INSERTAR DATOS A FULLCALENDAR
         /* Configurar botón submit con spinner */
 
         let btn = $('#agregar_cita')
+
         let existingHTML = btn.html() //store exiting button HTML
         //Add loading message and spinner
+
         $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
 
         setTimeout(function() {
-          $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
-        }, 5000) //5 seconds
 
+          $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+
+        }, 5000) //5 seconds
 
 
 
         $.ajax({
           url: "/fullcalendareventmaster/create",
+
           method: "POST",
+
           data: $(this).serialize(),
+
           dataType: "json",
+
           success: function(data) {
 
             // $('#agregar').attr('disabled', true);
             $('#users_form')[0].reset();
+
             $('#ModalAdd').modal('hide');
             //$('#agenda_modal').modal('hide');
 
@@ -3449,9 +3563,6 @@ INSERTAR DATOS A FULLCALENDAR
             //  $("#calendar").fullCalendar("unselect");
 
             toastr["success"]("Evento guardado correctamente.");
-
-
-
 
             //document.location.reload(); 
 
@@ -3467,10 +3578,7 @@ INSERTAR DATOS A FULLCALENDAR
 
 
 
-
-
-
-<!-- =========================================
+  <!-- =========================================
 
 EDITAR DATOS DE FULLCALENDAR
 
@@ -3483,18 +3591,23 @@ EDITAR DATOS DE FULLCALENDAR
     $(document).ready(function() {
 
       $('#editar_calendario').on('submit', function(e, event) {
+
         e.preventDefault();
 
 
         /* Configurar botón submit con spinner */
 
         let btn = $('#Editar_cita')
+
         let existingHTML = btn.html() //store exiting button HTML
         //Add loading message and spinner
+
         $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
 
         setTimeout(function() {
+
           $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+
         }, 5000) //5 seconds
 
 
@@ -3512,38 +3625,38 @@ EDITAR DATOS DE FULLCALENDAR
             $('#id').val(data.id);
 
             $('#cliente').val(data.cliente);
+
             $('#medico').val(data.medico);
+
             $('#especie').html(data.especie);
+
             $('#telefono').val(data.telefono);
+
             $('#descripcion').val(data.descripcion);
+
             $('#servicios').val(data.title);
+
             $('#titulo').val(data.title);
 
             $('#ModalEdit #color2').val(data.color);
 
             $('#calendar').fullCalendar('refetchEvents');
+
             $('#calendar2').fullCalendar('refetchEvents');
-          
+
 
             // $('#agregar').attr('disabled', true);
             $('#editar_calendario')[0].reset();
+
             $('#ModalEdit').modal('hide');
+
             $('#agenda_modal').modal('hide');
+
             toastr["success"]("los datos se han actulizado correctamente");
-
-
-
 
             // $("#fullCalModal").fullCalendar('addEventSource', JSON, true); 
 
-
-
-
-
-
-
             // document.location.reload(); 
-
 
           }
 
@@ -3597,9 +3710,11 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
 
 
       let select = document.getElementById('servicio');
+
       let option = select.options[select.selectedIndex];
 
       document.getElementById('color').value = option.value;
+
       document.getElementById('title').value = option.text;
 
 
@@ -3621,39 +3736,64 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
     $(document).ready(function() {
 
       $('#cedula').blur(function() {
+
         var error_cedula = '';
+
         var cedula = $('#cedula').val();
+
         var _token = $('input[name="_token"]').val();
+
         var filter = /([0-9])/;
+
         if (!filter.test(cedula)) {
+
           $('#error_cedula').html('<label class="text-danger">Debe escribir número de cédula.</label>');
+
           $('#cedula').addClass('has-error');
+
           $('#agregar_cliente').attr('disabled', 'disabled');
+
         } else {
+
           $.ajax({
+
             url: 'verificar_cliente',
+
             method: "POST",
+
             data: {
+
               cedula: cedula
+
             },
+
             success: function(result) {
+
               if (result == 'unique') {
 
                 $('#error_cedula').html('<label class="text-danger">El cliente ya existe.</label>');
+
                 $('#cedula').addClass('has-error');
+
                 $('#agregar_cliente').attr('disabled', 'disabled');
 
               } else {
 
                 $('#error_cedula').html('<label class="text-success">Disponible.</label>');
+
                 $('#cedula').removeClass('has-error');
+
                 $('#agregar_cliente').attr('disabled', false);
 
 
               }
+
             }
+
           })
+
         }
+
       });
 
     });
@@ -3672,39 +3812,64 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
     $(document).ready(function() {
 
       $('#cedula2').blur(function() {
+
         var error_cedula = '';
+
         var cedula2 = $('#cedula2').val();
+
         var _token = $('input[name="_token"]').val();
+
         var filter = /([0-9])/;
+
         if (!filter.test(cedula2)) {
+
           $('#error_cedula2').html('<label class="text-danger">Debe escribir número de cédula.</label>');
+
           $('#cedula2').addClass('has-error');
+
           $('#agregar_cliente2').attr('disabled', 'disabled');
+
         } else {
+
           $.ajax({
+
             url: 'verificar_cliente',
+
             method: "POST",
+
             data: {
+
               cedula: cedula2
+
             },
+
             success: function(result) {
+
               if (result == 'unique') {
 
                 $('#error_cedula2').html('<label class="text-danger">El cliente ya existe.</label>');
+
                 $('#cedula2').addClass('has-error');
+
                 $('#agregar_cliente2').attr('disabled', 'disabled');
 
               } else {
 
                 $('#error_cedula2').html('<label class="text-success">Disponible.</label>');
+
                 $('#cedula2').removeClass('has-error');
+
                 $('#agregar_cliente2').attr('disabled', false);
 
 
               }
+
             }
+
           })
+
         }
+
       });
 
     });
@@ -3722,9 +3887,13 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
 
   <script>
     $(document).ready(function() {
+
       $('#ModalAdd').on('shown.bs.modal', function() {
+
         $('#cliente').focus()
+
       });
+
     });
   </script>
 
@@ -3740,9 +3909,13 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
 
   <script>
     $(document).ready(function() {
+
       $('#ModalAgregarCliente').on('shown.bs.modal', function() {
-        $('#cliente').focus()
+
+        $('#cliente').focus();
+
       });
+
     });
   </script>
 
@@ -3757,24 +3930,36 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
         let id_cliente = this.value;
 
         if (data.length > 0) {
+
           $.ajax({
             url: 'buscarmascota',
+
             type: 'POST',
+
             dataType: 'json',
+
             data: {
+
               id_cliente: id_cliente
             },
+
             success: function(data) {
 
 
               $.each(data, function(key, value) {
+
                 $('#buscarEspecie').append('<option value="' + value.especie + '">' + value.especie + '</option>');
 
               });
+
             }
+
           });
+
         }
+
       });
+
     });
   </script>
 
@@ -3792,19 +3977,26 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
 
   <script>
     $(document).ready(function() {
+
       $('#modalAgregarListaEspera').on('hidden.bs.modal', function() {
 
         $('#selectBuscarCliente').html('');
+
         $('#buscarMascota').html('');
+
         $('#buscarEspecie').html('');
+
         $('#motivoConsulta').html('');
 
         //  $('.BuscMascota').css("display", "none");
         //  $('.motivoConsulta').hide();
         // $('.buscarEspecie').css("display", "none");
         $('#nombreMascota').html('');
+
         $('#form_lista_espera')[0].reset();
+
         $('#modalAgregarListaEspera').modal('hide');
+
         $("#nombreCliente").html('');
         // $("#nombreCliente").hide();
 
@@ -3813,11 +4005,6 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
 
     });
   </script>
-
-
-
-
-
 
 
 
@@ -3830,11 +4017,15 @@ VINCULAR SELECT COLOR CON SERVICIOS - AGREGAR
 
   <script>
     $(document).ready(function() {
+
       $('#modalAgregarCliente2').on('shown.bs.modal', function() {
+
         $('#cedula').focus();
+
         // $('#agregar_cliente').attr('enabled','enabled');
 
       });
+
     });
   </script>
 
@@ -3851,25 +4042,35 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
 
 
       $.ajaxSetup({
+
         headers: {
+
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+
       });
 
 
       let table = $('#Table_listado_cumpleaños').DataTable({
 
-
         processing: true,
+
         serverSide: true,
+
         rendering: true,
+
         retrive: true,
+
         paging: false,
+
         info: false,
+
         filter: false,
+
         responsive: true,
 
         type: "GET",
+
         ajax: "{{ url('/listado_cliente') }}",
 
 
@@ -3878,14 +4079,17 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
 
           {
             data: 'nombre',
+
             name: 'nombre'
           },
           {
             data: 'celular',
+
             name: 'celular'
           },
           {
             data: 'fecha_nacimiento',
+
             name: 'fecha_nacimiento'
           },
 
@@ -3918,17 +4122,23 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
       $('#form_lista_espera').off('submit').on('submit', function(event) {
 
         $.ajaxSetup({
+
           headers: {
+
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
           }
+
         });
 
 
         /* Configurar botón submit con spinner */
 
         let btn = $('#agregar_lista_espera')
+
         let existingHTML = btn.html() //store exiting button HTML
         //Add loading message and spinner
+
         $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
 
         setTimeout(function() {
@@ -3942,22 +4152,33 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
         try {
 
           $.ajax({
+
             url: "/listado_citas",
+
             method: "POST",
+
             data: $(this).serialize(),
+
             dataType: "json",
+
             success: function(data) {
 
               table.ajax.reload();
 
               $('#agregar').prop("required", true);
-              // $('#selectBuscarCliente').html("");
+
               $('#buscarMascotas').empty();
+
               $('.BuscMascota').css("display", "block");
+
               $('.motivoConsulta').css("display", "block");
+
               $('#nombreMascota').html("");
+
               $('#form_lista_espera')[0].reset();
+
               $('#modalAgregarListaEspera').modal('hide');
+
               $("#nombreCliente").html('');
 
               $('.selectBuscarCliente').val('').trigger('change');
@@ -4000,11 +4221,13 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
 
         $.ajax({
           type: 'delete',
+
           url: '/eliminar_cita/' + id,
 
           success: function(data) {
 
             table.ajax.reload();
+
             toastr["success"]("Cita eliminada correctamente.");
 
           }
@@ -4038,23 +4261,34 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
 
       swal({
         title: "Esta seguro de eliminar?",
+
         text: "La acción es permanente!",
+
         type: "warning",
+
         showCancelButton: !0,
+
         confirmButtonText: "Si, Eliminar",
+
         cancelButtonText: "No, cancelar",
+
         reverseButtons: !0
+
 
       }).then(function(e) {
 
         if (e.value === true) {
+
           let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
           $.ajax({
+
             type: 'delete',
+
             url: '/fullcalendareventmaster/delete/' + id,
 
             dataType: 'JSON',
+
             success: function(data) {
 
               //   if (data.success === true) {
@@ -4064,6 +4298,7 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
               $('#ModalEdit').modal('hide');
 
               $('#calendar').fullCalendar('refetchEvents');
+
               $('#calendar2').fullCalendar('refetchEvents');
 
 
@@ -4072,14 +4307,19 @@ CARGAR DATATABLE JQUERY LISTA DE ESPERA Y  GUARDAR DATOS
               //       swal("Error!", data.message, "error");
               //   }
             }
+
           });
 
         } else {
+
           e.dismiss;
+
         }
 
       }, function(dismiss) {
+
         return false;
+
       })
 
     });

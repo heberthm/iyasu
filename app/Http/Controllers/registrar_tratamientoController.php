@@ -59,9 +59,7 @@ class registrar_tratamientoController extends Controller
                     $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalVerTratamiento"  title="Ver tratamientos realizados" class="fa fa-eye verTratamiento"></a> 
                  
                   <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalEditarTratamiento"  title="Editar datos del tratamiento" class="fa fa-edit editarTratamiento"></a>
-  
-                  <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalImprimirTratamiento"  title="Imprimir recibo de tratamiento" class="fa fa-file-pdf-o ImprimirReciboTratamiento" style="color:red"></a>
-               
+                
                   <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" title="Eliminar tratamiento" class="fa fa-trash  eliminarTratamiento"></a>';
 
 

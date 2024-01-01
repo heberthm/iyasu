@@ -145,9 +145,9 @@ DATATABLE LISTA DE ESPERA
 
                 <th>Paciente</th>
                 <th>Fecha abono</th>
-                <th>Saldo actual</th>
-                <th>Vr. abono</th>
                 <th>Saldo</th>
+                <th>Vr. abono</th>
+                <th>Saldo actual</th>
                 <th></th>
 
               </tr>
@@ -305,7 +305,7 @@ DATATABLE LISTA DE ESPERA
 
                   </div>
                 </div>
-         
+
 
 
 
@@ -409,25 +409,14 @@ DATATABLE LISTA DE ESPERA
             </div>
 
 
-            <div class="col-md-12">
-
-              <div class="form-group">
-
-                <label for="Descripcion" class="control-label">Descripción</label>
-
-                <input type="text" name="descripcion" class="form-control  border-0" id="descripcion">
-
-              </div>
-            </div>
-
 
 
             <div class="col-md-3">
               <div class="form-group">
 
-                <label for="valor tratamiento" class="control-label">Valor tratamiento</label>
+                <label for="valor tratamiento" class="control-label">Saldo actual</label>
 
-                <input type="text" name="valor_tratamiento" class="form-control  border-0" id="valor_tratamiento">
+                <input type="text" name="saldo_actual" class="form-control  border-0" id="saldo_actual">
 
               </div>
             </div>
@@ -448,9 +437,21 @@ DATATABLE LISTA DE ESPERA
             <div class="col-md-3">
               <div class="form-group">
 
-                <label for="valor_abono" class="control-label">Saldo</label>
+                <label for="valor_abono" class="control-label">Nuevo saldo</label>
 
                 <input type="text" name="saldo" class="form-control  border-0" id="saldo">
+
+              </div>
+            </div>
+
+
+            <div class="col-md-12">
+
+              <div class="form-group">
+
+                <label for="Descripcion" class="control-label">Tratamiento(s)</label>
+
+                <input type="text" name="descripcion" class="form-control  border-0" id="descripcion">
 
               </div>
             </div>
@@ -590,7 +591,7 @@ DATATABLE LISTA DE ESPERA
 
               <div class="form-group">
 
-                <label for="Descripcion" class="control-label">Descripción</label>
+                <label for="Descripcion" class="control-label">Tratamiento(s)</label>
 
                 <input type="text" name="descripcion" class="form-control " id="descripcion" required autocomplete="off">
 
@@ -703,7 +704,7 @@ DATATABLE LISTA DE ESPERA
 
             <div class="form-group ">
 
-              <label for="Feca">Fecha</label>
+              <label for="Fecha">Fecha</label>
 
               <div class="col-sm-6">
 
@@ -731,6 +732,21 @@ DATATABLE LISTA DE ESPERA
 
 
 
+
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label for="saldo actual" class="control-label">Saldo actual</label>
+
+                <input type="number" name="valor_tratamiento" class="form-control-plaintext" readonly>
+
+
+              </div>
+            </div>
+
+
+
+
             <div class="col-md-4">
 
               <div class="form-group">
@@ -742,19 +758,6 @@ DATATABLE LISTA DE ESPERA
 
               </div>
 
-            </div>
-
-
-
-            <div class="col-md-4">
-              <div class="form-group">
-
-                <label for="saldo actual" class="control-label">Saldo actual</label>
-
-                <input type="number" name="valor_tratamiento" class="form-control-plaintext" readonly>
-
-
-              </div>
             </div>
 
 
@@ -1051,7 +1054,7 @@ BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
     $('#descripcion').val('');
     $('#valor_abono').val('');
     $('#saldo').val('');
- 
+
 
 
   });
@@ -1067,41 +1070,62 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
 <script>
-  $('#livesearch').on('select2:select', function(evt) {
+  $('#livesearch').on('select2:select', function(evt)
 
-    let celular = evt.params.data.celular;
-    let tratamiento = evt.params.data.tratamiento;
-    let valor_tratamiento2 = evt.params.data.valor_tratamiento;
-    let valor_tratamiento = evt.params.data.saldo;
-    let saldo_actual = evt.params.data.valor_tratamiento;
-    let id_tratamiento = evt.params.data.id_tratamiento;
-    let estado = evt.params.data.estado;
+    {
 
-    var opt = "<option value='" + celular + "' selected ='selected'> </option>";
-    $("#celular").html(opt);
-    $("#celular").val(celular).trigger("change");
+      let celular = evt.params.data.celular;
 
-    var opt = "<option value='" + tratamiento + "' selected ='selected'> </option>";
-    $("#descripcion").html(opt);
-    $("#descripcion").val(tratamiento).trigger("change");
+      let tratamiento = evt.params.data.tratamiento;
 
-    var opt = "<option value='" + valor_tratamiento + "' selected ='selected'> </option>";
-    $("#valor_tratamiento").html(opt);
-    $("#valor_tratamiento").val(valor_tratamiento).trigger("change");
+      let valor_tratamiento2 = evt.params.data.valor_tratamiento;
 
-    var opt = "<option value='" + valor_tratamiento2 + "' selected ='selected'> </option>";
-    $("#valor_tratamiento2").html(opt);
-    $("#valor_tratamiento2").val(valor_tratamiento2).trigger("change");
+      let valor_tratamiento = evt.params.data.saldo;
+
+      let saldo_actual = evt.params.data.valor_tratamiento;
+
+      let id_tratamiento = evt.params.data.id_tratamiento;
+
+      let estado = evt.params.data.estado;
+
+      var opt = "<option value='" + celular + "' selected ='selected'> </option>";
+
+      $("#celular").html(opt);
+
+      $("#celular").val(celular).trigger("change");
+
+      var opt = "<option value='" + tratamiento + "' selected ='selected'> </option>";
+
+      $("#descripcion").html(opt);
+
+      $("#descripcion").val(tratamiento).trigger("change");
+
+      var opt = "<option value='" + valor_tratamiento + "' selected ='selected'> </option>";
+
+      $("#valor_tratamiento").html(opt);
+
+      $("#valor_tratamiento").val(valor_tratamiento).trigger("change");
+
+      var opt = "<option value='" + valor_tratamiento2 + "' selected ='selected'> </option>";
+
+      $("#valor_tratamiento2").html(opt);
+
+      $("#valor_tratamiento2").val(valor_tratamiento2).trigger("change");
 
 
-    var opt = "<option value='" + id_tratamiento + "' selected ='selected'> </option>";
-    $("#id_tratamiento").html(opt);
-    $("#id_tratamiento").val(id_tratamiento).trigger("change");
+      var opt = "<option value='" + id_tratamiento + "' selected ='selected'> </option>";
 
-    var opt = "<option value='" + estado + "' selected ='selected'> </option>";
-    $("#estado").html(opt);
-    $("#estado").val(estado).trigger("change");
-  });
+      $("#id_tratamiento").html(opt);
+
+      $("#id_tratamiento").val(id_tratamiento).trigger("change");
+
+      var opt = "<option value='" + estado + "' selected ='selected'> </option>";
+
+      $("#estado").html(opt);
+
+      $("#estado").val(estado).trigger("change");
+
+    });
 </script>
 
 
@@ -1112,16 +1136,19 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
  DATATABLE TRATAMIENTO CLIENTES
 
-======================================================= --->
+====================================================== --->
 
 <script type="text/javascript">
   $(document).ready(function() {
 
 
     $.ajaxSetup({
+
       headers: {
+
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
+
     });
 
 
@@ -1129,9 +1156,11 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
       processing: true,
+
       serverSide: true,
 
       type: "GET",
+
       ajax: 'abonos',
 
 
@@ -1142,26 +1171,36 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
         {
           extend: 'excelHtml5',
+
           footer: true,
+
           text: 'Excel',
+
           title: 'Abonos de clientes',
 
           exportOptions: {
+
             columns: [0, 1, 2, 3, 4, 5]
 
           }
+
         },
 
         {
           extend: 'pdfHtml5',
+
           footer: true,
+
           text: 'PDF',
+
           title: 'Abonos de clientes',
 
           exportOptions: {
+
             columns: [0, 1, 2, 3, 4, 5]
 
           }
+
         },
 
       ],
@@ -1175,44 +1214,57 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
         {
           data: 'nombre',
+
           name: 'nombre'
         },
 
         {
           data: 'created_at',
+
           name: 'created_at',
+
           orderable: true
         },
         {
           data: 'saldo_actual',
+
           name: 'saldo_actual'
         },
         {
           data: 'valor_abono',
+
           name: 'valor_Abono'
         },
         {
           data: 'saldo',
+
           name: 'saldo'
         },
 
 
         {
           data: 'action',
+
           name: 'action',
+
           orderable: false,
+
           searchable: false
         },
 
 
       ],
 
-      order: [2, 'desc'],
+      order: [1, 'desc'],
 
       "columnDefs": [{
+
         "orderable": false,
+
         "render": $.fn.dataTable.render.number('.'),
+
         "targets": [2, 3, 4],
+
         className: 'dt-body-left',
       }],
 
@@ -1221,20 +1273,35 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
         "emptyTable": "No hay abonos registrados.",
+
         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+
         "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+
         "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+
         "infoPostFix": "",
+
         "thousands": ",",
+
         "lengthMenu": "Mostrar _MENU_ Entradas",
+
         "loadingRecords": "Cargando...",
+
         "processing": "Procesando...",
+
         "search": "Buscar:",
+
         "zeroRecords": "Sin resultados encontrados",
+
         "paginate": {
+
           "first": "Primero",
+
           "last": "Ultimo",
+
           "next": "Siguiente",
+
           "previous": "Anterior"
         }
 
@@ -1256,18 +1323,30 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
     $('#form_agregar_abono').off('submit').on('submit', function(event) {
 
       $.ajaxSetup({
+
         headers: {
+
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+
       });
+
       /* Configurar botón submit con spinner */
+
       let btn = $('#agregar_abono')
+
       let existingHTML = btn.html() //store exiting button HTML
+
       //Add loading message and spinner
+
       $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
       setTimeout(function() {
+
         $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+
       }, 5000) //5 seconds
+
       $('#agregar_abono').attr('disabled', true);
 
       event.preventDefault();
@@ -1275,16 +1354,24 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
       try {
 
         $.ajax({
+
           url: "crear_abono",
+
           method: "POST",
+
           data: $(this).serialize(),
+
           dataType: "json",
+
           success: function(data) {
+
             table.ajax.reload();
+
             $('#agregar_tratamiento').prop("required", true);
             // $('#selectBuscarCliente').html("");
 
             $('#form_agregar_abono')[0].reset();
+
             $('#modalACrearAbono').modal('hide');
 
             //   table.ajax.reload();
@@ -1292,10 +1379,15 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
             toastr["success"]("Abono registrado correctamente.");
 
           }
+
         });
+
       } catch (e) {
+
         toastr["danger"]("Se ha presentado un error.", "Información");
+
       }
+
     });
 
 
@@ -1312,28 +1404,41 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
 
 
       let id = $(this).data('id');
+
       $('#form_ver_abono')[0].reset();
 
       $.ajax({
+
         url: 'ver_abono/' + id,
+
         method: 'GET',
+
         data: {
+
           id: id
+
         },
 
         success: function(data) {
 
-
-
           $('#modalVerAbono').modal('show');
-          $('#modalVerAbono input[name="id_abono"]').val(data.id)
+
+          $('#modalVerAbono input[name="id_abono"]').val(data.id);
+
           $('#modalVerAbono input[name="id_cliente"]').val(data.id_cliente);
+
           $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
+
           $('#modalVerAbono input[name="celular"]').val(data.celular);
+
           $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
-          $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+
+          $('#modalVerAbono input[name="saldo_actual"]').val(data.saldo_actual);
+
           $('#modalVerAbono input[name="saldo"]').val(data.saldo);
+
           $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
+
           $('#modalVerAbono input[name="responsable"]').val(data.responsable);
 
 
@@ -1360,29 +1465,43 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
       let Fecha = '';
 
       let id = $(this).data('id');
+
       $('#form_ver_factura')[0].reset();
 
       $.ajax({
+
         url: 'mostrar_abonos/' + id,
+
         method: 'GET',
+
         data: {
+
           id: id
+
         },
 
         success: function(data) {
 
-
-
           $('#modalVerFactura').modal('show');
+
           $('#modalVerFactura input[name="id_abono"]').val(data.id);
+
           $('#modalVerFactura input[name="fecha"]').val(data.created_at);
+
           $('#modalVerFactura input[name="id_cliente"]').val(data.id_cliente);
+
           $('#modalVerFactura input[name="nombreCliente"]').val(data.nombre);
+
           $('#modalVerFactura input[name="celular"]').val(data.celular);
+
           $('#modalVerFactura input[name="valor_abono"]').val(data.valor_abono);
+
           $('#modalVerFactura input[name="valor_tratamiento"]').val(data.valor_tratamiento);
+
           $('#modalVerFactura input[name="saldo"]').val(data.saldo);
+
           $('#modalVerFactura input[name="descripcion"]').val(data.descripcion);
+
           $('#modalVerFactura input[name="responsable"]').val(data.responsable);
 
 
@@ -1416,10 +1535,15 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
       let id = $('#id_tratamiento').val();
 
       $.ajax({
+
         url: 'mostrar_tratamiento/' + id,
+
         method: 'GET',
+
         data: {
+
           id: id
+
         },
 
 
@@ -1441,7 +1565,7 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
             $('#tratamiento_1').val(tratamientos);
 
           }
-        
+
         }
 
       });
@@ -1466,28 +1590,19 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
       let id = $(this).data('id');
 
       $.ajax({
+
         url: 'factura/' + id,
+
         method: 'GET',
+
         data: {
+
           id: id
+
         },
 
         success: function(data) {
 
-          /*
-
-              $('#modalVerAbono').modal('show');
-              $('#modalVerAbono input[name="id_abono"]').val(data.id)
-              $('#modalVerAbono input[name="id_cliente"]').val(data.id_cliente);
-              $('#modalVerAbono input[name="nombreCliente"]').val(data.nombre);
-              $('#modalVerAbono input[name="celular"]').val(data.celular);
-              $('#modalVerAbono input[name="valor_abono"]').val(data.valor_abono);
-              $('#modalVerAbono input[name="valor_tratamiento"]').val(data.valor_tratamiento);
-              $('#modalVerAbono input[name="saldo"]').val(data.saldo);
-              $('#modalVerAbono input[name="descripcion"]').val(data.descripcion);
-              $('#modalVerAbono input[name="responsable"]').val(data.responsable);
-
-           */
 
         }
 
@@ -1514,27 +1629,39 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
       e.preventDefault();
 
       $('#form_editar_abono')[0].reset();
+
       let id = $(this).data('id');
 
       $.ajax({
+
         url: '/editar_abono/' + id,
+
         method: 'GET',
+
         data: {
+
           id: id
+
         },
 
 
         success: function(data) {
 
 
-
           $('#modalEditarAbono').modal('show');
-          $('#modalEditarAbono input[name="id_abono"]').val(data.id)
+
+          $('#modalEditarAbono input[name="id_abono"]').val(data.id);
+
           $('#modalEditarAbono input[name="id_cliente"]').val(data.id_cliente);
+
           $('#modalEditarAbono input[name="nombreCliente"]').val(data.nombre);
+
           $('#modalEditarAbono input[name="celular"]').val(data.celular);
+
           $('#modalEditarAbono input[name="valor_abono"]').val(data.valor_abono);
+
           $('#modalEditarAbono input[name="descripcion"]').val(data.descripcion);
+
           $('#modalEditarAbono input[name="responsable"]').val(data.responsable);
 
         }
@@ -1554,18 +1681,29 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
     $('#form_editar_abono').off('submit').on('submit', function(event) {
 
       $.ajaxSetup({
+
         headers: {
+
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+
       });
+
       /* Configurar botón submit con spinner */
+
       let btn = $('#editar_abono')
+
       let existingHTML = btn.html() //store exiting button HTML
+
       //Add loading message and spinner
       $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+
       setTimeout(function() {
+
         $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+
       }, 5000) //5 seconds
+
       $('#editar_abono').attr('disabled', true);
 
       event.preventDefault();
@@ -1577,15 +1715,20 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
         $.ajax({
 
           url: 'actualizar_abono/' + id,
+
           method: "POST",
+
           data: $(this).serialize(),
+
           dataType: "json",
+
           success: function(data) {
 
             $('#editar_abono').prop("required", true);
             // $('#selectBuscarCliente').html("");
 
             $('#form_editar_abono')[0].reset();
+
             $('#modalEditarAbono').modal('hide');
 
             table.ajax.reload();
@@ -1593,10 +1736,14 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
             toastr["success"]("datos actualizados correctamente.");
 
           }
+
         });
+
       } catch (e) {
+
         toastr["danger"]("Se ha presentado un error.", "Información");
       }
+
     });
 
 
@@ -1614,28 +1761,44 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
     $(document).on('click', '.eliminarAbono', function(event) {
 
       event.preventDefault();
+
       let id = $(this).data('id');
+
       swal({
+
         title: "Esta seguro de eliminar?",
+
         text: "La acción es permanente!",
+
         type: "warning",
+
         showCancelButton: !0,
+
         confirmButtonText: "Si, Eliminar",
+
         cancelButtonText: "No, cancelar",
+
         reverseButtons: !0
 
       }).then(function(e) {
 
         if (e.value === true) {
+
           let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
           $.ajax({
+
             type: 'delete',
+
             url: '/eliminar_abono/' + id,
+
             data: {
+
               id: id
+
             },
             dataType: 'JSON',
+
             success: function(data) {
 
               //   if (data.success === true) {
@@ -1653,21 +1816,20 @@ PASAR DATOS DE CAMPOS A INPUT TEXT CON SELECT2: livesearch2
           });
 
         } else {
+
           e.dismiss;
         }
 
       }, function(dismiss) {
+
         return false;
+
       })
+
     });
-
-
 
   });
 </script>
-
-
-
 
 
 @endsection

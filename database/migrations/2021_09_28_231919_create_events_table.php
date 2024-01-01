@@ -23,7 +23,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('end');
             $table->string('cliente',50);
             $table->string('telefono',25);
-            $table->string('descripcion',250);
+            $table->string('descripcion',250)->nullable();
             $table->string('medico',50);
             $table->string('color',20);
             $table->timestamps();

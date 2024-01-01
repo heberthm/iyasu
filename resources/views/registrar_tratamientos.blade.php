@@ -1333,7 +1333,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
           },
 
 
-          order: [3, 'DESC'],
+          order: [2, 'desc'],
 
           "columnDefs": [{
 
@@ -1365,20 +1365,35 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
 
             "emptyTable": "No hay tratamientos registrados.",
+
             "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+
             "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+
             "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+
             "infoPostFix": "",
+
             "thousands": ",",
+
             "lengthMenu": "Mostrar _MENU_ Entradas",
+
             "loadingRecords": "Cargando...",
+
             "processing": "Procesando...",
+
             "search": "Buscar:",
+
             "zeroRecords": "Sin resultados encontrados",
+
             "paginate": {
+
               "first": "Primero",
+
               "last": "Ultimo",
+
               "next": "Siguiente",
+
               "previous": "Anterior"
             }
 
@@ -1548,6 +1563,7 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
           for (let i = 0; i < descripcion.length; i++) {
 
             listaProductos.push({
+
               "tratamientos": $(descripcion[i]).val(),
 
               "valor_tratamiento": $(descripcion[i]).val()
@@ -1573,30 +1589,36 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
         $('body').on('click', '.verTratamiento', function(e) {
 
           $.ajaxSetup({
+
             headers: {
+
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
 
 
           let id = $(this).data('id');
+
           $('#form_ver_tratamiento')[0].reset();
 
           $.ajax({
+
             url: 'ver_tratamiento/' + id,
+
             method: 'get',
 
             dataType: 'json',
 
             data: {
+
               id: id,
+
             },
 
             success: function(response) {
 
-
-
               let json = JSON.parse(response.tratamientos);
+
 
 
               $("#myTable").empty();
@@ -1609,9 +1631,11 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
                 let table = document.getElementById('myTable')
 
                 for (var i = 0; i < json.length; i++) {
+
                   let row = `<tr>
 
                         <td>${json[i].tratamiento}</td>
+                        
                         <td>${json[i].valor_tratamiento}</td>
                        
                       </tr>`
@@ -1694,7 +1718,6 @@ ESCRIBIR EN DOS INPUTS AL MISMO TIEMPO 2
 
 
               $("#myTable2").empty();
-
 
 
               let table = document.getElementById('myTable2')

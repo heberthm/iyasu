@@ -24,8 +24,10 @@ class ValidarFormularioRequest extends FormRequest
         'title'         => 'required|min:1|max:90',
         'cliente'       => 'required|min:1|max:80',
         'telefono'      => 'required|min:1|max:30',
-        'descripcion'  => 'required|min:1|max:130',
         'medico'        => 'required|min:1|max:50',
+      
+
+        
                        
       ];
     }

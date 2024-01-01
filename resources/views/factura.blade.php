@@ -136,13 +136,13 @@
 
         <tr>
           
-            <th style="font-size: 12px;">Tratamiento</th>
+            <th style="font-size: 12px;">Tratamiento(s)</th>
 
-            <th style="font-size: 12px;">valor</th>
+            <th style="font-size: 12px;">Saldo</th>
 
             <th style="font-size: 12px;">Abono</th>
 
-            <th style="font-size: 12px;">Saldo</th>
+            <th style="font-size: 12px;"> Nuevo saldo</th>
             
         </tr>
 
@@ -153,7 +153,7 @@
 
             <td>{{ $abono->descripcion}}</td>
 
-            <td>{{ $abono->valor_tratamiento }}</td>
+            <td>{{ $abono->saldo_actual }}</td>
 
             <td>{{ $abono->valor_abono }}</td>
 
