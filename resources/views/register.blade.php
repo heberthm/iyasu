@@ -4,18 +4,7 @@
 @section('content')
 
 <style>
-  .calendar {
-
-    max-width: auto;
-    margin: 0, 0;
-    padding: 0, 0;
-    cursor: pointer;
-
-  }
-
-  .calendar {
-    cursor: pointer;
-  }
+ 
 
   .has-error {
     border-color: #cc0000;
@@ -25,33 +14,6 @@
 
   .alert-message {
     color: red;
-  }
-
-  #loading {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    z-index: 1000;
-  }
-
-
-  .mostrar_inputs {
-    display: none;
-  }
-
-  #loading2 {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    z-index: 1100;
-  }
-
-  .listado_citas {
-    height: 300px;
-    overflow-y: scroll;
-    overflow-x: hidden;
   }
 
 
@@ -90,6 +52,7 @@ FORMULARIO RECEPCION DE USUARIOS
       <h3 class="card-title"><span style="color: #28a745;" class="fas fa-users mr-3"></span>Listado de usuarios</h3>
 
       <div class="pull-right">
+
         <button type="button" class="btn btn-primary  float-right" data-toggle="modal" data-target="#modalCrearUsuario"> <span class="fa fa-list fa-fw"></span>
           Crear usuario
         </button> &nbsp;
@@ -117,19 +80,24 @@ DATATABLE USUARIOS
         <div class="col-lg-12">
 
           <table id="table_registros_usuarios" class="table dt-responsive table-hover" style="width:100%;font-size:12.5px;">
+          
             <thead>
+
               <tr>
 
                 <th>Nombre</th>
+
                 <th>Email</th>
+
+                <th>Rol</th>
+
                 <th>Fecha de registro</th>
 
                 <th></th>
 
               </tr>
+
             </thead>
-
-
 
           </table>
 
@@ -212,6 +180,33 @@ DATATABLE USUARIOS
                 </div>
 
               </div>
+
+
+
+              <div class="input-group mb-3">
+
+              <select id="rol" name="rol" class="form-control" placeholder="roles" required>
+
+                      <option value="">Seleccionar rol</option>
+
+                      <option value="admin">Admin</option>
+
+                      <option value="user">Usuario</option>
+
+
+               </select>
+
+              <div class="input-group-append">
+
+                <div class="input-group-text">
+
+                  <span class="fas fa-id-card"></span>
+
+                </div>
+              </div>
+
+              </div>
+
 
 
               <div class="input-group mb-3">
@@ -302,6 +297,7 @@ DATATABLE USUARIOS
       </div>
 
       <div class="modal-body">
+
         <form method="POST" id="formEditarUsuario">
 
           <div class="input-group mb-3">
@@ -336,6 +332,34 @@ DATATABLE USUARIOS
 
           </div>
 
+
+
+
+          <div class="input-group mb-3">
+
+          <select id="rol" name="rol" class="form-control" placeholder="roles">
+
+                     
+
+                      <option value="admin">Admin</option>
+
+                      <option value="user">Usuario</option>
+
+
+               </select>
+
+          <div class="input-group-append">
+
+            <div class="input-group-text">
+
+              <span class="fas fa-id-card"></span>
+
+            </div>
+          </div>
+
+          </div>
+
+          
 
           <div class="input-group mb-3">
 
@@ -599,22 +623,38 @@ MOSTRAR / OCULTAR CLAVE
 
         {
           data: 'name',
+
           name: 'name'
+
         },
+
         {
           data: 'email',
+
           name: 'email'
         },
+
+        {
+          data: 'rol',
+
+          name: 'rol'
+        },
+        
         {
           data: 'created_at',
+
           name: 'created_at',
+
           orderable: true
         },
 
         {
           data: 'action',
+
           name: 'action',
+
           orderable: false,
+          
           searchable: false
         },
 
@@ -670,12 +710,18 @@ MOSTRAR / OCULTAR CLAVE
       });
       /* Configurar botón submit con spinner */
       let btn = $('#agregar_usuario')
+
       let existingHTML = btn.html() //store exiting button HTML
       //Add loading message and spinner
+     
       $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+    
       setTimeout(function() {
+    
         $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    
       }, 5000) //5 seconds
+   
       $('#agregar_usuario').attr('disabled', true);
 
       event.preventDefault();
@@ -683,16 +729,24 @@ MOSTRAR / OCULTAR CLAVE
       try {
 
         $.ajax({
+
           url: "crear_usuario",
+
           method: "POST",
+
           data: $(this).serialize(),
+
           dataType: "json",
+
           success: function(data) {
+
             table.ajax.reload();
+
             $('#agregar_usuario').prop("required", true);
             // $('#selectBuscarCliente').html("");
 
             $('#formCrearUsuario')[0].reset();
+
             $('#modalCrearUsuario').modal('hide');
 
             //   table.ajax.reload();
@@ -702,8 +756,11 @@ MOSTRAR / OCULTAR CLAVE
           }
         });
       } catch (e) {
+
         toastr["danger"]("Se ha presentado un error.", "Información");
+
       }
+
     });
 
 
@@ -720,31 +777,43 @@ MOSTRAR / OCULTAR CLAVE
       e.preventDefault();
 
       $('#formEditarUsuario')[0].reset();
+
       let id = $(this).data('id');
 
       $('#CheckPasswordMatch2').html('');
 
       $.ajax({
+
         url: 'editar_usuario/' + id,
+
         method: 'GET',
+
         data: {
+
           id: id
+
         },
 
 
         success: function(data) {
 
-
-
           $('#modalEditarUsuario').modal('show');
-          $('#modalEditarUsuario input[name="id_usuario"]').val(data.id)
-          $('#modalEditarUsuario input[name="nombre"]').val(data.name);
+
+          $('#modalEditarUsuario input[name="id_usuario"]').val(data.id);
+
+         $('#modalEditarUsuario input[name="nombre"]').val(data.name);
+
           $('#modalEditarUsuario input[name="email"]').val(data.email);
+
+          $('#modalEditarUsuario select[name="rol"]').val(data.rol);
+
           $('#modalEditarUsuario input[name="clave"]').val(data.password);
 
 
         }
+
       });
+
     });
 
 
@@ -766,12 +835,18 @@ MOSTRAR / OCULTAR CLAVE
       });
       /* Configurar botón submit con spinner */
       let btn = $('#editar_usuario')
+
       let existingHTML = btn.html() //store exiting button HTML
       //Add loading message and spinner
+
       $(btn).html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').prop('disabled', true)
+     
       setTimeout(function() {
+
         $(btn).html(existingHTML).prop('disabled', false) //show original HTML and enable
+    
       }, 5000) //5 seconds
+
       $('#editar_usuario').attr('disabled', true);
 
       event.preventDefault();
@@ -783,15 +858,20 @@ MOSTRAR / OCULTAR CLAVE
         $.ajax({
 
           url: 'actualizar_usuario/' + id,
+
           method: "POST",
+
           data: $(this).serialize(),
+
           dataType: "json",
+
           success: function(data) {
 
             $('#editar_usuario').prop("required", true);
             // $('#selectBuscarCliente').html("");
 
             $('#formEditarUsuario')[0].reset();
+
             $('#modalEditarUsuario').modal('hide');
 
             table.ajax.reload();
@@ -820,33 +900,48 @@ MOSTRAR / OCULTAR CLAVE
     $(document).on('click', '.eliminarUsuario', function(event) {
 
       event.preventDefault();
+
       let id = $(this).data('id');
+
       swal({
+
         title: "Esta seguro de eliminar?",
+
         text: "La acción es permanente!",
+
         type: "warning",
+
         showCancelButton: !0,
+
         confirmButtonText: "Si, Eliminar",
+
         cancelButtonText: "No, cancelar",
+
         reverseButtons: !0
 
       }).then(function(e) {
 
         if (e.value === true) {
+
           let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
           $.ajax({
+
             type: 'delete',
+
             url: '/eliminar_usuario/' + id,
+
             data: {
+
               id: id
+
             },
             dataType: 'JSON',
             success: function(data) {
 
               //   if (data.success === true) {
 
-              swal("Abono eliminado correctamente!", data.message, "success");
+              swal("Usuario eliminado correctamente!", data.message, "success");
 
               table.ajax.reload();
               //  $('#table_mascotas').html(data);
@@ -856,20 +951,27 @@ MOSTRAR / OCULTAR CLAVE
               //       swal("Error!", data.message, "error");
               //   }
             }
+
           });
 
         } else {
+
           e.dismiss;
+
         }
 
       }, function(dismiss) {
+
         return false;
+
       })
+      
     });
 
 
 
   });
+
 </script>
 
 

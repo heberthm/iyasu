@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Traits\HasRoles;
 
 class RegisterController extends Controller
 {
@@ -24,49 +25,50 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use HasRoles;
 
 
     public function index()
     {
-      
-                
-        if(request()->ajax()) {
 
-          //  $id = $request->id_cliente;
 
-          $id = User::select('id','name', 'email', 'created_at');
+        if (request()->ajax()) {
 
-           return datatables()->of($id)
+            //  $id = $request->id_cliente;
 
-           ->addColumn('created_at', function($row)  {  
-            $date = date("d-m-Y", strtotime($row->created_at));
-            return $date;
-          })
-                                                                                                       
-            ->addColumn('action', 'atencion')
-            ->rawColumns(['action'])
-            ->addColumn('action', function($data) {
+            $id = User::all();
 
-           
+            return datatables()->of($id)
 
-                $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-target="#modalEditarUsuario"  title="Editar datos del usuario" class="fa fa-edit editarUsuario"></a>
+                ->addColumn('created_at', function ($row) {
+                    $date = date("d-m-Y", strtotime($row->created_at));
+                    return $date;
+                })
 
-                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" title="Eliminar usuario" class="fa fa-trash eliminarUsuario"></a>';
-                
-                 
-                return $actionBtn;
-           
+                ->addColumn('action', 'atencion')
+                ->rawColumns(['action'])
+                ->addColumn('action', function ($data) {
 
-               
-            })
-           
-           
-            ->make(true);
-        } 
 
-       
+
+                    $actionBtn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" data-target="#modalEditarUsuario"  title="Editar datos del usuario" class="fa fa-edit editarUsuario"></a>
+
+                <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $data->id . '" title="Eliminar usuario" class="fa fa-trash eliminarUsuario"></a>';
+
+
+                    return $actionBtn;
+                })
+
+
+                ->make(true);
+        }
+
+
+
+
+
+
         return view('register');
-
     }
 
 
@@ -76,9 +78,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-   // protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
-   
+
     /**
      * Create a new controller instance.
      *
@@ -92,7 +94,7 @@ class RegisterController extends Controller
     public function registration()
     {
 
-          return view('register');
+        return view('register');
     }
 
     /**
@@ -118,43 +120,67 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-        
+
+        $role = $request['rol'];
+
         return User::create([
+
             'name' => $request['nombre'],
+
             'email' => $request['email'],
+
+           'rol' => $request['rol'],
+
             'password' => Hash::make($request['clave']),
-        ]);
+
+        ])->assignRole($role);
     }
+
+
+    public function showRegistrationForm()
+
+    {
+
+        $roles = User::all('id', 'rol');
+
+        return view("register", compact("roles"));
+    }
+
+
+
 
     public function edit($id)
     {
-       
+
         $id_usuario  = User::find($id);
+
         return response()->json($id_usuario);
     }
 
 
     public function update(Request $request, $id)
     {
-       
-              $id = $request->input('id_usuario');
 
-              $user = User::find($id);
+        $id = $request->input('id_usuario');
 
-              $user ->name  = $request->nombre;
-              $user->email = $request->email;
-              $user->password = Hash::make($request->clave);
-              
-              $user->save();
-           
-              return response()->json(['success'=>'update successfully.']);
+        $user = User::find($id);
 
-         
+        $user->name  = $request->nombre;
+
+        $user->email = $request->email;
+
+        $user->rol = $request->rol;
+        
+        $user->password = Hash::make($request->clave);
+
+        $user->save();
+
+        return response()->json(['success' => 'update successfully.']);
     }
 
 
 
-      /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -163,10 +189,7 @@ class RegisterController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-     
-        return response()->json(['success'=>'deleted successfully.']);
+
+        return response()->json(['success' => 'deleted successfully.']);
     }
-
-
-
 }

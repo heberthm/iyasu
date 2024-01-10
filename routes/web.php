@@ -58,19 +58,19 @@ Auth::routes();
 
 // ======================================================
 
-Route::get('inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
+Route::get('inicio', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.inicio');
 
-Route::get('listado_usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('listado_usuarios');
+Route::get('listado_usuarios', [App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('admin.listado_usuarios');
 
 Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'registration'])->name('register');
 
-Route::post('crear_usuario', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('crear_usuario');
+Route::post('crear_usuario', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('admin.crear_usuario');
 
-Route::get('editar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'edit']);
+Route::get('editar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'edit'])->name('admin.editar_usuario');
 
-Route::post('actualizar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update']);
+Route::post('actualizar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'update'])->name('admin.actualiar_usuario');
 
-Route::delete('eliminar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'destroy']);
+Route::delete('eliminar_usuario/{id}', [App\Http\Controllers\Auth\RegisterController::class, 'destroy'])->name('admin.eliminar_usuario');
 
 
 
@@ -186,7 +186,7 @@ Route::delete('/eliminar_control/{id}', [App\Http\Controllers\controlesControlle
 // ======================================================
 
 
-Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index']);
+Route::get('abonos', [App\Http\Controllers\abonosClientesController::class, 'index'])->name('abonos');
 
 Route::post('crear_abono', [App\Http\Controllers\abonosClientesController::class, 'store']);
 
@@ -210,7 +210,7 @@ Route::get('mostrar_abonos/{id}', [App\Http\Controllers\abonosClientesController
 // ======================================================
 
 
-Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index']);
+Route::get('registrar_tratamientos', [App\Http\Controllers\registrar_tratamientoController::class, 'index'])->name('registrar_tratamiento');
 
 Route::post('crear_tratamiento', [App\Http\Controllers\registrar_tratamientoController::class, 'store']);
 
@@ -228,7 +228,7 @@ Route::delete('/eliminar_tratamiento/{id}', [App\Http\Controllers\registrar_trat
 
 Route::post('mensaje_pago_deuda', [App\Http\Controllers\registrar_tratamientoController::class, 'mensajePagoDeuda']);
 
-Route::get('deudores', [App\Http\Controllers\DeudoresController::class, 'index']);
+Route::get('deudores', [App\Http\Controllers\DeudoresController::class, 'index'])->name('deudores');
 
 
 
@@ -241,7 +241,7 @@ Route::get('deudores', [App\Http\Controllers\DeudoresController::class, 'index']
 // ======================================================
 
 
-Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index']);
+Route::get('terapias', [App\Http\Controllers\terapiasController::class, 'index'])->name('terapias');
 
 Route::post('crear_terapia', [App\Http\Controllers\terapiasController::class, 'store']);
 
@@ -260,7 +260,7 @@ Route::delete('eliminar_terapia/{id}', [App\Http\Controllers\terapiasController:
 // ======================================================
 
 
-Route::get('terapias_adicionales', [App\Http\Controllers\terapias_adicionalesController::class, 'index']);
+Route::get('terapias_adicionales', [App\Http\Controllers\terapias_adicionalesController::class, 'index'])->name('terapias_adicionales');
 
 Route::post('crear_terapia_adicional', [App\Http\Controllers\terapias_adicionalesController::class, 'store']);
 
@@ -280,7 +280,7 @@ Route::delete('eliminar_terapia_adicional/{id}', [App\Http\Controllers\terapias_
 // ======================================================
 
 
-Route::get('lavados', [App\Http\Controllers\lavadosController::class, 'index']);
+Route::get('lavados', [App\Http\Controllers\lavadosController::class, 'index'])->name('lavados');
 
 Route::post('crear_lavado', [App\Http\Controllers\lavadosController::class, 'store']);
 
@@ -300,7 +300,7 @@ Route::delete('eliminar_lavado/{id}', [App\Http\Controllers\lavadosController::c
 // ======================================================
 
 
-Route::get('profesionales', [App\Http\Controllers\profesionalesController::class, 'index']);
+Route::get('profesionales', [App\Http\Controllers\profesionalesController::class, 'index'])->name('profesionales');
 
 Route::post('crear_profesional', [App\Http\Controllers\profesionalesController::class, 'store']);
 
@@ -323,7 +323,7 @@ Route::delete('eliminar_profesional/{id}', [App\Http\Controllers\profesionalesCo
 
 // ======================================================
 
-Route::get('pago_honorarios', [App\Http\Controllers\HonorariosProfesionalesController::class, 'index']);
+Route::get('pago_honorarios', [App\Http\Controllers\HonorariosProfesionalesController::class, 'index'])->name('pago_honorarios');
 
 Route::get('buscar_pago_honorarios', [App\Http\Controllers\HonorariosProfesionalesController::class, 'selectSearchPagosHonorarios']);
 
@@ -355,7 +355,7 @@ Route::post('/guardar_egreso', [App\Http\Controllers\Registros_contableControlle
 Route::get('mostrarRegistros/{registros}', [App\Http\Controllers\Registros_contableController::class, 'mostrarRegistros']);
 
 
-Route::get('registros_contables', [App\Http\Controllers\Registros_contableController::class, 'index']);
+Route::get('registros_contables', [App\Http\Controllers\Registros_contableController::class, 'index'])->name('registros_contables');
 
 Route::post('/editar_registro', [App\Http\Controllers\Registros_contableController::class, 'update']);
 
@@ -370,7 +370,7 @@ Route::post('/eliminar_registro/{id}', [App\Http\Controllers\Registros_contableC
 
 // ======================================================
 
-Route::get('estadisticas', [App\Http\Controllers\ChartJSController::class, 'index']);
+Route::get('estadisticas', [App\Http\Controllers\ChartJSController::class, 'index'])->name('estadisticas');
 
 
 
