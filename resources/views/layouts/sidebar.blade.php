@@ -92,7 +92,7 @@
 
 
 
-         @can('dedores')
+         @can('deudores')
 
          <li class="nav-item">
 
