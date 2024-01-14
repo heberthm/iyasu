@@ -664,7 +664,7 @@ DATATABLE LISTA DE ESPERA
 
       <div class="modal-header">
 
-        <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Ver factura de abono</h5>
+        <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Factura de abono</h5>
 
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -799,7 +799,7 @@ DATATABLE LISTA DE ESPERA
 
           <div class="modal-footer">
 
-            <button type="submit" id="imprimir_factura" formtarget="_blank" class="btn btn-primary loader ">Imprimir</button>
+            <button type="submit" id="imprimir_factura" formtarget="_blank" class="btn btn-primary loader ">Imprimir factura</button>
             <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
           </div>

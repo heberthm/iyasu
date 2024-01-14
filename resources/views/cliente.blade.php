@@ -94,7 +94,7 @@ thead {
 
           <!-- ==========================
 
-DATATABLE MASCOTAS
+DATATABLE HISTÓRIAS ClÍNICAS
 
 ============================== -->
 
@@ -188,27 +188,40 @@ DATATABLE MASCOTAS
         <div class="card-body">
           <!-- Date -->
           <div class="form-group">
+
             <table class="table" id="table_clientes" style="width:100%;font-size:12.5 px;">
+
               <tbody style="font-size:95%;">
 
 
                 <tr style="display:none;">
 
                   <td>
+
                     <div class="control-label">Id_cliente</div>
+
                     <a href="#" id="id_cliente">{{ $id_cliente->id_cliente }}</a>
 
                   </td>
+
                 </tr>
 
                 <tr style="display:none;">
 
                   <td>
+
                     <div class="control-label">Cédula</div>
-                    <a href="#" id="cedula">{{ $id_cliente->cedula }}</a></td>
+
+                    <a href="#" id="cedula">{{ $id_cliente->cedula }}</a>
+                 
+                  </td>
+
                     </tr>
-                    <span id=" navbar_estado"></span>
-                <tr>
+
+                      <span id=" navbar_estado"></span>
+
+                    <tr>
+
                   <td>
 
                     <div class="control-label">Nombre</div>
@@ -217,32 +230,51 @@ DATATABLE MASCOTAS
 
 
                   </td>
+
                 </tr>
 
                 <tr>
+
                   <td>
+
                     <div class="control-label">Edad</div>
-                    <a href="#" id="edad" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="edad">{{ $id_cliente->edad }}</a>
+
+                    <a href="#" id="edad" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="edad">{{ $id_cliente->edad() }} años</a>
                    
                   </td>
+
                 </tr>
 
                 <tr>
+
                   <td>
+
                     <div class="control-label">Celular</div>
+
+                   
                     <a href="#" id="celular" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="celular">{{ $id_cliente->celular }}</a>
+                  
                     
-                </tr>
+                  </tr>
+
                 <tr>
+
                   <td>
+
                     <div class="control-label">Email</div>
+
                     <a href="#" id="email" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="email">{{ $id_cliente->email }}</a>
                     
                   </td>
+
                 </tr>
+
                 <tr>
+
                   <td>
+
                     <div class="control-label">Dirección</div>
+
                     <a href="#" id="direccion" data-type="text" data-pk="{{$id_cliente->id_cliente}}" data-name="direccion">{{ $id_cliente->direccion }}</a>
                     
                 </tr>
@@ -255,6 +287,7 @@ DATATABLE MASCOTAS
                     <!--   <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarCliente" onclick="editarCliente();" >
                          <span class="fa fa-edit fa-fw" ></span> Editar datos </button>  -->
                   </td>
+                  
                 <tr>
 
               </tbody>
@@ -271,7 +304,9 @@ DATATABLE MASCOTAS
 
           <!-- /.card-body -->
         </div>
+
       </div>
+      
     </div>
     <!-- /.card -->
   </div><!-- /.container-fluid -->
@@ -297,11 +332,15 @@ DATATABLE MASCOTAS
           <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-list-alt mr-3"></span>Agregar História </h5>
 
           <div class="col-6 align-items-center" style="font-size: small;">
+
             <div id="datos_historia_clinica">
+
               <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5>
-              <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a>
+
+              <a class="mx-1 especie" style="color:black">{{$id_cliente->edad() }} años</a>
 
             </div>
+
           </div>
 
 
@@ -629,7 +668,7 @@ DATATABLE MASCOTAS
         <div class="col-6 align-items-center" style="font-size: small;">
           <div id="datos_historia_clinica">
             <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5>
-            <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a>
+            <a class="mx-1 especie" style="color:black">{{$id_cliente->edad() }} años</a>
             <!--  <a class="mx-1 raza" style="color:black">{{$id_cliente->peso}}</a> -->
             <!--  <a class="mx-1 edad" style="color:black">{{$id_cliente->estatura}}</a> -->
           </div>
@@ -952,7 +991,7 @@ DATATABLE MASCOTAS
         <div class="col-6 align-items-center" style="font-size: small;">
           <div id="datos_historia_clinica">
             <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5>
-            <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a>
+            <a class="mx-1 especie" style="color:black"> {{$id_cliente->edad() }} años </a>
             <!--  <a class="mx-1 raza" style="color:black">{{$id_cliente->peso}}</a> -->
             <!--  <a class="mx-1 edad" style="color:black">{{$id_cliente->estatura}}</a> -->
           </div>
@@ -1504,7 +1543,7 @@ DATATABLE MASCOTAS
         <div class="col-6 align-items-center" style="font-size: small;">
           <div id="datos_historia_clinica">
             <h5> <a class=" mx-1 nombre" style="color:coral">{{$id_cliente->nombre}}</a></h5>
-            <a class="mx-1 especie" style="color:black">{{$id_cliente->edad}}</a>
+            <a class="mx-1 especie" style="color:black">{{$id_cliente->edad() }} años </a>
             <!--  <a class="mx-1 raza" style="color:black">{{$id_cliente->peso}}</a> -->
             <!--  <a class="mx-1 edad" style="color:black">{{$id_cliente->estatura}}</a> -->
           </div>

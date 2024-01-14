@@ -31,6 +31,15 @@ class ClientesController extends Controller
      */
 
 
+   public function __construct()
+   {
+    
+   $this->middleware('can:inicio')->only('inicio');
+
+   }
+
+
+
     public function index()
     {
 
