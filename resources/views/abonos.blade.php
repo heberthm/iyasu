@@ -678,7 +678,9 @@ DATATABLE LISTA DE ESPERA
       <div class="modal-body">
 
         @if (session('error'))
+
         <div class="alert alert-danger">{{ session('error') }}</div>
+
         @endif
 
         <form id="form_ver_factura" method="GET" action="{{ url('factura/{id}') }}">
@@ -734,6 +736,7 @@ DATATABLE LISTA DE ESPERA
 
 
             <div class="col-md-4">
+
               <div class="form-group">
 
                 <label for="saldo actual" class="control-label">Saldo actual</label>
@@ -742,6 +745,7 @@ DATATABLE LISTA DE ESPERA
 
 
               </div>
+
             </div>
 
 
@@ -800,15 +804,19 @@ DATATABLE LISTA DE ESPERA
           <div class="modal-footer">
 
             <button type="submit" id="imprimir_factura" formtarget="_blank" class="btn btn-primary loader ">Imprimir factura</button>
+
             <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
           </div>
 
       </div>
+
     </div>
+
   </div>
 
   </form>
+
 </div>
 
 
@@ -826,11 +834,17 @@ MOSTRAR SPINNER AL CARGAR PAGINA
 
 <script type="text/javascript">
   $(window).on('load', function() {
+
     setTimeout(function() {
+
       $(".loader-page").css({
+
         visibility: "hidden",
+
         opacity: "0"
+
       })
+
     }, 1000);
 
   });
@@ -848,9 +862,13 @@ DESHABILITAR CLICK DERECHO
 
 <script>
   $(document).ready(function() {
+
     $("body").on("contextmenu", function(e) {
+
       return false;
+
     });
+
   });
 </script>
 
@@ -892,6 +910,7 @@ MULTIPLICAR INPUTS PARA HALLAR SALDO DE TRATAMIENTO
 
 
     });
+
   });
 </script>
 
@@ -935,41 +954,51 @@ SELECT2 - BUSQUEDAD DE CLIENTES
 
 <script type="text/javascript">
   $('.livesearch').select2({
-    placeholder: 'Buscar cliente por nombre...',
-    language: "es",
-    allowClear: true,
-    minimumInputLength: 3,
-    ajax: {
 
+    placeholder: 'Buscar cliente por nombre...',
+
+    language: "es",
+
+    allowClear: true,
+
+    minimumInputLength: 3,
+
+    ajax: {
 
       url: 'buscar_tratamiento',
 
       dataType: 'json',
+
       delay: 250,
+
       processResults: function(data) {
 
 
-
         return {
+
           results: $.map(data, function(item) {
+
             return {
+
               text: item.nombre,
+
               id: item.id_cliente,
+
               id_tratamiento: item.id_tratamiento,
 
               celular: item.celular,
+
               valor_tratamiento: item.valor_tratamiento,
+
               saldo: item.saldo,
+
               estado: item.estado,
 
             }
 
           })
 
-
-
         };
-
 
       },
 
@@ -991,9 +1020,13 @@ SELECT2 - BUSQUEDAD DE CLIENTES
   $('#livesearch').off('change').on('change', function() {
 
     $.ajaxSetup({
+
       headers: {
+
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
       }
+
     });
 
     let id = $(this).val();
@@ -1003,7 +1036,9 @@ SELECT2 - BUSQUEDAD DE CLIENTES
       url: 'buscar_tratamiento',
 
       method: "GET",
+
       data: $(this).serialize(),
+
       dataType: "json",
 
       success: function(data) {
@@ -1016,10 +1051,12 @@ SELECT2 - BUSQUEDAD DE CLIENTES
     // window.location.href = 'cliente/' +id;
 
     $('#id_cliente').val('');
+
     $('#nombreCliente').val('');
 
 
     let cliente = '';
+
     let id_cliente = '';
 
     cliente = $(".livesearch").text();
@@ -1048,13 +1085,18 @@ BORRAR CONTENIDO ESCRITO EN SELECT2: livesearch2
   $('.livesearch').on('select2:opening', function(e) {
 
     $('.livesearch').html('');
-    $('#celular').val('');
-    $('#valor_tratamiento').val('');
-    $('#valor_tratamiento2').val('');
-    $('#descripcion').val('');
-    $('#valor_abono').val('');
-    $('#saldo').val('');
 
+    $('#celular').val('');
+
+    $('#valor_tratamiento').val('');
+
+    $('#valor_tratamiento2').val('');
+
+    $('#descripcion').val('');
+
+    $('#valor_abono').val('');
+
+    $('#saldo').val('');
 
 
   });

@@ -221,13 +221,17 @@ FORMULARIO RECEPCION DE PACIENTES
 
 
           <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3">
+
             </span> Pacientes que cumplen años el mes de: &nbsp; </h3>
+
           <p><b>{{ now()->translatedFormat('F');  }}</b></p>
 
 
 
         </div>
+
         <div class="card-body">
+          
           <div class="form-group">
 
 
@@ -364,7 +368,9 @@ CALENDAR - AGENDAR   MEDICA
             <div id="tituloMes">
 
               <h6>
+
                 <div class="mx-8 titulo-mes" style="color:brown"></div>
+
               </h6>
 
             </div>
@@ -383,6 +389,7 @@ CALENDAR - AGENDAR   MEDICA
         <div class="modal-body">
 
           <div class="row">
+
             <div class="col-md-5">
 
               <input id="filtrar_calendario" name="filtrar_calendario" type="text" class="form-control form-control" placeholder="Filtrar eventos">
@@ -406,9 +413,13 @@ CALENDAR - AGENDAR   MEDICA
               <select id="selector" class="form-control" placeholder="Filtrar eventos">
 
                 <option value="todos">Mostrar todos</option>
+
                 @foreach($profesionales as $prof)
+
                 <option value="{{$prof->nombre}}">{{$prof->nombre}}</option>
+
                 @endforeach
+
               </select>
 
 
@@ -419,19 +430,29 @@ CALENDAR - AGENDAR   MEDICA
             <div id='calendar2'></div>
 
             <div id="loading2" style="display:none;">
+
               <img id="loading-image" src="../img/loader.gif" alt="Cargando..." />
+
             </div>
+
           </div>
 
+  
 
         </div>
+
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-primary">Guardar</button>  -->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </div>
 
 

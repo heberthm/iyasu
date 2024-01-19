@@ -103,10 +103,15 @@ FORMULARIO CREAR TRATAMIENTO
       <h3 class="card-title"><span style="color: #28a745;" class="fas fa-list mr-3"></span>Listado de registro de tratamientos de clientes</h3>
 
       <div class="pull-right">
+
         <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalACrearTratamiento">
+
           <span class="fa fa-list fa-fw"></span>
+
           Crear tratamiento de cliente
+
         </button> &nbsp;
+
       </div>
 
 
@@ -126,17 +131,29 @@ DATAPICKER BOOTSTRAP
 
 
       <div class="row input-daterange">
+
         <div class="col-md-3">
+
           <input type="date" name="fecha_inicial" id="fecha_final" class="form-control" placeholder="Fecha inicial" />
+
         </div>
+
         <div class="col-md-3">
+
           <input type="date" name="fecha_final" id="fecha_final" class="form-control" placeholder="Fecha final" />
+
         </div>
+
         <div class="col-md-3">
+
           <button type="button" name="filter" id="filter" class="btn btn-primary">Filtrar</button>
+
           <button type="button" name="refresh" id="refresh" class="btn btn-default">Refrescar</button>
+
         </div>
+
       </div>
+
       <br />
 
 
@@ -151,22 +168,30 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
       <div class="row">
+
         <div class="col-lg-12">
 
-        
 
           <table id="table_registros_contables" class="table dt-responsive table-hover" style="width:100%;font-size:12.5px;">
+
             <thead>
+
               <tr>
 
                 <th>Paciente</th>
+
                 <th> Vr. Tratamiento</th>
+
                 <th>Fecha</th>
+
                 <th>Estado</th>
+
                 <th>Saldo actual</th>
+
                 <th></th>
 
               </tr>
+
             </thead>
 
             <tbody>
@@ -175,7 +200,6 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
           </table>
-
 
 
         </div>
@@ -239,7 +263,9 @@ DATATABLE REGISTRO DE TRATAMIENTOS
               <div class="modal-body">
 
                 @if (session('error'))
+
                 <div class="alert alert-danger">{{ session('error') }}</div>
+
                 @endif
 
                 <form method="POST" id="form_agregar_tratamiento" enctype="multipart/form-data" action="{{ url('crear_tratamiento') }}">
@@ -257,7 +283,9 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
                         <div class="form-group">
+
                           <select class="livesearch form-control" id="livesearch" name="livesearch" style="width: 100%;"></select>
+
                         </div>
 
 
@@ -282,15 +310,13 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                         <div class="alert-message" id="celularError"></div>
 
                       </div>
+
                     </div>
 
 
                     <div class="col-md-6">
 
                       <div class="form-group">
-
-
-
 
                         <select name="tratamientos" class="form-control tratamientos" id="tratamientos" required placeholder="Seleccione tratamiento">
 
@@ -306,6 +332,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
                       </div>
+
                     </div>
 
                     <div class="col-md-3">
@@ -339,11 +366,21 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                       <table id="table_registros_tratamientos" class="table dt-responsive" style="width:100%">
 
                         <thead>
+
                           <tr>
-                            <th>Select</th>
+
+
+
+                            <th>Id</th>
+
                             <th>Tratamiento</th>
+
                             <th>Valor</th>
+
+                            <th></th>
+
                           </tr>
+
                         </thead>
 
                         <tbody>
@@ -353,9 +390,13 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                         <tfoot>
 
                           <tr id="total">
+
                             <td>&nbsp;</td>
+
                             <td align="right">Total :</td>
+
                             <td align="left"><input type='text' class='form-control  border-0' name='sum1' id='sum1' disabled="disabled" style="font:bold; background-color:khaki; color:black;"></td>
+
                           </tr>
 
                         </tfoot>
@@ -363,7 +404,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
                       </table>
 
-                      <button type="button" class="btn btn-danger btn-xs delete-row"><i class="fa fa-minus"></i> Eliminar</button>
+                      <!--    <button type="button" class="btn btn-danger btn-xs delete-row"><i class="fa fa-minus"></i> Eliminar</button>   -->
 
 
                     </div>
@@ -392,14 +433,17 @@ DATATABLE REGISTRO DE TRATAMIENTOS
               <div class="modal-footer">
 
                 <button type="submit" id="agregar_tratamiento" name="agregar_tratamiento" class="btn btn-primary loader">Guardar</button>
+
                 <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
               </div>
+
               </form>
+
             </div>
 
-
           </div>
+
         </div>
 
     </div>
@@ -427,6 +471,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
           <div class="modal-header">
 
             <h5 class="modal-title"><span style="color:#28a745;" class="fas fa-cubes mr-3"></span>Editar tratamiento</h5>
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
               <span aria-hidden="true">&times;</span>
@@ -438,7 +483,9 @@ DATATABLE REGISTRO DE TRATAMIENTOS
           <div class="modal-body">
 
             @if (session('error'))
+
             <div class="alert alert-danger">{{ session('error') }}</div>
+
             @endif
 
             <form method="POST" id="form_editar_tratamiento" action="{{ url('registrar_tratamiento') }}">
@@ -489,15 +536,16 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
                     <select name="tratamientos2" class="form-control" id="tratamientos2" required placeholder="Seleccione profesional">
+
                       <option value="" selected="selected" style='color: #cccccc'>Seleccionar tratamiento</option>
+
                       @foreach($terapias as $terap)
+
                       <option value="{{$terap->valor_terapia}}">{{$terap->terapia}}</option>
+
                       @endforeach
+
                     </select>
-
-
-
-
 
                     <div class="alert-message" id="terapiasError"></div>
 
@@ -508,8 +556,8 @@ DATATABLE REGISTRO DE TRATAMIENTOS
 
 
 
-
                 <div class="col-md-3">
+
                   <div class="form-group">
 
                     <label for="valor_abono" class="control-label">Valor</label>
@@ -519,6 +567,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                     <div class="alert-message" id="valorTratamientoError"></div>
 
                   </div>
+
                 </div>
 
 
@@ -530,7 +579,9 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                     <tr class="bg-white">
 
                       <th>Tratamientos</th>
+
                       <th>Valor. tratamiento</th>
+
                       <th></th>
 
                     </tr>
@@ -538,6 +589,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                     <tbody id="myTable2">
 
                     </tbody>
+
                   </table>
 
 
@@ -565,19 +617,20 @@ DATATABLE REGISTRO DE TRATAMIENTOS
               <div class="modal-footer">
 
                 <button type="submit" id="editar_tratamiento" name="editar_tratamiento" class="btn btn-primary loader">Guardar</button>
+
                 <button type="button" id="salir" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
               </div>
 
           </div>
+
           </form>
+
         </div>
+
       </div>
+
     </div>
-
-
-
-
 
 
 
@@ -630,6 +683,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                   <tr class="bg-white">
 
                     <th>Tratamientos</th>
+
                     <th>Valor. tratamiento</th>
 
                   </tr>
@@ -637,6 +691,7 @@ DATATABLE REGISTRO DE TRATAMIENTOS
                   <tbody id="myTable">
 
                   </tbody>
+
                 </table>
 
 
@@ -668,7 +723,9 @@ DATATABLE REGISTRO DE TRATAMIENTOS
           </div>
 
         </div>
+
       </div>
+
     </div>
 
     </form>
@@ -685,11 +742,16 @@ MOSTRAR SPINNER AL CARGAR PAGINA
 
     <script type="text/javascript">
       $(window).on('load', function() {
+
         setTimeout(function() {
+
           $(".loader-page").css({
+
             visibility: "hidden",
+
             opacity: "0"
           })
+
         }, 1000);
 
       });
@@ -707,9 +769,13 @@ DESHABILITAR CLICK DERECHO
 
     <script>
       $(document).ready(function() {
+
         $("body").on("contextmenu", function(e) {
+
           return false;
+
         });
+
       });
     </script>
 
@@ -720,6 +786,7 @@ DESHABILITAR CLICK DERECHO
       $('.select2-multiple').select2({
 
         allowClear: true,
+
         placeholder: "Seleccione una opción",
 
       });
@@ -728,10 +795,19 @@ DESHABILITAR CLICK DERECHO
 
     <script>
       $(document).ready(function() {
+
         $('.tratamientos').select2();
 
       });
     </script>
+
+
+
+
+
+
+
+
 
 
     <!-- ==================================
@@ -753,10 +829,12 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
         =============================================*/
 
 
+
         let listaProductos = [];
 
         function listarProductos() {
 
+          let id = $("#id");
 
           let valor_tratamiento = $(".tratamientos");
 
@@ -767,13 +845,12 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
 
             listaProductos.push({
+
               "tratamiento": $(descripcion[i]).val(),
 
               "valor_tratamiento": $(valor_tratamiento[i]).val()
+
             })
-
-
-
 
             $("#tratamientos1").val(JSON.stringify(listaProductos));
 
@@ -781,11 +858,10 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
           console.log(listarProductos);
 
-
-
-
-
         }
+
+
+        let count = 0;
 
 
 
@@ -809,10 +885,12 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
 
           let saldo = $('#sum1').val();
 
-          let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamientos[]' disabled='disabled' id='tratamientos3' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamientos3' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre' disabled='disabled'  id='nombre' value='" + nombre + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='saldo' disabled='disabled'  id='saldo' value='" + saldo + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>";
+
+          count++;
 
 
-          // let record = "<tr><td><input type='checkbox' id='record' name='record'></td><td><input type='text' class='form-control  border-0'  name='tratamiento[]' disabled='disabled' id='tratamiento' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamiento' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre' disabled='disabled'  id='nombre' value='" + cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td></tr>"
+          let record = "<tr class='rowClass'><td id='conteo'>" + count + "</td><td><input type='text' class='form-control  border-0'  name='tratamientos[]' disabled='disabled' id='tratamientos3' value='" + tratamiento + "' style='background-color:white;'></td><td><input type='text' class='form-control  border-0 valores' name='valor_tratamiento[]' disabled='disabled'  id='valor_tratamientos3' value='" + valor + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='nombre' disabled='disabled'  id='nombre' value='" + nombre + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='celular' disabled='disabled'  id='celular' value='" + celular + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='responsable' disabled='disabled'  id='responsable' value='" + responsable + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='user_id' disabled='disabled'  id='user_id' value='" + user_id + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='id_cliente' disabled='disabled'  id='id_cliente' value='" + id_cliente + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='saldo' disabled='disabled'  id='saldo' value='" + saldo + "' style='background-color:white;'></td><td style='display:none'><input type='text' class='form-control  border-0' name='estado' disabled='disabled'  id='estado' value='" + estado + "' style='background-color:white;'></td><td class='text-center'><button class='btn btn-danger btn-xs remove'type='button'><i class='fa fa-minus'></i> Eliminar</td> </tr>";
+
 
           $("#table_registros_tratamientos tbody").append(record);
 
@@ -833,14 +911,50 @@ AGRGAR FILA A TABLA HTML  AGREGAR TRATAMIENTO
             var sum = 0;
 
             $('.valores').each(function() {
+
               sum += Number($(this).val() * 1);
+
             });
 
             $('#sum1').val(sum);
+
             $('#valor_tratamiento').val(sum);
 
             console.log(sum);
           }
+
+
+          /* ============================================================
+
+           FUNCIÔN PARA RESTAR EL NÚMERO DE ID FILA DE TABLA
+
+           ============================================================= */
+
+
+          function reset() {
+
+            $(this).closest('tr').remove();
+
+            $('#table_registros_tratamientos tbody tr').each(function(i) {
+
+              $($(this).find('td')[0]).html(i + 1);
+
+                $(this).find('tr').each(function (index) {
+                  let conteo = $(this).find('td')[0];
+                  let $firstTDJQObject = $(conteo);
+                  $firstTDJQObject.text(index + 1);
+              });
+
+             
+            });
+
+
+          }
+
+
+
+
+
 
 
 
@@ -852,6 +966,22 @@ ELIMNAR FILA Y RECALCULAR VALOR TOTAL
 
 
 
+          $('#table_registros_tratamientos').on('click', '.remove', function() {
+
+            $(this).parent('td.text-center').parent('tr.rowClass').remove();
+
+            count = 0;
+            
+                
+            calculateTotal();
+
+            listarProductos();
+
+            reset();
+
+          });
+
+          /*
           // Find and remove selected table rows
           $(".delete-row").click(function() {
             $("table tbody").find('input[name="record"]').each(function() {
@@ -862,6 +992,9 @@ ELIMNAR FILA Y RECALCULAR VALOR TOTAL
               }
             });
           });
+
+ */
+
         });
       });
     </script>
